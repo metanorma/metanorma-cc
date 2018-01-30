@@ -1,20 +1,16 @@
-# coding: utf-8
-
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require "asciidoctor/csd/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "asciidoctor-csd"
-  spec.version       = Asciidoctor::CSD::VERSION
+  spec.version       = Asciidoctor::Csd::VERSION
   spec.authors       = ["Ribose Inc."]
   spec.email         = ["open.source@ribose.com"]
 
-  spec.summary       = "asciidoctor-csd lets you write CalConnect standards "\
-    "in AsciiDoc."
+  spec.summary       = "asciidoctor-csd lets you write CSD in AsciiDoc."
   spec.description   = <<~DESCRIPTION
-    asciidoctor-iso lets you write CalConnect standards documents
-    (CSD)  in AsciiDoc syntax.
+    asciidoctor-csd lets you write CSD in AsciiDoc syntax.
 
     This gem is in active development.
   DESCRIPTION
@@ -22,11 +18,12 @@ Gem::Specification.new do |spec|
   spec.homepage      = "https://github.com/riboseinc/asciidoctor-csd"
   spec.license       = "MIT"
 
-  spec.bindir        = "bin"
+  spec.files         = `git ls-files -z`.split("\x0").reject do |f|
+    f.match(%r{^(test|spec|features)/})
+  end
+  spec.bindir        = "exe"
+  spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
-  spec.files         = `git ls-files`.split("\n")
-  spec.test_files    = `git ls-files -- {spec}/*`.split("\n")
-  spec.required_ruby_version = Gem::Requirement.new(">= 2.4.0")
 
   spec.add_dependency "asciidoctor", "~> 1.5.6"
   spec.add_dependency "asciimath"

@@ -1,5 +1,6 @@
 require "asciidoctor"
 require "asciidoctor/csd/version"
+require "asciidoctor/csd/csdconvert"
 require "asciidoctor/iso/converter"
 
 module Asciidoctor
@@ -47,7 +48,7 @@ module Asciidoctor
         nil
       end
 
-      def document(node)
+      def makexml(node)
         result = ["<?xml version='1.0' encoding='UTF-8'?>\n<csd-standard>"]
         @@draft = node.attributes.has_key?("draft")
         result << noko { |ixml| front node, ixml }
@@ -56,8 +57,18 @@ module Asciidoctor
         result = textcleanup(result.flatten * "\n")
         ret1 = cleanup(Nokogiri::XML(result))
         ret1.root.add_namespace(nil, "http://riboseinc.com/isoxml")
+        ret1
+      end
+
+      def document(node)
+        ret1 = makexml(node)
         validate(ret1)
-        ret1.to_xml(indent: 2)
+        ret = ret1.to_xml(indent: 2)
+        filename = node.attr("docfile").gsub(/\.adoc/, ".xml").
+          gsub(%r{^.*/}, '')
+        File.open("#{filename}", "w") { |f| f.write(ret) }
+        CsdConvert.convert filename
+        ret
       end
 
 

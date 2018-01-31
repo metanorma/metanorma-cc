@@ -10,28 +10,38 @@ module Asciidoctor
         @@meta[:doctitle] = main
       end
 
-          def self.subtitle(_isoxml, _out)
-nil
-          end
+      def self.subtitle(_isoxml, _out)
+        nil
+      end
 
-              def self.id(isoxml, _out)
-      docnumber = isoxml.at(ns("//csd-standard/id"))
-      documentstatus = isoxml.at(ns("//csd-standard/status"))
-      @@meta[:docnumber] = docnumber.text
-      @@meta[:status] = documentstatus.text if documentstatus
+      def self.id(isoxml, _out)
+        docnumber = isoxml.at(ns("//csd-standard/id"))
+        documentstatus = isoxml.at(ns("//csd-standard/status"))
+        @@meta[:docnumber] = docnumber.text
+        @@meta[:status] = documentstatus.text if documentstatus
         @@meta[:docnumber] = @@meta[:status] + " " + @@meta[:docnumber]
-    end
+      end
 
-                  def self.populate_template(docxml)
-      meta = get_metadata
-      docxml.
-        gsub(/DOCYEAR/, meta[:docyear]).
-        gsub(/DOCNUMBER/, meta[:docnumber]).
-        gsub(/DOCTITLE/, meta[:doctitle]).
-        gsub(/\[TERMREF\]\s*/, "[SOURCE: ").
-        gsub(/\s*\[\/TERMREF\]\s*/, "]").
-        gsub(/\s*\[ISOSECTION\]/, ", ").
-        gsub(/\s*\[MODIFICATION\]/, ", modified &mdash; ")
+      def self.populate_template(docxml)
+        meta = get_metadata
+        docxml.
+          gsub(/DOCYEAR/, meta[:docyear]).
+          gsub(/DOCNUMBER/, meta[:docnumber]).
+          gsub(/DOCTITLE/, meta[:doctitle]).
+          gsub(/\[TERMREF\]\s*/, "[SOURCE: ").
+          gsub(/\s*\[\/TERMREF\]\s*/, "]").
+          gsub(/\s*\[ISOSECTION\]/, ", ").
+          gsub(/\s*\[MODIFICATION\]/, ", modified &mdash; ")
+      end
+
+          def self.postprocess(result, filename, dir)
+      generate_header(filename, dir)
+      result = cleanup(Nokogiri::XML(result)).to_xml
+      result = populate_template(result)
+      File.open("#{filename}.out.html", "w") do |f|
+        f.write(result)
+      end
+      Html2Doc.process(result, filename, "wordstyle.css", "header.html", dir)
     end
 
     end

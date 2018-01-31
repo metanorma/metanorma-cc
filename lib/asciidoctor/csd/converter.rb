@@ -60,6 +60,11 @@ module Asciidoctor
         ret1
       end
 
+      def validate(doc)
+        content_validate(doc)
+        schema_validate(doc, "csd.rng")
+      end
+
       def document(node)
         ret1 = makexml(node)
         validate(ret1)

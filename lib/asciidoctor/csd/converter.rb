@@ -62,7 +62,7 @@ module Asciidoctor
 
       def validate(doc)
         content_validate(doc)
-        schema_validate(doc, "csd.rng")
+        schema_validate(doc, File.join(File.dirname(__FILE__), "csd.rng"))
       end
 
       def document(node)

@@ -41,7 +41,9 @@ module Asciidoctor
       File.open("#{filename}.out.html", "w") do |f|
         f.write(result)
       end
-      Html2Doc.process(result, filename, "wordstyle.css", "header.html", dir)
+      Html2Doc.process(result, filename, 
+                       File.join(File.dirname(__FILE__), "wordstyle.css"), 
+                       "header.html", dir)
     end
 
     end

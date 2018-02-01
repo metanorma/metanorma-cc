@@ -34,17 +34,17 @@ module Asciidoctor
           gsub(/\s*\[MODIFICATION\]/, ", modified &mdash; ")
       end
 
-          def self.postprocess(result, filename, dir)
-      generate_header(filename, dir)
-      result = cleanup(Nokogiri::XML(result)).to_xml
-      result = populate_template(result)
-      File.open("#{filename}.out.html", "w") do |f|
-        f.write(result)
+      def self.postprocess(result, filename, dir)
+        generate_header(filename, dir)
+        result = cleanup(Nokogiri::XML(result)).to_xml
+        result = populate_template(result)
+        File.open("#{filename}.out.html", "w") do |f|
+          f.write(result)
+        end
+        Html2Doc.process(result, filename, 
+                         File.join(File.dirname(__FILE__), "wordstyle.css"), 
+                         "header.html", dir)
       end
-      Html2Doc.process(result, filename, 
-                       File.join(File.dirname(__FILE__), "wordstyle.css"), 
-                       "header.html", dir)
-    end
 
     end
   end

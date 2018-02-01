@@ -56,7 +56,7 @@ module Asciidoctor
         result << "</csd-standard>"
         result = textcleanup(result.flatten * "\n")
         ret1 = cleanup(Nokogiri::XML(result))
-        ret1.root.add_namespace(nil, "http://riboseinc.com/isoxml")
+        ret1.root.add_namespace(nil, "http://riboseinc.com/csd")
         ret1
       end
 

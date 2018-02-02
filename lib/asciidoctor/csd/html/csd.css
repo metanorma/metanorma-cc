@@ -296,7 +296,7 @@ p.zzContents, li.zzContents, div.zzContents
 	mso-ansi-language:EN-GB;
 	font-weight:bold;
 	mso-bidi-font-weight:normal;}
-p.zzCopyright, li.zzCopyright, div.zzCopyright
+p.zzCopyright, li.zzCopyright
 	{mso-style-name:zzCopyright;
 	mso-style-noshow:yes;
 	mso-style-unhide:no;
@@ -309,8 +309,6 @@ p.zzCopyright, li.zzCopyright, div.zzCopyright
 	line-height:12.0pt;
 	mso-pagination:widow-orphan;
 	tab-stops:20.15pt 25.7pt 481.15pt;
-	border:none;
-	mso-border-alt:solid blue .5pt;
 	padding:0cm;
 	mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt;
 	font-size:11.0pt;
@@ -318,6 +316,27 @@ p.zzCopyright, li.zzCopyright, div.zzCopyright
 	mso-fareast-font-family:Calibri;
 	mso-bidi-font-family:"Source Sans Pro";
 	mso-ansi-language:EN-GB;}
+div.zzCopyright
+    {mso-element:para-border-div;
+    border:solid windowtext 1.0pt;
+    mso-border-top-alt:solid windowtext .5pt;
+    mso-border-left-alt:solid windowtext .5pt;
+    mso-border-right-alt:solid windowtext .5pt;
+    mso-border-bottom-alt:solid windowtext .5pt;
+    padding:1.0pt 4.0pt 0cm 4.0pt;
+    margin-left:5.1pt;
+    margin-right:5.1pt;}
+p.zzCopyright_address
+    {margin:0cm;
+    margin-bottom:.0001pt;
+    margin-left:20.15pt;
+    mso-layout-grid-align:none;
+    text-autospace:none;
+    padding:0cm;
+    mso-padding-alt:0cm 4.0pt 0cm 4.0pt;
+    font-size:10.0pt;
+	text-align:left;
+    mso-bidi-font-size:11.0pt;}
 p.zzSTDTitle, li.zzSTDTitle, div.zzSTDTitle
 	{mso-style-name:zzSTDTitle;
 	mso-style-noshow:yes;

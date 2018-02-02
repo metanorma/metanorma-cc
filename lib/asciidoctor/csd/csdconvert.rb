@@ -5,7 +5,7 @@ module Asciidoctor
     # A {Converter} implementation that generates CSD output, and a document
     # schema encapsulation of the document for validation
     class CsdConvert < IsoDoc::Convert
-      def initialize
+      def initialize(options)
         super
       end
 

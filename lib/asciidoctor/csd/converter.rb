@@ -70,7 +70,7 @@ module Asciidoctor
       end
 
       def doc_converter
-        IsoDoc::Convert.new(
+        CsdConvert.new(
           htmlstylesheet: html_doc_path("htmlstyle.css"),
           wordstylesheet: html_doc_path("wordstyle.css"),
           standardstylesheet: html_doc_path("csd.css"),

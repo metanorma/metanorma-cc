@@ -75,8 +75,8 @@ module Asciidoctor
           wordstylesheet: html_doc_path("wordstyle.css"),
           standardstylesheet: html_doc_path("csd.css"),
           header: html_doc_path("header.html"),
-          htmlcoverpage: html_doc_path("csd_titlepage.html"),
-          wordcoverpage: html_doc_path("csd_titlepage.html"),
+          htmlcoverpage: html_doc_path("html_csd_titlepage.html"),
+          wordcoverpage: html_doc_path("word_csd_titlepage.html"),
           htmlintropage: html_doc_path("csd_intro.html"),
           wordintropage: html_doc_path("csd_intro.html"),
         )

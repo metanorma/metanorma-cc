@@ -46,6 +46,20 @@ module Asciidoctor
                          "header.html", dir)
       end
 
+      def self.intropage(out)
+        fn = File.join(File.dirname(__FILE__), "csd_intro.html")
+        intropage = File.read(fn, encoding: "UTF-8")
+        out.parent.add_child intropage
+      end
+
+      def self.titlepage(_docxml, div)
+        fn = File.join(File.dirname(__FILE__), "csd_titlepage.html")
+        titlepage = File.read(fn, encoding: "UTF-8")
+        div.parent.add_child titlepage
+      end
+
+
+
     end
   end
 end

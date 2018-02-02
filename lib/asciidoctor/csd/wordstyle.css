@@ -85,7 +85,7 @@ p.MsoNormalIndent, li.MsoNormalIndent, div.MsoNormalIndent
 	mso-pagination:widow-orphan;
 	tab-stops:20.15pt;
 	font-size:11.0pt;
-	font-family:"Cambria",sans-serif;
+	font-family:"Source Sans Pro",sans-serif;
 	mso-fareast-font-family:Calibri;
 	mso-bidi-font-family:"Source Sans Pro";
 	mso-ansi-language:EN-GB;}
@@ -471,7 +471,7 @@ span.Heading1Char
 	mso-style-link:"Heading 1";
 	mso-ansi-font-size:13.0pt;
 	font-family:"Source Sans Pro",sans-serif;
-	mso-ascii-font-family:Cambria;
+	mso-ascii-font-family:Source Sans Pro;
 	mso-fareast-font-family:"MS Mincho";
 	mso-hansi-font-family:Cambria;
 	mso-ansi-language:EN-GB;
@@ -487,7 +487,7 @@ span.Heading2Char
 	mso-style-link:"Heading 2";
 	mso-ansi-font-size:12.0pt;
 	font-family:"Source Sans Pro",sans-serif;
-	mso-ascii-font-family:Cambria;
+	mso-ascii-font-family:Source Sans Pro;
 	mso-fareast-font-family:"MS Mincho";
 	mso-hansi-font-family:Cambria;
 	mso-ansi-language:EN-GB;
@@ -503,7 +503,7 @@ span.Heading3Char
 	mso-style-link:"Heading 3";
 	mso-ansi-font-size:11.0pt;
 	font-family:"Source Sans Pro",sans-serif;
-	mso-ascii-font-family:Cambria;
+	mso-ascii-font-family:Source Sans Pro;
 	mso-fareast-font-family:"MS Mincho";
 	mso-hansi-font-family:Cambria;
 	mso-ansi-language:EN-GB;
@@ -519,7 +519,7 @@ span.Heading4Char
 	mso-style-link:"Heading 4";
 	mso-ansi-font-size:11.0pt;
 	font-family:"Source Sans Pro",sans-serif;
-	mso-ascii-font-family:Cambria;
+	mso-ascii-font-family:Source Sans Pro;
 	mso-fareast-font-family:"MS Mincho";
 	mso-hansi-font-family:Cambria;
 	mso-ansi-language:EN-GB;
@@ -535,7 +535,7 @@ span.Heading5Char
 	mso-style-link:"Heading 5";
 	mso-ansi-font-size:11.0pt;
 	font-family:"Source Sans Pro",sans-serif;
-	mso-ascii-font-family:Cambria;
+	mso-ascii-font-family:Source Sans Pro;
 	mso-fareast-font-family:"MS Mincho";
 	mso-hansi-font-family:Cambria;
 	mso-ansi-language:EN-GB;
@@ -551,7 +551,7 @@ span.Heading6Char
 	mso-style-link:"Heading 6";
 	mso-ansi-font-size:11.0pt;
 	font-family:"Source Sans Pro",sans-serif;
-	mso-ascii-font-family:Cambria;
+	mso-ascii-font-family:Source Sans Pro;
 	mso-fareast-font-family:"MS Mincho";
 	mso-hansi-font-family:Cambria;
 	mso-ansi-language:EN-GB;
@@ -780,7 +780,7 @@ p.Tablebody, li.Tablebody, div.Tablebody
 .MsoChpDefault
 	{mso-style-type:export-only;
 	mso-default-props:yes;
-	mso-ascii-font-family:Cambria;
+	mso-ascii-font-family:Source Sans Pro;
 	mso-fareast-font-family:Calibri;
 	mso-hansi-font-family:Cambria;}
  /* Page Definitions */

@@ -58,6 +58,29 @@ module Asciidoctor
         div.parent.add_child titlepage
       end
 
+      def self.define_head(html, filename, dir)
+        html.head do |head|
+          head.title { |t| t << filename }
+          head.style do |style|
+            fn = File.join(File.dirname(__FILE__), "csd.css")
+            stylesheet = File.read(fn).gsub("FILENAME", filename)
+            style.comment "\n#{stylesheet}\n"
+          end
+        end
+      end
+
+          def self.convert(filename)
+    docxml = Nokogiri::XML(File.read(filename))
+    filename, dir = init_file(filename)
+    docxml.root.default_namespace = ""
+    result = noko do |xml|
+      xml.html do |html|
+        html_header(html, docxml, filename, dir)
+        make_body(html, docxml)
+      end
+    end.join("\n")
+    postprocess(result, filename, dir)
+  end
 
 
     end

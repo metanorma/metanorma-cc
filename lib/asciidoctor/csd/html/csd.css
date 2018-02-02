@@ -327,13 +327,14 @@ div.zzCopyright
     margin-left:5.1pt;
     margin-right:5.1pt;}
 p.zzCopyright_address
-    {margin:0cm;
-    margin-bottom:.0001pt;
-    margin-left:20.15pt;
+    {margin-top:0cm;
+	margin-right:14.2pt;
+	margin-bottom:0.0pt;
+	margin-left:14.2pt;
     mso-layout-grid-align:none;
     text-autospace:none;
-    padding:0cm;
-    mso-padding-alt:0cm 4.0pt 0cm 4.0pt;
+	padding-left:20pt;
+	mso-padding-alt-left:20pt;
     font-size:10.0pt;
 	text-align:left;
     mso-bidi-font-size:11.0pt;}

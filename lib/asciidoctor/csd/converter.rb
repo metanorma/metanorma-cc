@@ -77,8 +77,8 @@ module Asciidoctor
           header: html_doc_path("header.html"),
           htmlcoverpage: html_doc_path("html_csd_titlepage.html"),
           wordcoverpage: html_doc_path("word_csd_titlepage.html"),
-          htmlintropage: html_doc_path("csd_intro.html"),
-          wordintropage: html_doc_path("csd_intro.html"),
+          htmlintropage: html_doc_path("html_csd_intro.html"),
+          wordintropage: html_doc_path("word_csd_intro.html"),
         )
       end
 

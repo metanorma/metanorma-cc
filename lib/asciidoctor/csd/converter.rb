@@ -65,15 +65,17 @@ module Asciidoctor
         schema_validate(doc, File.join(File.dirname(__FILE__), "csd.rng"))
       end
 
-      def document(node)
-        ret1 = makexml(node)
-        validate(ret1)
-        ret = ret1.to_xml(indent: 2)
-        filename = node.attr("docfile").gsub(/\.adoc/, ".xml").
-          gsub(%r{^.*/}, '')
-        File.open("#{filename}", "w") { |f| f.write(ret) }
-        CsdConvert.convert filename
-        ret
+      def doc_converter
+        IsoDoc::Convert.new(
+          htmlstylesheet: html_doc_path("htmlstyle.css"),
+          wordstylesheet: html_doc_path("wordstyle.css"),
+          standardstylesheet: html_doc_path("csd.css"),
+          header: html_doc_path("header.html"),
+          htmlcoverpage: html_doc_path("csd_titlepage.html"),
+          wordcoverpage: html_doc_path("csd_titlepage.html"),
+          htmlintropage: html_doc_path("csd_intro.html"),
+          wordintropage: html_doc_path("csd_intro.html"),
+        )
       end
 
 

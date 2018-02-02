@@ -65,6 +65,10 @@ module Asciidoctor
         schema_validate(doc, File.join(File.dirname(__FILE__), "csd.rng"))
       end
 
+            def html_doc_path(file)
+        File.join(File.dirname(__FILE__), File.join("html", file))
+      end
+
       def doc_converter
         IsoDoc::Convert.new(
           htmlstylesheet: html_doc_path("htmlstyle.css"),

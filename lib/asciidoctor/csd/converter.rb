@@ -5,7 +5,7 @@ require "asciidoctor/iso/converter"
 
 module Asciidoctor
   module Csd
-    CSD_NAMESPACE = "https://www.calconnect.com/standards/csd"
+    CSD_NAMESPACE = "https://www.calconnect.org/standards/csd"
 
     # A {Converter} implementation that generates CSD output, and a document
     # schema encapsulation of the document for validation

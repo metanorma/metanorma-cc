@@ -1,4 +1,4 @@
-default namespace  = "https://www.calconnect.com/standards/csd"
+default namespace  = "https://www.calconnect.org/standards/csd"
 grammar { start =   csd-standard                                                                                                                                               standard-document = element  standard-document  {   title + ,   status  ,   creator * ,   language  ,   script  ,   type ? ,   id * ,   version ? ,   copyright  ,   sections + } 
   title = element  title  { attribute  language  { text  }  , text  } 
   status = element  status  {   stage  ,   substage ? } 

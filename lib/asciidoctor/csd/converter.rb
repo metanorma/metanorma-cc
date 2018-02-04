@@ -5,6 +5,8 @@ require "asciidoctor/iso/converter"
 
 module Asciidoctor
   module Csd
+    CSD_NAMESPACE = "https://www.calconnect.org/standards/csd"
+
     # A {Converter} implementation that generates CSD output, and a document
     # schema encapsulation of the document for validation
     class Converter < ISO::Converter
@@ -21,7 +23,7 @@ module Asciidoctor
       def title(node, xml)
         ["en"].each do |lang|
           xml.title **{ language: lang } do |t|
-            t << node.attr("title") 
+            t << node.attr("title")
           end
         end
       end
@@ -56,7 +58,7 @@ module Asciidoctor
         result << "</csd-standard>"
         result = textcleanup(result.flatten * "\n")
         ret1 = cleanup(Nokogiri::XML(result))
-        ret1.root.add_namespace(nil, "http://riboseinc.com/csd")
+        ret1.root.add_namespace(nil, CSD_NAMESPACE)
         ret1
       end
 
@@ -65,7 +67,7 @@ module Asciidoctor
         schema_validate(doc, File.join(File.dirname(__FILE__), "csd.rng"))
       end
 
-            def html_doc_path(file)
+      def html_doc_path(file)
         File.join(File.dirname(__FILE__), File.join("html", file))
       end
 

@@ -279,9 +279,7 @@
       <optional>
         <ref name="termdomain"/>
       </optional>
-      <optional>
-        <ref name="definition"/>
-      </optional>
+      <ref name="definition"/>
       <zeroOrMore>
         <ref name="termnote"/>
       </zeroOrMore>
@@ -890,7 +888,7 @@
       <attribute name="type">
         <choice>
           <value>MathML</value>
-          <value>AsciiML</value>
+          <value>AsciiMath</value>
         </choice>
       </attribute>
       <text/>

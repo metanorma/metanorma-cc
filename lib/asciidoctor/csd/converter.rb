@@ -50,7 +50,7 @@ module Asciidoctor
 
       def makexml(node)
         result = ["<?xml version='1.0' encoding='UTF-8'?>\n<csd-standard>"]
-        @@draft = node.attributes.has_key?("draft")
+        @draft = node.attributes.has_key?("draft")
         result << noko { |ixml| front node, ixml }
         result << noko { |ixml| middle node, ixml }
         result << "</csd-standard>"

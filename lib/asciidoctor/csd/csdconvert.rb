@@ -75,6 +75,17 @@ module Asciidoctor
         end
       end
 
+      def annex_names(clause, num)
+        obligation = "(Informative)"
+        obligation = "(Normative)" if clause["subtype"] == "normative"
+        label = "<b>Appendix #{num}</b><br/>#{obligation}"
+        @anchors[clause["id"]] = { label: label,
+                                   xref: "Appendix #{num}", level: 1 }
+        clause.xpath(ns("./subsection")).each_with_index do |c, i|
+          annex_names1(c, "#{num}.#{i + 1}", 2)
+        end
+        hierarchical_asset_names(clause, num)
+      end
 
     end
   end

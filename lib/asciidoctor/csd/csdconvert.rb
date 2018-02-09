@@ -20,14 +20,14 @@ module Asciidoctor
 
       def author(isoxml, _out)
         set_metadata(:tc, "XXXX")
-        tc = isoxml.at(ns("//technical-committee"))
+        tc = isoxml.at(ns("//isoworkgroup/technical-committee"))
         set_metadata(:tc, tc.text) if tc
       end
 
 
       def id(isoxml, _out)
-        docnumber = isoxml.at(ns("//csd-standard/id"))
-        docstatus = isoxml.at(ns("//csd-standard/status"))
+        docnumber = isoxml.at(ns("//bibdata/docidentifier"))
+        docstatus = isoxml.at(ns("//bibdata/status"))
         dn = docnumber.text
         if docstatus
           set_metadata(:status, status_print(docstatus.text))

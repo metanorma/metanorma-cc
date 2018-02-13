@@ -83,6 +83,7 @@ p.Note, div.Note, li.Note
 	font-size:10.0pt;
 	mso-bidi-font-size:11.0pt;
 	font-family:"Source Sans Pro",sans-serif;
+        font-size:10.0pt;
 	mso-fareast-font-family:Calibri;
 	mso-bidi-font-family:"Source Sans Pro";
 	mso-ansi-language:EN-GB;}
@@ -506,4 +507,12 @@ div.coverpage_warning
 .coverpage_warning
     {color:#485094;
     font-size:10.0pt;}
+
+    a.TableFootnoteRef
+        {mso-style-priority:99;
+        vertical-align:super;}
+
+        aside {
+          font-size:10.0pt;
+}
 

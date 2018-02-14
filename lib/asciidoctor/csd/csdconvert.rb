@@ -7,6 +7,11 @@ module Asciidoctor
     class CsdConvert < IsoDoc::Convert
       def initialize(options)
         super
+        set_metadata(:status, "XXX")
+      end
+
+      def init_metadata
+        super
       end
 
       def title(isoxml, _out)

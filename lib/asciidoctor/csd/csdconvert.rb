@@ -56,7 +56,7 @@ module Asciidoctor
         end
       end
 
-      def populate_template(docxml)
+      def populate_template(docxml, _format)
         meta = get_metadata
         docxml.
           gsub(/DOCYEAR/, meta[:docyear]).

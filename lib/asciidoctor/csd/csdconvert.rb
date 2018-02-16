@@ -56,30 +56,6 @@ module Asciidoctor
         end
       end
 
-      def populate_template(docxml, _format)
-        meta = get_metadata
-        docxml.
-          gsub(/DOCYEAR/, meta[:docyear]).
-          gsub(/DOCNUMBER/, meta[:docnumber]).
-          gsub(/TECHCOMMITTEE/, meta[:tc]).
-          gsub(/DOCTITLE/, meta[:doctitle]).
-          gsub(/DOCSTAGE/, meta[:status]).
-          gsub(/\[TERMREF\]\s*/, "[SOURCE: ").
-          gsub(/\s*\[\/TERMREF\]\s*/, "]").
-          gsub(/\s*\[ISOSECTION\]/, ", ").
-          gsub(/\s*\[MODIFICATION\]/, ", modified &mdash; ")
-      end
-
-      def generate_header(filename, dir)
-        header = File.read(@header, encoding: "UTF-8").
-          gsub(/FILENAME/, filename).
-          gsub(/DOCYEAR/, get_metadata()[:docyear]).
-          gsub(/DOCNUMBER/, get_metadata()[:docnumber])
-        File.open("header.html", "w") do |f|
-          f.write(header)
-        end
-      end
-
       def annex_names(clause, num)
         obligation = "(Informative)"
         obligation = "(Normative)" if clause["subtype"] == "normative"

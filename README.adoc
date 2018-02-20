@@ -9,7 +9,13 @@ WARNING: This gem is still under development.
 == Functionality
 
 This gem processes http://asciidoctor.org/[Asciidoctor] documents following
-a template for generating CSD International Standards. The following
+a template for generating CSD International Standards.
+
+The gem currently inherits from the https://github.com/riboseinc/asciidoctor-iso
+gem, and aligns closely to it. Refer to the ISO gem
+for guidance, including https://github.com/riboseinc/asciidoctor-iso/wiki/Guidance-for-authoring
+
+The following
 outputs are generated.
 
 * (Optional) An HTML preview generated directly from the Asciidoctor document,

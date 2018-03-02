@@ -102,6 +102,13 @@ module Asciidoctor
         end
       end
 
+      def sections_cleanup(xmldoc)
+        super
+        xmldoc.xpath("//*[@inline-header]").each do |x|
+          x.delete("inline-header")
+        end
+      end
+
       def doc_converter
         CsdConvert.new(
           htmlstylesheet: html_doc_path("htmlstyle.css"),

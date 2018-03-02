@@ -79,9 +79,7 @@ module Asciidoctor
       end
 
       def pre_parse(node, out)
-        out.pre do |p|
-          p node.content.gsub(/&/, "&amp;").gsub(/</, "&lt;").gsub(/>/, "&gt;")
-        end
+        out.pre node.text # content.gsub(/</, "&lt;").gsub(/>/, "&gt;")
       end
 
       TERM_DEF_BOILERPLATE = "".freeze

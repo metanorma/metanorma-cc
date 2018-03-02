@@ -25,7 +25,7 @@ module Asciidoctor
 
       def author(isoxml, _out)
         set_metadata(:tc, "XXXX")
-        tc = isoxml.at(ns("//isoworkgroup/technical-committee"))
+        tc = isoxml.at(ns("//editorialgroup/technical-committee"))
         set_metadata(:tc, tc.text) if tc
       end
 

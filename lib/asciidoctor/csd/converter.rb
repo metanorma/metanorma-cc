@@ -32,7 +32,7 @@ module Asciidoctor
       end
 
       def metadata_committee(node, xml)
-        xml.isoworkgroup do |a|
+        xml.editorialgroup do |a|
           a.technical_committee node.attr("technical-committee"),
             **attr_code(type: node.attr("technical-committee-type"))
         end

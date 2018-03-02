@@ -82,6 +82,8 @@ module Asciidoctor
           p << node.text
         end
       end
+
+      TERM_DEF_BOILERPLATE = "".freeze
     end
   end
 end

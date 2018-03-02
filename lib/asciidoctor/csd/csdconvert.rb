@@ -71,7 +71,8 @@ module Asciidoctor
       def error_parse(node, out)
         # catch elements not defined in ISO
         case node.name
-        when "pre" then pre_parse(node, out)
+        when "pre" 
+          pre_parse(node, out)
         else
           super
         end
@@ -79,7 +80,7 @@ module Asciidoctor
 
       def pre_parse(node, out)
         out.pre do |p|
-          p << node.text
+          p << node.content.gsub(/&/, "&amp;").gsub(/</, "&lt;").gsub(/>/, "&gt;")
         end
       end
 

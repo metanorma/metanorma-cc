@@ -80,7 +80,7 @@ module Asciidoctor
 
       def pre_parse(node, out)
         out.pre do |p|
-          p << node.content.gsub(/&/, "&amp;").gsub(/</, "&lt;").gsub(/>/, "&gt;")
+          p node.content.gsub(/&/, "&amp;").gsub(/</, "&lt;").gsub(/>/, "&gt;")
         end
       end
 

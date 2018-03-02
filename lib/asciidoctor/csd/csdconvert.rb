@@ -84,6 +84,18 @@ module Asciidoctor
       end
 
       TERM_DEF_BOILERPLATE = "".freeze
+
+      def term_defs_boilerplate(div, source, term)
+        if source.empty? && term.nil?
+          div << "<p>No terms and definitions are listed in this document.</p>"
+        else
+          out = "<p>For the purposes of this document, " +
+            term_defs_boilerplate_cont(source, term)
+          div << out
+        end
+        div << TERM_DEF_BOILERPLATE
+      end
+
     end
   end
 end

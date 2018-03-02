@@ -68,6 +68,20 @@ module Asciidoctor
         hierarchical_asset_names(clause, num)
       end
 
+      def error_parse(node, out)
+        # catch elements not defined in ISO
+        case node.name
+        when "pre" then pre_parse(node, out)
+        else
+          super
+        end
+      end
+
+      def pre_parse(node, out)
+        out.pre do |p|
+          p << node.text
+        end
+      end
     end
   end
 end

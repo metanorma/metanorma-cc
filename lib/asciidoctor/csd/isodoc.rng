@@ -24,9 +24,6 @@
   <define name="standard-document">
     <element name="standard-document">
       <ref name="bibdata"/>
-      <zeroOrMore>
-        <ref name="docrelation"/>
-      </zeroOrMore>
       <optional>
         <ref name="version"/>
       </optional>
@@ -47,15 +44,27 @@
     </element>
   </define>
   <define name="docrelation">
-    <element name="docrelation">
+    <element name="relation">
       <attribute name="type">
         <choice>
+          <value>parent</value>
+          <value>child</value>
           <value>obsoletes</value>
           <value>updates</value>
           <value>complements</value>
+          <value>derivedFrom</value>
+          <value>adoptedFrom</value>
+          <value>equivalent</value>
+          <value>identical</value>
+          <value>nonequivalent</value>
         </choice>
       </attribute>
-      <ref name="eref"/>
+      <element name="bibitem">
+        <ref name="BibliographicItem"/>
+      </element>
+      <zeroOrMore>
+        <ref name="locality"/>
+      </zeroOrMore>
     </element>
   </define>
   <define name="status">
@@ -110,8 +119,22 @@
           <ref name="content"/>
           <ref name="clause"/>
           <ref name="terms"/>
+          <ref name="symbols-abbrevs"/>
         </choice>
       </oneOrMore>
+    </element>
+  </define>
+  <define name="symbols-abbrevs">
+    <element name="symbols-abbrevs">
+      <optional>
+        <attribute name="id">
+          <data type="ID"/>
+        </attribute>
+      </optional>
+      <optional>
+        <ref name="section-title"/>
+      </optional>
+      <ref name="dl"/>
     </element>
   </define>
   <define name="section-title">
@@ -192,7 +215,7 @@
           <data type="ID"/>
         </attribute>
       </optional>
-      <attribute name="type">
+      <attribute name="obligation">
         <choice>
           <value>normative</value>
           <value>informative</value>
@@ -471,7 +494,9 @@
           <ref name="Alignments"/>
         </attribute>
       </optional>
-      <ref name="quote-source"/>
+      <optional>
+        <ref name="quote-source"/>
+      </optional>
       <optional>
         <ref name="quote-author"/>
       </optional>
@@ -1281,15 +1306,26 @@
           <value>chapter</value>
           <value>page</value>
           <value>whole</value>
+          <value>table</value>
+          <value>annex</value>
+          <value>figure</value>
+          <value>note</value>
+          <value>example</value>
         </choice>
       </attribute>
-      <zeroOrMore>
-        <ref name="localityreference"/>
-      </zeroOrMore>
+      <ref name="referenceFrom"/>
+      <optional>
+        <ref name="referenceTo"/>
+      </optional>
     </element>
   </define>
-  <define name="localityreference">
-    <element name="reference">
+  <define name="referenceFrom">
+    <element name="referenceFrom">
+      <text/>
+    </element>
+  </define>
+  <define name="referenceTo">
+    <element name="referenceTo">
       <text/>
     </element>
   </define>
@@ -1299,6 +1335,11 @@
       <attribute name="id">
         <data type="ID"/>
       </attribute>
+      <ref name="BibliographicItem"/>
+    </element>
+  </define>
+  <define name="bibitem_no_id">
+    <element name="bibitem">
       <ref name="BibliographicItem"/>
     </element>
   </define>
@@ -1365,6 +1406,9 @@
     <optional>
       <ref name="copyright"/>
     </optional>
+    <zeroOrMore>
+      <ref name="docrelation"/>
+    </zeroOrMore>
   </define>
   <define name="BibData">
     <optional>
@@ -1412,6 +1456,9 @@
       <ref name="status"/>
     </optional>
     <ref name="copyright"/>
+    <zeroOrMore>
+      <ref name="docrelation"/>
+    </zeroOrMore>
   </define>
   <define name="btitle">
     <element name="title">

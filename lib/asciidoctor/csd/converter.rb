@@ -93,6 +93,15 @@ module Asciidoctor
         File.join(File.dirname(__FILE__), File.join("html", file))
       end
 
+      def literal(node)
+        noko do |xml|
+          xml.figure **id_attr(node) do |f|
+            figure_title(node, f)
+            f.pre node.lines.join("\n")
+          end
+        end
+      end
+
       def doc_converter
         CsdConvert.new(
           htmlstylesheet: html_doc_path("htmlstyle.css"),

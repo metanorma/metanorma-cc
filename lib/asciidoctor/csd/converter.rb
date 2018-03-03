@@ -109,7 +109,11 @@ module Asciidoctor
         end
       end
 
-      def doc_converter
+      def style(n, t)
+        return
+      end
+
+      def doc_converter(_node)
         CsdConvert.new(
           htmlstylesheet: html_doc_path("htmlstyle.css"),
           wordstylesheet: html_doc_path("wordstyle.css"),

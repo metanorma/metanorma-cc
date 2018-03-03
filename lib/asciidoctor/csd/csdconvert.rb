@@ -56,18 +56,6 @@ module Asciidoctor
         end
       end
 
-      def annex_names(clause, num)
-        obligation = "(Informative)"
-        obligation = "(Normative)" if clause["subtype"] == "normative"
-        label = "<b>Appendix #{num}</b><br/>#{obligation}"
-        @anchors[clause["id"]] = { label: label,
-                                   xref: "Appendix #{num}", level: 1 }
-        clause.xpath(ns("./subsection")).each_with_index do |c, i|
-          annex_names1(c, "#{num}.#{i + 1}", 2)
-        end
-        hierarchical_asset_names(clause, num)
-      end
-
       def error_parse(node, out)
         # catch elements not defined in ISO
         case node.name
@@ -82,19 +70,18 @@ module Asciidoctor
         out.pre node.text # content.gsub(/</, "&lt;").gsub(/>/, "&gt;")
       end
 
-      TERM_DEF_BOILERPLATE = "".freeze
-
       def term_defs_boilerplate(div, source, term)
         if source.empty? && term.nil?
-          div << "<p>No terms and definitions are listed in this document.</p>"
+          div << @no_terms_boilerplate
         else
-          out = "<p>For the purposes of this document, " +
-            term_defs_boilerplate_cont(source, term)
-          div << out
+          div << term_defs_boilerplate_cont(source, term)
         end
-        div << TERM_DEF_BOILERPLATE
       end
 
+      def i18n_init(lang, script)
+        super
+        @annex_lbl = "Appendix"
+      end
     end
   end
 end

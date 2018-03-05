@@ -258,3 +258,6 @@ image::models/standard-document.png[]
 
 == Examples
 
+* link:spec/examples/rfc6350.adoc[] is an AsciiCSD version of https://tools.ietf.org/html/rfc6350[RFC 6350].
+* link:spec/examples/rfc6350.html[] is an HTML file generated from the AsciiCSD.
+* link:spec/examples/rfc6350.doc[] is a Word document generated from the AsciiCSD.

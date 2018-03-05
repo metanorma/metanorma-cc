@@ -2,7 +2,7 @@
 Simon Perreault <simon.perreault@viagenie.ca>
 :title: vCard Format Specification
 :docnumber: RFC 6350
-:doctype: rfc
+:doctype: international-standard
 :abbrev: vCard
 :obsoletes: 2425, 2426, 4770
 :updates: 2739
@@ -28,7 +28,8 @@ Simon Perreault <simon.perreault@viagenie.ca>
 :inline-definition-lists: true
 :comments: yes
 
-
+.Foreword
+TBD
 
 [[section1]]
 == Introduction
@@ -426,7 +427,7 @@ Examples for "uri":
 
 "date", "time", "date-time", "date-and-or-time", and "timestamp":
 Each of these value types is based on the definitions in
-<<ISO.8601>>.  Multiple such values can be specified using the
+<<ISO8601>>.  Multiple such values can be specified using the
 comma-separated notation.
 
 Only the basic format is supported.
@@ -3502,7 +3503,7 @@ that have been made in the vCard specification from <<RFC2425>> and
 * [[[RFC2119,IETF RFC 2119]]], S. Bradner. _Key words for use in RFCs to Indicate Requirement Levels._ 1997. https://www.rfc-editor.org/info/rfc2119
 * [[[RFC2739,IETF RFC 2739]]], T. Small, D. Hennessy, F. Dawson. _Calendar Attributes for vCard and LDAP._ 2000. https://www.rfc-editor.org/info/rfc2739
 * [[[RFC3629,IETF RFC 3629]]], F. Yergeau. _UTF-8, a transformation format of ISO 10646._ 2003. https://www.rfc-editor.org/info/rfc3629
-* [[[RFC3986,IETF RFC 3966]]], H. Schulzrinne. _The tel URI for Telephone Numbers._ 2004. https://www.rfc-editor.org/info/rfc3966
+* [[[RFC3966,IETF RFC 3966]]], H. Schulzrinne. _The tel URI for Telephone Numbers._ 2004. https://www.rfc-editor.org/info/rfc3966
 * [[[RFC3986,IETF RFC 3986]]], T. Berners-Lee, R. Fielding, L. Masinter. _Uniform Resource Identifier (URI): Generic Syntax._ 2005. https://www.rfc-editor.org/info/rfc3986
 * [[[RFC4122,IETF RFC 4122]]], P. Leach, M. Mealling, R. Salz. _A Universally Unique IDentifier (UUID) URN Namespace._ 2005. https://www.rfc-editor.org/info/rfc4122
 * [[[RFC4288,IETF RFC 4288]]], N. Freed, J. Klensin. _Media Type Specifications and Registration Procedures._ 2005. https://www.rfc-editor.org/info/rfc4288

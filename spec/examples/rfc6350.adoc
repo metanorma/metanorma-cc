@@ -1,10 +1,5 @@
 = vCard Format Specification
 Simon Perreault <simon.perreault@viagenie.ca>
-:bibliography-database: rfc6350_refs.xml
-:bibliography-passthrough: true
-:bibliography-prepend-empty: false
-:bibliography-hyperlinks: false
-:bibliography-style: rfc-v2
 :doctype: rfc
 :abbrev: vCard
 :obsoletes: 2425, 2426, 4770
@@ -35,8 +30,8 @@ This document defines the vCard data format for representing and
 exchanging a variety of information about individuals and other
 entities (e.g., formatted and structured name and delivery addresses,
 email address, multiple telephone numbers, photograph, logo, audio
-clips, etc.).  This document obsoletes RFCs 2425, 2426, and 4770, and
-updates RFC 2739.
+clips, etc.).  This document obsoletes <<RFC2425>>, <<RFC2426>>, and <<RFC4770>>, and
+updates <<RFC2739>>.
 
 
 [[section1]]
@@ -49,7 +44,7 @@ defines the vCard format, which allows the capture and exchange of
 information normally stored within an address book or directory
 application.
 
-A high-level overview of the differences from RFCs 2425 and 2426 can
+A high-level overview of the differences from <<RFC2425>> and <<RFC2426>> can
 be found in <<appendixA>>.
 
 [[section2]]
@@ -58,7 +53,7 @@ be found in <<appendixA>>.
 The key words "[bcp14]#MUST#", "[bcp14]#MUST NOT#", "[bcp14]#REQUIRED#", "[bcp14]#SHALL#", "[bcp14]#SHALL NOT#",
 "[bcp14]#SHOULD#", "[bcp14]#SHOULD NOT#", "[bcp14]#RECOMMENDED#", "[bcp14]#NOT RECOMMENDED#", "[bcp14]#MAY#", and
 "[bcp14]#OPTIONAL#" in this document are to be interpreted as described in
-cite:norm[RFC2119].
+<<RFC2119>>.
 
 [[section3]]
 == vCard Format Specification
@@ -71,21 +66,21 @@ more lines in the format given below.
 [[section3_1]]
 === Charset
 
-The charset (see cite:info[RFC3536] for internationalization terminology) for
-vCard is UTF-8 as defined in cite:norm[RFC3629].  There is no way to override
+The charset (see <<RFC3536>> for internationalization terminology) for
+vCard is UTF-8 as defined in <<RFC3629>>.  There is no way to override
 this.  It is invalid to specify a value other than "UTF-8" in the
 "charset" MIME parameter (see <<section10_1>>).
 
 [[section3_2]]
 ===  Line Delimiting and Folding
 
-Individual lines within vCard are delimited by the cite:norm[RFC5322] line
+Individual lines within vCard are delimited by the <<RFC5322>> line
 break, which is a CRLF sequence (U+000D followed by U+000A).  Long
 logical lines of text can be split into a multiple-physical-line
 representation using the following folding technique.  Content lines
 [bcp14]#SHOULD# be folded to a maximum width of 75 octets, excluding the line
 break.  Multi-octet characters [bcp14]#MUST# remain contiguous.  The rationale
-for this folding process can be found in cite:norm[RFC5322, suffix=", Section 2.1.1"].
+for this folding process can be found in <<RFC5322,section 2.1.1>>.
 
 A logical line [bcp14]#MAY# be continued on the next physical line anywhere
 between two characters by inserting a CRLF immediately followed by a
@@ -126,8 +121,8 @@ improperly folded lines in the middle of a UTF-8 multi-octet
 sequence.  For this reason, implementations [bcp14]#SHOULD# unfold lines in
 such a way as to properly restore the original sequence.
 
-Note: Unfolding is done differently than in cite:norm[RFC5322].  Unfolding
-in cite:norm[RFC5322] only removes the CRLF, not the space following it.
+Note: Unfolding is done differently than in <<RFC5322>>.  Unfolding
+in <<RFC5322>> only removes the CRLF, not the space following it.
 
 Folding is done after any content encoding of a type value.
 Unfolding is done before any decoding of a type value in a content
@@ -136,7 +131,7 @@ line.
 [[section3_3]]
 === ABNF Format Definition
 
-The following ABNF uses the notation of cite:norm[RFC5234], which also defines
+The following ABNF uses the notation of <<RFC5234>>, which also defines
 CRLF, WSP, DQUOTE, VCHAR, ALPHA, and DIGIT.
 
 [source,abnf]
@@ -188,7 +183,7 @@ param-value = *SAFE-CHAR / DQUOTE *QSAFE-CHAR DQUOTE
 any-param  = (iana-token / x-name) "=" param-value *("," param-value)
 
 NON-ASCII = UTF8-2 / UTF8-3 / UTF8-4
-  ; UTF8-{2,3,4} are defined in [RFC3629]
+  ; UTF8-{2,3,4} are defined in IETF RFC 3629
 
 QSAFE-CHAR = WSP / "!" / %x23-7E / NON-ASCII
   ; Any character except CTLs, DQUOTE
@@ -204,7 +199,7 @@ A line that begins with a white space character is a continuation of
 the previous line, as described in <<section3_2>>.  The white space
 character and immediately preceeding CRLF should be discarded when
 reconstructing the original line.  Note that this line-folding
-convention differs from that found in cite:norm[RFC5322], in that the sequence
+convention differs from that found in <<RFC5322>>, in that the sequence
 <CRLF><WSP> found anywhere in the content indicates a continued line
 and should be removed.
 
@@ -225,7 +220,7 @@ grouping [bcp14]#MAY# simply strip off any text before a "." to the left of
 the type name and present the types and values as normal.
 
 Property cardinalities are indicated using the following notation,
-which is based on ABNF (see cite:norm[RFC5234, suffix=", Section 3.6"]):
+which is based on ABNF (see <<RFC5234,section 3.6>>):
 
 |===
 | Cardinality | Meaning                                         
@@ -292,7 +287,7 @@ Standard value types are defined below.
         / boolean
         / integer-list
         / float-list
-        / URI               ; from Section 3 of [RFC3986]
+        / URI               ; from Section 3 of IETF RFC 3986
         / utc-offset
         / Language-Tag
         / iana-valuespec
@@ -356,7 +351,7 @@ Standard value types are defined below.
 
   utc-offset = sign hour [minute]
 
-  Language-Tag = <Language-Tag, defined in [RFC5646], Section 2.1>
+  Language-Tag = <Language-Tag, defined in IETF RFC 5646, Section 2.1>
 
   iana-valuespec = <value-spec, see Section 12>
                  ; a publicly defined valuetype format, registered
@@ -410,7 +405,7 @@ escape technique.
 are referenced by a Uniform Resource Identifier (URI) instead of
 encoded in-line.  These value references might be used if the value
 is too large, or otherwise undesirable to include directly.  The
-format for the URI is as defined in cite:norm[RFC3986, prefix="Section 3 of "].  Note
+format for the URI is as defined in <<RFC3986,section 3>>.  Note
 that the value of a property of type "uri" is what the URI points to,
 not the URI itself.
 
@@ -426,7 +421,7 @@ Examples for "uri":
 
 "date", "time", "date-time", "date-and-or-time", and "timestamp":
 Each of these value types is based on the definitions in
-cite:norm[ISO.8601.2004].  Multiple such values can be specified using the
+<<ISO.8601>>.  Multiple such values can be specified using the
 comma-separated notation.
 
 Only the basic format is supported.
@@ -434,14 +429,14 @@ Only the basic format is supported.
 [[section4_3_1]]
 ====  DATE
 
-A calendar date as specified in cite:norm[ISO.8601.2004, suffix=", Section 4.1.2"].
+A calendar date as specified in <<ISO8601,clause 4.1.2>>].
 
-Reduced accuracy, as specified in cite:norm[ISO.8601.2004, suffix=", Sections 4.1.2.3"] a)
+Reduced accuracy, as specified in <<ISO8601,clause 4.1.2.3>> a)
 and b), but not c), is permitted.
 
-Expanded representation, as specified in cite:norm[ISO.8601.2004, suffix=", Section 4.1.4"], is forbidden.
+Expanded representation, as specified in <<ISO8601,clause 4.1.4>>, is forbidden.
 
-Truncated representation, as specified in cite:norm[ISO.8601.2000, suffix=", Sections 5.2.1.3"] d), e), and f), is permitted.
+Truncated representation, as specified in <<ISO8601,clause 5.2.1.3>> d), e), and f), is permitted.
 
 Examples for "date":
 
@@ -464,18 +459,18 @@ of the extended format.
 [[section4_3_2]]
 ====  TIME
 
-A time of day as specified in cite:norm[ISO.8601.2004, suffix=", Section 4.2"].
+A time of day as specified in <<ISO8601,clause 4.2>>.
 
-Reduced accuracy, as specified in cite:norm[ISO.8601.2004, suffix=", Section 4.2.2.3"],
+Reduced accuracy, as specified in <<ISO8601,clause 4.2.2.3>>,
 is permitted.
 
 Representation with decimal fraction, as specified in
-cite:norm[ISO.8601.2004, suffix=", Section 4.2.2.4"], is forbidden.
+<<ISO8601,clause 4.2.2.4>>, is forbidden.
 
 The midnight hour is always represented by 00, never 24 (see
-cite:norm[ISO.8601.2004, suffix=", Section 4.2.3"]).
+<<ISO8601,clause 4.2.3>>).
 
-Truncated representation, as specified in cite:norm[ISO.8601.2000, suffix=", Sections 5.3.1.4"] a), b), and c), is permitted.
+Truncated representation, as specified in <<ISO8601.2000,clause 5.3.1.4>> a), b), and c), is permitted.
 
 Examples for "time":
 
@@ -492,9 +487,9 @@ Examples for "time":
 [[section4_3_3]]
 ====  DATE-TIME
 
-A date and time of day combination as specified in cite:norm[ISO.8601.2004, suffix=", Section 4.3"].
+A date and time of day combination as specified in <<ISO8601,clause 4.3>>.
 
-Truncation of the date part, as specified in cite:norm[ISO.8601.2000, suffix=", Section 5.4.2"] c), is permitted.
+Truncation of the date part, as specified in <<ISO8601.2000,clause 5.4.2>> c), is permitted.
 
 Examples for "date-time":
 
@@ -534,7 +529,7 @@ Examples for "date-and-or-time":
 ====  TIMESTAMP
 
 A complete date and time of day combination as specified in
-cite:norm[ISO.8601.2004, suffix=", Section 4.3.2"].
+<<ISO8601,clause 4.3.2>>.
 
 Examples for "timestamp":
 
@@ -584,7 +579,7 @@ Examples: ::
 sign is not specified, the value is assumed positive "+".  Multiple
 "float" values can be specified using the comma-separated notation.
 Implementations [bcp14]#MUST# support a precision equal or better than that of
-the IEEE "binary64" format cite:norm[IEEE.754.2008].
+the IEEE "binary64" format <<IEEE754>>.
 
 Note: Scientific notation is disallowed.  Implementers wishing to
 use their favorite language's %f formatting should be careful.
@@ -614,7 +609,7 @@ to maintain digit count.  The basic format for ISO 8601 UTC offsets
 [[section4_8]]
 ===  LANGUAGE-TAG
 
-"language-tag": A single language tag, as defined in cite:norm[RFC5646].
+"language-tag": A single language tag, as defined in <<RFC5646>>.
 
 [[section5]]
 ==  Property Parameters
@@ -641,8 +636,8 @@ recognize.
 The LANGUAGE property parameter is used to identify data in multiple
 languages.  There is no concept of "default" language, except as
 specified by any "Content-Language" MIME header parameter that is
-present cite:info[RFC3282].  The value of the LANGUAGE property parameter is a
-language tag as defined in cite:norm[RFC5646, prefix="Section 2 of "].
+present <<RFC3282>>.  The value of the LANGUAGE property parameter is a
+language tag as defined in <<RFC5646,section 2>>.
 
 Examples: ::
 ....
@@ -653,7 +648,7 @@ ABNF: ::
 [source,abnf]
 ----
         language-param = "LANGUAGE=" Language-Tag
-          ; Language-Tag is defined in section 2.1 of RFC 5646
+          ; Language-Tag is defined in section 2.1 of IETF RFC 5646
           
 ----
 
@@ -865,31 +860,29 @@ ABNF: ::
 
 The MEDIATYPE parameter is used with properties whose value is a URI.
 Its use is [bcp14]#OPTIONAL#.  It provides a hint to the vCard consumer
-application about the media type cite:norm[RFC2046] of the resource identified
+application about the media type <<RFC2046>> of the resource identified
 by the URI.  Some URI schemes do not need this parameter.  For
 example, the "data" scheme allows the media type to be explicitly
-indicated as part of the URI cite:info[RFC2397].  Another scheme, "http",
+indicated as part of the URI <<RFC2397>>.  Another scheme, "http",
 provides the media type as part of the URI resolution process, with
-the Content-Type HTTP header cite:info[RFC2616].  The MEDIATYPE parameter is
+the Content-Type HTTP header <<RFC2616>>.  The MEDIATYPE parameter is
 intended to be used with URI schemes that do not provide such
-functionality (e.g., "ftp" cite:info[RFC1738]).
+functionality (e.g., "ftp" <<RFC1738>>).
 
 ABNF: ::
 [source,abnf]
 ----
   mediatype-param = "MEDIATYPE=" mediatype
   mediatype = type-name "/" subtype-name *( ";" attribute "=" value )
-    ; "attribute" and "value" are from [RFC2045]
+    ; "attribute" and "value" are from IETF RFC 2045
     ; "type-name" and "subtype-name" are from [RFC4288]
 ----
-
-cite:norm[RFC2045, text="<xref target='RFC2045' format='none'/>"] cite:norm[RFC4288, text="<xref target='RFC4288' format='none'/>"]
 
 [[section5_8]]
 ===  CALSCALE
 
 The CALSCALE parameter is identical to the CALSCALE property in
-iCalendar (see cite:norm[RFC5545, suffix=", Section 3.7.1"]).  It is used to define the
+iCalendar (see <<RFC5545,section 3.7.1>>).  It is used to define the
 calendar system in which a date or date-time value is expressed.  The
 only value specified by iCalendar is "gregorian", which stands for
 the Gregorian system.  It is the default when the parameter is
@@ -1107,7 +1100,7 @@ Cardinality: :: *
 Special notes: :: The SOURCE property is used to provide the means by
    which applications knowledgable in the given directory service
    protocol can obtain additional or more up-to-date information from
-   the directory service.  It contains a URI as defined in cite:norm[RFC3986]
+   the directory service.  It contains a URI as defined in <<RFC3986>>
    and/or other information referencing the vCard to which the
    information pertains.  When directory information is available
    from more than one source, the sending entity can pick what it
@@ -1274,12 +1267,12 @@ Value type: :: A single text value.
 Cardinality: :: *
 
 Special notes: :: The content of this property is a single XML 1.0
-   cite:norm[W3C.REC-xml-20081126] element whose namespace [bcp14]#MUST# be explicitly
+   <<W3C.REC-xml-20081126>> element whose namespace [bcp14]#MUST# be explicitly
    specified using the xmlns attribute and [bcp14]#MUST NOT# be the vCard 4
    namespace ("urn:ietf:params:xml:ns:vcard-4.0").  (This implies
    that it cannot duplicate a standard vCard property.)  The element
    is to be interpreted as if it was contained in a <vcard> element,
-   as defined in cite:norm[RFC6351].
+   as defined in <<RFC6351>>.
 +
 The fragment is subject to normal line folding and escaping, i.e.,
    replace all backslashes with "\\", then replace all newlines with
@@ -1289,7 +1282,7 @@ Support for this property is [bcp14]#OPTIONAL#, but implementations of this
    specification [bcp14]#MUST# preserve instances of this property when
    propagating vCards.
 +
-See cite:norm[RFC6351] for more information on the intended use of this
+See <<RFC6351>> for more information on the intended use of this
    property.
 
 ABNF: ::
@@ -1317,7 +1310,7 @@ Value type: :: A single text value.
 Cardinality: :: 1*
 
 Special notes: :: This property is based on the semantics of the X.520
-   Common Name attribute cite:norm[CCITT.X520.1988].  The property [bcp14]#MUST# be
+   Common Name attribute <<CCITT.X520.1988>>.  The property [bcp14]#MUST# be
    present in the vCard object.
 
 ABNF: ::
@@ -1353,7 +1346,7 @@ Special note: :: The structured property value corresponds, in
    character (U+003B).  Individual text components can include
    multiple text values separated by the COMMA character (U+002C).
    This property is based on the semantics of the X.520 individual
-   name attributes cite:norm[CCITT.X520.1988].  The property [bcp14]#SHOULD# be present
+   name attributes <<CCITT.X520.1988>>.  The property [bcp14]#SHOULD# be present
    in the vCard object when the name of the object the vCard
    represents follows the X.520 model.
 +
@@ -1654,12 +1647,12 @@ Purpose: :: To specify the telephone number for telephony communication
 Value type: :: By default, it is a single free-form text value (for
    backward compatibility with vCard 3), but it [bcp14]#SHOULD# be reset to a
    URI value.  It is expected that the URI scheme will be "tel", as
-   specified in cite:norm[RFC3966], but other schemes [bcp14]#MAY# be used.
+   specified in <<RFC3966>>, but other schemes [bcp14]#MAY# be used.
 
 Cardinality: :: *
 
 Special notes: :: This property is based on the X.520 Telephone Number
-   attribute cite:norm[CCITT.X520.1988].
+   attribute <<CCITT.X520.1988>>.
 +
 The property can include the "PREF" parameter to indicate a
    preferred-use telephone number.
@@ -1740,9 +1733,9 @@ Special notes: :: The property can include tye "PREF" parameter to
 +
 Even though the value is free-form UTF-8 text, it is likely to be
    interpreted by a Mail User Agent (MUA) as an "addr-spec", as
-   defined in cite:norm[RFC5322, suffix=", Section 3.4.1"].  Readers should also be aware
+   defined in <<RFC5322,section 3.4.1>>.  Readers should also be aware
    of the current work toward internationalized email addresses
-   cite:info[RFC5335bis].
+   <<RFC5335bis>>.
 
 ABNF: ::
 +
@@ -1779,7 +1772,7 @@ If this property's value is a URI that can be used for voice
 and/or video, the TEL property (<<section6_4_1>>) [bcp14]#SHOULD# be used in
 addition to this property.
 +
-This property is adapted from cite:info[RFC4770], which is made obsolete by
+This property is adapted from <<RFC4770>>, which is made obsolete by
    this document.
 
 ABNF: ::
@@ -1843,8 +1836,8 @@ Value type: :: The default is a single text value.  It can also be
 Cardinality: :: *
 
 Special notes: :: It is expected that names from the public-domain
-   Olson database cite:info[TZ-DB] will be used, but this is not a
-   restriction.  See also cite:info[IANA-TZ].
+   Olson database <<TZ-DB>> will be used, but this is not a
+   restriction.  See also <<IANA-TZ>>.
 +
 Efforts are currently being directed at creating a standard URI
    scheme for expressing time zone information.  Usage of such a
@@ -1888,7 +1881,7 @@ Value type: :: A single URI.
 
 Cardinality: ::  *
 
-Special notes: :: The "geo" URI scheme cite:norm[RFC5870] is particularly well
+Special notes: :: The "geo" URI scheme <<RFC5870>> is particularly well
    suited for this property, but other schemes [bcp14]#MAY# be used.
 
 
@@ -1925,7 +1918,7 @@ Value type: :: A single text value.
 Cardinality:  *
 
 Special notes: :: This property is based on the X.520 Title attribute
-   cite:norm[CCITT.X520.1988].
+   <<CCITT.X520.1988>>.
 
 ABNF: ::
 +
@@ -1953,7 +1946,7 @@ Value type: :: A single text value.
 Cardinality: :: *
 
 Special notes:  This property is based on the X.520 Business Category
-   explanatory attribute cite:norm[CCITT.X520.1988].  This property is
+   explanatory attribute <<CCITT.X520.1988>>.  This property is
    included as an organizational type to avoid confusion with the
    semantics of the TITLE property and incorrect usage of that
    property when the semantics of this property is intended.
@@ -2015,7 +2008,7 @@ Value type: :: A single structured text value consisting of components
 Cardinality: :: *
 
 Special notes: ::  The property is based on the X.520 Organization Name
-   and Organization Unit attributes cite:norm[CCITT.X520.1988].  The property
+   and Organization Unit attributes <<CCITT.X520.1988>>.  The property
    value is a structured type consisting of the organization name,
    followed by zero or more levels of organizational unit names.
 +
@@ -2045,7 +2038,7 @@ Purpose: :: To include a member in the group this vCard represents.
 
 Value type: :: A single URI.  It [bcp14]#MAY# refer to something other than a
    vCard object.  For example, an email distribution list could
-   employ the "mailto" URI scheme cite:info[RFC6068] for efficiency.
+   employ the "mailto" URI scheme <<RFC6068>> for efficiency.
 
 Cardinality: :: *
 
@@ -2107,7 +2100,7 @@ Cardinality: :: *
 Special notes: :: The TYPE parameter [bcp14]#MAY# be used to characterize the
    related entity.  It contains a comma-separated list of values that
    are registered with IANA as described in <<section10_2>>.  The
-   registry is pre-populated with the values defined in cite:norm[xfn].  This
+   registry is pre-populated with the values defined in <<xfn>>.  This
    document also specifies two additional values:
 
 agent: ::: an entity who may sometimes act on behalf of the entity
@@ -2197,7 +2190,7 @@ Value type: :: A single text value.
 Cardinality: :: *
 
 Special notes:  The property is based on the X.520 Description
-   attribute cite:norm[CCITT.X520.1988].
+   attribute <<CCITT.X520.1988>>.
 
 ABNF: ::
 +
@@ -2226,8 +2219,8 @@ Type value: :: A single text value.
 Cardinality: :: *1
 
 Special notes: :: Implementations [bcp14]#SHOULD# use a method such as that
-   specified for Formal Public Identifiers in cite:info[ISO9070] or for
-   Universal Resource Names in cite:info[RFC3406] to ensure that the text
+   specified for Formal Public Identifiers in <<ISO9070>> or for
+   Universal Resource Names in <<RFC3406>> to ensure that the text
    value is unique.
 
 ABNF: ::
@@ -2316,7 +2309,7 @@ Cardinality: :: *1
 
 Special notes: :: This property is used to uniquely identify the object
    that the vCard represents.  The "uuid" URN namespace defined in
-   cite:norm[RFC4122] is particularly well suited to this task, but other URI
+   <<RFC4122>> is particularly well suited to this task, but other URI
    schemes [bcp14]#MAY# be used.  Free-form text [bcp14]#MAY# also be used.
 
 ABNF: ::
@@ -2350,7 +2343,7 @@ Purpose: :: To give a global meaning to a local PID source identifier.
 Value type: :: A semicolon-separated pair of values.  The first field
    is a small integer corresponding to the second field of a PID
    parameter instance.  The second field is a URI.  The "uuid" URN
-   namespace defined in cite:norm[RFC4122] is particularly well suited to this
+   namespace defined in <<RFC4122>> is particularly well suited to this
    task, but other URI schemes [bcp14]#MAY# be used.
 
 Cardinality: :: *
@@ -2491,7 +2484,7 @@ Examples: ::
 [[section6_9]]
 ===  Calendar Properties
 
-These properties are further specified in cite:norm[RFC2739].
+These properties are further specified in <<RFC2739>>.
 
 [[secton6_9_1]]
 ====  FBURL
@@ -2505,8 +2498,8 @@ Cardinality: :: *
 
 Special notes: :: Where multiple FBURL properties are specified, the
    default FBURL property is indicated with the PREF parameter.  The
-   FTP cite:info[RFC1738] or HTTP cite:info[RFC2616] type of URI points to an iCalendar
-   cite:norm[RFC5545] object associated with a snapshot of the next few weeks
+   FTP <<RFC1738>> or HTTP <<RFC2616>> type of URI points to an iCalendar
+   <<RFC5545>> object associated with a snapshot of the next few weeks
    or months of busy time data.  If the iCalendar object is
    represented as a file or document, its file extension should be
    ".ifb".
@@ -2530,8 +2523,8 @@ Examples: ::
 [[section6_9_2]]
 ====  CALADRURI
 
-Purpose: :: To specify the calendar user address cite:norm[RFC5545] to which a
-   scheduling request cite:norm[RFC5546] should be sent for the object
+Purpose: :: To specify the calendar user address <<RFC5545>> to which a
+   scheduling request <<RFC5546>> should be sent for the object
    represented by the vCard.
 
 Value type: :: A single URI value.
@@ -2570,7 +2563,7 @@ Cardinality: :: *
 
 Special notes: :: Where multiple CALURI properties are specified, the
    default CALURI property is indicated with the PREF parameter.  The
-   property should contain a URI pointing to an iCalendar cite:norm[RFC5545]
+   property should contain a URI pointing to an iCalendar <<RFC5545>>
    object associated with a snapshot of the user's calendar store.
    If the iCalendar object is represented as a file or document, its
    file extension should be ".ics".
@@ -2626,7 +2619,7 @@ synchronization engine.
 
 vCard instances for which the UID properties (<<section6_7_6>>) are
 equivalent [bcp14]#MUST# be matched.  Equivalence is determined as specified
-in cite:norm[RFC3986, suffix=", Section 6"].
+in <<RFC3986,section 6>>.
 
 In all other cases, vCard instances [bcp14]#MAY# be matched at the discretion
 of the synchronization engine.
@@ -2661,7 +2654,7 @@ the same local value.
 
 Two PID values representing the same local value and for which the
 second fields point to CLIENTPIDMAP properties whose second field
-URIs are equivalent (as specified in cite:norm[RFC3986, suffix=", Section 6"]) also
+URIs are equivalent (as specified in <<RFC3986,section 6>>) also
 represent the same global value.
 
 PID parameters for which at least one pair of their values represent
@@ -2922,7 +2915,7 @@ investigating would be, in the author's opinion, worthwhile.
    no inherent authentication or confidentiality provisions, they can
    easily be carried by any security mechanism that transfers MIME
    objects to address authentication or confidentiality (e.g., S/MIME
-   cite:info[RFC5751], OpenPGP cite:info[RFC4880]).  In cases where the confidentiality
+   <<RFC5751>>, OpenPGP <<RFC4880>>).  In cases where the confidentiality
    or authenticity of information contained in vCard is a concern,
    the vCard [bcp14]#SHOULD# be transported using one of these secure
    mechanisms.  The KEY property (<<section6_8_1>>) can be used to
@@ -2935,7 +2928,7 @@ investigating would be, in the author's opinion, worthwhile.
    indicate the last time that the vCard data was updated.
 
 *  Many vCard properties may be used to transport URIs.  Please refer
-   to cite:norm[RFC3986, suffix=", Section 7"], for considerations related to URIs.
+   to <<RFC3986,section 7>>, for considerations related to URIs.
 
 [[section10]]
 == IANA Considerations
@@ -2964,8 +2957,8 @@ The "version" parameter is to be interpreted identically as the
    in a text/vcard body part [bcp14]#MUST# have a VERSION property with value
    identical to that of this MIME parameter.
 +
-"charset": as defined for text/plain cite:norm[RFC2046]; encodings other
-   than UTF-8 cite:norm[RFC3629] [bcp14]#MUST NOT# be used.
+"charset": as defined for text/plain <<RFC2046>>; encodings other
+   than UTF-8 <<RFC3629>> [bcp14]#MUST NOT# be used.
 
 Encoding considerations: :: 8bit
 
@@ -2973,7 +2966,7 @@ Security considerations: :: See <<section9>>.
 
 Interoperability considerations: :: The text/vcard media type is
    intended to identify vCard data of any version.  There are older
-   specifications of vCard cite:info[RFC2426] cite:info[vCard21] still in common use.
+   specifications of vCard <<RFC2426>> <<vCard21>> still in common use.
    While these formats are similar, they are not strictly compatible.
    In general, it is necessary to inspect the value of the VERSION
    property (see <<section6_7_9>>) for identifying the standard to which
@@ -3057,7 +3050,7 @@ information.  These completed templates are intended to go in the
 body of the document, not in the IANA Considerations section.
 
 Finally, note that there is an XML representation for vCard defined
-in cite:norm[RFC6351].  An XML representation [bcp14]#SHOULD# be defined for new vCard
+in <<RFC6351>>.  An XML representation [bcp14]#SHOULD# be defined for new vCard
 elements.
 
 [[section10_2_2]]
@@ -3351,58 +3344,58 @@ registry.
 | RFC 6350, Section 5.8   
 
 | RELATED   | TYPE      | contact      
-| RFC 6350, Section 6.6.6 and cite:norm[xfn]     
+| RFC 6350, Section 6.6.6 and <<xfn>>
 
 | RELATED   | TYPE      | acquaintance 
-| RFC 6350, Section 6.6.6 and cite:norm[xfn]
+| RFC 6350, Section 6.6.6 and <<xfn>>
 
 | RELATED   | TYPE      | friend       
-| RFC 6350, Section 6.6.6 and cite:norm[xfn]
+| RFC 6350, Section 6.6.6 and <<xfn>>
 
 | RELATED   | TYPE      | met          
-| RFC 6350, Section 6.6.6 and cite:norm[xfn]
+| RFC 6350, Section 6.6.6 and <<xfn>>
 
 | RELATED   | TYPE      | co-worker    
-| RFC 6350, Section 6.6.6 and cite:norm[xfn]
+| RFC 6350, Section 6.6.6 and <<xfn>>
 
 | RELATED   | TYPE      | colleague    
-| RFC 6350, Section 6.6.6 and cite:norm[xfn]
+| RFC 6350, Section 6.6.6 and <<xfn>>
 
 | RELATED   | TYPE      | co-resident  
-| RFC 6350, Section 6.6.6 and cite:norm[xfn]
+| RFC 6350, Section 6.6.6 and <<xfn>>
 
 | RELATED   | TYPE      | neighbor     
-| RFC 6350, Section 6.6.6 and cite:norm[xfn]
+| RFC 6350, Section 6.6.6 and <<xfn>>
 
 | RELATED   | TYPE      | child        
-| RFC 6350, Section 6.6.6 and cite:norm[xfn]
+| RFC 6350, Section 6.6.6 and <<xfn>>
 
 | RELATED   | TYPE      | parent       
-| RFC 6350, Section 6.6.6 and cite:norm[xfn]
+| RFC 6350, Section 6.6.6 and <<xfn>>
 
 | RELATED   | TYPE      | sibling      
-| RFC 6350, Section 6.6.6 and cite:norm[xfn]
+| RFC 6350, Section 6.6.6 and <<xfn>>
 
 | RELATED   | TYPE      | spouse       
-| RFC 6350, Section 6.6.6 and cite:norm[xfn]
+| RFC 6350, Section 6.6.6 and <<xfn>>
 
 | RELATED   | TYPE      | kin          
-| RFC 6350, Section 6.6.6 and cite:norm[xfn]
+| RFC 6350, Section 6.6.6 and <<xfn>>
 
 | RELATED   | TYPE      | muse         
-| RFC 6350, Section 6.6.6 and cite:norm[xfn]
+| RFC 6350, Section 6.6.6 and <<xfn>>
 
 | RELATED   | TYPE      | crush        
-| RFC 6350, Section 6.6.6 and cite:norm[xfn]
+| RFC 6350, Section 6.6.6 and <<xfn>>
 
 | RELATED   | TYPE      | date         
-| RFC 6350, Section 6.6.6 and cite:norm[xfn]
+| RFC 6350, Section 6.6.6 and <<xfn>>
 
 | RELATED   | TYPE      | sweetheart   
-| RFC 6350, Section 6.6.6 and cite:norm[xfn]
+| RFC 6350, Section 6.6.6 and <<xfn>>
 
 | RELATED   | TYPE      | me           
-| RFC 6350, Section 6.6.6 and cite:norm[xfn]
+| RFC 6350, Section 6.6.6 and <<xfn>>
 
 | RELATED   | TYPE      | agent        | RFC 6350, Section 6.6.6 
 | RELATED   | TYPE      | emergency    | RFC 6350, Section 6.6.6 
@@ -3413,7 +3406,7 @@ registry.
 ==  Acknowledgments
 
 The authors would like to thank Tim Howes, Mark Smith, and Frank
-Dawson, the original authors of cite:info[RFC2425] and cite:info[RFC2426], Pete
+Dawson, the original authors of <<RFC2425>> and <<RFC2426>>, Pete
 Resnick, who got this effort started and provided help along the way,
 as well as the following individuals who have participated in the
 drafting, review, and discussion of this memo:
@@ -3431,29 +3424,17 @@ Douglass, Nick Levinson, Peter K. Sheerin, Peter Mogensen, Peter
 Saint-Andre, Renato Iannella, Rohit Khare, Sly Gryphon, Stephane
 Bortzmeyer, Tantek Celik, and Zoltan Ordogh.
 
-[bibliography]
-==  Normative References
-++++
-bibliography::norm[]
-++++
-
-[bibliography]
-==  Informative References
-++++
-bibliography::info[]
-++++
-
 [[appendixA]]
 == Differences from RFCs 2425 and 2426
 
 This appendix contains a high-level overview of the major changes
-that have been made in the vCard specification from RFCs 2425 and
-2426.  It is incomplete, as it only lists the most important changes.
+that have been made in the vCard specification from <<RFC2425>> and
+<<RFC2426>>.  It is incomplete, as it only lists the most important changes.
 
 [[appendixA_1]]
 ===  New Structure
 
-*  cite:info[RFC2425] and cite:info[RFC2426] have been merged.
+*  <<RFC2425>> and <<RFC2426>> have been merged.
 
 *  vCard is now not only a MIME type but a stand-alone format.
 
@@ -3482,10 +3463,10 @@ that have been made in the vCard specification from RFCs 2425 and
 *  The KIND, GENDER, LANG, ANNIVERSARY, XML, and CLIENTPIDMAP
    properties have been added.
 
-*  cite:norm[RFC2739], which defines the FBURL, CALADRURI, CAPURI, and CALURI
+*  <<RFC2739>>, which defines the FBURL, CALADRURI, CAPURI, and CALURI
    properties, has been merged in.
 
-*  cite:info[RFC4770], which defines the IMPP property, has been merged in.
+*  <<RFC4770>>, which defines the IMPP property, has been merged in.
 
 *  The "work" and "home" TYPE parameter values are now applicable to
    many more properties.
@@ -3502,4 +3483,51 @@ that have been made in the vCard specification from RFCs 2425 and
 
 
 
+[bibliography]
+==  Normative References
+
+* [[[CCITT.X520.1988,CCITT Recommendation X520]]], International Telephone and Telegraph Consultative Committee, _Information Technology - Open Systems Interconnection - The Directory: Selected Attribute Types._ 1988.
+* [[[IEEE754,IEEE 754]]], _Standard for Binary Floating-Point Arithmetic._ 2008.
+* [[[ISO8601.2000,ISO 8601:2000]]], _Data elements and interchange formats -- Information interchange -- Representation of dates and times._
+* [[[ISO8601,ISO 8601:2004]]], _Data elements and interchange formats -- Information interchange -- Representation of dates and times._
+* [[[RFC2045,IETF RFC 2045]]], N. Freed, N. Borenstein. _Multipurpose Internet Mail Extensions (MIME) Part One: Format of Internet Message Bodies._ 1996. https://www.rfc-editor.org/info/rfc2045
+* [[[RFC2046,IETF RFC 2046]]], N. Freed, N. Borenstein. _Multipurpose Internet Mail Extensions (MIME) Part Two: Media Types._ 1996. https://www.rfc-editor.org/info/rfc2046
+* [[[RFC2119,IETF RFC 2119]]], S. Bradner. _Key words for use in RFCs to Indicate Requirement Levels._ 1997. https://www.rfc-editor.org/info/rfc2119
+* [[[RFC2739,IETF RFC 2739]]], T. Small, D. Hennessy, F. Dawson. _Calendar Attributes for vCard and LDAP._ 2000. https://www.rfc-editor.org/info/rfc2739
+* [[[RFC3629,IETF RFC 3629]]], F. Yergeau. _UTF-8, a transformation format of ISO 10646._ 2003. https://www.rfc-editor.org/info/rfc3629
+* [[[RFC3986,IETF RFC 3966]]], H. Schulzrinne. _The tel URI for Telephone Numbers._ 2004. https://www.rfc-editor.org/info/rfc3966
+* [[[RFC3986,IETF RFC 3986]]], T. Berners-Lee, R. Fielding, L. Masinter. _Uniform Resource Identifier (URI): Generic Syntax._ 2005. https://www.rfc-editor.org/info/rfc3986
+* [[[RFC4122,IETF RFC 4122]]], P. Leach, M. Mealling, R. Salz. _A Universally Unique IDentifier (UUID) URN Namespace._ 2005. https://www.rfc-editor.org/info/rfc4122
+* [[[RFC4288,IETF RFC 4288]]], N. Freed, J. Klensin. _Media Type Specifications and Registration Procedures._ 2005. https://www.rfc-editor.org/info/rfc4288
+* [[[RFC5234,IETF RFC 5234]]], D. Crocker, P. Overell. _Augmented BNF for Syntax Specifications: ABNF._ 2008. https://www.rfc-editor.org/info/rfc5234
+* [[[RFC5322,IETF RFC 5322]]], P. Resnick. _Internet Message Format._ 2008. https://www.rfc-editor.org/info/rfc5322
+* [[[RFC5545,IETF RFC 5545]]], B. Desruisseaux. _Internet Calendaring and Scheduling Core Object Specification (iCalendar)._ 2009. https://www.rfc-editor.org/info/rfc5545
+* [[[RFC5546,IETF RFC 5546]]], C. Daboo. _iCalendar Transport-Independent Interoperability Protocol (iTIP)._ 2009. https://www.rfc-editor.org/info/rfc5546
+* [[[RFC5646,IETF RFC 5646]]], A. Phillips, M. Davis. _Tags for Identifying Languages._ 2009. https://www.rfc-editor.org/info/rfc5646
+* [[[RFC5870,IETF RFC 5870]]], A. Mayrhofer, C. Soanring. _A Uniform Resource Identifier for Geographic Locations ('geo' URI)._ 2010. https://www.rfc-editor.org/info/rfc5870
+* [[[RFC6351,IETF RFC 6351]]], S. Perreault. _xCard: vCard XML Representation._ 2011. https://www.rfc-editor.org/info/rfc6351
+* [[[W3C.REC-xml-20081126,W3C REC-xml-20081126]]], E. Maler, Yergeau, F., Sperberg-McQueen, C., Paoli, J., T. Bray. _Extensible Markup Language (XML) 1.0 (Fifth Edition)._ 2008. http://www.w3.org/TR/2008/REC-xml-20081126
+* [[[xfn,XFN]]], T. Celik, M. Mullenweg, E. Meyer. _XFN 1.1 profile._ http://gmpg.org/xfn/11
+
+
+[bibliography]
+==  Informative References
+
+* [[[IANA-TZ,IANA TZ]]], E. Lear, P. Eggert. _IANA Procedures for Maintaining the Timezone Database._ Work in Progress. 2011.
+* [[[ISO9070,ISO 9070]]], _Information Processing -- SGML support facilities -- Registration Procedures for Public Text Owner Identifiers._
+* [[[RFC1738,IETF RFC 1738]]], T. Berners-Lee, L. Masinter, M. McCahill. _Uniform Resource Locators (URL)._ 1994. https://www.rfc-editor.org/info/rfc1738
+* [[[RFC2397,IETF RFC 2397]]], L. Masinter. _The "data" URL scheme._ 1998. https://www.rfc-editor.org/info/rfc2397
+* [[[RFC2425,IETF RFC 2425]]], T. Howes, M. Smith, F. Dawson. _MIME Content-Type for Directory Information._ 1998. https://www.rfc-editor.org/info/rfc2425
+* [[[RFC2426,IETF RFC 2426]]], F. Dawson, T. Howes. _vCard MIME Directory Profile._ 1998. https://www.rfc-editor.org/info/rfc2426
+* [[[RFC2616,IETF RFC 2616]]], R. Fielding, J. Gettys, J. Mogul, H. Frystyk, L. Masinter, P. Leach, T. Berners-Lee. _Hypertext Transfer Protocol -- HTTP/1.1_ 1999. https://www.rfc-editor.org/info/rfc2616
+* [[[RFC3282,IETF RFC 3282]]], H. Alvestrand. _Content Language Headers._ 2002. https://www.rfc-editor.org/info/rfc3282
+* [[[RFC3406,IETF RFC 3406]]], L. Daigle, D. van Gulik, R. Iannella, P. Faltstrom. _Uniform Resource Names (URN) Namespace Definition Mechanisms._ 2002. https://www.rfc-editor.org/info/rfc3406
+* [[[RFC3536,IETF RFC 3536]]], P. Hoffman. _Terminology Used in Internationalization in the IETF._ 2003. https://www.rfc-editor.org/info/rfc3536
+* [[[RFC4770,IETF RFC 4770]]], C. Jennings, J. Reschke. _vCard Extensions for Instant Messaging (IM)._ 2007. https://www.rfc-editor.org/info/rfc4770
+* [[[RFC4880,IETF RFC 4880]]], J. Callas, L. Donnerhcke, H. Finney, D. Shaw, R. Thayer. _OpenPGP Message Format._ 2007. https://www.rfc-editor.org/info/rfc4880
+* [[[RFC5335bis,IETF RFC 5335]]], A. Yang, S. Steele. _Internationalized Email Headers._ 2011. https://www.rfc-editor.org/info/rfc5335
+* [[[RFC5751,IETF RFC 5751]]], B. Ramsdell, S. Turner. _Secure/Multipurpose Internet Mail Extensions (S/MIME) Version 3.2 Message Specification._ 2010. https://www.rfc-editor.org/info/rfc5751
+* [[[RFC6068,IETF RFC 6068]]], M. Duerst, L. Masinter, J. Zawinski. _The 'mailto' URI Scheme._ 2010. https://www.rfc-editor.org/info/rfc6068
+* [[[TZ-DB,TZ-DB]]], A. Olson. _Time zone code and data._ ftp://elsie.nci.nih.gov/pub/
+* [[[vCard21,Internet Mail Consortium vCard]]], Internet Mail Consortium. _vCard - The Electronic Business Card Version 2.1._ 1996.
 

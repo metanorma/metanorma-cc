@@ -1,5 +1,7 @@
 = vCard Format Specification
 Simon Perreault <simon.perreault@viagenie.ca>
+:title: vCard Format Specification
+:docnumber: RFC 6350
 :doctype: rfc
 :abbrev: vCard
 :obsoletes: 2425, 2426, 4770

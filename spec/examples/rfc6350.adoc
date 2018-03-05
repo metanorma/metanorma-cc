@@ -28,12 +28,6 @@ Simon Perreault <simon.perreault@viagenie.ca>
 :inline-definition-lists: true
 :comments: yes
 
-This document defines the vCard data format for representing and
-exchanging a variety of information about individuals and other
-entities (e.g., formatted and structured name and delivery addresses,
-email address, multiple telephone numbers, photograph, logo, audio
-clips, etc.).  This document obsoletes <<RFC2425>>, <<RFC2426>>, and <<RFC4770>>, and
-updates <<RFC2739>>.
 
 
 [[section1]]
@@ -49,13 +43,22 @@ application.
 A high-level overview of the differences from <<RFC2425>> and <<RFC2426>> can
 be found in <<appendixA>>.
 
-[[section2]]
-== Conventions
+=== Conventions
 
 The key words "[bcp14]#MUST#", "[bcp14]#MUST NOT#", "[bcp14]#REQUIRED#", "[bcp14]#SHALL#", "[bcp14]#SHALL NOT#",
 "[bcp14]#SHOULD#", "[bcp14]#SHOULD NOT#", "[bcp14]#RECOMMENDED#", "[bcp14]#NOT RECOMMENDED#", "[bcp14]#MAY#", and
 "[bcp14]#OPTIONAL#" in this document are to be interpreted as described in
 <<RFC2119>>.
+
+== Scope
+This document defines the vCard data format for representing and
+exchanging a variety of information about individuals and other
+entities (e.g., formatted and structured name and delivery addresses,
+email address, multiple telephone numbers, photograph, logo, audio
+clips, etc.).  This document obsoletes <<RFC2425>>, <<RFC2426>>, and <<RFC4770>>, and
+updates <<RFC2739>>.
+
+== Terms and Definitions
 
 [[section3]]
 == vCard Format Specification
@@ -3405,6 +3408,7 @@ registry.
 
 
 [[section11]]
+[appendix,obligation=informative]
 ==  Acknowledgments
 
 The authors would like to thank Tim Howes, Mark Smith, and Frank
@@ -3427,6 +3431,7 @@ Saint-Andre, Renato Iannella, Rohit Khare, Sly Gryphon, Stephane
 Bortzmeyer, Tantek Celik, and Zoltan Ordogh.
 
 [[appendixA]]
+[appendix]
 == Differences from RFCs 2425 and 2426
 
 This appendix contains a high-level overview of the major changes
@@ -3513,7 +3518,7 @@ that have been made in the vCard specification from <<RFC2425>> and
 
 
 [bibliography]
-==  Informative References
+==  Bibliography
 
 * [[[IANA-TZ,IANA TZ]]], E. Lear, P. Eggert. _IANA Procedures for Maintaining the Timezone Database._ Work in Progress. 2011.
 * [[[ISO9070,ISO 9070]]], _Information Processing -- SGML support facilities -- Registration Procedures for Public Text Owner Identifiers._

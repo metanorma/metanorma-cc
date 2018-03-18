@@ -115,8 +115,8 @@ module Asciidoctor
 
       def html_converter(_node)
         CsdConvert.new(
-          htmlstylesheet: generate_css(html_doc_path("htmlstyle.css")),
-          standardstylesheet: generate_css(html_doc_path("csd.css")),
+          htmlstylesheet: generate_css(html_doc_path("htmlstyle.scss")),
+          standardstylesheet: generate_css(html_doc_path("csd.scss")),
           htmlcoverpage: html_doc_path("html_csd_titlepage.html"),
           htmlintropage: html_doc_path("html_csd_intro.html"),
         )
@@ -124,12 +124,23 @@ module Asciidoctor
 
       def doc_converter(_node)
         CsdWordConvert.new(
-          wordstylesheet: generate_css(html_doc_path("wordstyle.css")),
-          standardstylesheet: generate_css(html_doc_path("csd.css")),
+          wordstylesheet: generate_css(html_doc_path("wordstyle.scss")),
+          standardstylesheet: generate_css(html_doc_path("csd.scss")),
           header: html_doc_path("header.html"),
           wordcoverpage: html_doc_path("word_csd_titlepage.html"),
           wordintropage: html_doc_path("word_csd_intro.html"),
         )
+      end
+
+      def default_fonts(node)
+        b = node.attr("body-font") ||
+          (node.attr("script") == "Hans" ? '"SimSun",serif' :
+           '"Source Sans Pro",sans-serif')
+        h = node.attr("header-font") ||
+          (node.attr("script") == "Hans" ? '"SimHei",sans-serif' :
+           '"Source Sans Pro",sans-serif')
+        m = node.attr("monospace-font") || '"Courier New",monospace'
+        "$bodyfont: #{b};\n$headerfont: #{h};\n$monospacefont: #{m};\n"
       end
     end
   end

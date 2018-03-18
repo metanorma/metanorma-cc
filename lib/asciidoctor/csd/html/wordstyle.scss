@@ -70,7 +70,7 @@ p.MsoNormal, li.MsoNormal, div.MsoNormal
 	mso-pagination:widow-orphan;
 	tab-stops:20.15pt;
 	font-size:11.0pt;
-	font-family:"Source Sans Pro",sans-serif;
+	font-family:$bodyfont;
 	mso-fareast-font-family:Calibri;
 	mso-bidi-font-family:"Source Sans Pro";
 	mso-ansi-language:EN-GB;}
@@ -85,7 +85,7 @@ p.MsoNormalIndent, li.MsoNormalIndent, div.MsoNormalIndent
 	mso-pagination:widow-orphan;
 	tab-stops:20.15pt;
 	font-size:11.0pt;
-	font-family:"Source Sans Pro",sans-serif;
+	font-family:$bodyfont;
 	mso-fareast-font-family:Calibri;
 	mso-bidi-font-family:"Source Sans Pro";
 	mso-ansi-language:EN-GB;}
@@ -103,7 +103,7 @@ p.MsoBlockText, li.MsoBlockText, div.MsoBlockText
 	padding:0cm;
 	mso-padding-alt:10.0pt 10.0pt 10.0pt 10.0pt;
 	font-size:12.0pt;
-	font-family:"Source Sans Pro",sans-serif;
+	font-family:$bodyfont;
 	mso-ascii-font-family:Source Sans Pro;
 	mso-ascii-theme-font:minor-latin;
 	mso-fareast-font-family:"Source Sans Pro";
@@ -136,7 +136,7 @@ h1
 	tab-stops:20.0pt list 21.6pt left 28.0pt;
 	font-size:13.0pt;
 	mso-bidi-font-size:11.0pt;
-	font-family:"Source Sans Pro",sans-serif;
+	font-family:$headerfont;
 	mso-fareast-font-family:"MS Mincho";
 	mso-font-kerning:0pt;
 	mso-ansi-language:EN-GB;
@@ -164,7 +164,7 @@ h1.Annex
 	tab-stops:20.0pt list 21.6pt left 28.0pt;
 	font-size:13.0pt;
 	mso-bidi-font-size:11.0pt;
-	font-family:"Source Sans Pro",sans-serif;
+	font-family:$headerfont;
 	mso-fareast-font-family:"MS Mincho";
 	mso-font-kerning:0pt;
 	mso-ansi-language:EN-GB;
@@ -191,7 +191,7 @@ h2
 	tab-stops:27.0pt 35.0pt;
 	font-size:12.0pt;
 	mso-bidi-font-size:11.0pt;
-	font-family:"Source Sans Pro",sans-serif;
+	font-family:$headerfont;
 	mso-fareast-font-family:"MS Mincho";
 	mso-ansi-language:EN-GB;
 	mso-fareast-language:JA;
@@ -216,7 +216,7 @@ h3
 	mso-hyphenate:none;
 	tab-stops:list 36.0pt left 44.0pt;
 	font-size:11.0pt;
-	font-family:"Source Sans Pro",sans-serif;
+	font-family:$headerfont;
 	mso-fareast-font-family:"MS Mincho";
 	mso-ansi-language:EN-GB;
 	mso-fareast-language:JA;
@@ -241,7 +241,7 @@ h4
 	mso-hyphenate:none;
 	tab-stops:51.05pt 57.0pt 68.0pt;
 	font-size:11.0pt;
-	font-family:"Source Sans Pro",sans-serif;
+	font-family:$headerfont;
 	mso-fareast-font-family:"MS Mincho";
 	mso-ansi-language:EN-GB;
 	mso-fareast-language:JA;
@@ -266,7 +266,7 @@ h5
 	mso-hyphenate:none;
 	tab-stops:51.05pt list 54.0pt;
 	font-size:11.0pt;
-	font-family:"Source Sans Pro",sans-serif;
+	font-family:$headerfont;
 	mso-fareast-font-family:"MS Mincho";
 	mso-ansi-language:EN-GB;
 	mso-fareast-language:JA;
@@ -291,7 +291,7 @@ h6
 	mso-hyphenate:none;
 	tab-stops:51.05pt list 72.0pt;
 	font-size:11.0pt;
-	font-family:"Source Sans Pro",sans-serif;
+	font-family:$headerfont;
 	mso-fareast-font-family:"MS Mincho";
 	mso-ansi-language:EN-GB;
 	mso-fareast-language:JA;
@@ -311,7 +311,7 @@ p.MsoToc1, li.MsoToc1, div.MsoToc1
 	mso-hyphenate:none;
 	tab-stops:20.15pt 36.0pt right dotted 487.6pt;
 	font-size:11.0pt;
-	font-family:"Source Sans Pro",sans-serif;
+	font-family:$headerfont;
 	mso-fareast-font-family:Calibri;
 	mso-bidi-font-family:"Source Sans Pro";
 	mso-ansi-language:EN-GB;
@@ -334,7 +334,7 @@ p.MsoToc2, li.MsoToc2, div.MsoToc2
 	mso-hyphenate:none;
 	tab-stops:20.15pt 36.0pt right dotted 487.6pt;
 	font-size:11.0pt;
-	font-family:"Source Sans Pro",sans-serif;
+	font-family:$headerfont;
 	mso-fareast-font-family:Calibri;
 	mso-bidi-font-family:"Source Sans Pro";
 	mso-ansi-language:EN-GB;
@@ -357,7 +357,7 @@ p.MsoToc3, li.MsoToc3, div.MsoToc3
 	mso-hyphenate:none;
 	tab-stops:20.15pt 36.0pt right dotted 487.6pt;
 	font-size:11.0pt;
-	font-family:"Source Sans Pro",sans-serif;
+	font-family:$headerfont;
 	mso-fareast-font-family:Calibri;
 	mso-bidi-font-family:"Source Sans Pro";
 	mso-ansi-language:EN-GB;
@@ -378,7 +378,7 @@ p.MsoHeader, li.MsoHeader, div.MsoHeader
 	mso-pagination:widow-orphan;
 	tab-stops:20.15pt;
 	font-size:11.0pt;
-	font-family:"Source Sans Pro",sans-serif;
+	font-family:$headerfont;
 	mso-fareast-font-family:Calibri;
 	mso-bidi-font-family:"Source Sans Pro";
 	mso-ansi-language:EN-GB;
@@ -399,7 +399,7 @@ p.MsoFooter, li.MsoFooter, div.MsoFooter
 	mso-pagination:widow-orphan;
 	tab-stops:right 487.6pt;
 	font-size:11.0pt;
-	font-family:"Source Sans Pro",sans-serif;
+	font-family:$headerfont;
 	mso-fareast-font-family:Calibri;
 	mso-bidi-font-family:"Source Sans Pro";
 	mso-ansi-language:EN-GB;}
@@ -419,7 +419,7 @@ p.MsoFootnoteText, li.MsoFootnoteText, div.MsoFootnoteText
 	mso-pagination:widow-orphan;
 	tab-stops:20.15pt;
 	font-size:10.0pt;
-	font-family:"Source Sans Pro",sans-serif;
+	font-family:$bodyfont;
 	mso-fareast-font-family:Calibri;
 	mso-bidi-font-family:"Source Sans Pro";
 	mso-ansi-language:EN-GB;
@@ -437,7 +437,7 @@ p.MsoBodyText, li.MsoBodyText, div.MsoBodyText
 	line-height:12.0pt;
 	mso-pagination:widow-orphan;
 	font-size:11.0pt;
-	font-family:"Source Sans Pro",sans-serif;
+	font-family:$bodyfont;
 	mso-fareast-font-family:"Source Sans Pro";
 	mso-bidi-font-family:"Source Sans Pro";
 	mso-ansi-language:EN-GB;}
@@ -470,7 +470,7 @@ span.Heading1Char
 	mso-style-parent:"";
 	mso-style-link:"Heading 1";
 	mso-ansi-font-size:13.0pt;
-	font-family:"Source Sans Pro",sans-serif;
+	font-family:$headerfont;
 	mso-ascii-font-family:Source Sans Pro;
 	mso-fareast-font-family:"MS Mincho";
 	mso-hansi-font-family:Cambria;
@@ -486,7 +486,7 @@ span.Heading2Char
 	mso-style-parent:"";
 	mso-style-link:"Heading 2";
 	mso-ansi-font-size:12.0pt;
-	font-family:"Source Sans Pro",sans-serif;
+	font-family:$headerfont;
 	mso-ascii-font-family:Source Sans Pro;
 	mso-fareast-font-family:"MS Mincho";
 	mso-hansi-font-family:Cambria;
@@ -502,7 +502,7 @@ span.Heading3Char
 	mso-style-parent:"";
 	mso-style-link:"Heading 3";
 	mso-ansi-font-size:11.0pt;
-	font-family:"Source Sans Pro",sans-serif;
+	font-family:$headerfont;
 	mso-ascii-font-family:Source Sans Pro;
 	mso-fareast-font-family:"MS Mincho";
 	mso-hansi-font-family:Cambria;
@@ -518,7 +518,7 @@ span.Heading4Char
 	mso-style-parent:"";
 	mso-style-link:"Heading 4";
 	mso-ansi-font-size:11.0pt;
-	font-family:"Source Sans Pro",sans-serif;
+	font-family:$headerfont;
 	mso-ascii-font-family:Source Sans Pro;
 	mso-fareast-font-family:"MS Mincho";
 	mso-hansi-font-family:Cambria;
@@ -534,7 +534,7 @@ span.Heading5Char
 	mso-style-parent:"";
 	mso-style-link:"Heading 5";
 	mso-ansi-font-size:11.0pt;
-	font-family:"Source Sans Pro",sans-serif;
+	font-family:$headerfont;
 	mso-ascii-font-family:Source Sans Pro;
 	mso-fareast-font-family:"MS Mincho";
 	mso-hansi-font-family:Cambria;
@@ -550,7 +550,7 @@ span.Heading6Char
 	mso-style-parent:"";
 	mso-style-link:"Heading 6";
 	mso-ansi-font-size:11.0pt;
-	font-family:"Source Sans Pro",sans-serif;
+	font-family:$headerfont;
 	mso-ascii-font-family:Source Sans Pro;
 	mso-fareast-font-family:"MS Mincho";
 	mso-hansi-font-family:Cambria;
@@ -576,7 +576,7 @@ p.a2, li.a2, div.a2
 	tab-stops:1.0cm 36.0pt;
 	font-size:13.0pt;
 	mso-bidi-font-size:11.0pt;
-	font-family:"Source Sans Pro",sans-serif;
+	font-family:$bodyfont;
 	mso-fareast-font-family:"MS Mincho";
 	mso-bidi-font-family:"Source Sans Pro";
 	mso-ansi-language:EN-GB;
@@ -601,7 +601,7 @@ p.a3, li.a3, div.a3
 	tab-stops:20.15pt list 36.0pt;
 	font-size:12.0pt;
 	mso-bidi-font-size:11.0pt;
-	font-family:"Source Sans Pro",sans-serif;
+	font-family:$bodyfont;
 	mso-fareast-font-family:"MS Mincho";
 	mso-bidi-font-family:"Source Sans Pro";
 	mso-ansi-language:EN-GB;
@@ -625,7 +625,7 @@ p.a4, li.a4, div.a4
 	mso-list:l0 level4 lfo12;
 	tab-stops:20.15pt 44.0pt list 54.0pt;
 	font-size:11.0pt;
-	font-family:"Source Sans Pro",sans-serif;
+	font-family:$bodyfont;
 	mso-fareast-font-family:"MS Mincho";
 	mso-bidi-font-family:"Source Sans Pro";
 	mso-ansi-language:EN-GB;
@@ -649,7 +649,7 @@ p.a5, li.a5, div.a5
 	mso-list:l0 level5 lfo12;
 	tab-stops:20.15pt list 54.0pt left 62.35pt 68.0pt;
 	font-size:11.0pt;
-	font-family:"Source Sans Pro",sans-serif;
+	font-family:$bodyfont;
 	mso-fareast-font-family:"MS Mincho";
 	mso-bidi-font-family:"Source Sans Pro";
 	mso-ansi-language:EN-GB;
@@ -673,7 +673,7 @@ p.a6, li.a6, div.a6
 	mso-list:l0 level6 lfo12;
 	tab-stops:20.15pt 62.35pt 68.0pt list 72.0pt;
 	font-size:11.0pt;
-	font-family:"Source Sans Pro",sans-serif;
+	font-family:$bodyfont;
 	mso-fareast-font-family:"MS Mincho";
 	mso-bidi-font-family:"Source Sans Pro";
 	mso-ansi-language:EN-GB;
@@ -713,7 +713,7 @@ span.BodyTextChar
 	mso-style-link:"Body Text";
 	mso-ansi-font-size:11.0pt;
 	mso-bidi-font-size:11.0pt;
-	font-family:"Source Sans Pro",sans-serif;
+	font-family:$bodyfont;
 	mso-fareast-font-family:"Source Sans Pro";
 	mso-ansi-language:EN-GB;}
 p.MsoCommentText, li.MsoCommentText, div.MsoCommentText
@@ -729,7 +729,7 @@ p.MsoCommentText, li.MsoCommentText, div.MsoCommentText
 	mso-pagination:widow-orphan;
 	tab-stops:20.15pt;
 	font-size:12.0pt;
-	font-family:"Source Sans Pro",sans-serif;
+	font-family:$bodyfont;
 	mso-fareast-font-family:Calibri;
 	mso-bidi-font-family:"Times New Roman";
 	mso-ansi-language:EN-GB;
@@ -755,7 +755,7 @@ p.MsoCommentSubject, li.MsoCommentSubject, div.MsoCommentSubject
 	mso-pagination:widow-orphan;
 	tab-stops:20.15pt;
 	font-size:10.0pt;
-	font-family:"Source Sans Pro",sans-serif;
+	font-family:$headerfont;
 	mso-fareast-font-family:Calibri;
 	mso-bidi-font-family:"Times New Roman";
 	mso-ansi-language:EN-GB;
@@ -773,7 +773,7 @@ p.Tablebody, li.Tablebody, div.Tablebody
 	mso-pagination:widow-orphan;
 	font-size:10.0pt;
 	mso-bidi-font-size:11.0pt;
-	font-family:"Source Sans Pro",sans-serif;
+	font-family:$bodyfont;
 	mso-fareast-font-family:"Source Sans Pro";
 	mso-bidi-font-family:"Source Sans Pro";
 	mso-ansi-language:EN-GB;}
@@ -819,7 +819,7 @@ div.WordSection1
 	text-indent:0cm;
 	mso-ansi-font-size:14.0pt;
 	mso-bidi-font-size:14.0pt;
-	font-family:"Source Sans Pro",sans-serif;
+	font-family:$headerfont;
 	mso-bidi-font-family:"Source Sans Pro";
 	mso-ansi-font-weight:bold;
 	mso-ansi-font-style:normal;}
@@ -995,7 +995,7 @@ table.MsoNormalTable
 	mso-para-margin-bottom:.0001pt;
 	mso-pagination:widow-orphan;
 	font-size:10.0pt;
-	font-family:"Source Sans Pro",sans-serif;}
+	font-family:$bodyfont;}
 p.Terms, li.Terms, div.Terms
 	{mso-style-name:"Term\(s\)";
 	mso-style-priority:8;
@@ -1009,7 +1009,7 @@ p.Terms, li.Terms, div.Terms
 	mso-hyphenate:none;
 	tab-stops:20.15pt;
 	font-size:11.0pt;
-	font-family:"Source Sans Pro",sans-serif;
+	font-family:$bodyfont;
 	mso-fareast-font-family:Calibri;
 	mso-bidi-font-family:"Source Sans Pro";
 	mso-ansi-language:EN-GB;
@@ -1028,7 +1028,7 @@ p.AltTerms, li.AltTerms, div.AltTerms
 	mso-hyphenate:none;
 	tab-stops:20.15pt;
 	font-size:11.0pt;
-	font-family:"Source Sans Pro",sans-serif;
+	font-family:$bodyfont;
 	mso-fareast-font-family:Calibri;
 	mso-bidi-font-family:"Source Sans Pro";
 	mso-ansi-language:EN-GB;
@@ -1046,7 +1046,7 @@ p.DeprecatedTerms, li.DeprecatedTerms, div.DeprecatedTerms
 	mso-hyphenate:none;
 	tab-stops:20.15pt;
 	font-size:11.0pt;
-	font-family:"Source Sans Pro",sans-serif;
+	font-family:$bodyfont;
 	mso-fareast-font-family:Calibri;
 	mso-bidi-font-family:"Source Sans Pro";
 	mso-ansi-language:EN-GB;
@@ -1063,7 +1063,7 @@ p.TermNum, li.TermNum, div.TermNum
 	page-break-after:avoid;
 	tab-stops:20.15pt;
 	font-size:11.0pt;
-	font-family:"Source Sans Pro",sans-serif;
+	font-family:$bodyfont;
 	mso-fareast-font-family:Calibri;
 	mso-bidi-font-family:"Source Sans Pro";
 	mso-ansi-language:EN-GB;
@@ -1092,4 +1092,4 @@ br.pagebreak
     {page-break-before:always;
     mso-special-character:line-break;}
 body
-    {font-family:"Source Sans Pro",sans-serif;}
+    {font-family:$bodyfont;}

@@ -115,8 +115,8 @@ module Asciidoctor
 
       def html_converter(_node)
         CsdConvert.new(
-          htmlstylesheet: html_doc_path("htmlstyle.css"),
-          standardstylesheet: html_doc_path("csd.css"),
+          htmlstylesheet: generate_css(html_doc_path("htmlstyle.css")),
+          standardstylesheet: generate_css(html_doc_path("csd.css")),
           htmlcoverpage: html_doc_path("html_csd_titlepage.html"),
           htmlintropage: html_doc_path("html_csd_intro.html"),
         )
@@ -124,8 +124,8 @@ module Asciidoctor
 
       def doc_converter(_node)
         CsdWordConvert.new(
-          wordstylesheet: html_doc_path("wordstyle.css"),
-          standardstylesheet: html_doc_path("csd.css"),
+          wordstylesheet: generate_css(html_doc_path("wordstyle.css")),
+          standardstylesheet: generate_css(html_doc_path("csd.css")),
           header: html_doc_path("header.html"),
           wordcoverpage: html_doc_path("word_csd_titlepage.html"),
           wordintropage: html_doc_path("word_csd_intro.html"),

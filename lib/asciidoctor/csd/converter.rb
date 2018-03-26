@@ -119,6 +119,7 @@ module Asciidoctor
           standardstylesheet: generate_css(html_doc_path("csd.scss"), true),
           htmlcoverpage: html_doc_path("html_csd_titlepage.html"),
           htmlintropage: html_doc_path("html_csd_intro.html"),
+          scripts: html_doc_path("scripts.html"),
         )
       end
 
@@ -135,11 +136,11 @@ module Asciidoctor
       def default_fonts(node)
         b = node.attr("body-font") ||
           (node.attr("script") == "Hans" ? '"SimSun",serif' :
-           '"Source Sans Pro",sans-serif')
+           '"Overpass",sans-serif')
         h = node.attr("header-font") ||
           (node.attr("script") == "Hans" ? '"SimHei",sans-serif' :
-           '"Source Sans Pro",sans-serif')
-        m = node.attr("monospace-font") || '"Courier New",monospace'
+           '"Overpass",sans-serif')
+        m = node.attr("monospace-font") || '"Space Mono",monospace'
         "$bodyfont: #{b};\n$headerfont: #{h};\n$monospacefont: #{m};\n"
       end
 

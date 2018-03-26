@@ -232,7 +232,10 @@ the document was issued
 introduced with `=`, is ignored)
 
 `:doctype:`:: The document type (see CSD deliverables: The different types of
-CSD publications) (mandatory). The permitted types are: `standard, governance`.
+CSD publications) (mandatory). The permitted types are: `standard, governance, guide`.
+
+`:status:``:: The document status. The permitted types are: `working-draft`,
+`committee-draft`, `draft-standard`, `standard`, `obsolete`.
 
 `:technical-committee:`:: The name of the relevant CSD technical committee
 (mandatory)

@@ -92,6 +92,55 @@ module Asciidoctor
           super
         end
       end
+
+      HEAD = <<~HEAD.freeze
+          <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!--TOC script import-->
+    <script type="text/javascript"  src="https://cdn.rawgit.com/jgallen23/toc/0.3.2/dist/toc.min.js"></script>
+
+    <!--Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Overpass:300,300i,600,900" rel="stylesheet">
+    <!--Font awesome import for the link icon-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css" integrity="sha384-v2Tw72dyUXeU3y4aM2Y0tBJQkGfplr39mxZqlTBDUZAb9BGoC40+rdFCG0m10lXk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/fontawesome.css" integrity="sha384-q3jl8XQu1OpdLgGFvNRnPdj5VIlCvgsDQTQB6owSOHWlAurxul7f+JpUOVdAiJ5P" crossorigin="anonymous">
+      HEAD
+
+      def html_main(docxml)
+        d = docxml.at('//div[@class="WordSection3"]')
+        s = d.replace("<main></main>")
+        s.first.children = d
+        s.first.first.previous = '<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>'
+      end
+
+      def html_preface(docxml)
+        super
+        docxml.at("//*[local-name() = 'head']").add_child(HEAD)
+        html_main(docxml)
+        docxml
+      end
+
+      def make_body(xml, docxml)
+        body_attr = { lang: "EN-US", link: "blue", vlink: "#954F72" "xml:lang": "EN-US", class: "container" }
+        xml.body **body_attr do |body|
+          make_body1(body, docxml)
+          make_body2(body, docxml)
+          make_body3(body, docxml)
+        end
+      end
+
+      def html_cover(docxml)
+        cover = Nokogiri::HTML(File.read(@htmlcoverpage, encoding: "UTF-8"))
+        d = docxml.at('//div[@id="titlepage"]')
+        d.children.first.add_previous_sibling cover.to_xml(encoding: "US-ASCII")
+      end
+
+      def html_intro(docxml)
+        cover = Nokogiri::HTML(File.read(@htmlintropage, encoding: "UTF-8"))
+        d = docxml.at('//div[@id=nav"]')
+        d.children.first.add_previous_sibling cover.to_xml(encoding: "US-ASCII")
+      end
+
     end
   end
 end

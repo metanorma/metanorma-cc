@@ -1,12 +1,21 @@
-<div class="coverpage">
+<div id="titlepage">
+<div class="document-stage-band" id="working-draft-band">
+    <p class="document-stage">{{ status }}</p>
+</div>
 
-  <div class="coverpage-logo">
-    <span>The Calendaring and Scheduling Consortium</span>
-  </div>
+<div class="document-type-band" id="standard-band">
+    <p class="document-type">{{ doctype }}</p>
+</div>
+  
+    
 
-  <div class="coverpage-tc-name">
-    <span>TC {{ tc }}</span>
-  </div>
+  <div id='toggle'> <span>•</span> </div>
+
+  <header>
+
+<div class="WordSection1">
+  <div class="coverpage">
+    <div class="wrapper-top">
 
   <div class="coverpage-doc-identity">
     <div class="doc-number">
@@ -21,9 +30,25 @@
     </div>
   </div>
 
-  <div class="coverpage-stage-block">
-    <span class="coverpage-stage">{{ status }} Stage</span>
+  <div class="coverpage-logo">
+    <span>The Calendaring and Scheduling Consortium</span>
   </div>
+
+  <div class="coverpage-tc-name">
+    <span>TC {{ tc }}</span>
+  </div>
+  </div>
+
+  <div class="WordSection2">
+
+  <div class="coverpage-stage-block" >
+    <span class="coverpage-stage" id='{{ doctype | downcase | replace: " ", "-" }}'>{{ doctype }}</span>
+  </div>
+
+  <div class="coverpage-stage-block" >
+    <span class="coverpage-maturity" id="{{ status | downcase | replace: " ", "-" }}">{{ status }}</span>
+</div>
+
 
   <div class="coverpage-warning">
     <span class="title">Warning for Drafts</span>
@@ -37,5 +62,37 @@
     </p>
   </div>
 
+<div class="copyright">
+  <p class="year">
+    &copy; {{ docyear }} The Calendaring and Scheduling Consortium, Inc.
+  </p>
+
+  <p class="message">
+    All rights reserved. Unless otherwise specified, no part of this
+    publication may be reproduced or utilized otherwise in any form or by any
+    means, electronic or mechanical, including photocopying, or posting on the
+    internet or an intranet, without prior written permission. Permission can
+    be requested from the address below.
+  </p>
+
+<div class="contact-info">
+  <p class="name">The Calendaring and Scheduling Consortium, Inc.</p>
+  <p class="address">
+    4390 Chaffin Lane<br />
+    McKinleyville<br />
+    California 95519<br />
+    United States of America<br />
+    <br />
+    <a href="mailto:copyright@calconnect.org">copyright@calconnect.org</a><br />
+    <a href="www.calconnect.org">www.calconnect.org</a>
+  </p>
+</div>
 </div>
 
+<div class="rule"></div>
+</div>
+
+
+
+</header>
+</div>

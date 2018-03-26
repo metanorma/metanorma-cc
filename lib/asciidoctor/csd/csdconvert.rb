@@ -154,7 +154,7 @@ module Asciidoctor
 
       def html_intro(docxml)
         cover = Nokogiri::HTML(File.read(@htmlintropage, encoding: "UTF-8"))
-        d = docxml.at('//div[@id=nav"]')
+        d = docxml.at('//div[@id="nav"]')
         d.children.first.add_previous_sibling cover.to_xml(encoding: "US-ASCII")
       end
 

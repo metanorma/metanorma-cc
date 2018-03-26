@@ -121,12 +121,29 @@ module Asciidoctor
       end
 
       def make_body(xml, docxml)
-        body_attr = { lang: "EN-US", link: "blue", vlink: "#954F72" "xml:lang": "EN-US", class: "container" }
+        body_attr = { lang: "EN-US", link: "blue", vlink: "#954F72", "xml:lang": "EN-US", class: "container" }
         xml.body **body_attr do |body|
           make_body1(body, docxml)
           make_body2(body, docxml)
           make_body3(body, docxml)
         end
+      end
+
+      def make_body1(body, _docxml)
+        body.div **{ id: "titlepage" } do |div1|
+          div1.p { |p| p << "&nbsp;" } # placeholder
+        end
+        section_break(body)
+      end
+
+      def make_body2(body, docxml)
+        body.div **{ id: "nav" } do |div2|
+          info docxml, div2
+          foreword docxml, div2
+          introduction docxml, div2
+          div2.p { |p| p << "&nbsp;" } # placeholder
+        end
+        section_break(body)
       end
 
       def html_cover(docxml)

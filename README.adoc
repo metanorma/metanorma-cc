@@ -248,7 +248,7 @@ these are otherwise suppressed.
 
 == AsciiCSD features not also present in AsciiISO
 
-* `[keyword]#...#`: encodes keywords, such as "MUST", "MUST NOT". (Encoded as
+* `+[keyword]#...#+`: encodes keywords, such as "MUST", "MUST NOT". (Encoded as
 `<span class="keyword">...</span>`.
 
 == Data Models

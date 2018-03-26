@@ -2,14 +2,14 @@
 Simon Perreault <simon.perreault@viagenie.ca>
 :title: vCard Format Specification
 :docnumber: RFC 6350
-:doctype: international-standard
+:doctype: standard
 :abbrev: vCard
 :obsoletes: 2425, 2426, 4770
 :updates: 2739
 :name: 6350
 :revdate: 2011-08
 :submission-type: IETF
-:status: standard
+:status: working-draft
 :intended-series: full-standard 6350
 :fullname: Simon Perreault
 :lastname: Perreault

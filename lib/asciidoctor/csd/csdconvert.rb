@@ -94,28 +94,33 @@ module Asciidoctor
       end
 
       HEAD = <<~HEAD.freeze
-          <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     <!--TOC script import-->
     <script type="text/javascript"  src="https://cdn.rawgit.com/jgallen23/toc/0.3.2/dist/toc.min.js"></script>
 
     <!--Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i|Space+Mono:400,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Overpass:300,300i,600,900" rel="stylesheet">
     <!--Font awesome import for the link icon-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css" integrity="sha384-v2Tw72dyUXeU3y4aM2Y0tBJQkGfplr39mxZqlTBDUZAb9BGoC40+rdFCG0m10lXk" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/fontawesome.css" integrity="sha384-q3jl8XQu1OpdLgGFvNRnPdj5VIlCvgsDQTQB6owSOHWlAurxul7f+JpUOVdAiJ5P" crossorigin="anonymous">
       HEAD
 
+      BUTTON = '<button onclick="topFunction()" id="myBtn" '\
+        'title="Go to top">Top</button>'.freeze
+
+
       def html_main(docxml)
         d = docxml.at('//div[@class="WordSection3"]')
         s = d.replace("<main></main>")
         s.first.children = d
-        s.first.first.previous = '<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>'
+        s.first.children.first.previous = BUTTON
       end
 
       def html_preface(docxml)
         super
-        docxml.at("//*[local-name() = 'head']").add_child(HEAD)
+        docxml.at("//head").add_child(HEAD)
         html_main(docxml)
         docxml
       end
@@ -129,35 +134,9 @@ module Asciidoctor
         end
       end
 
-      def make_body1(body, _docxml)
-        body.div **{ id: "titlepage" } do |div1|
-          div1.p { |p| p << "&nbsp;" } # placeholder
-        end
-        section_break(body)
+      def html_toc(docxml)
+         docxml
       end
-
-      def make_body2(body, docxml)
-        body.div **{ id: "nav" } do |div2|
-          info docxml, div2
-          foreword docxml, div2
-          introduction docxml, div2
-          div2.p { |p| p << "&nbsp;" } # placeholder
-        end
-        section_break(body)
-      end
-
-      def html_cover(docxml)
-        cover = Nokogiri::HTML(File.read(@htmlcoverpage, encoding: "UTF-8"))
-        d = docxml.at('//div[@id="titlepage"]')
-        d.children.first.add_previous_sibling cover.to_xml(encoding: "US-ASCII")
-      end
-
-      def html_intro(docxml)
-        cover = Nokogiri::HTML(File.read(@htmlintropage, encoding: "UTF-8"))
-        d = docxml.at('//div[@id="nav"]')
-        d.children.first.add_previous_sibling cover.to_xml(encoding: "US-ASCII")
-      end
-
     end
   end
 end

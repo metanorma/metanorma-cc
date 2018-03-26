@@ -79,6 +79,7 @@ table {
     2. Responsive navigation layout
 */
 
+
 @media (min-width: 768px) {
     nav {
         position: fixed;
@@ -630,7 +631,7 @@ p {
 
 .wrapper-top {
     background-color:#0e1a85;
-    background-image: url("img/dots@2x.png");
+    /* background-image: url("img/dots@2x.png"); */
     color: #ffffff;
     padding: 2em 0;
 }
@@ -647,9 +648,14 @@ p {
       font-weight: 900;
   }
   
-  .WordSection2 {
+  .WordSection11 {
     padding: 0 2em 0 3em;
   }
+
+  .WordSection2 {
+    padding: 0 3em 0 6em;
+  }
+  
   
   .zzSTDTitle1, .MsoCommentText {
     display: none;

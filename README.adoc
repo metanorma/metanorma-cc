@@ -255,7 +255,9 @@ these are otherwise suppressed.
 
 The CSD Standard Document format is an instance of the
 https://github.com/riboseinc/isodoc-models[StandardDocument model]. Details of
-this general model can be found on its page.
+this general model can be found on its page. Details of the CSD modifications
+to this general model can be found on the https://github.com/riboseinc/csd[CSD model]
+repository.
 
 === CSD Document Model
 

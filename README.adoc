@@ -15,8 +15,7 @@ The gem currently inherits from the https://github.com/riboseinc/asciidoctor-iso
 gem, and aligns closely to it. Refer to the ISO gem
 for guidance, including https://github.com/riboseinc/asciidoctor-iso/wiki/Guidance-for-authoring
 
-The following
-outputs are generated.
+The following outputs are generated.
 
 * (Optional) An HTML preview generated directly from the Asciidoctor document,
 using native Asciidocot formatting. 
@@ -244,6 +243,10 @@ CSD publications) (mandatory). The permitted types are: `standard, governance`.
 The attribute `:draft:`, if present, includes review notes in the XML output;
 these are otherwise suppressed.
 
+== AsciiCSD features not also present in AsciiISO
+
+* `[keyword]#...#`: encodes keywords, such as "MUST", "MUST NOT". (Encoded as
+`<span class="keyword">...</span>`.
 
 == Data Models
 

@@ -82,6 +82,16 @@ module Asciidoctor
         super
         @annex_lbl = "Appendix"
       end
+
+      def error_parse(node, out)
+        # catch elements not defined in ISO
+        case node.name
+        when "keyword"
+          out.span node.text, **{ class: "keyword" }
+        else
+          super
+        end
+      end
     end
   end
 end

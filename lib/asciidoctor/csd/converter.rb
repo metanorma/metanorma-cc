@@ -142,6 +142,30 @@ module Asciidoctor
         m = node.attr("monospace-font") || '"Courier New",monospace'
         "$bodyfont: #{b};\n$headerfont: #{h};\n$monospacefont: #{m};\n"
       end
+
+      def inline_quoted(node)
+        noko do |xml|
+          case node.type
+          when :emphasis then xml.em node.text
+          when :strong then xml.strong node.text
+          when :monospaced then xml.tt node.text
+          when :double then xml << "\"#{node.text}\""
+          when :single then xml << "'#{node.text}'"
+          when :superscript then xml.sup node.text
+          when :subscript then xml.sub node.text
+          when :asciimath then stem_parse(node.text, xml)
+          else
+            case node.role
+            when "strike" then xml.strike node.text
+            when "smallcap" then xml.smallcap node.text
+            when "keyword" then xml.keyword node.text
+            else
+              xml << node.text
+            end
+          end
+        end.join
+      end
+
     end
   end
 end

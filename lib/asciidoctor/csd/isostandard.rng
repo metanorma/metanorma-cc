@@ -17,20 +17,6 @@
         <value>Latn</value>
       </element>
     </define>
-    <!-- draft into isodoc? To replace version/version? -->
-    <define name="version">
-      <element name="version">
-        <optional>
-          <ref name="edition"/>
-        </optional>
-        <optional>
-          <ref name="revision-date"/>
-        </optional>
-        <optional>
-          <ref name="draft"/>
-        </optional>
-      </element>
-    </define>
     <!-- add type to docidentifier in isodoc? -->
     <define name="docidentifier">
       <element name="docidentifier">
@@ -213,6 +199,9 @@
             <optional>
               <ref name="substage"/>
             </optional>
+            <optional>
+              <ref name="iteration"/>
+            </optional>
           </group>
         </choice>
       </element>
@@ -236,9 +225,12 @@
     <define name="sections">
       <element name="sections">
         <ref name="clause"/>
-        <ref name="terms"/>
+        <choice>
+          <ref name="term-clause"/>
+          <ref name="terms"/>
+        </choice>
         <optional>
-          <ref name="symbols-abbrevs"/>
+          <ref name="definitions"/>
         </optional>
         <oneOrMore>
           <ref name="clause"/>
@@ -276,6 +268,42 @@
         </oneOrMore>
       </choice>
     </define>
+    <define name="Clause-Section">
+      <optional>
+        <attribute name="id">
+          <data type="ID"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="inline-header">
+          <data type="boolean"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="obligation">
+          <choice>
+            <value>normative</value>
+            <value>informative</value>
+          </choice>
+        </attribute>
+      </optional>
+      <optional>
+        <ref name="section-title"/>
+      </optional>
+      <choice>
+        <group>
+          <oneOrMore>
+            <ref name="BasicBlock"/>
+          </oneOrMore>
+          <zeroOrMore>
+            <ref name="note"/>
+          </zeroOrMore>
+        </group>
+        <oneOrMore>
+          <ref name="clause-subsection"/>
+        </oneOrMore>
+      </choice>
+    </define>
     <define name="references">
       <element name="references">
         <optional>
@@ -302,8 +330,8 @@
         </zeroOrMore>
       </element>
     </define>
-    <define name="symbols-abbrevs">
-      <element name="symbols-abbrevs">
+    <define name="definitions">
+      <element name="definitions">
         <optional>
           <attribute name="id">
             <data type="ID"/>
@@ -338,9 +366,6 @@
         <optional>
           <ref name="section-title"/>
         </optional>
-        <zeroOrMore>
-          <ref name="termdocsource"/>
-        </zeroOrMore>
         <choice>
           <oneOrMore>
             <ref name="term"/>
@@ -350,7 +375,7 @@
               <ref name="terms"/>
             </zeroOrMore>
             <optional>
-              <ref name="symbols-abbrevs"/>
+              <ref name="definitions"/>
             </optional>
           </group>
         </choice>
@@ -594,42 +619,6 @@
         <ref name="paragraph"/>
       </element>
     </define>
-    <define name="Clause-Section">
-      <optional>
-        <attribute name="id">
-          <data type="ID"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="inline-header">
-          <data type="boolean"/>
-        </attribute>
-      </optional>
-      <optional>
-        <attribute name="obligation">
-          <choice>
-            <value>normative</value>
-            <value>informative</value>
-          </choice>
-        </attribute>
-      </optional>
-      <optional>
-        <ref name="section-title"/>
-      </optional>
-      <choice>
-        <group>
-          <oneOrMore>
-            <ref name="BasicBlock"/>
-          </oneOrMore>
-          <zeroOrMore>
-            <ref name="note"/>
-          </zeroOrMore>
-        </group>
-        <oneOrMore>
-          <ref name="clause-subsection"/>
-        </oneOrMore>
-      </choice>
-    </define>
   </include>
   <!-- end overrides -->
   <!--
@@ -642,6 +631,9 @@
       <optional>
         <ref name="version"/>
       </optional>
+      <zeroOrMore>
+        <ref name="termdocsource"/>
+      </zeroOrMore>
       <ref name="foreword"/>
       <optional>
         <ref name="introduction"/>
@@ -653,7 +645,10 @@
         <ref name="annex"/>
       </zeroOrMore>
       <oneOrMore>
-        <ref name="references"/>
+        <choice>
+          <ref name="references"/>
+          <ref name="reference-clause"/>
+        </choice>
       </oneOrMore>
     </element>
   </define>
@@ -691,11 +686,6 @@
       <ref name="Content-Section"/>
     </element>
   </define>
-  <define name="draft">
-    <element name="draft">
-      <text/>
-    </element>
-  </define>
   <define name="stage">
     <element name="stage">
       <choice>
@@ -723,6 +713,11 @@
         <value>98</value>
         <value>99</value>
       </choice>
+    </element>
+  </define>
+  <define name="iteration">
+    <element name="iteration">
+      <data type="int"/>
     </element>
   </define>
   <define name="documentnumber">
@@ -838,13 +833,82 @@
     </element>
   </define>
   <define name="termdocsource">
-    <element name="source">
+    <element name="termdocsource">
       <ref name="erefType"/>
     </element>
   </define>
   <define name="ics">
     <element name="ics">
       <text/>
+    </element>
+  </define>
+  <define name="term-clause">
+    <element name="clause">
+      <optional>
+        <attribute name="id">
+          <data type="ID"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="inline-header">
+          <data type="boolean"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="obligation">
+          <choice>
+            <value>normative</value>
+            <value>informative</value>
+          </choice>
+        </attribute>
+      </optional>
+      <optional>
+        <ref name="section-title"/>
+      </optional>
+      <choice>
+        <oneOrMore>
+          <ref name="term-clause"/>
+        </oneOrMore>
+        <zeroOrMore>
+          <choice>
+            <ref name="terms"/>
+            <ref name="definitions"/>
+          </choice>
+        </zeroOrMore>
+      </choice>
+    </element>
+  </define>
+  <define name="reference-clause">
+    <element name="clause">
+      <optional>
+        <attribute name="id">
+          <data type="ID"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="inline-header">
+          <data type="boolean"/>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="obligation">
+          <choice>
+            <value>normative</value>
+            <value>informative</value>
+          </choice>
+        </attribute>
+      </optional>
+      <optional>
+        <ref name="section-title"/>
+      </optional>
+      <choice>
+        <oneOrMore>
+          <ref name="reference-clause"/>
+        </oneOrMore>
+        <zeroOrMore>
+          <ref name="references"/>
+        </zeroOrMore>
+      </choice>
     </element>
   </define>
 </grammar>

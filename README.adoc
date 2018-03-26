@@ -259,11 +259,6 @@ this general model can be found on its page. Details of the CSD modifications
 to this general model can be found on the https://github.com/riboseinc/csd[CSD model]
 repository.
 
-=== CSD Document Model
-
-image::models/standard-document.png[]
-
-
 == Examples
 
 * link:spec/examples/rfc6350.adoc[] is an AsciiCSD version of https://tools.ietf.org/html/rfc6350[RFC 6350].

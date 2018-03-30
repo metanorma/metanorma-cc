@@ -7,7 +7,7 @@ Simon Perreault <simon.perreault@viagenie.ca>
 :obsoletes: 2425, 2426, 4770
 :updates: 2739
 :name: 6350
-:revdate: 2011-08
+:revdate: 2011-08-01
 :submission-type: IETF
 :status: working-draft
 :intended-series: full-standard 6350
@@ -33,6 +33,8 @@ TBD
 
 [[section1]]
 == Introduction
+
+=== General
 
 Electronic address books have become ubiquitous.  Their increased
 presence on portable, connected devices as well as the diversity of
@@ -63,6 +65,8 @@ updates <<RFC2739>>.
 
 [[section3]]
 == vCard Format Specification
+
+=== General
 
 The text/vcard MIME content type (hereafter known as "vCard"; see
 <<section10_1>>) contains contact information, typically pertaining to a
@@ -279,6 +283,8 @@ In all other cases, escaping [keyword]#MUST NOT# be used.
 [[section4]]
 ==  Property Value Data Types
 
+=== General
+
 Standard value types are defined below.
 
 [source,abnf]
@@ -424,6 +430,8 @@ Examples for "uri":
 
 [[section4_3]]
 ===  DATE, TIME, DATE-TIME, DATE-AND-OR-TIME, and TIMESTAMP
+
+==== General
 
 "date", "time", "date-time", "date-and-or-time", and "timestamp":
 Each of these value types is based on the definitions in
@@ -619,6 +627,7 @@ to maintain digit count.  The basic format for ISO 8601 UTC offsets
 
 [[section5]]
 ==  Property Parameters
+=== General
 
 A property can have attributes associated with it.  These "property
 parameters" contain meta-information about the property or the
@@ -1016,6 +1025,7 @@ ABNF: ::
 
 [[section6]]
 ==  vCard Properties
+=== General
 
 What follows is an enumeration of the standard vCard properties.
 
@@ -1302,6 +1312,8 @@ ABNF: ::
 [[section6_2]]
 ===  Identification Properties
 
+==== General
+
 These types are used to capture information associated with the
 identification and naming of the entity associated with the vCard.
 
@@ -1552,6 +1564,8 @@ Examples: ::
 [[section6_3]]
 === Delivery Addressing Properties
 
+==== General
+
 These types are concerned with information related to the delivery
 addressing or label for the vCard object.
 
@@ -1640,6 +1654,8 @@ address are absent.
 
 [[section6_4]]
 ===  Communications Properties
+
+==== General
 
 These properties describe information about how to communicate with
 the object the vCard represents.
@@ -1825,6 +1841,7 @@ Example: ::
 
 [[section6_5]]
 ===  Geographical Properties
+==== General
 
 These properties are concerned with information associated with
 geographical positions or regions associated with the object the
@@ -1908,6 +1925,7 @@ Example: ::
 
 [[section6_6]]
 ===  Organizational Properties
+==== General
 
 These properties are concerned with information associated with
 characteristics of the organization or organizational units of the
@@ -2152,6 +2170,7 @@ RELATED;TYPE=co-worker;VALUE=text:Please contact my assistant Jane
 
 [[section6_7]]
 ===  Explanatory Properties
+==== General
 
 These properties are concerned with additional explanations, such as
 that related to informational notes or revisions specific to the
@@ -2443,6 +2462,7 @@ Example: ::
 
 [[section6_8]]
 ===  Security Properties
+==== General
 
 These properties are concerned with the security of communication
 pathways or access to the vCard.
@@ -2489,6 +2509,7 @@ Examples: ::
 
 [[section6_9]]
 ===  Calendar Properties
+==== General
 
 These properties are further specified in <<RFC2739>>.
 
@@ -2600,6 +2621,7 @@ cooperating agents without outside registration or standardization.
 
 [[section7]]
 ==  Synchronization
+=== General
 
 vCard data often needs to be synchronized between devices.  In this
 context, synchronization is defined as the intelligent merging of two
@@ -2608,6 +2630,8 @@ aid this process.
 
 [[section7_1]]
 ===  Mechanisms
+
+==== General
 
 Two mechanisms are available: the UID property is used to match
 multiple instances of the same vCard, while the PID parameter is used
@@ -3015,6 +3039,8 @@ Change controller: :: IETF
 [[section10_2]]
 ===  Registering New vCard Elements
 
+==== General
+
 This section defines the process for registering new or modified
 vCard elements (i.e., properties, parameters, value data types, and
 values) with IANA.
@@ -3194,6 +3220,7 @@ RELATED;TYPE=supervisor:urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6
 
 [[section10_3]]
 ===  Initial vCard Elements Registries
+==== General
 
 The IANA has created and will maintain the following registries for
 vCard elements with pointers to appropriate reference documents.  The

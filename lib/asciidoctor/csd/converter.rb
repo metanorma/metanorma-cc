@@ -102,10 +102,10 @@ module Asciidoctor
         end
       end
 
-      def sections_cleanup(xmldoc)
+      def sections_cleanup(x)
         super
-        xmldoc.xpath("//*[@inline-header]").each do |x|
-          x.delete("inline-header")
+        x.xpath("//*[@inline-header]").each do |h|
+          h.delete("inline-header")
         end
       end
 

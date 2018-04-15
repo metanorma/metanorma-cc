@@ -4,7 +4,10 @@ SimpleCov.start do
 end
 
 require "bundler/setup"
+require "asciidoctor"
 require "asciidoctor-csd"
+require "rspec/matchers"
+require "equivalent-xml"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
@@ -40,49 +43,37 @@ VALIDATING_BLANK_HDR = <<~"HDR"
 HDR
 
 BLANK_HDR = <<~"HDR"
-    <?xml version="1.0" encoding="UTF-8"?>
-<iso-standard xmlns="http://riboseinc.com/isoxml">
-<bibdata type="article">
-  <title>
-  </title>
-  <title>
-  </title>
-  <docidentifier>
-    <project-number/>
-  </docidentifier>
-  <contributor>
-    <role type="author"/>
-    <organization>
-      <name>International Organization for Standardization</name>
-      <abbreviation>ISO</abbreviation>
-    </organization>
-  </contributor>
-  <contributor>
-    <role type="publisher"/>
-    <organization>
-      <name>International Organization for Standardization</name>
-      <abbreviation>ISO</abbreviation>
-    </organization>
-  </contributor>
-  <script>Latn</script>
-  <status>
-    <stage>60</stage>
-    <substage>60</substage>
-  </status>
-  <copyright>
-    <from>#{Time.new.year}</from>
-    <owner>
-      <organization>
-      <name>International Organization for Standardization</name>
-      <abbreviation>ISO</abbreviation>
-      </organization>
-    </owner>
-  </copyright>
-  <editorialgroup>
-    <technical-committee/>
-    <subcommittee/>
-    <workgroup/>
-  </editorialgroup>
-</bibdata>
+       <?xml version="1.0" encoding="UTF-8"?>
+       <csd-standard xmlns="https://www.calconnect.org/standards/csd">
+       <bibdata type="article">
+
+
+         <contributor>
+           <role type="author"/>
+           <organization>
+             <name>CalConnect</name>
+           </organization>
+         </contributor>
+         <contributor>
+           <role type="publisher"/>
+           <organization>
+             <name>CalConnect</name>
+           </organization>
+         </contributor>
+
+         <script>Latn</script>
+
+         <copyright>
+           <from>#{Time.new.year}</from>
+           <owner>
+             <organization>
+               <name>CalConnect</name>
+             </organization>
+           </owner>
+         </copyright>
+         <editorialgroup>
+           <technical-committee/>
+         </editorialgroup>
+       </bibdata>
 HDR
 

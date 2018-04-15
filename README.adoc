@@ -232,7 +232,18 @@ the document was issued
 introduced with `=`, is ignored)
 
 `:doctype:`:: The document type (see CSD deliverables: The different types of
-CSD publications) (mandatory). The permitted types are: `standard, governance, guide`.
+CSD publications) (mandatory). The permitted types are:
++
+--
+ARTF:: Code Artifact
+PRES:: Presentation
+PROP:: Proposal
+RCMD:: Recommendation
+REPT:: Report
+REVW:: Public Review
+IETF DRAFT:: IETF Internet Draft
+IETF RFC:: IETF Pubished Standard
+--
 
 `:status:``:: The document status. The permitted types are: `working-draft`,
 `committee-draft`, `draft-standard`, `standard`, `obsolete`.

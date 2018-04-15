@@ -15,7 +15,7 @@ module Asciidoctor
       end
 
       def title(isoxml, _out)
-        main = isoxml.at(ns("//title[@language='en']")).text
+        main = isoxml&.at(ns("//title[@language='en']"))&.text
         set_metadata(:doctitle, main)
       end
 
@@ -33,7 +33,7 @@ module Asciidoctor
       def docid(isoxml, _out)
         docnumber = isoxml.at(ns("//bibdata/docidentifier"))
         docstatus = isoxml.at(ns("//bibdata/status"))
-        dn = docnumber.text
+        dn = docnumber&.text
         if docstatus
           set_metadata(:status, status_print(docstatus.text))
           abbr = status_abbr(docstatus.text)

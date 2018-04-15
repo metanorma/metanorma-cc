@@ -30,7 +30,7 @@ module Asciidoctor
       end
 
 
-      def id(isoxml, _out)
+      def docid(isoxml, _out)
         docnumber = isoxml.at(ns("//bibdata/docidentifier"))
         docstatus = isoxml.at(ns("//bibdata/status"))
         dn = docnumber.text

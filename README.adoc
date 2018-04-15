@@ -246,7 +246,7 @@ IETF RFC:: IETF Pubished Standard
 --
 
 `:status:``:: The document status. The permitted types are: `working-draft`,
-`committee-draft`, `draft-standard`, `standard`, `obsolete`.
+`committee-draft`, `draft-standard`, `published`, `obsolete`.
 
 `:technical-committee:`:: The name of the relevant CSD technical committee
 (mandatory)

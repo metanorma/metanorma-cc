@@ -83,6 +83,17 @@ module Asciidoctor
         ret1
       end
 
+      def document(node)
+        init(node)
+        ret1 = makexml(node)
+        ret = ret1.to_xml(indent: 2)
+        filename = node.attr("docfile").gsub(/\.adoc/, ".xml").
+          gsub(%r{^.*/}, "")
+        File.open(filename, "w") { |f| f.write(ret) }
+        html_converter(node).convert filename unless node.attr("nodoc")
+        ret
+      end
+
       def validate(doc)
         content_validate(doc)
         schema_validate(formattedstr_strip(doc.dup),
@@ -120,16 +131,6 @@ module Asciidoctor
           htmlcoverpage: html_doc_path("html_csd_titlepage.html"),
           htmlintropage: html_doc_path("html_csd_intro.html"),
           scripts: html_doc_path("scripts.html"),
-        )
-      end
-
-      def doc_converter(_node)
-        CsdWordConvert.new(
-          wordstylesheet: generate_css(html_doc_path("wordstyle.scss"), false),
-          standardstylesheet: generate_css(html_doc_path("csd.scss"), false),
-          header: html_doc_path("header.html"),
-          wordcoverpage: html_doc_path("word_csd_titlepage.html"),
-          wordintropage: html_doc_path("word_csd_intro.html"),
         )
       end
 

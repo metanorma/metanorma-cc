@@ -291,8 +291,8 @@ RSpec.describe Asciidoctor::Csd do
     OUTPUT
   end
 
-    it "processes section names" do
-          expect(Asciidoctor::Csd::CsdConvert.new({}).convert_file(<<~"INPUT", "test", true)).to be_equivalent_to <<~"OUTPUT"
+  it "processes section names" do
+    expect(Asciidoctor::Csd::CsdConvert.new({}).convert_file(<<~"INPUT", "test", true)).to be_equivalent_to <<~"OUTPUT"
                <csd-standard xmlns="http://riboseinc.com/isoxml">
       <preface>
       <foreword obligation="informative">
@@ -446,11 +446,11 @@ RSpec.describe Asciidoctor::Csd do
            </body>
          </head>
        </html>
-OUTPUT
-    end
+    OUTPUT
+  end
 
-      it "injects JS into blank html" do
-    system "rm -f test.doc"
+  it "injects JS into blank html" do
+    system "rm -f test.html"
     expect(Asciidoctor.convert(<<~"INPUT", backend: :csd, header_footer: true)).to be_equivalent_to <<~"OUTPUT"
       = Document title
       Author

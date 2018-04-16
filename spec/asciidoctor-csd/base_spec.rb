@@ -7,7 +7,7 @@ RSpec.describe Asciidoctor::Csd do
 
   it "generates output for the Rice document" do
   system "cd spec/examples; rm -f rfc6350.doc; rm -f rfc6350.html; asciidoctor --trace -b csd -r 'asciidoctor-csd' rfc6350.adoc; cd ../.."
-  expect(File.exist?("spec/examples/rfc6350.doc")).to be true
+  expect(File.exist?("spec/examples/rfc6350.doc")).to be false
   expect(File.exist?("spec/examples/rfc6350.html")).to be true
   end
 
@@ -22,7 +22,7 @@ RSpec.describe Asciidoctor::Csd do
   end
 
   it "converts a blank document" do
-    system "rm -f test.doc"
+    system "rm -f test.html"
     expect(Asciidoctor.convert(<<~"INPUT", backend: :csd, header_footer: true)).to be_equivalent_to <<~"OUTPUT"
       = Document title
       Author
@@ -33,7 +33,7 @@ RSpec.describe Asciidoctor::Csd do
 <sections/>
 </csd-standard>
     OUTPUT
-    expect(File.exist?("test.doc")).to be true
+    expect(File.exist?("test.html")).to be true
   end
 
   it "processes default metadata" do

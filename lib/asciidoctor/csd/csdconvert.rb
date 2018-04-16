@@ -56,16 +56,6 @@ module Asciidoctor
         end
       end
 
-      def error_parse(node, out)
-        # catch elements not defined in ISO
-        case node.name
-        when "pre" 
-          pre_parse(node, out)
-        else
-          super
-        end
-      end
-
       def pre_parse(node, out)
         out.pre node.text # content.gsub(/</, "&lt;").gsub(/>/, "&gt;")
       end
@@ -86,6 +76,8 @@ module Asciidoctor
       def error_parse(node, out)
         # catch elements not defined in ISO
         case node.name
+        when "pre" 
+          pre_parse(node, out)
         when "keyword"
           out.span node.text, **{ class: "keyword" }
         else

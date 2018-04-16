@@ -6,6 +6,9 @@ end
 require "bundler/setup"
 require "asciidoctor"
 require "asciidoctor-csd"
+require "asciidoctor/csd"
+require "asciidoctor/csd/csdconvert"
+require "asciidoctor/iso/converter"
 require "rspec/matchers"
 require "equivalent-xml"
 

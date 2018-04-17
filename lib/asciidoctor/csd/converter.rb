@@ -91,6 +91,7 @@ module Asciidoctor
           gsub(%r{^.*/}, "")
         File.open(filename, "w") { |f| f.write(ret) }
         html_converter(node).convert filename unless node.attr("nodoc")
+        @files_to_delete.each { |f| system "rm #{f}" }
         ret
       end
 

@@ -242,8 +242,9 @@ standard:: Recommendation; includes IETF RFC
 report:: report
 --
 
-`:status:``:: The document status. The permitted types are: `working-draft`,
-`committee-draft`, `draft-standard`, `published`, `obsolete`.
+`:status:``:: The document status. The permitted types are: `proposal`,
+`working-draft`, `committee-draft`, `draft-standard`, `final-draft`,
+`published`, `withdrawn`.
 
 `:technical-committee:`:: The name of the relevant CSD technical committee
 (mandatory)

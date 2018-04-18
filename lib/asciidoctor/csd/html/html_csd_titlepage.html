@@ -47,7 +47,7 @@
     <span class="coverpage-maturity" id="{{ status | replace: ' ', '-' | downcase }}">{{ status }}</span>
 </div>
 
-
+{% if status != "Published" and status != "Withdrawn" %}
   <div class="coverpage-warning">
     <span class="title">Warning for Drafts</span>
 
@@ -59,6 +59,7 @@
     and to provide supporting documentation.
     </p>
   </div>
+{% endif %}
 
 <div class="copyright">
   <p class="year">

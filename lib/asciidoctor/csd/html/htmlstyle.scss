@@ -282,6 +282,14 @@ p.document-stage {
     text-transform: uppercase;
     }
 
+#proposal {
+    border-bottom: solid 3px #00BFFF;
+}
+
+#proposal-band {
+    background-color: #00BFFF;
+}
+
 #working-draft {
     border-bottom: solid 3px #fda706;
 }
@@ -302,24 +310,32 @@ p.document-stage {
     border-bottom: solid 3px #fdf906;
 }
 
-#draft-standard {
-    border-bottom: solid 3px #fdf906;
+#draft-standard-band {
+    background-color: #fdf906;
 }
 
-#standard {
-    border-bottom: solid 3px #0ac442;
-}
-
-#standard-band {
-    background-color: #0ac442;
-}
-
-#obsolete {
+#final-draft {
     border-bottom: solid 3px #7e0d13;
 }
 
-#obsolete-band {
+#final-draft-band {
     background-color: #7e0d13;
+}
+
+#published {
+    border-bottom: solid 3px #0ac442;
+}
+
+#published-band {
+    background-color: #0ac442;
+}
+
+#withdrawn {
+    border-bottom: solid 3px #a0a0a0;
+}
+
+#withdrawn-band {
+    background-color: #a0a0a0;
 }
 
 /*

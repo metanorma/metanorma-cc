@@ -9,7 +9,7 @@ Simon Perreault <simon.perreault@viagenie.ca>
 :name: 6350
 :revdate: 2011-08-01
 :submission-type: IETF
-:status: working-draft
+:status: published
 :intended-series: full-standard 6350
 :fullname: Simon Perreault
 :lastname: Perreault

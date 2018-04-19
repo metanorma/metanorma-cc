@@ -41,7 +41,7 @@ RSpec.describe Asciidoctor::Csd do
 <sections/>
 </csd-standard>
     INPUT
-    {:accesseddate=>"XXX", :activateddate=>"XXX", :confirmeddate=>"XXX", :createddate=>"XXX", :docnumber=>"1000(wd)", :doctitle=>"Main Title", :doctype=>"Standard", :docyear=>"2001", :draft=>"3.4", :draftinfo=>" ( 3.4, 2000-01-01)", :editorialgroup=>[], :issueddate=>"XXX", :obsoleteddate=>"XXX", :obsoletes=>nil, :obsoletes_part=>nil, :publisheddate=>"XXX", :revdate=>"2000-01-01", :sc=>"XXXX", :secretariat=>"XXXX", :status=>"Working Draft", :tc=>"TC", :updateddate=>"XXX", :wg=>"XXXX"}
+           {:accesseddate=>"XXX", :confirmeddate=>"XXX", :createddate=>"XXX", :docnumber=>"1000(wd)", :doctitle=>"Main Title", :doctype=>"Standard", :docyear=>"2001", :draft=>"3.4", :draftinfo=>" ( 3.4, 2000-01-01)", :editorialgroup=>[], :implementeddate=>"XXX", :issueddate=>"XXX", :obsoleteddate=>"XXX", :obsoletes=>nil, :obsoletes_part=>nil, :publisheddate=>"XXX", :revdate=>"2000-01-01", :sc=>"XXXX", :secretariat=>"XXXX", :status=>"Working Draft", :tc=>"TC", :updateddate=>"XXX", :wg=>"XXXX"}
     OUTPUT
   end
 
@@ -58,7 +58,7 @@ RSpec.describe Asciidoctor::Csd do
 <sections/>
 </csd-standard>
     INPUT
-    {:accesseddate=>"XXX", :activateddate=>"XXX", :confirmeddate=>"XXX", :createddate=>"XXX", :docnumber=>"(cd)", :doctitle=>nil, :doctype=>"Standard", :docyear=>nil, :draft=>"3.4", :draftinfo=>" ( 3.4, 2000-01-01)", :editorialgroup=>[], :issueddate=>"XXX", :obsoleteddate=>"XXX", :obsoletes=>nil, :obsoletes_part=>nil, :publisheddate=>"XXX", :revdate=>"2000-01-01", :sc=>"XXXX", :secretariat=>"XXXX", :status=>"Committee Draft", :tc=>"XXXX", :updateddate=>"XXX", :wg=>"XXXX"}
+           {:accesseddate=>"XXX", :confirmeddate=>"XXX", :createddate=>"XXX", :docnumber=>"(cd)", :doctitle=>nil, :doctype=>"Standard", :docyear=>nil, :draft=>"3.4", :draftinfo=>" ( 3.4, 2000-01-01)", :editorialgroup=>[], :implementeddate=>"XXX", :issueddate=>"XXX", :obsoleteddate=>"XXX", :obsoletes=>nil, :obsoletes_part=>nil, :publisheddate=>"XXX", :revdate=>"2000-01-01", :sc=>"XXXX", :secretariat=>"XXXX", :status=>"Committee Draft", :tc=>"XXXX", :updateddate=>"XXX", :wg=>"XXXX"}
     OUTPUT
   end
 
@@ -75,7 +75,7 @@ RSpec.describe Asciidoctor::Csd do
 <sections/>
 </csd-standard>
     INPUT
-           {:accesseddate=>"XXX", :activateddate=>"XXX", :confirmeddate=>"XXX", :createddate=>"XXX", :docnumber=>"(d)", :doctitle=>nil, :doctype=>"Standard", :docyear=>nil, :draft=>"3.4", :draftinfo=>" ( 3.4, 2000-01-01)", :editorialgroup=>[], :issueddate=>"XXX", :obsoleteddate=>"XXX", :obsoletes=>nil, :obsoletes_part=>nil, :publisheddate=>"XXX", :revdate=>"2000-01-01", :sc=>"XXXX", :secretariat=>"XXXX", :status=>"Draft Standard", :tc=>"XXXX", :updateddate=>"XXX", :wg=>"XXXX"}
+           {:accesseddate=>"XXX", :confirmeddate=>"XXX", :createddate=>"XXX", :docnumber=>"(d)", :doctitle=>nil, :doctype=>"Standard", :docyear=>nil, :draft=>"3.4", :draftinfo=>" ( 3.4, 2000-01-01)", :editorialgroup=>[], :implementeddate=>"XXX", :issueddate=>"XXX", :obsoleteddate=>"XXX", :obsoletes=>nil, :obsoletes_part=>nil, :publisheddate=>"XXX", :revdate=>"2000-01-01", :sc=>"XXXX", :secretariat=>"XXXX", :status=>"Draft Standard", :tc=>"XXXX", :updateddate=>"XXX", :wg=>"XXXX"}
     OUTPUT
   end
 
@@ -92,7 +92,7 @@ RSpec.describe Asciidoctor::Csd do
 <sections/>
 </csd-standard>
     INPUT
-           {:accesseddate=>"XXX", :activateddate=>"XXX", :confirmeddate=>"XXX", :createddate=>"XXX", :docnumber=>nil, :doctitle=>nil, :doctype=>"Standard", :docyear=>nil, :draft=>"3.4", :draftinfo=>" ( 3.4, 2000-01-01)", :editorialgroup=>[], :issueddate=>"XXX", :obsoleteddate=>"XXX", :obsoletes=>nil, :obsoletes_part=>nil, :publisheddate=>"XXX", :revdate=>"2000-01-01", :sc=>"XXXX", :secretariat=>"XXXX", :status=>"Standard", :tc=>"XXXX", :updateddate=>"XXX", :wg=>"XXXX"}
+           {:accesseddate=>"XXX", :confirmeddate=>"XXX", :createddate=>"XXX", :docnumber=>nil, :doctitle=>nil, :doctype=>"Standard", :docyear=>nil, :draft=>"3.4", :draftinfo=>" ( 3.4, 2000-01-01)", :editorialgroup=>[], :implementeddate=>"XXX", :issueddate=>"XXX", :obsoleteddate=>"XXX", :obsoletes=>nil, :obsoletes_part=>nil, :publisheddate=>"XXX", :revdate=>"2000-01-01", :sc=>"XXXX", :secretariat=>"XXXX", :status=>"Standard", :tc=>"XXXX", :updateddate=>"XXX", :wg=>"XXXX"}
     OUTPUT
   end
 
@@ -190,10 +190,10 @@ RSpec.describe Asciidoctor::Csd do
              <br/>
              <div class="WordSection3">
                <p class="zzSTDTitle1"/>
-               <div id="H"><h1>3.&#160; Terms and Definitions</h1><p>For the purposes of this document,
+               <div id="H"><h1>1.&#160; Terms and Definitions</h1><p>For the purposes of this document,
            the following terms and definitions apply.</p>
-       <p class="TermNum" id="J">3.1</p>
-         <p class="Terms">Term2</p>
+       <p class="TermNum" id="J">1.1</p>
+         <p class="Terms" style="text-align:left;">Term2</p>
        </div>
              </div>
            </body>
@@ -205,7 +205,7 @@ RSpec.describe Asciidoctor::Csd do
   it "processes terms & definitions with external source" do
     expect(Asciidoctor::Csd::CsdConvert.new({}).convert_file(<<~"INPUT", "test", true)).to be_equivalent_to <<~"OUTPUT"
                <csd-standard xmlns="http://riboseinc.com/isoxml">
-         <termdocsource type="inline" bibitemid="ISO712" citeas="ISO 712"/>
+         <termdocsource type="inline" bibitemid="ISO712" target="ISO 712"/>
        <sections>
        <terms id="H" obligation="normative"><title>Terms, Definitions, Symbols and Abbreviated Terms</title>
          <term id="J">
@@ -243,14 +243,14 @@ RSpec.describe Asciidoctor::Csd do
              <div class="WordSection3">
                <p class="zzSTDTitle1"/>
                <div>
-                 <h1>2.&#160; Normative References</h1>
+                 <h1>1.&#160; Normative References</h1>
                  <p>The following documents are referred to in the text in such a way that some or all of their content constitutes requirements of this document. For dated references, only the edition cited applies. For undated references, the latest edition of the referenced document (including any amendments) applies.</p>
                  <p id="ISO712">ISO 712, <i> Cereals and cereal products?~@~I?~@~T?~@~IDetermination of moisture content?~@~I?~@~T?~@~IReference method</i></p>
                </div>
-               <div id="H"><h1>3.&#160; Terms and Definitions</h1><p>For the purposes of this document, the terms and definitions
+               <div id="H"><h1>2.&#160; Terms and Definitions</h1><p>For the purposes of this document, the terms and definitions
          given in ISO 712 and the following apply.</p>
-       <p class="TermNum" id="J">3.1</p>
-                <p class="Terms">Term2</p>
+       <p class="TermNum" id="J">2.1</p>
+                <p class="Terms" style="text-align:left;">Term2</p>
               </div>
              </div>
            </body>
@@ -282,7 +282,7 @@ RSpec.describe Asciidoctor::Csd do
              <br/>
              <div class="WordSection3">
                <p class="zzSTDTitle1"/>
-               <div id="H"><h1>3.&#160; Terms and Definitions</h1><p>No terms and definitions are listed in this document.</p>
+               <div id="H"><h1>1.&#160; Terms and Definitions</h1><p>No terms and definitions are listed in this document.</p>
        </div>
              </div>
            </body>
@@ -399,7 +399,7 @@ RSpec.describe Asciidoctor::Csd do
        <div id="I">
           <h2>3.1. Normal Terms</h2>
           <p class="TermNum" id="J">3.1.1</p>
-          <p class="Terms">Term2</p>
+          <p class="Terms" style="text-align:left;">Term2</p>
 
         </div><div id="K"><h2>3.2. Symbols and Abbreviated Terms</h2>
           <dl><dt><p>Symbol</p></dt><dd>Definition</dd></dl>

@@ -205,7 +205,7 @@ RSpec.describe Asciidoctor::Csd do
   it "processes terms & definitions with external source" do
     expect(Asciidoctor::Csd::CsdConvert.new({}).convert_file(<<~"INPUT", "test", true)).to be_equivalent_to <<~"OUTPUT"
                <csd-standard xmlns="http://riboseinc.com/isoxml">
-         <termdocsource type="inline" target="ISO712"/>
+         <termdocsource type="inline" bibitemid="ISO712"/>
        <sections>
        <terms id="H" obligation="normative"><title>Terms, Definitions, Symbols and Abbreviated Terms</title>
          <term id="J">
@@ -424,7 +424,7 @@ RSpec.describe Asciidoctor::Csd do
                </div>
                <br/>
                <div id="P" class="Section3">
-                 <h1 class="Annex"><b>Appendix A</b><br/>(normative)<br/><br/><b>Annex</b></h1>
+                 <h1 class="Annex"><b>Appendix A</b> (normative) <b>Annex</b></h1>
                  <div id="Q">
           <h2>A.1. Annex A.1</h2>
           <div id="Q1">

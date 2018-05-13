@@ -56,6 +56,19 @@ module Asciidoctor
         end
       end
 
+      def annex_name(annex, name, div)
+        div.h1 **{ class: "Annex" } do |t|
+          t << "#{get_anchors[annex['id']][:label]} "
+          t << "<b>#{name.text}</b>"
+        end
+      end
+
+      def annex_name_lbl(clause, num)
+        obl = l10n("(#{@inform_annex_lbl})")
+        obl = l10n("(#{@norm_annex_lbl})") if clause["obligation"] == "normative"
+        l10n("<b>#{@annex_lbl} #{num}</b> #{obl}")
+      end
+
       def pre_parse(node, out)
         out.pre node.text # content.gsub(/</, "&lt;").gsub(/>/, "&gt;")
       end
@@ -127,7 +140,7 @@ module Asciidoctor
       end
 
       def html_toc(docxml)
-         docxml
+        docxml
       end
     end
   end

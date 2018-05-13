@@ -127,8 +127,8 @@ module Asciidoctor
 
       def html_converter(_node)
         CsdConvert.new(
-          htmlstylesheet: generate_css(html_doc_path("htmlstyle.scss"), true),
-          standardstylesheet: generate_css(html_doc_path("csd.scss"), true),
+          htmlstylesheet: generate_css(html_doc_path("htmlstyle.scss"), true, @fontheader),
+          standardstylesheet: generate_css(html_doc_path("csd.scss"), true, @fontheader),
           htmlcoverpage: html_doc_path("html_csd_titlepage.html"),
           htmlintropage: html_doc_path("html_csd_intro.html"),
           scripts: html_doc_path("scripts.html"),

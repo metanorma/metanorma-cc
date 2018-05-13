@@ -98,7 +98,8 @@ module Asciidoctor
         end
       end
 
-      HEAD = <<~HEAD.freeze
+      def html_head()
+        <<~HEAD.freeze
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     <!--TOC script import-->
@@ -110,24 +111,7 @@ module Asciidoctor
     <!--Font awesome import for the link icon-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css" integrity="sha384-v2Tw72dyUXeU3y4aM2Y0tBJQkGfplr39mxZqlTBDUZAb9BGoC40+rdFCG0m10lXk" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/fontawesome.css" integrity="sha384-q3jl8XQu1OpdLgGFvNRnPdj5VIlCvgsDQTQB6owSOHWlAurxul7f+JpUOVdAiJ5P" crossorigin="anonymous">
-      HEAD
-
-      BUTTON = '<button onclick="topFunction()" id="myBtn" '\
-        'title="Go to top">Top</button>'.freeze
-
-
-      def html_main(docxml)
-        d = docxml.at('//div[@class="WordSection3"]')
-        s = d.replace("<main></main>")
-        s.first.children = d
-        s.first.children.first.previous = BUTTON
-      end
-
-      def html_preface(docxml)
-        super
-        docxml.at("//head").add_child(HEAD)
-        html_main(docxml)
-        docxml
+        HEAD
       end
 
       def make_body(xml, docxml)

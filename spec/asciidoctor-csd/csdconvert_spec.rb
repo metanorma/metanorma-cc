@@ -107,25 +107,25 @@ RSpec.describe Asciidoctor::Csd do
            <html xmlns:epub="http://www.idpf.org/2007/ops">
          <head>
            <title>test</title>
-           <body lang="EN-US" link="blue" vlink="#954F72" xml:lang="EN-US" class="container">
-             <div class="WordSection1">
-               <p>&#160;</p>
-             </div>
-             <br/>
-             <div class="WordSection2">
-               <br/>
-               <div>
-                 <h1 class="ForewordTitle">Foreword</h1>
-                 <pre>ABC</pre>
-               </div>
-               <p>&#160;</p>
-             </div>
-             <br/>
-             <div class="WordSection3">
-               <p class="zzSTDTitle1"/>
-             </div>
-           </body>
          </head>
+         <body lang="EN-US" link="blue" vlink="#954F72" xml:lang="EN-US" class="container">
+           <div class="WordSection1">
+             <p>&#160;</p>
+           </div>
+           <br/>
+           <div class="WordSection2">
+             <p>&#160;</p>
+           </div>
+           <br/>
+           <div class="WordSection3">
+             <br/>
+             <div>
+               <h1 class="ForewordTitle">Foreword</h1>
+               <pre>ABC</pre>
+             </div>
+             <p class="zzSTDTitle1"/>
+           </div>
+         </body>
        </html>
     OUTPUT
   end
@@ -141,25 +141,25 @@ RSpec.describe Asciidoctor::Csd do
            <html xmlns:epub="http://www.idpf.org/2007/ops">
          <head>
            <title>test</title>
-           <body lang="EN-US" link="blue" vlink="#954F72" xml:lang="EN-US" class="container">
-             <div class="WordSection1">
-               <p>&#160;</p>
-             </div>
-             <br/>
-             <div class="WordSection2">
-               <br/>
-               <div>
-                 <h1 class="ForewordTitle">Foreword</h1>
-                 <span class="keyword">ABC</span>
-               </div>
-               <p>&#160;</p>
-             </div>
-             <br/>
-             <div class="WordSection3">
-               <p class="zzSTDTitle1"/>
-             </div>
-           </body>
          </head>
+         <body lang="EN-US" link="blue" vlink="#954F72" xml:lang="EN-US" class="container">
+           <div class="WordSection1">
+             <p>&#160;</p>
+           </div>
+           <br/>
+           <div class="WordSection2">
+             <p>&#160;</p>
+           </div>
+           <br/>
+           <div class="WordSection3">
+             <br/>
+             <div>
+               <h1 class="ForewordTitle">Foreword</h1>
+               <span class="keyword">ABC</span>
+             </div>
+             <p class="zzSTDTitle1"/>
+           </div>
+         </body>
        </html>
     OUTPUT
   end
@@ -179,6 +179,7 @@ RSpec.describe Asciidoctor::Csd do
            <html xmlns:epub="http://www.idpf.org/2007/ops">
          <head>
            <title>test</title>
+           </head>
            <body lang="EN-US" link="blue" vlink="#954F72" xml:lang="EN-US" class="container">
              <div class="WordSection1">
                <p>&#160;</p>
@@ -197,7 +198,6 @@ RSpec.describe Asciidoctor::Csd do
        </div>
              </div>
            </body>
-         </head>
        </html>
     OUTPUT
   end
@@ -231,6 +231,7 @@ RSpec.describe Asciidoctor::Csd do
            <html xmlns:epub="http://www.idpf.org/2007/ops">
          <head>
            <title>test</title>
+           </head>
            <body lang="EN-US" link="blue" vlink="#954F72" xml:lang="EN-US" class="container">
              <div class="WordSection1">
                <p>&#160;</p>
@@ -254,7 +255,6 @@ RSpec.describe Asciidoctor::Csd do
               </div>
              </div>
            </body>
-         </head>
        </html>
     OUTPUT
   end
@@ -271,6 +271,7 @@ RSpec.describe Asciidoctor::Csd do
            <html xmlns:epub="http://www.idpf.org/2007/ops">
          <head>
            <title>test</title>
+           </head>
            <body lang="EN-US" link="blue" vlink="#954F72" xml:lang="EN-US" class="container">
              <div class="WordSection1">
                <p>&#160;</p>
@@ -286,7 +287,6 @@ RSpec.describe Asciidoctor::Csd do
        </div>
              </div>
            </body>
-         </head>
        </html>
     OUTPUT
   end
@@ -362,14 +362,19 @@ RSpec.describe Asciidoctor::Csd do
            <html xmlns:epub="http://www.idpf.org/2007/ops">
          <head>
            <title>test</title>
-           <body lang="EN-US" link="blue" vlink="#954F72" xml:lang="EN-US" class="container">
-             <div class="WordSection1">
-               <p>&#160;</p>
-             </div>
+         </head>
+         <body lang="EN-US" link="blue" vlink="#954F72" xml:lang="EN-US" class="container">
+           <div class="WordSection1">
+             <p>&#160;</p>
+           </div>
+           <br/>
+           <div class="WordSection2">
+             <p>&#160;</p>
+           </div>
+           <br/>
+           <div class="WordSection3">
              <br/>
-             <div class="WordSection2">
-               <br/>
-               <div>
+             <div>
                  <h1 class="ForewordTitle">Foreword</h1>
                  <p id="A">This is a preamble</p>
                </div>
@@ -381,10 +386,6 @@ RSpec.describe Asciidoctor::Csd do
         </div>
                  <p>This is patent boilerplate</p>
                </div>
-               <p>&#160;</p>
-             </div>
-             <br/>
-             <div class="WordSection3">
                <p class="zzSTDTitle1"/>
                <div id="D">
                  <h1>1.&#160; Scope</h1>
@@ -444,7 +445,6 @@ RSpec.describe Asciidoctor::Csd do
                </div>
              </div>
            </body>
-         </head>
        </html>
     OUTPUT
   end
@@ -464,7 +464,7 @@ RSpec.describe Asciidoctor::Csd do
     html = File.read("test.html")
     expect(html).to match(%r{jquery\.min\.js})
     expect(html).to match(%r{Overpass})
-    expect(html).to match(%r{<main><button})
+    expect(html).to match(%r{<main class="WordSection3"><button})
   end
 
 

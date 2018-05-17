@@ -36,6 +36,21 @@ RSpec.describe Asciidoctor::Csd do
     expect(File.exist?("test.html")).to be true
   end
 
+  it "overrides invalid document type" do
+    system "rm -f test.html"
+    expect(Asciidoctor.convert(<<~"INPUT", backend: :csd, header_footer: true)).to be_equivalent_to <<~"OUTPUT"
+      = Document title
+      Author
+      :docfile: test.adoc
+      :doctype: dinosaur
+    INPUT
+    #{BLANK_HDR}
+<sections/>
+</csd-standard>
+    OUTPUT
+    expect(File.exist?("test.html")).to be true
+  end
+
   it "processes default metadata" do
     expect(Asciidoctor.convert(<<~"INPUT", backend: :csd, header_footer: true)).to be_equivalent_to <<~'OUTPUT'
       = Document title
@@ -44,7 +59,7 @@ RSpec.describe Asciidoctor::Csd do
       :nodoc:
       :novalid:
       :docnumber: 1000
-      :doctype: standard
+      :doctype: code
       :edition: 2
       :revdate: 2000-01-01
       :draft: 3.4
@@ -66,7 +81,7 @@ RSpec.describe Asciidoctor::Csd do
     INPUT
     <?xml version="1.0" encoding="UTF-8"?>
 <csd-standard xmlns="https://www.calconnect.org/standards/csd">
-<bibdata type="standard">
+<bibdata type="code">
   <title language="en" format="plain">Main Title</title>
   <docidentifier>1000</docidentifier>
   <contributor>
@@ -199,6 +214,7 @@ RSpec.describe Asciidoctor::Csd do
   it "processes inline_quoted formatting" do
     expect(strip_guid(Asciidoctor.convert(<<~"INPUT", backend: :csd, header_footer: true))).to be_equivalent_to <<~"OUTPUT"
       #{ASCIIDOC_BLANK_HDR}
+    
       _emphasis_
       *strong*
       `monospace`
@@ -212,7 +228,7 @@ RSpec.describe Asciidoctor::Csd do
       [strike]#strike#
       [smallcap]#smallcap#
     INPUT
-            #{BLANK_HDR}
+    #{BLANK_HDR}
        <sections>
         <p id="_"><em>emphasis</em>
        <strong>strong</strong>
@@ -233,3 +249,15 @@ RSpec.describe Asciidoctor::Csd do
 
 
 end
+
+RSpec.describe "warns when missing a title" do
+  specify { expect { Asciidoctor.convert(<<~"INPUT", backend: :csd, header_footer: true) }.to output(/is not a legal document type/).to_stderr }
+  #{VALIDATING_BLANK_HDR}
+      = Document title
+      Author
+      :docfile: test.adoc
+      :doctype: dinosaur
+
+  INPUT
+end
+

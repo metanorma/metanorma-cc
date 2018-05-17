@@ -83,6 +83,15 @@ module Asciidoctor
         ret1
       end
 
+      def doctype(node)
+        d = node.attr("doctype")
+        unless %w{presentation code proposal standard report}.include? d
+          warn "#{d} is not a legal document type: reverting to 'standard'"
+          d = "standard"
+        end
+        d
+      end
+
       def document(node)
         init(node)
         ret1 = makexml(node)

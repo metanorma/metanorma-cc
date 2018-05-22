@@ -96,10 +96,12 @@ module Asciidoctor
         init(node)
         ret1 = makexml(node)
         ret = ret1.to_xml(indent: 2)
-        filename = node.attr("docfile").gsub(/\.adoc/, ".xml").
-          gsub(%r{^.*/}, "")
-        File.open(filename, "w") { |f| f.write(ret) }
-        html_converter(node).convert filename unless node.attr("nodoc")
+        unless node.attr("nodoc") || !node.attr("docfile")
+          filename = node.attr("docfile").gsub(/\.adoc/, ".xml").
+            gsub(%r{^.*/}, "")
+          File.open(filename, "w") { |f| f.write(ret) }
+          html_converter(node).convert filename unless node.attr("nodoc")
+        end
         @files_to_delete.each { |f| system "rm #{f}" }
         ret
       end

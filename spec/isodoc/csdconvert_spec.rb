@@ -266,6 +266,53 @@ RSpec.describe Asciidoctor::Csd do
     OUTPUT
   end
 
+    it "rearranges term headers" do
+    expect(IsoDoc::Csd::Convert.new({}).cleanup(Nokogiri::XML(<<~"INPUT")).to_s).to be_equivalent_to <<~"OUTPUT"
+    <html>
+           <body lang="EN-US" link="blue" vlink="#954F72" xml:lang="EN-US" class="container">
+             <div class="WordSection1">
+               <p>&#160;</p>
+             </div>
+             <br/>
+             <div class="WordSection2">
+               <p>&#160;</p>
+             </div>
+             <br/>
+             <div class="WordSection3">
+               <p class="zzSTDTitle1"/>
+               <div id="H"><h1>1.&#160; Terms and Definitions</h1><p>For the purposes of this document,
+           the following terms and definitions apply.</p>
+       <p class="TermNum" id="J">1.1</p>
+         <p class="Terms" style="text-align:left;">Term2</p>
+       </div>
+             </div>
+           </body>
+           </html>
+           INPUT
+                  <html>
+              <body lang="EN-US" link="blue" vlink="#954F72" xml:lang="EN-US" class="container">
+                <div class="WordSection1">
+                  <p>&#xA0;</p>
+                </div>
+                <br/>
+                <div class="WordSection2">
+                  <p>&#xA0;</p>
+                </div>
+                <br/>
+                <div class="WordSection3">
+                  <p class="zzSTDTitle1"/>
+                  <div id="H"><h1>1.&#xA0; Terms and Definitions</h1><p>For the purposes of this document,
+              the following terms and definitions apply.</p>
+          <p class="TermNum" id="J">1.1&#xA0;<p class="Terms" style="text-align:left;">Term2</p></p>
+
+          </div>
+                </div>
+              </body>
+              </html>
+    OUTPUT
+  end
+
+
   it "processes section names" do
     expect(IsoDoc::Csd::Convert.new({}).convert_file(<<~"INPUT", "test", true).gsub(%r{^.*<body}m, "<body").gsub(%r{</body>}, "</body>")).to be_equivalent_to <<~"OUTPUT"
                <csd-standard xmlns="http://riboseinc.com/isoxml">
@@ -431,7 +478,7 @@ RSpec.describe Asciidoctor::Csd do
 <sections/>
 </csd-standard>
     OUTPUT
-    html = File.read("test.html")
+    html = File.read("test.html", encoding: "utf-8")
     expect(html).to match(%r{jquery\.min\.js})
     expect(html).to match(%r{Overpass})
     expect(html).to match(%r{<main class="WordSection3"><button})

@@ -5,9 +5,29 @@ module IsoDoc
     # A {Converter} implementation that generates CSD output, and a document
     # schema encapsulation of the document for validation
     class Convert < IsoDoc::Convert
+      def html_doc_path(file)
+        File.join(File.dirname(__FILE__), File.join("html", file))
+      end
+
       def initialize(options)
         super
+        @htmlstylesheet = generate_css(html_doc_path("htmlstyle.scss"), true, default_fonts(options))
+        @standardstylesheet = generate_css(html_doc_path("csd.scss"), true, default_fonts(options))
+        @htmlcoverpage = html_doc_path("html_csd_titlepage.html")
+        @htmlintropage = html_doc_path("html_csd_intro.html")
+        @scripts = html_doc_path("scripts.html")
         set_metadata(:status, "XXX")
+      end
+
+      def default_fonts(options)
+        b = options[:bodyfont] ||
+          (options[:script] == "Hans" ? '"SimSun",serif' :
+           '"Overpass",sans-serif')
+        h = options[:headerfont] ||
+          (options[:script] == "Hans" ? '"SimHei",sans-serif' :
+           '"Overpass",sans-serif')
+        m = options[:monospacefont] || '"Space Mono",monospace'
+        "$bodyfont: #{b};\n$headerfont: #{h};\n$monospacefont: #{m};\n"
       end
 
       def init_metadata

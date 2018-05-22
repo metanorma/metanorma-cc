@@ -97,17 +97,13 @@ RSpec.describe Asciidoctor::Csd do
   end
 
   it "processes pre" do
-    expect(IsoDoc::Csd::Convert.new({}).convert_file(<<~"INPUT", "test", true)).to be_equivalent_to <<~"OUTPUT"
+    expect(IsoDoc::Csd::Convert.new({}).convert_file(<<~"INPUT", "test", true).gsub(%r{^.*<body}m, "<body").gsub(%r{</body>}, "</body>")).to be_equivalent_to <<~"OUTPUT"
 <csd-standard xmlns="https://www.calconnect.org/standards/csd">
 <preface><foreword>
 <pre>ABC</pre>
 </foreword></preface>
 </csd-standard>
     INPUT
-           <html xmlns:epub="http://www.idpf.org/2007/ops">
-         <head>
-           <title>test</title>
-         </head>
          <body lang="EN-US" link="blue" vlink="#954F72" xml:lang="EN-US" class="container">
            <div class="WordSection1">
              <p>&#160;</p>
@@ -126,22 +122,17 @@ RSpec.describe Asciidoctor::Csd do
              <p class="zzSTDTitle1"/>
            </div>
          </body>
-       </html>
     OUTPUT
   end
 
   it "processes keyword" do
-    expect(IsoDoc::Csd::Convert.new({}).convert_file(<<~"INPUT", "test", true)).to be_equivalent_to <<~"OUTPUT"
+    expect(IsoDoc::Csd::Convert.new({}).convert_file(<<~"INPUT", "test", true).gsub(%r{^.*<body}m, "<body").gsub(%r{</body>}, "</body>")).to be_equivalent_to <<~"OUTPUT"
 <csd-standard xmlns="https://www.calconnect.org/standards/csd">
 <preface><foreword>
 <keyword>ABC</keyword>
 </foreword></preface>
 </csd-standard>
     INPUT
-           <html xmlns:epub="http://www.idpf.org/2007/ops">
-         <head>
-           <title>test</title>
-         </head>
          <body lang="EN-US" link="blue" vlink="#954F72" xml:lang="EN-US" class="container">
            <div class="WordSection1">
              <p>&#160;</p>
@@ -160,12 +151,11 @@ RSpec.describe Asciidoctor::Csd do
              <p class="zzSTDTitle1"/>
            </div>
          </body>
-       </html>
     OUTPUT
   end
 
   it "processes simple terms & definitions" do
-    expect(IsoDoc::Csd::Convert.new({}).convert_file(<<~"INPUT", "test", true)).to be_equivalent_to <<~"OUTPUT"
+    expect(IsoDoc::Csd::Convert.new({}).convert_file(<<~"INPUT", "test", true).gsub(%r{^.*<body}m, "<body").gsub(%r{</body>}, "</body>")).to be_equivalent_to <<~"OUTPUT"
                <csd-standard xmlns="http://riboseinc.com/isoxml">
        <sections>
        <terms id="H" obligation="normative"><title>Terms, Definitions, Symbols and Abbreviated Terms</title>
@@ -176,10 +166,6 @@ RSpec.describe Asciidoctor::Csd do
         </sections>
         </csd-standard>
     INPUT
-           <html xmlns:epub="http://www.idpf.org/2007/ops">
-         <head>
-           <title>test</title>
-           </head>
            <body lang="EN-US" link="blue" vlink="#954F72" xml:lang="EN-US" class="container">
              <div class="WordSection1">
                <p>&#160;</p>
@@ -198,12 +184,11 @@ RSpec.describe Asciidoctor::Csd do
        </div>
              </div>
            </body>
-       </html>
     OUTPUT
   end
 
   it "processes terms & definitions with external source" do
-    expect(IsoDoc::Csd::Convert.new({}).convert_file(<<~"INPUT", "test", true)).to be_equivalent_to <<~"OUTPUT"
+    expect(IsoDoc::Csd::Convert.new({}).convert_file(<<~"INPUT", "test", true).gsub(%r{^.*<body}m, "<body").gsub(%r{</body>}, "</body>")).to be_equivalent_to <<~"OUTPUT"
                <csd-standard xmlns="http://riboseinc.com/isoxml">
          <termdocsource type="inline" bibitemid="ISO712"/>
        <sections>
@@ -228,10 +213,6 @@ RSpec.describe Asciidoctor::Csd do
 </bibliography>
         </csd-standard>
     INPUT
-           <html xmlns:epub="http://www.idpf.org/2007/ops">
-         <head>
-           <title>test</title>
-           </head>
            <body lang="EN-US" link="blue" vlink="#954F72" xml:lang="EN-US" class="container">
              <div class="WordSection1">
                <p>&#160;</p>
@@ -255,12 +236,11 @@ RSpec.describe Asciidoctor::Csd do
               </div>
              </div>
            </body>
-       </html>
     OUTPUT
   end
 
   it "processes empty terms & definitions" do
-    expect(IsoDoc::Csd::Convert.new({}).convert_file(<<~"INPUT", "test", true)).to be_equivalent_to <<~"OUTPUT"
+    expect(IsoDoc::Csd::Convert.new({}).convert_file(<<~"INPUT", "test", true).gsub(%r{^.*<body}m, "<body").gsub(%r{</body>}, "</body>")).to be_equivalent_to <<~"OUTPUT"
                <csd-standard xmlns="http://riboseinc.com/isoxml">
        <sections>
        <terms id="H" obligation="normative"><title>Terms, Definitions, Symbols and Abbreviated Terms</title>
@@ -268,10 +248,6 @@ RSpec.describe Asciidoctor::Csd do
         </sections>
         </csd-standard>
     INPUT
-           <html xmlns:epub="http://www.idpf.org/2007/ops">
-         <head>
-           <title>test</title>
-           </head>
            <body lang="EN-US" link="blue" vlink="#954F72" xml:lang="EN-US" class="container">
              <div class="WordSection1">
                <p>&#160;</p>
@@ -287,12 +263,11 @@ RSpec.describe Asciidoctor::Csd do
        </div>
              </div>
            </body>
-       </html>
     OUTPUT
   end
 
   it "processes section names" do
-    expect(IsoDoc::Csd::Convert.new({}).convert_file(<<~"INPUT", "test", true)).to be_equivalent_to <<~"OUTPUT"
+    expect(IsoDoc::Csd::Convert.new({}).convert_file(<<~"INPUT", "test", true).gsub(%r{^.*<body}m, "<body").gsub(%r{</body>}, "</body>")).to be_equivalent_to <<~"OUTPUT"
                <csd-standard xmlns="http://riboseinc.com/isoxml">
       <preface>
       <foreword obligation="informative">
@@ -359,10 +334,6 @@ RSpec.describe Asciidoctor::Csd do
        </bibliography>
        </csd-standard>
     INPUT
-           <html xmlns:epub="http://www.idpf.org/2007/ops">
-         <head>
-           <title>test</title>
-         </head>
          <body lang="EN-US" link="blue" vlink="#954F72" xml:lang="EN-US" class="container">
            <div class="WordSection1">
              <p>&#160;</p>
@@ -445,7 +416,6 @@ RSpec.describe Asciidoctor::Csd do
                </div>
              </div>
            </body>
-       </html>
     OUTPUT
   end
 

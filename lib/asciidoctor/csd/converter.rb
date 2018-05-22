@@ -134,25 +134,16 @@ module Asciidoctor
         return
       end
 
-      def html_converter(_node)
+      def html_converter(node)
         IsoDoc::Csd::Convert.new(
-          htmlstylesheet: generate_css(html_doc_path("htmlstyle.scss"), true, @fontheader),
-          standardstylesheet: generate_css(html_doc_path("csd.scss"), true, @fontheader),
-          htmlcoverpage: html_doc_path("html_csd_titlepage.html"),
-          htmlintropage: html_doc_path("html_csd_intro.html"),
-          scripts: html_doc_path("scripts.html"),
+          script: node.attr("script"),
+          bodyfont: node.attr("body-font"),
+          headerfont: node.attr("header-font"),
+          monospacefont: node.attr("monospace-font"),
+          titlefont: node.attr("title-font"),
+          i18nyaml: node.attr("i18nyaml"),
+          scope: node.attr("scope"),
         )
-      end
-
-      def default_fonts(node)
-        b = node.attr("body-font") ||
-          (node.attr("script") == "Hans" ? '"SimSun",serif' :
-           '"Overpass",sans-serif')
-        h = node.attr("header-font") ||
-          (node.attr("script") == "Hans" ? '"SimHei",sans-serif' :
-           '"Overpass",sans-serif')
-        m = node.attr("monospace-font") || '"Space Mono",monospace'
-        "$bodyfont: #{b};\n$headerfont: #{h};\n$monospacefont: #{m};\n"
       end
 
       def inline_quoted(node)

@@ -1,10 +1,10 @@
 require "isodoc"
 
-module Asciidoctor
+module IsoDoc
   module Csd
     # A {Converter} implementation that generates CSD output, and a document
     # schema encapsulation of the document for validation
-    class CsdConvert < IsoDoc::Convert
+    class Convert < IsoDoc::Convert
       def initialize(options)
         super
         set_metadata(:status, "XXX")

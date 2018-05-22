@@ -1,6 +1,6 @@
 require "asciidoctor"
 require "asciidoctor/csd/version"
-require "asciidoctor/csd/csdconvert"
+require "isodoc/csd/csdconvert"
 require "asciidoctor/iso/converter"
 
 module Asciidoctor
@@ -135,7 +135,7 @@ module Asciidoctor
       end
 
       def html_converter(_node)
-        CsdConvert.new(
+        IsoDoc::Csd::Convert.new(
           htmlstylesheet: generate_css(html_doc_path("htmlstyle.scss"), true, @fontheader),
           standardstylesheet: generate_css(html_doc_path("csd.scss"), true, @fontheader),
           htmlcoverpage: html_doc_path("html_csd_titlepage.html"),

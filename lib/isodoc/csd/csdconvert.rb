@@ -12,7 +12,7 @@ module IsoDoc
       def initialize(options)
         super
         @htmlstylesheet = generate_css(html_doc_path("htmlstyle.scss"), true, default_fonts(options))
-        @standardstylesheet = generate_css(html_doc_path("csd.scss"), true, default_fonts(options))
+        # @standardstylesheet = generate_css(html_doc_path("csd.scss"), true, default_fonts(options))
         @htmlcoverpage = html_doc_path("html_csd_titlepage.html")
         @htmlintropage = html_doc_path("html_csd_intro.html")
         @scripts = html_doc_path("scripts.html")
@@ -131,6 +131,7 @@ module IsoDoc
     <!--Font awesome import for the link icon-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css" integrity="sha384-v2Tw72dyUXeU3y4aM2Y0tBJQkGfplr39mxZqlTBDUZAb9BGoC40+rdFCG0m10lXk" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/fontawesome.css" integrity="sha384-q3jl8XQu1OpdLgGFvNRnPdj5VIlCvgsDQTQB6owSOHWlAurxul7f+JpUOVdAiJ5P" crossorigin="anonymous">
+<style class="anchorjs"></style>
         HEAD
       end
 

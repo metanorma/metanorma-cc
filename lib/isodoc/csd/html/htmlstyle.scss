@@ -13,20 +13,89 @@ a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
 small, strike, strong, sub, sup, tt, var,
 b, u, i, center,
+ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+        margin: 0;
+        padding: 0;
+}
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font-family: $bodyfont;
-	vertical-align: baseline;
+        border: 0;
+        font-size: 100%;
 }
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, tt, var,
+b, u, i, center,
+dl, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+        vertical-align: baseline;
+}
+
+
+html, body, div, span, applet, object, iframe,
+p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  font-family: $bodyfont;
+}
+
+h1, h2, h3, h4, h5, h6, .h2Annex {
+  font-family: $headerfont;
+}
+
+dl {
+  display: grid;
+  grid-template-columns: max-content auto;
+}
+
+dt {
+  grid-column-start: 1;
+}
+
+dd {
+  grid-column-start: 2;
+}
+
+dd p {
+  margin-top: 0px;
+}
+
+
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
@@ -512,6 +581,7 @@ h2 p {
 p.Biblio, p.NormRef {
     margin-top: 1em;
     margin-left: 2em;
+    text-indent:-2em;
 }
 
 /*
@@ -623,12 +693,15 @@ a.footnote-number {
     margin-right: auto;
 }
 
+.QuoteAttribution
+        {text-align:right;}
+
 
 /*
     3.12 Formulas
 */
 
-.formula {
+.formula, .Formula {
     background-color: #f7f7f7;
     padding: 1.5em;
     margin-top: 2em;
@@ -682,6 +755,21 @@ p {
     margin-top: 1em;
     margin-bottom: 1em;
 }
+
+/* Admonitions */
+
+.Admonition, .admonition {
+    background-color: #ffb3b3;
+    /* color: #47430c;*/
+    padding: 0.5em;
+    margin: 1.5em 0 1.5em 0;
+    text-align: left;
+}
+
+.Admonition p, .admonition p {
+    margin: 0;
+}
+
 
 /*
     4.0 Page header

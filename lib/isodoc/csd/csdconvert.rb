@@ -49,7 +49,6 @@ module IsoDoc
         set_metadata(:tc, tc.text) if tc
       end
 
-
       def docid(isoxml, _out)
         docnumber = isoxml.at(ns("//bibdata/docidentifier"))
         docstatus = isoxml.at(ns("//bibdata/status"))

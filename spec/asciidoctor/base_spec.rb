@@ -173,8 +173,8 @@ RSpec.describe Asciidoctor::Csd do
       :novalid:
     INPUT
     html = File.read("test.html", encoding: "utf-8")
-    expect(html).to match(%r[p\.Sourcecode[^{]+\{[^}]+font-family: "Space Mono", monospace;]m)
-    expect(html).to match(%r[\.Biblio[^{]+\{[^}]+font-family: "Overpass", sans-serif;]m)
+    expect(html).to match(%r[\.Sourcecode[^{]+\{[^}]+font-family: "Space Mono", monospace;]m)
+    expect(html).to match(%r[ div[^{]+\{[^}]+font-family: "Overpass", sans-serif;]m)
     expect(html).to match(%r[h1, h2, h3, h4, h5, h6 \{[^}]+font-family: "Overpass", sans-serif;]m)
   end
 
@@ -188,8 +188,8 @@ RSpec.describe Asciidoctor::Csd do
       :script: Hans
     INPUT
     html = File.read("test.html", encoding: "utf-8")
-    expect(html).to match(%r[p\.Sourcecode[^{]+\{[^}]+font-family: "Space Mono", monospace;]m)
-    expect(html).to match(%r[\.Biblio[^{]+\{[^}]+font-family: "SimSun", serif;]m)
+    expect(html).to match(%r[\.Sourcecode[^{]+\{[^}]+font-family: "Space Mono", monospace;]m)
+    expect(html).to match(%r[ div[^{]+\{[^}]+font-family: "SimSun", serif;]m)
     expect(html).to match(%r[h1, h2, h3, h4, h5, h6 \{[^}]+font-family: "SimHei", sans-serif;]m)
   end
 
@@ -206,8 +206,8 @@ RSpec.describe Asciidoctor::Csd do
       :monospace-font: Andale Mono
     INPUT
     html = File.read("test.html", encoding: "utf-8")
-    expect(html).to match(%r[p\.Sourcecode[^{]+\{[^{]+font-family: Andale Mono;]m)
-    expect(html).to match(%r[\.Biblio[^{]+\{[^}]+font-family: Zapf Chancery;]m)
+    expect(html).to match(%r[\.Sourcecode[^{]+\{[^{]+font-family: Andale Mono;]m)
+    expect(html).to match(%r[ div,[^{]+\{[^}]+font-family: Zapf Chancery;]m)
     expect(html).to match(%r[h1, h2, h3, h4, h5, h6 \{[^}]+font-family: Comic Sans;]m)
   end
 

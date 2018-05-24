@@ -35,6 +35,7 @@
           <value>final-draft</value>
           <value>published</value>
           <value>withdrawn</value>
+          <ref name="LocalizedString"/>
         </choice>
       </element>
     </define>

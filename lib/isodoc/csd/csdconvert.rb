@@ -92,7 +92,7 @@ module IsoDoc
         out.pre node.text # content.gsub(/</, "&lt;").gsub(/>/, "&gt;")
       end
 
-      def term_defs_boilerplate(div, source, term)
+      def term_defs_boilerplate(div, source, term, preface)
         if source.empty? && term.nil?
           div << @no_terms_boilerplate
         else

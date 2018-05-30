@@ -92,15 +92,21 @@ module Asciidoctor
         d
       end
 
+      def pdf_convert(filename)
+        url = "#{Dir.pwd}/#{filename}.html"
+        system "node #{File.join(File.dirname(__FILE__), 'pdf.js')} file://#{url} #{filename}.pdf"
+      end
+
       def document(node)
         init(node)
         ret1 = makexml(node)
         ret = ret1.to_xml(indent: 2)
         unless node.attr("nodoc") || !node.attr("docfile")
-          filename = node.attr("docfile").gsub(/\.adoc/, ".xml").
+          filename = node.attr("docfile").gsub(/\.adoc$/, ".xml").
             gsub(%r{^.*/}, "")
           File.open(filename, "w") { |f| f.write(ret) }
-          html_converter(node).convert filename unless node.attr("nodoc")
+          html_converter(node).convert filename
+          pdf_convert(filename.sub(/\.xml$/, ""))
         end
         @files_to_delete.each { |f| system "rm #{f}" }
         ret

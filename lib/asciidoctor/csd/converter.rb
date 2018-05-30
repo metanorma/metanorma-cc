@@ -94,7 +94,9 @@ module Asciidoctor
 
       def pdf_convert(filename)
         url = "#{Dir.pwd}/#{filename}.html"
-        system "node #{File.join(File.dirname(__FILE__), 'pdf.js')} file://#{url} #{filename}.pdf"
+        pdfjs = File.join(File.dirname(__FILE__), 'pdf.js')
+        system "export NODE_PATH=$(npm root --quiet -g);
+                node #{pdfjs} file://#{url} #{filename}.pdf"
       end
 
       def document(node)

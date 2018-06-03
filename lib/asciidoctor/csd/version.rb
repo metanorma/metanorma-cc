@@ -1,5 +1,5 @@
 module Asciidoctor
   module Csd
-    VERSION = "0.2.8"
+    VERSION = "0.3.0"
   end
 end

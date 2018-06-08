@@ -127,10 +127,6 @@ module Asciidoctor
                         File.join(File.dirname(__FILE__), "csd.rng"))
       end
 
-      def html_doc_path(file)
-        File.join(File.dirname(__FILE__), File.join("html", file))
-      end
-
       def literal(node)
         noko do |xml|
           xml.figure **id_attr(node) do |f|

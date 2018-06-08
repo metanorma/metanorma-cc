@@ -11,6 +11,7 @@ require "isodoc/csd/csdconvert"
 require "asciidoctor/iso/converter"
 require "rspec/matchers"
 require "equivalent-xml"
+require "htmlentities"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
@@ -22,6 +23,12 @@ RSpec.configure do |config|
   config.expect_with :rspec do |c|
     c.syntax = :expect
   end
+end
+
+def htmlencode(x)
+  HTMLEntities.new.encode(x, :hexadecimal).gsub(/&#x3e;/, ">").gsub(/&#xa;/, "\n").
+    gsub(/&#x22;/, '"').gsub(/&#x3c;/, "<").gsub(/&#x26;/, '&').gsub(/&#x27;/, "'").
+    gsub(/\\u(....)/) { |s| "&#x#{$1.downcase};" }
 end
 
 def strip_guid(x)

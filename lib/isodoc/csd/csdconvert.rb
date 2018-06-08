@@ -1,4 +1,5 @@
 require "isodoc"
+require_relative "metadata"
 
 module IsoDoc
   module Csd
@@ -16,7 +17,6 @@ module IsoDoc
         @htmlcoverpage = html_doc_path("html_csd_titlepage.html")
         @htmlintropage = html_doc_path("html_csd_intro.html")
         @scripts = html_doc_path("scripts.html")
-        set_metadata(:status, "XXX")
       end
 
       def default_fonts(options)
@@ -30,49 +30,8 @@ module IsoDoc
         "$bodyfont: #{b};\n$headerfont: #{h};\n$monospacefont: #{m};\n"
       end
 
-      def init_metadata
-        super
-      end
-
-      def title(isoxml, _out)
-        main = isoxml&.at(ns("//title[@language='en']"))&.text
-        set_metadata(:doctitle, main)
-      end
-
-      def subtitle(_isoxml, _out)
-        nil
-      end
-
-      def author(isoxml, _out)
-        set_metadata(:tc, "XXXX")
-        tc = isoxml.at(ns("//editorialgroup/technical-committee"))
-        set_metadata(:tc, tc.text) if tc
-      end
-
-      def docid(isoxml, _out)
-        docnumber = isoxml.at(ns("//bibdata/docidentifier"))
-        docstatus = isoxml.at(ns("//bibdata/status"))
-        dn = docnumber&.text
-        if docstatus
-          set_metadata(:status, status_print(docstatus.text))
-          abbr = status_abbr(docstatus.text)
-          dn = "#{dn}(#{abbr})" unless abbr.empty?
-        end
-        set_metadata(:docnumber, dn)
-      end
-
-      def status_print(status)
-        status.split(/-/).map{ |w| w.capitalize }.join(" ")
-      end
-
-      def status_abbr(status)
-        case status
-        when "working-draft" then "wd"
-        when "committee-draft" then "cd"
-        when "draft-standard" then "d"
-        else
-          ""
-        end
+      def metadata_init(lang, script, labels)
+        @meta = Metadata.new(lang, script, labels)
       end
 
       def annex_name(annex, name, div)

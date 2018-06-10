@@ -113,16 +113,7 @@ RSpec.describe Asciidoctor::Csd do
 </foreword></preface>
 </csd-standard>
     INPUT
-         <body lang="EN-US" link="blue" vlink="#954F72" xml:lang="EN-US" class="container">
-           <div class="WordSection1">
-             <p>&#160;</p>
-           </div>
-           <br/>
-           <div class="WordSection2">
-             <p>&#160;</p>
-           </div>
-           <br/>
-           <div class="WordSection3">
+    #{HTML_HDR}
              <br/>
              <div>
                <h1 class="ForewordTitle">Foreword</h1>
@@ -142,16 +133,7 @@ RSpec.describe Asciidoctor::Csd do
 </foreword></preface>
 </csd-standard>
     INPUT
-         <body lang="EN-US" link="blue" vlink="#954F72" xml:lang="EN-US" class="container">
-           <div class="WordSection1">
-             <p>&#160;</p>
-           </div>
-           <br/>
-           <div class="WordSection2">
-             <p>&#160;</p>
-           </div>
-           <br/>
-           <div class="WordSection3">
+        #{HTML_HDR}
              <br/>
              <div>
                <h1 class="ForewordTitle">Foreword</h1>
@@ -175,16 +157,7 @@ RSpec.describe Asciidoctor::Csd do
         </sections>
         </csd-standard>
     INPUT
-           <body lang="EN-US" link="blue" vlink="#954F72" xml:lang="EN-US" class="container">
-             <div class="WordSection1">
-               <p>&#160;</p>
-             </div>
-             <br/>
-             <div class="WordSection2">
-               <p>&#160;</p>
-             </div>
-             <br/>
-             <div class="WordSection3">
+        #{HTML_HDR}
                <p class="zzSTDTitle1"/>
                <div id="H"><h1>1.&#160; Terms and Definitions</h1><p>For the purposes of this document,
            the following terms and definitions apply.</p>
@@ -222,16 +195,7 @@ RSpec.describe Asciidoctor::Csd do
 </bibliography>
         </csd-standard>
     INPUT
-           <body lang="EN-US" link="blue" vlink="#954F72" xml:lang="EN-US" class="container">
-             <div class="WordSection1">
-               <p>&#160;</p>
-             </div>
-             <br/>
-             <div class="WordSection2">
-               <p>&#160;</p>
-             </div>
-             <br/>
-             <div class="WordSection3">
+        #{HTML_HDR}
                <p class="zzSTDTitle1"/>
                <div>
                  <h1>1.&#160; Normative References</h1>
@@ -257,16 +221,7 @@ RSpec.describe Asciidoctor::Csd do
         </sections>
         </csd-standard>
     INPUT
-           <body lang="EN-US" link="blue" vlink="#954F72" xml:lang="EN-US" class="container">
-             <div class="WordSection1">
-               <p>&#160;</p>
-             </div>
-             <br/>
-             <div class="WordSection2">
-               <p>&#160;</p>
-             </div>
-             <br/>
-             <div class="WordSection3">
+        #{HTML_HDR}
                <p class="zzSTDTitle1"/>
                <div id="H"><h1>1.&#160; Terms and Definitions</h1><p>No terms and definitions are listed in this document.</p>
        </div>
@@ -279,7 +234,7 @@ RSpec.describe Asciidoctor::Csd do
     expect(IsoDoc::Csd::Convert.new({}).cleanup(Nokogiri::XML(<<~"INPUT")).to_s).to be_equivalent_to <<~"OUTPUT"
     <html>
            <body lang="EN-US" link="blue" vlink="#954F72" xml:lang="EN-US" class="container">
-             <div class="WordSection1">
+             <div class="title-section">
                <p>&#160;</p>
              </div>
              <br/>
@@ -298,9 +253,10 @@ RSpec.describe Asciidoctor::Csd do
            </body>
            </html>
            INPUT
-                  <html>
+                 <?xml version="1.0"?>
+       <html>
               <body lang="EN-US" link="blue" vlink="#954F72" xml:lang="EN-US" class="container">
-                <div class="WordSection1">
+                <div class="title-section">
                   <p>&#xA0;</p>
                 </div>
                 <br/>
@@ -390,16 +346,7 @@ RSpec.describe Asciidoctor::Csd do
        </bibliography>
        </csd-standard>
     INPUT
-         <body lang="EN-US" link="blue" vlink="#954F72" xml:lang="EN-US" class="container">
-           <div class="WordSection1">
-             <p>&#160;</p>
-           </div>
-           <br/>
-           <div class="WordSection2">
-             <p>&#160;</p>
-           </div>
-           <br/>
-           <div class="WordSection3">
+        #{HTML_HDR}
              <br/>
              <div>
                  <h1 class="ForewordTitle">Foreword</h1>
@@ -490,7 +437,7 @@ RSpec.describe Asciidoctor::Csd do
     html = File.read("test.html", encoding: "utf-8")
     expect(html).to match(%r{jquery\.min\.js})
     expect(html).to match(%r{Overpass})
-    expect(html).to match(%r{<main class="WordSection3"><button})
+    expect(html).to match(%r{<main class="main-section"><button})
   end
 
 

@@ -802,11 +802,11 @@ p {
 	padding-right: 1em;
   }
   
-  .WordSection11 {
+  .title-section1 {
     padding: 0 2em 0 3em;
   }
 
-  .WordSection2 {
+  .prefatory-section {
     padding: 0 3em 0 6em;
   }
   
@@ -939,7 +939,7 @@ a.anchorjs-link:hover {
 }
 
 @media print {
-    h1, .WordSection11 {page-break-before: always;}
+    h1, .title-section1 {page-break-before: always;}
     #toggle, .document-stage-band,
     .document-type-band,#myBtn {display: none;}
     .container {padding-left: 0;}

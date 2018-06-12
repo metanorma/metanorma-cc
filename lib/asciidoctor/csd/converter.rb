@@ -47,7 +47,7 @@ module Asciidoctor
       end
 
       def metadata_status(node, xml)
-        xml.status **{ format: "plain" } { |s| s << node.attr("status") }
+        xml.status(**{ format: "plain" }) { |s| s << node.attr("status") }
       end
 
       def metadata_id(node, xml)
@@ -95,9 +95,9 @@ module Asciidoctor
       end
 
       # deactivating biblio caching for now
-      def open_cache_biblio(node, global)
-        nil
-      end
+      #def open_cache_biblio(node, global)
+        #nil
+      #end
 
       def pdf_convert(filename)
         url = "#{Dir.pwd}/#{filename}.html"

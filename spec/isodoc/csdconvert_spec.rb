@@ -159,7 +159,7 @@ RSpec.describe Asciidoctor::Csd do
     INPUT
         #{HTML_HDR}
                <p class="zzSTDTitle1"/>
-               <div id="H"><h1>1.&#160; Terms and Definitions</h1><p>For the purposes of this document,
+               <div id="H"><h1>1.&#160; Terms and definitions</h1><p>For the purposes of this document,
            the following terms and definitions apply.</p>
        <p class="TermNum" id="J">1.1</p>
          <p class="Terms" style="text-align:left;">Term2</p>
@@ -198,11 +198,11 @@ RSpec.describe Asciidoctor::Csd do
         #{HTML_HDR}
                <p class="zzSTDTitle1"/>
                <div>
-                 <h1>1.&#160; Normative References</h1>
+                 <h1>1.&#160; Normative references</h1>
                  <p>The following documents are referred to in the text in such a way that some or all of their content constitutes requirements of this document. For dated references, only the edition cited applies. For undated references, the latest edition of the referenced document (including any amendments) applies.</p>
                  <p id="ISO712" class="NormRef">ISO 712, <i> Cereals and cereal products?~@~I?~@~T?~@~IDetermination of moisture content?~@~I?~@~T?~@~IReference method</i></p>
                </div>
-               <div id="H"><h1>2.&#160; Terms and Definitions</h1><p>For the purposes of this document, the terms and definitions
+               <div id="H"><h1>2.&#160; Terms and definitions</h1><p>For the purposes of this document, the terms and definitions
          given in ISO 712 and the following apply.</p>
        <p class="TermNum" id="J">2.1</p>
                 <p class="Terms" style="text-align:left;">Term2</p>
@@ -223,7 +223,7 @@ RSpec.describe Asciidoctor::Csd do
     INPUT
         #{HTML_HDR}
                <p class="zzSTDTitle1"/>
-               <div id="H"><h1>1.&#160; Terms and Definitions</h1><p>No terms and definitions are listed in this document.</p>
+               <div id="H"><h1>1.&#160; Terms and definitions</h1><p>No terms and definitions are listed in this document.</p>
        </div>
              </div>
            </body>
@@ -244,7 +244,7 @@ RSpec.describe Asciidoctor::Csd do
              <br/>
              <div class="WordSection3">
                <p class="zzSTDTitle1"/>
-               <div id="H"><h1>1.&#160; Terms and Definitions</h1><p>For the purposes of this document,
+               <div id="H"><h1>1.&#160; Terms and definitions</h1><p>For the purposes of this document,
            the following terms and definitions apply.</p>
        <p class="TermNum" id="J">1.1</p>
          <p class="Terms" style="text-align:left;">Term2</p>
@@ -266,7 +266,7 @@ RSpec.describe Asciidoctor::Csd do
                 <br/>
                 <div class="WordSection3">
                   <p class="zzSTDTitle1"/>
-                  <div id="H"><h1>1.&#xA0; Terms and Definitions</h1><p>For the purposes of this document,
+                  <div id="H"><h1>1.&#xA0; Terms and definitions</h1><p>For the purposes of this document,
               the following terms and definitions apply.</p>
           <p class="TermNum" id="J">1.1&#xA0;<p class="Terms" style="text-align:left;">Term2</p></p>
 
@@ -366,21 +366,21 @@ RSpec.describe Asciidoctor::Csd do
                  <p id="E">Text</p>
                </div>
                <div>
-                 <h1>2.&#160; Normative References</h1>
+                 <h1>2.&#160; Normative references</h1>
                  <p>There are no normative references in this document.</p>
                </div>
-               <div id="H"><h1>3.&#160; Terms and Definitions</h1><p>For the purposes of this document,
+               <div id="H"><h1>3.&#160; Terms and definitions</h1><p>For the purposes of this document,
            the following terms and definitions apply.</p>
        <div id="I">
           <h2>3.1. Normal Terms</h2>
           <p class="TermNum" id="J">3.1.1</p>
           <p class="Terms" style="text-align:left;">Term2</p>
 
-        </div><div id="K"><h2>3.2. Symbols and Abbreviated Terms</h2>
+        </div><div id="K"><h2>3.2. Symbols and abbreviated terms</h2>
           <dl><dt><p>Symbol</p></dt><dd>Definition</dd></dl>
         </div></div>
                <div id="L" class="Symbols">
-                 <h1>4.&#160; Symbols and Abbreviated Terms</h1>
+                 <h1>4.&#160; Symbols and abbreviated terms</h1>
                  <dl>
                    <dt>
                      <p>Symbol</p>

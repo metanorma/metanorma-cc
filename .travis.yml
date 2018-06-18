@@ -5,3 +5,7 @@ rvm:
 before_install:
   - gem install bundler -v 1.16.1
   - unset _JAVA_OPTIONS
+  - sudo apt-get -y update
+  - sudo apt-get -y install nodejs
+  - sudo npm install -g puppeteer
+  - sudo npm install

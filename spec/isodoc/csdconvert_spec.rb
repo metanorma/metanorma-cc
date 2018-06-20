@@ -2,7 +2,7 @@ require "spec_helper"
 
 RSpec.describe Asciidoctor::Csd do
   it "processes default metadata" do
-    csdc = IsoDoc::Csd::Convert.new({})
+    csdc = IsoDoc::Csd::HtmlConvert.new({})
     docxml, filename, dir = csdc.convert_init(<<~"INPUT", "test", true)
 <csd-standard xmlns="https://www.calconnect.org/standards/csd">
 <bibdata type="standard">
@@ -49,7 +49,7 @@ RSpec.describe Asciidoctor::Csd do
   end
 
   it "abbreviates committee-draft" do
-        csdc = IsoDoc::Csd::Convert.new({})
+        csdc = IsoDoc::Csd::HtmlConvert.new({})
     docxml, filename, dir = csdc.convert_init(<<~"INPUT", "test", true)
 <csd-standard xmlns="https://www.calconnect.org/standards/csd">
 <bibdata type="standard">
@@ -68,7 +68,7 @@ RSpec.describe Asciidoctor::Csd do
   end
 
   it "abbreviates draft-standard" do
-        csdc = IsoDoc::Csd::Convert.new({})
+        csdc = IsoDoc::Csd::HtmlConvert.new({})
     docxml, filename, dir = csdc.convert_init(<<~"INPUT", "test", true)
 <csd-standard xmlns="https://www.calconnect.org/standards/csd">
 <bibdata type="standard">
@@ -87,7 +87,7 @@ RSpec.describe Asciidoctor::Csd do
   end
 
   it "ignores unrecognised status" do
-            csdc = IsoDoc::Csd::Convert.new({})
+            csdc = IsoDoc::Csd::HtmlConvert.new({})
     docxml, filename, dir = csdc.convert_init(<<~"INPUT", "test", true)
 <csd-standard xmlns="https://www.calconnect.org/standards/csd">
 <bibdata type="standard">
@@ -106,7 +106,7 @@ RSpec.describe Asciidoctor::Csd do
   end
 
   it "processes pre" do
-    expect(IsoDoc::Csd::Convert.new({}).convert("test", <<~"INPUT", true).gsub(%r{^.*<body}m, "<body").gsub(%r{</body>}, "</body>")).to be_equivalent_to <<~"OUTPUT"
+    expect(IsoDoc::Csd::HtmlConvert.new({}).convert("test", <<~"INPUT", true).gsub(%r{^.*<body}m, "<body").gsub(%r{</body>}, "</body>")).to be_equivalent_to <<~"OUTPUT"
 <csd-standard xmlns="https://www.calconnect.org/standards/csd">
 <preface><foreword>
 <pre>ABC</pre>
@@ -126,7 +126,7 @@ RSpec.describe Asciidoctor::Csd do
   end
 
   it "processes keyword" do
-    expect(IsoDoc::Csd::Convert.new({}).convert("test", <<~"INPUT", true).gsub(%r{^.*<body}m, "<body").gsub(%r{</body>}, "</body>")).to be_equivalent_to <<~"OUTPUT"
+    expect(IsoDoc::Csd::HtmlConvert.new({}).convert("test", <<~"INPUT", true).gsub(%r{^.*<body}m, "<body").gsub(%r{</body>}, "</body>")).to be_equivalent_to <<~"OUTPUT"
 <csd-standard xmlns="https://www.calconnect.org/standards/csd">
 <preface><foreword>
 <keyword>ABC</keyword>
@@ -146,7 +146,7 @@ RSpec.describe Asciidoctor::Csd do
   end
 
   it "processes simple terms & definitions" do
-    expect(IsoDoc::Csd::Convert.new({}).convert("test", <<~"INPUT", true).gsub(%r{^.*<body}m, "<body").gsub(%r{</body>}, "</body>")).to be_equivalent_to <<~"OUTPUT"
+    expect(IsoDoc::Csd::HtmlConvert.new({}).convert("test", <<~"INPUT", true).gsub(%r{^.*<body}m, "<body").gsub(%r{</body>}, "</body>")).to be_equivalent_to <<~"OUTPUT"
                <csd-standard xmlns="http://riboseinc.com/isoxml">
        <sections>
        <terms id="H" obligation="normative"><title>Terms, Definitions, Symbols and Abbreviated Terms</title>
@@ -170,7 +170,7 @@ RSpec.describe Asciidoctor::Csd do
   end
 
   it "processes terms & definitions with external source" do
-    expect(IsoDoc::Csd::Convert.new({}).convert("test", <<~"INPUT", true).gsub(%r{^.*<body}m, "<body").gsub(%r{</body>}, "</body>")).to be_equivalent_to <<~"OUTPUT"
+    expect(IsoDoc::Csd::HtmlConvert.new({}).convert("test", <<~"INPUT", true).gsub(%r{^.*<body}m, "<body").gsub(%r{</body>}, "</body>")).to be_equivalent_to <<~"OUTPUT"
                <csd-standard xmlns="http://riboseinc.com/isoxml">
          <termdocsource type="inline" bibitemid="ISO712"/>
        <sections>
@@ -213,7 +213,7 @@ RSpec.describe Asciidoctor::Csd do
   end
 
   it "processes empty terms & definitions" do
-    expect(IsoDoc::Csd::Convert.new({}).convert("test", <<~"INPUT", true).gsub(%r{^.*<body}m, "<body").gsub(%r{</body>}, "</body>")).to be_equivalent_to <<~"OUTPUT"
+    expect(IsoDoc::Csd::HtmlConvert.new({}).convert("test", <<~"INPUT", true).gsub(%r{^.*<body}m, "<body").gsub(%r{</body>}, "</body>")).to be_equivalent_to <<~"OUTPUT"
                <csd-standard xmlns="http://riboseinc.com/isoxml">
        <sections>
        <terms id="H" obligation="normative"><title>Terms, Definitions, Symbols and Abbreviated Terms</title>
@@ -231,7 +231,7 @@ RSpec.describe Asciidoctor::Csd do
   end
 
     it "rearranges term headers" do
-    expect(IsoDoc::Csd::Convert.new({}).cleanup(Nokogiri::XML(<<~"INPUT")).to_s).to be_equivalent_to <<~"OUTPUT"
+    expect(IsoDoc::Csd::HtmlConvert.new({}).cleanup(Nokogiri::XML(<<~"INPUT")).to_s).to be_equivalent_to <<~"OUTPUT"
     <html>
            <body lang="EN-US" link="blue" vlink="#954F72" xml:lang="EN-US" class="container">
              <div class="title-section">
@@ -279,7 +279,7 @@ RSpec.describe Asciidoctor::Csd do
 
 
   it "processes section names" do
-    expect(IsoDoc::Csd::Convert.new({}).convert("test", <<~"INPUT", true).gsub(%r{^.*<body}m, "<body").gsub(%r{</body>}, "</body>")).to be_equivalent_to <<~"OUTPUT"
+    expect(IsoDoc::Csd::HtmlConvert.new({}).convert("test", <<~"INPUT", true).gsub(%r{^.*<body}m, "<body").gsub(%r{</body>}, "</body>")).to be_equivalent_to <<~"OUTPUT"
                <csd-standard xmlns="http://riboseinc.com/isoxml">
       <preface>
       <foreword obligation="informative">

@@ -29,11 +29,11 @@ module Metanorma
           require 'tempfile'
           # Tempfile.open("#{outname}.html") do |tmp|
           outname_html = outname + ".html"
-            IsoDoc::Csd::HtmlConvert.new(options).convert(outname_html, isodoc_node)
-            puts outname_html
-            system "cat #{outname_html}"
-            Metanorma::Output::Pdf.new.convert(outname_html, outname)
-          end
+          IsoDoc::Csd::HtmlConvert.new(options).convert(outname_html, isodoc_node)
+          puts outname_html
+          system "cat #{outname_html}"
+          Metanorma::Output::Pdf.new.convert(outname_html, outname)
+        end
 
       end
 

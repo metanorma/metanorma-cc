@@ -28,17 +28,21 @@ expressions.
 International Standards. 
 * The XML representation is processed in turn to generate the following outputs
 as end deliverable CSD standard drafts.
-** HTML 
+** HTML
 ** PDF
 
 This AsciiDoc syntax for writing CSD standards is hereby named "AsciiCSD".
 
 == Usage
 
+The preferred way to invoke this gem is via the `metanorma` script:
+
 [source,console]
 ----
-$ asciidoctor a.adoc  # HTML output of Asciidoc file
-$ asciidoctor -b csd -r 'asciidoctor-csd' a.adoc  # CSD XML output
+$ metanorma --type csd a.adoc                   # output HTML and PDF
+$ metanorma --type csd --extensions html a.adoc # output just HTML
+$ metanorma --type csd --extensions pdf a.adoc  # output just PDF
+$ metanorma --type csd --extensions xml a.adoc  # output CSD XML
 ----
 
 The gem translates the document into CSD XML format, and then
@@ -48,6 +52,13 @@ check that they have provided all necessary components of the
 document.
 
 The gem then converts the XML into HTML and PDF.
+
+The gem can also be invoked directly within asciidoctor, though this is deprecated:
+
+[source,console]
+----
+$ asciidoctor -b csd -r 'asciidoctor-csand' a.adoc  
+----
 
 === Installation
 

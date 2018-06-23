@@ -18,7 +18,7 @@ for guidance, including https://github.com/riboseinc/asciidoctor-iso/wiki/Guidan
 The following outputs are generated.
 
 * (Optional) An HTML preview generated directly from the Asciidoctor document,
-using native Asciidocot formatting. 
+using native Asciidoc formatting. 
 ** http://asciimath.org[AsciiMathML] is to be used for mathematical formatting.
 The gem uses the https://github.com/asciidoctor/asciimath[Ruby AsciiMath parser],
 which is syntactically stricter than the common MathJax processor;
@@ -57,7 +57,7 @@ The gem can also be invoked directly within asciidoctor, though this is deprecat
 
 [source,console]
 ----
-$ asciidoctor -b csd -r 'asciidoctor-csand' a.adoc  
+$ asciidoctor -b csd -r 'asciidoctor-csd' a.adoc  
 ----
 
 === Installation

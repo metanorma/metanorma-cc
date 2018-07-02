@@ -11,10 +11,10 @@ module Metanorma
       end
 
       def output_formats
-        {
+        super.merge(
           html: "html",
           pdf: "pdf"
-        }
+        )
       end
 
       def version
@@ -37,10 +37,10 @@ module Metanorma
           puts outname_html
           system "cat #{outname_html}"
           Metanorma::Output::Pdf.new.convert(outname_html, outname)
+        else
+          super
         end
-
       end
-
     end
   end
 end

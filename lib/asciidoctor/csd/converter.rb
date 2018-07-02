@@ -76,8 +76,8 @@ module Asciidoctor
         result << noko { |ixml| front node, ixml }
         result << noko { |ixml| middle node, ixml }
         result << "</csd-standard>"
-        save_cache_biblio(@bibliodb, true)
-        save_cache_biblio(@local_bibliodb, false)
+        save_cache_biblio(@bibdb, true)
+        save_cache_biblio(@local_bibdb, false)
         result = textcleanup(result.flatten * "\n")
         ret1 = cleanup(Nokogiri::XML(result))
         validate(ret1)

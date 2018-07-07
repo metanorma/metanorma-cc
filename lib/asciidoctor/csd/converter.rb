@@ -76,8 +76,7 @@ module Asciidoctor
         result << noko { |ixml| front node, ixml }
         result << noko { |ixml| middle node, ixml }
         result << "</csd-standard>"
-        save_cache_biblio(@bibdb, true)
-        save_cache_biblio(@local_bibdb, false)
+        @bibdb.save() if @bibdb
         result = textcleanup(result.flatten * "\n")
         ret1 = cleanup(Nokogiri::XML(result))
         validate(ret1)
@@ -96,7 +95,7 @@ module Asciidoctor
 
       # deactivating biblio caching for now
       #def open_cache_biblio(node, global)
-        #nil
+      #nil
       #end
 
       def pdf_convert(filename)

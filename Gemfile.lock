@@ -25,16 +25,16 @@ GEM
       ruby-xslt
       thread_safe
       uuidtools
-    asciidoctor-gb (0.3.1)
+    asciidoctor-gb (0.3.2)
       asciidoctor-iso (>= 0.9.0)
       gbbib
       isodoc (>= 0.8.0)
       twitter_cldr
-    asciidoctor-iso (0.9.3)
+    asciidoctor-iso (0.9.4)
       asciidoctor (~> 1.5.7)
-      iso-bib-item (~> 0.1.6)
-      isobib (~> 0.1.8)
+      iev (~> 0.1.0)
       isodoc (>= 0.8)
+      relaton (~> 0.0.1)
       ruby-jing
     asciidoctor-m3d (0.3.2)
       asciidoctor (~> 1.5.7)
@@ -82,7 +82,7 @@ GEM
       nokogiri (>= 1.4.3)
     ffi (1.9.25)
     formatador (0.2.5)
-    gbbib (0.1.3)
+    gbbib (0.1.4)
       cnccs
       iso-bib-item
     guard (2.14.2)
@@ -110,6 +110,8 @@ GEM
       uuidtools
     htmlentities (4.3.4)
     httpclient (2.8.3)
+    iev (0.1.0)
+      nokogiri
     image_size (2.0.0)
     iso-bib-item (0.1.10)
       duplicate (~> 1.1.1)
@@ -155,7 +157,7 @@ GEM
     mime-types-data (3.2016.0521)
     mini_portile2 (2.3.0)
     nenv (0.3.0)
-    nokogiri (1.8.3)
+    nokogiri (1.8.4)
       mini_portile2 (~> 2.3.0)
     notiffany (0.1.1)
       nenv (~> 0.1)
@@ -173,6 +175,15 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
+    relaton (0.0.1)
+      asciidoctor (~> 1.5.7)
+      gbbib (~> 0.1.0)
+      iev (~> 0.1.0)
+      iso-bib-item (~> 0.1.6)
+      isobib (~> 0.1.8)
+      rfcbib (~> 0.1.0)
+    rfcbib (0.1.1)
+      iso-bib-item (~> 0.1.10)
     roman-numerals (0.3.0)
     rspec (3.7.0)
       rspec-core (~> 3.7.0)

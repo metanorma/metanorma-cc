@@ -93,11 +93,6 @@ module Asciidoctor
         d
       end
 
-      # deactivating biblio caching for now
-      #def open_cache_biblio(node, global)
-      #nil
-      #end
-
       def pdf_convert(filename)
         url = "#{Dir.pwd}/#{filename}.html"
         pdfjs = File.join(File.dirname(__FILE__), 'pdf.js')

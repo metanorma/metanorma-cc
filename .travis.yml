@@ -1,12 +1,14 @@
+dist: trusty
 sudo: false
 language: ruby
 rvm:
-  - 2.4.3
-node_js:
-  - "iojs"
-  - "8"
+  - 2.5
+  - 2.4
+  - ruby-head
 before_install:
   - gem install bundler -v 1.16.1
   - unset _JAVA_OPTIONS
-  - npm install -g puppeteer
-  - npm install
+matrix:
+  allow_failures:
+    - rvm: ruby-head
+

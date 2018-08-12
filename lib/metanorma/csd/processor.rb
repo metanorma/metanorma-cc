@@ -30,7 +30,7 @@ module Metanorma
         when :html
           IsoDoc::Csd::HtmlConvert.new(options).convert(outname, isodoc_node)
         when :pdf
-          require 'tempfile'
+          #require 'tempfile'
           # Tempfile.open("#{outname}.html") do |tmp|
           outname_html = outname + ".html"
           IsoDoc::Csd::HtmlConvert.new(options).convert(outname_html, isodoc_node)

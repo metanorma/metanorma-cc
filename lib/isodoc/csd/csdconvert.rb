@@ -6,12 +6,9 @@ module IsoDoc
     # A {Converter} implementation that generates CSD output, and a document
     # schema encapsulation of the document for validation
     class HtmlConvert < IsoDoc::HtmlConvert
-      def html_doc_path(file)
-        File.join(File.dirname(__FILE__), File.join("html", file))
-      end
-
       def initialize(options)
         super
+        @libdir = File.dirname(__FILE__)
         @htmlstylesheet = generate_css(html_doc_path("htmlstyle.scss"), true, default_fonts(options))
         # @standardstylesheet = generate_css(html_doc_path("csd.scss"), true, default_fonts(options))
         @htmlcoverpage = html_doc_path("html_csd_titlepage.html")

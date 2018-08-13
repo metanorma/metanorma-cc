@@ -149,11 +149,6 @@ module Asciidoctor
           titlefont: node.attr("title-font"),
           i18nyaml: node.attr("i18nyaml"),
           scope: node.attr("scope"),
-          wordstylesheet: node.attr("wordstylesheet"),
-          standardstylesheet: node.attr("standardstylesheet"),
-          header: node.attr("header"),
-          wordcoverpage: node.attr("wordcoverpage"),
-          wordintropage: node.attr("wordintropage"),
         )
       end
 

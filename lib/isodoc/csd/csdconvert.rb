@@ -19,7 +19,7 @@ module IsoDoc
         }
       end
 
-      def default_file_locations
+      def default_file_locations(options)
         {
           htmlstylesheet: html_doc_path("htmlstyle.scss"),
           htmlcoverpage: html_doc_path("html_csd_titlepage.html"),

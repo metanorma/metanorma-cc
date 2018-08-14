@@ -15,8 +15,9 @@ Gem::Specification.new do |spec|
     This gem is in active development.
   DESCRIPTION
 
-  spec.homepage      = "https://github.com/riboseinc/asciidoctor-csd"
+  spec.homepage      = "https://github.com/riboseinc/metanorma-csd"
   spec.license       = "BSD-2-Clause"
+  spec.post_install_message = "The asciidoctor-csd gem has been deprecated and has been replaced by metanorma-csd"
 
   spec.files         = `git ls-files -z`.split("\x0").reject do |f|
     f.match(%r{^(test|spec|features)/})

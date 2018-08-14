@@ -1,7 +1,7 @@
 require "asciidoctor"
 require "asciidoctor/csd/version"
 require "isodoc/csd/csdconvert"
-require "asciidoctor/iso/converter"
+require "asciidoctor/standoc/converter"
 
 module Asciidoctor
   module Csd
@@ -9,9 +9,14 @@ module Asciidoctor
 
     # A {Converter} implementation that generates CSD output, and a document
     # schema encapsulation of the document for validation
-    class Converter < ISO::Converter
+    class Converter < Standoc::Converter
 
       register_for "csd"
+
+      def initialize(backend, opts)
+        super
+        warn "The asciidoctor-csd gem has been deprecated and has been replaced by metanorma-csd"
+      end
 
       def metadata_author(node, xml)
         xml.contributor do |c|
@@ -141,15 +146,7 @@ module Asciidoctor
       end
 
       def html_converter(node)
-        IsoDoc::Csd::HtmlConvert.new(
-          script: node.attr("script"),
-          bodyfont: node.attr("body-font"),
-          headerfont: node.attr("header-font"),
-          monospacefont: node.attr("monospace-font"),
-          titlefont: node.attr("title-font"),
-          i18nyaml: node.attr("i18nyaml"),
-          scope: node.attr("scope"),
-        )
+        IsoDoc::Csd::HtmlConvert.new(html_extract_attributes(node))
       end
 
       def inline_quoted(node)

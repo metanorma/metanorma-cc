@@ -1,8 +1,10 @@
-= AsciiCSD: Asciidoctor processor for CSD standards
+= AsciiCSD: Metanorma processor for CSD standards
 
 image:https://img.shields.io/gem/v/asciidoctor-csd.svg["Gem Version", link="https://rubygems.org/gems/asciidoctor-csd"]
 image:https://img.shields.io/travis/riboseinc/asciidoctor-csd/master.svg["Build Status", link="https://travis-ci.org/riboseinc/asciidoctor-csd"]
 image:https://codeclimate.com/github/riboseinc/asciidoctor-csd/badges/gpa.svg["Code Climate", link="https://codeclimate.com/github/riboseinc/asciidoctor-csd"]
+
+_Formerly known as_ `asciidoctor-csd`.
 
 WARNING: This gem is still under development.
 
@@ -11,9 +13,9 @@ WARNING: This gem is still under development.
 This gem processes http://asciidoctor.org/[Asciidoctor] documents following
 a template for generating CSD International Standards.
 
-The gem currently inherits from the https://github.com/riboseinc/asciidoctor-iso
+The gem currently inherits from the https://github.com/riboseinc/metanorma-iso
 gem, and aligns closely to it. Refer to the ISO gem
-for guidance, including https://github.com/riboseinc/asciidoctor-iso/wiki/Guidance-for-authoring
+for guidance, including https://github.com/riboseinc/metanorma-iso/wiki/Guidance-for-authoring
 
 The following outputs are generated.
 
@@ -57,7 +59,7 @@ The gem can also be invoked directly within asciidoctor, though this is deprecat
 
 [source,console]
 ----
-$ asciidoctor -b csd -r 'asciidoctor-csd' a.adoc  
+$ asciidoctor -b csd -r 'metanorma-csd' a.adoc  
 ----
 
 === Installation
@@ -69,7 +71,7 @@ scripts such as this one. You need only run the following in a Terminal console:
 [source,console]
 ----
 $ bash <(curl -s https://raw.githubusercontent.com/riboseinc/metanorma-macos-setup/master/metanorma-setup)
-$ gem install asciidoctor-csd
+$ gem install metanorma-csd
 ----
 
 === PDF output

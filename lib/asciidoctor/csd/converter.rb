@@ -1,6 +1,7 @@
 require "asciidoctor"
 require "asciidoctor/csd/version"
-require "isodoc/csd/csdconvert"
+require "isodoc/csd/html_convert"
+require "isodoc/csd/word_convert"
 require "asciidoctor/standoc/converter"
 
 module Asciidoctor
@@ -113,6 +114,7 @@ module Asciidoctor
             gsub(%r{^.*/}, "")
           File.open(filename, "w") { |f| f.write(ret) }
           html_converter(node).convert filename
+          word_converter(node).convert filename
           pdf_convert(filename.sub(/\.xml$/, ""))
         end
         @files_to_delete.each { |f| system "rm #{f}" }
@@ -147,6 +149,10 @@ module Asciidoctor
 
       def html_converter(node)
         IsoDoc::Csd::HtmlConvert.new(html_extract_attributes(node))
+      end
+
+      def word_converter(node)
+        IsoDoc::Csd::WordConvert.new(doc_extract_attributes(node))
       end
 
       def inline_quoted(node)

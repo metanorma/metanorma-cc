@@ -7,7 +7,7 @@ RSpec.describe Asciidoctor::Csd do
 
   it "generates output for the Rice document" do
     system "cd spec/examples; rm -f rfc6350.doc; rm -f rfc6350.html; rm -f rfc6350.pdf; asciidoctor --trace -b csd -r 'metanorma-csd' rfc6350.adoc; cd ../.."
-  expect(File.exist?("spec/examples/rfc6350.doc")).to be false
+  expect(File.exist?("spec/examples/rfc6350.doc")).to be true
   expect(File.exist?("spec/examples/rfc6350.html")).to be true
   expect(File.exist?("spec/examples/rfc6350.pdf")).to be true
   end
@@ -177,6 +177,20 @@ RSpec.describe Asciidoctor::Csd do
     expect(html).to match(%r[\.Sourcecode[^{]+\{[^}]+font-family: "Space Mono", monospace;]m)
     expect(html).to match(%r[ div[^{]+\{[^}]+font-family: "Overpass", sans-serif;]m)
     expect(html).to match(%r[h1, h2, h3, h4, h5, h6 \{[^}]+font-family: "Overpass", sans-serif;]m)
+  end
+
+  it "uses default fonts (Word)" do
+    system "rm -f test.doc"
+    Asciidoctor.convert(<<~"INPUT", backend: :csd, header_footer: true)
+      = Document title
+      Author
+      :docfile: test.adoc
+      :novalid:
+    INPUT
+    html = File.read("test.doc", encoding: "utf-8")
+    expect(html).to match(%r[\.Sourcecode[^{]+\{[^}]+font-family: "Courier New", monospace;]m)
+    expect(html).to match(%r[ div[^{]+\{[^}]+font-family: "Arial", sans-serif;]m)
+    expect(html).to match(%r[h1 \{[^}]+font-family: "Arial", sans-serif;]m)
   end
 
   it "uses Chinese fonts" do

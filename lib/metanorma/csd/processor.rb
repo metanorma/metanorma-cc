@@ -13,7 +13,8 @@ module Metanorma
       def output_formats
         super.merge(
           html: "html",
-          pdf: "pdf"
+          pdf: "pdf",
+          doc: "doc"
         )
       end
 
@@ -29,13 +30,15 @@ module Metanorma
         case format
         when :html
           IsoDoc::Csd::HtmlConvert.new(options).convert(outname, isodoc_node)
+        when :doc
+          IsoDoc::Csd::WordConvert.new(options).convert(outname, isodoc_node)
         when :pdf
           #require 'tempfile'
           # Tempfile.open("#{outname}.html") do |tmp|
           outname_html = outname + ".html"
           IsoDoc::Csd::HtmlConvert.new(options).convert(outname_html, isodoc_node)
           puts outname_html
-          system "cat #{outname_html}"
+          #system "cat #{outname_html}"
           Metanorma::Output::Pdf.new.convert(outname_html, outname)
         else
           super

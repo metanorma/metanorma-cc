@@ -619,9 +619,12 @@ p.Biblio, p.NormRef {
     3.8 Examples
 */
 
-.example {
+table.example {
     background-color: #e1eef1;
-    padding: 1.2em;
+}
+
+td.example {
+    padding: 0 1em 0 1em;
     margin: 2em 0 1em 0;
 }
 

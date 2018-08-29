@@ -16,7 +16,6 @@ module Asciidoctor
 
       def initialize(backend, opts)
         super
-        warn "The asciidoctor-csd gem has been deprecated and has been replaced by metanorma-csd"
       end
 
       def metadata_author(node, xml)

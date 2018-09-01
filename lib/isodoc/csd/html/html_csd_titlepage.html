@@ -1,12 +1,12 @@
-<div class="document-stage-band" id="{{ status }}-band">
+<div class="document-stage-band" id="{{ doctype | replace: ' ', '-' | downcase }}-band">
     <p class="document-stage">{{ status }}</p>
 </div>
 
-<div class="document-type-band" id="{{ doctype }}-band">
+<div class="document-type-band" id="{{ doctype | replace: ' ', '-' | downcase }}-band">
     <p class="document-type">Calconnect {{ doctype }}</p>
 </div>
-  
-    
+
+
 
   <div id='toggle'> <span>•</span> </div>
 

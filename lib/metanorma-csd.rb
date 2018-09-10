@@ -3,7 +3,7 @@ require_relative "asciidoctor/csd/converter"
 require_relative "isodoc/csd/html_convert"
 require_relative "isodoc/csd/word_convert"
 require_relative "isodoc/csd/pdf_convert"
-require_relative "asciidoctor/csd/version"
+require_relative "metanorma/csd/version"
 
 if defined? Metanorma
   require_relative "metanorma/csd"

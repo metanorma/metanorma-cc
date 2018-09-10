@@ -1,5 +1,4 @@
 require "asciidoctor"
-require "asciidoctor/csd/version"
 require "isodoc/csd/html_convert"
 require "isodoc/csd/word_convert"
 require "asciidoctor/standoc/converter"

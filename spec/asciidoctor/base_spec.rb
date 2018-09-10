@@ -2,7 +2,7 @@ require "spec_helper"
 
 RSpec.describe Asciidoctor::Csd do
   it "has a version number" do
-    expect(Asciidoctor::Csd::VERSION).not_to be nil
+    expect(Metanorma::Csd::VERSION).not_to be nil
   end
 
   it "generates output for the Rice document" do

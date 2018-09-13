@@ -55,7 +55,27 @@ module Asciidoctor
       end
 
       def metadata_id(node, xml)
-        xml.docidentifier { |i| i << node.attr("docnumber") }
+        docprefix = case node.attr("doctype")
+        when "standard"
+          "CC"
+        when "directive"
+          "CC/DIR"
+        when "Guide"
+          "CC/Guide"
+        when "specification"
+          "CC/S"
+        when "report"
+          "CC/R"
+        when "amendment"
+          "CC/Amd"
+        when "technical-corrigendum"
+          "CC/Cor"
+        end
+
+        docnumber = node.attr("docnumber")
+        docid = "#{docprefix} #{docnumber}"
+
+        xml.docidentifier { |i| i << docid }
       end
 
       def metadata_copyright(node, xml)

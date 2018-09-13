@@ -32,7 +32,7 @@ module IsoDoc
         if docstatus
           set(:status, status_print(docstatus.text))
           abbr = status_abbr(docstatus.text)
-          dn = "#{dn}(#{abbr})" unless abbr.empty?
+          dn += "/#{abbr}" unless abbr.empty?
         end
         set(:docnumber, dn)
       end
@@ -43,9 +43,11 @@ module IsoDoc
 
       def status_abbr(status)
         case status
-        when "working-draft" then "wd"
-        when "committee-draft" then "cd"
-        when "draft-standard" then "d"
+        when "working-draft" then "WD"
+        when "committee-draft" then "CD"
+        when "draft-standard" then "DS"
+        when "final-draft" then "FDS"
+        # when "published" then ""
         else
           ""
         end

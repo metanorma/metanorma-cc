@@ -28,7 +28,7 @@ module IsoDoc
       def docid(isoxml, _out)
         docnumber = isoxml.at(ns("//bibdata/docidentifier"))
         docstatus = isoxml.at(ns("//bibdata/status"))
-        dn = docnumber&.text
+        dn = docnumber&.text || "???"
         if docstatus
           set(:status, status_print(docstatus.text))
           abbr = status_abbr(docstatus.text)

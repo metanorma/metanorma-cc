@@ -50,12 +50,36 @@ module Asciidoctor
         end
       end
 
+      DOCSUFFIX = {
+        "standard": "",
+        "directive": "DIR",
+        "guide": "Guide",
+        "specification": "S",
+        "report": "R",
+        "amendment": "Amd",
+        "technical corrigendum": "Cor",
+      }
+
       def metadata_status(node, xml)
-        xml.status(**{ format: "plain" }) { |s| s << node.attr("status") }
+        status = node.attr("status")
+        unless status && %w(FDS DS CD WD published).include?(status)
+          warn "#{status} is not a legal status"
+        end
+        xml.status(**{ format: "plain" }) { |s| s << status }
       end
 
       def metadata_id(node, xml)
-        xml.docidentifier { |i| i << node.attr("docnumber") }
+        id = node.attr("docnumber") || "???"
+        typesuffix = DOCSUFFIX[doctype(node)]
+        prefix = "CC"
+        prefix += "/#{typesuffix}" if typesuffix
+        status = node.attr("status")
+        status = nil if status == "published"
+        prefix += "/#{status}" if status
+        year = node.attr("copyright-year")
+        id = prefix + " " + id
+        id += ":#{year}" if year
+        xml.docidentifier { |i| i << id }
       end
 
       def metadata_copyright(node, xml)
@@ -89,7 +113,8 @@ module Asciidoctor
 
       def doctype(node)
         d = node.attr("doctype")
-        unless %w{presentation code proposal standard report}.include? d
+        unless ["standard", "directive", "guide", "specification", "report",
+            "amendment", "technical corrigendum" ].include?(d)
           warn "#{d} is not a legal document type: reverting to 'standard'"
           d = "standard"
         end

@@ -75,16 +75,16 @@ RSpec.describe Asciidoctor::Csd do
       :workgroup-type: C
       :secretariat: SECRETARIAT
       :copyright-year: 2001
-      :status: working-draft
+      :status: FDS
       :iteration: 3
       :language: en
       :title: Main Title
     INPUT
     <?xml version="1.0" encoding="UTF-8"?>
 <csd-standard xmlns="https://www.calconnect.org/standards/csd">
-<bibdata type="code">
+<bibdata type="standard">
   <title language="en" format="plain">Main Title</title>
-  <docidentifier>1000</docidentifier>
+  <docidentifier>CC/FDS 1000:2001</docidentifier>
   <contributor>
     <role type="author"/>
     <organization>
@@ -99,7 +99,7 @@ RSpec.describe Asciidoctor::Csd do
   </contributor>
   <language>en</language>
   <script>Latn</script>
-  <status format="plain">working-draft</status>
+  <status format="plain">FDS</status>
   <copyright>
     <from>2001</from>
     <owner>
@@ -120,6 +120,64 @@ RSpec.describe Asciidoctor::Csd do
 </csd-standard>
     OUTPUT
   end
+
+    it "processes default metadata" do
+    expect(Asciidoctor.convert(<<~"INPUT", backend: :csd, header_footer: true)).to be_equivalent_to <<~'OUTPUT'
+      = Document title
+      Author
+      :docfile: test.adoc
+      :nodoc:
+      :novalid:
+      :docnumber: 1000
+      :doctype: technical corrigendum
+      :edition: 2
+      :technical-committee: TC
+      :technical-committee-number: 1
+      :technical-committee-type: A
+      :secretariat: SECRETARIAT
+      :status: published
+      :iteration: 3
+      :language: en
+      :title: Main Title
+    INPUT
+           <?xml version="1.0" encoding="UTF-8"?>
+       <csd-standard xmlns="https://www.calconnect.org/standards/csd">
+       <bibdata type="technical corrigendum">
+         <title language="en" format="plain">Main Title</title>
+         <docidentifier>CC 1000</docidentifier>
+         <contributor>
+           <role type="author"/>
+           <organization>
+             <name>CalConnect</name>
+           </organization>
+         </contributor>
+         <contributor>
+           <role type="publisher"/>
+           <organization>
+             <name>CalConnect</name>
+           </organization>
+         </contributor>
+         <language>en</language>
+         <script>Latn</script>
+         <status format="plain">published</status>
+         <copyright>
+           <from>2018</from>
+           <owner>
+             <organization>
+               <name>CalConnect</name>
+             </organization>
+           </owner>
+         </copyright>
+         <editorialgroup>
+           <technical-committee type="A">TC</technical-committee>
+         </editorialgroup>
+       </bibdata><version>
+         <edition>2</edition>
+       </version>
+       <sections/>
+       </csd-standard>
+        OUTPUT
+    end
 
   it "processes figures" do
     expect(strip_guid(Asciidoctor.convert(<<~"INPUT", backend: :csd, header_footer: true))).to be_equivalent_to <<~"OUTPUT"
@@ -272,6 +330,17 @@ RSpec.describe "warns when missing a title" do
       Author
       :docfile: test.adoc
       :doctype: dinosaur
+
+  INPUT
+end
+
+RSpec.describe "warns about illegal status" do
+  specify { expect { Asciidoctor.convert(<<~"INPUT", backend: :csd, header_footer: true) }.to output(/is not a legal status/).to_stderr }
+  #{VALIDATING_BLANK_HDR}
+      = Document title
+      Author
+      :docfile: test.adoc
+      :status: dinosaur
 
   INPUT
 end

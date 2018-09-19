@@ -65,15 +65,7 @@ RSpec.describe Asciidoctor::Csd do
       :revdate: 2000-01-01
       :draft: 3.4
       :technical-committee: TC
-      :technical-committee-number: 1
-      :technical-committee-type: A
-      :subcommittee: SC
-      :subcommittee-number: 2
-      :subcommittee-type: B
-      :workgroup: WG
-      :workgroup-number: 3
-      :workgroup-type: C
-      :secretariat: SECRETARIAT
+      :technical-committee-type: provisional
       :copyright-year: 2001
       :status: FDS
       :iteration: 3
@@ -109,7 +101,7 @@ RSpec.describe Asciidoctor::Csd do
     </owner>
   </copyright>
   <editorialgroup>
-    <technical-committee type="A">TC</technical-committee>
+    <technical-committee type="provisional">TC</technical-committee>
   </editorialgroup>
 </bibdata><version>
   <edition>2</edition>
@@ -131,9 +123,10 @@ RSpec.describe Asciidoctor::Csd do
       :docnumber: 1000
       :doctype: technical corrigendum
       :edition: 2
-      :technical-committee: TC
-      :technical-committee-number: 1
-      :technical-committee-type: A
+      :technical-committee: TC 788
+      :technical-committee-type: provisional
+      :technical-committee_2: TC 789
+      :technical-committee-type_2: technical
       :secretariat: SECRETARIAT
       :status: published
       :iteration: 3
@@ -169,7 +162,8 @@ RSpec.describe Asciidoctor::Csd do
            </owner>
          </copyright>
          <editorialgroup>
-           <technical-committee type="A">TC</technical-committee>
+           <technical-committee type="provisional">TC 788</technical-committee>
+           <technical-committee type="technical">TC 789</technical-committee>
          </editorialgroup>
        </bibdata><version>
          <edition>2</edition>

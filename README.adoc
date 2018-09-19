@@ -148,7 +148,12 @@ report:: report
 `published`, `withdrawn`.
 
 `:technical-committee:`:: The name of the relevant CSD technical committee
-(mandatory)
+`:technical-committee-type:`:: The type of the relevant CSD technical committee
+(mandatory): `technical`, `provisional`
+`:technical-committee_2:`:: The name of a second relevant CSD technical committee;
+other committees are added as `_3`, `_4`...
+`:technical-committee-type_2:`:: The type of a second relevant CSD technical committee;
+other committees are added as `_3`, `_4`...
 
 `:language:` :: The language of the document (only `en` for now)  (mandatory)
 

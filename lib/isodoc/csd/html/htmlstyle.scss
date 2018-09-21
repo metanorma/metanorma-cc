@@ -541,10 +541,10 @@ ul > li {
     display: inline-block; width: 1em;
     margin-left: -1.2em;
   }
-  
-  li p {
-    display: inline;
-  }
+
+li p:first-child {
+  display: inline;
+}
 
 li:first-child {
   margin-top: 1em;

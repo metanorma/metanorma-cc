@@ -2,6 +2,7 @@ require "asciidoctor"
 require "isodoc/csd/html_convert"
 require "isodoc/csd/word_convert"
 require "asciidoctor/standoc/converter"
+require "fileutils"
 
 module Asciidoctor
   module Csd
@@ -139,7 +140,7 @@ module Asciidoctor
           word_converter(node).convert filename
           pdf_converter(node).convert filename
         end
-        @files_to_delete.each { |f| system "rm #{f}" }
+        @files_to_delete.each { |f| FileUtils.rm f }
         ret
       end
 

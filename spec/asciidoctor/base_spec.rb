@@ -1,4 +1,5 @@
 require "spec_helper"
+require "fileutils"
 
 RSpec.describe Asciidoctor::Csd do
   it "has a version number" do
@@ -6,7 +7,8 @@ RSpec.describe Asciidoctor::Csd do
   end
 
   it "generates output for the Rice document" do
-    system "cd spec/examples; rm -f rfc6350.doc; rm -f rfc6350.html; rm -f rfc6350.pdf; asciidoctor --trace -b csd -r 'metanorma-csd' rfc6350.adoc; cd ../.."
+    FileUtils.rm_r %w(spec/examples/rfc6350.doc spec/examples/rfc6350.html spec/examples/rfc6350.pdf)
+    system "cd spec/examples; asciidoctor --trace -b csd -r 'metanorma-csd' rfc6350.adoc; cd ../.."
   expect(File.exist?("spec/examples/rfc6350.doc")).to be true
   expect(File.exist?("spec/examples/rfc6350.html")).to be true
   expect(File.exist?("spec/examples/rfc6350.pdf")).to be true
@@ -23,7 +25,7 @@ RSpec.describe Asciidoctor::Csd do
   end
 
   it "converts a blank document" do
-    system "rm -f test.html"
+    FileUtils.rm_f "test.html"
     expect(Asciidoctor.convert(<<~"INPUT", backend: :csd, header_footer: true)).to be_equivalent_to <<~"OUTPUT"
       = Document title
       Author
@@ -38,7 +40,7 @@ RSpec.describe Asciidoctor::Csd do
   end
 
   it "overrides invalid document type" do
-    system "rm -f test.html"
+    FileUtils.rm_f "test.html"
     expect(Asciidoctor.convert(<<~"INPUT", backend: :csd, header_footer: true)).to be_equivalent_to <<~"OUTPUT"
       = Document title
       Author
@@ -218,7 +220,7 @@ RSpec.describe Asciidoctor::Csd do
   end
 
   it "uses default fonts" do
-    system "rm -f test.html"
+    FileUtils.rm_f "test.html"
     Asciidoctor.convert(<<~"INPUT", backend: :csd, header_footer: true)
       = Document title
       Author
@@ -232,7 +234,7 @@ RSpec.describe Asciidoctor::Csd do
   end
 
   it "uses default fonts (Word)" do
-    system "rm -f test.doc"
+    FileUtils.rm_f "test.doc"
     Asciidoctor.convert(<<~"INPUT", backend: :csd, header_footer: true)
       = Document title
       Author
@@ -246,7 +248,7 @@ RSpec.describe Asciidoctor::Csd do
   end
 
   it "uses Chinese fonts" do
-    system "rm -f test.html"
+    FileUtils.rm_f "test.html"
     Asciidoctor.convert(<<~"INPUT", backend: :csd, header_footer: true)
       = Document title
       Author
@@ -261,7 +263,7 @@ RSpec.describe Asciidoctor::Csd do
   end
 
   it "uses specified fonts" do
-    system "rm -f test.html"
+    FileUtils.rm_f "test.html"
     Asciidoctor.convert(<<~"INPUT", backend: :csd, header_footer: true)
       = Document title
       Author

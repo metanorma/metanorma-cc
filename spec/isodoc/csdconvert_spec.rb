@@ -1,4 +1,5 @@
 require "spec_helper"
+require "fileutils"
 
 RSpec.describe Asciidoctor::Csd do
   it "processes default metadata" do
@@ -416,7 +417,7 @@ RSpec.describe Asciidoctor::Csd do
   end
 
   it "injects JS into blank html" do
-    system "rm -f test.html"
+    FileUtils.rm_f "test.html"
     expect(Asciidoctor.convert(<<~"INPUT", backend: :csd, header_footer: true)).to be_equivalent_to <<~"OUTPUT"
       = Document title
       Author

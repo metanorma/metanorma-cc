@@ -132,8 +132,8 @@ the document was issued
 (mandatory). (The first line of the AsciiDoc document, which contains the title
 introduced with `=`, is ignored)
 
-`:doctype:`:: The document type (see CSD deliverables: The different types of
-CSD publications) (mandatory). Note that the document types are reflected in the
+`:doctype:`:: The document type (see _CSD deliverables: The different types of
+CSD publications_) (mandatory). Note that the document types are reflected in the
 document identifier. The permitted types are:
 +
 --

@@ -133,14 +133,18 @@ the document was issued
 introduced with `=`, is ignored)
 
 `:doctype:`:: The document type (see CSD deliverables: The different types of
-CSD publications) (mandatory). The permitted types are:
+CSD publications) (mandatory). Note that the document types are reflected in the
+document identifier. The permitted types are:
 +
 --
-code:: Code Artifact
-presentation:: Presentation
-proposal:: Proposal; includes IETF DRAFT
-standard:: Recommendation; includes IETF RFC
-report:: report
+standard:: Standard (no suffix on identifier; e.g. `CC 1`)
+directive:: Directive (suffix `DIR`, e.g. `CC/DIR 1`)
+guide:: Guide (suffix `Guide`)
+specification:: Specification (suffix `S`)
+report:: Report (suffix `R`)
+administrative:: Administrative (suffix `A`)
+amendment:: Amendment (suffix `Amd`)
+technical corrigendum:: Technical Corrigendum (suffix `Cor`)
 --
 
 `:status:``:: The document status. The permitted types are: `proposal`,

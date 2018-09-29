@@ -65,6 +65,7 @@ module Asciidoctor
         "report": "R",
         "amendment": "Amd",
         "technical corrigendum": "Cor",
+        "administrative": "A",
       }
 
       def metadata_status(node, xml)

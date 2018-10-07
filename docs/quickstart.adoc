@@ -288,24 +288,23 @@ In particular, those for bread wheat (T. aestivum) are given in
 
 ==== Terms and definitions
 
-
 This must be clause 3.
 
 [source,adoc]
 ----
 [[tda]]                      <= anchor if you want it
 [source=ISO8601-1]           <= allows inheriting terms and definitions from
-                              another document
-                              == Terms, definitions, symbols and abbreviations   <= can combine T&D and S&A
+another document
+== Terms, definitions, symbols and abbreviations   <= can combine T&D and S&A
 
-                              === Terms and definitions    <= the real T&D clause
+=== Terms and definitions    <= the real T&D clause
 
-                              [[term-explicit]]            <= anchor if you want it
-                              ==== explicit form           <= term item
+[[term-explicit]]            <= anchor if you want it
+==== explicit form           <= term item
 
-                              date and time representation that uses designator symbols to delimit
-                              time scale components
-                              ----
+date and time representation that uses designator symbols to delimit
+time scale components
+----
 
 
 ==== Term entry in T&D

@@ -8,7 +8,10 @@ RSpec.describe Asciidoctor::Csd do
 
   it "generates output for the Rice document" do
     FileUtils.rm_rf %w(spec/examples/rfc6350.doc spec/examples/rfc6350.html spec/examples/rfc6350.pdf)
-    system "cd spec/examples; asciidoctor --trace -b csd -r 'metanorma-csd' rfc6350.adoc; cd ../.."
+    #system "cd spec/examples; asciidoctor --trace -b csd -r 'metanorma-csd' rfc6350.adoc; cd ../.."
+    FileUtils.cd "spec/examples"
+    Asciidoctor.convert_file "rfc6350.adoc", {:attributes=>{"backend"=>"csd"}, :safe=>0, :header_footer=>true, :requires=>["metanorma-csd"], :failure_level=>4, :mkdirs=>true, :to_file=>nil}
+    FileUtils.cd "../.."
   expect(File.exist?("spec/examples/rfc6350.doc")).to be true
   expect(File.exist?("spec/examples/rfc6350.html")).to be true
   expect(File.exist?("spec/examples/rfc6350.pdf")).to be true

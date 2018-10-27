@@ -145,6 +145,7 @@ report:: Report (suffix `R`)
 administrative:: Administrative (suffix `A`)
 amendment:: Amendment (suffix `Amd`)
 technical corrigendum:: Technical Corrigendum (suffix `Cor`)
+advisory:: Advisory (suffix `Cor`)
 --
 
 `:status:``:: The document status. The permitted types are: `proposal`,

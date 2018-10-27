@@ -66,6 +66,7 @@ module Asciidoctor
         "amendment": "Amd",
         "technical corrigendum": "Cor",
         "administrative": "A",
+        "advisory": "Adv",
       }
 
       def metadata_status(node, xml)
@@ -122,7 +123,7 @@ module Asciidoctor
       def doctype(node)
         d = node.attr("doctype")
         unless ["standard", "directive", "guide", "specification", "report",
-            "amendment", "technical corrigendum" ].include?(d)
+            "amendment", "technical corrigendum", "advisory" ].include?(d)
           warn "#{d} is not a legal document type: reverting to 'standard'"
           d = "standard"
         end

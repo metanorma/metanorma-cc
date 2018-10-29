@@ -1,10 +1,12 @@
 require "isodoc"
+require "metanorma/csd"
 
 module IsoDoc
   module Csd
     # A {Converter} implementation that generates CSD output, and a document
     # schema encapsulation of the document for validation
     class Metadata < IsoDoc::Metadata
+
       def initialize(lang, script, labels)
         super
         set(:status, "XXX")
@@ -27,14 +29,39 @@ module IsoDoc
 
       def docid(isoxml, _out)
         docnumber = isoxml.at(ns("//bibdata/docidentifier"))
-        # docstatus = isoxml.at(ns("//bibdata/status"))
+
+        prefix = "CC"
+
+        if docnumber.nil?
+          set(:docnumber, prefix)
+        end
+
         dn = docnumber&.text
-        # if docstatus
-        #   set(:status, status_print(docstatus.text))
-        #   abbr = status_abbr(docstatus.text)
-        #   dn += "/#{abbr}" unless abbr.empty?
-        # end
-        set(:docnumber, dn)
+
+        doctype = isoxml&.at(ns("//bibdata"))&.attr("type")
+        typesuffix = ::Metanorma::Csd::DOCSUFFIX[doctype] || ""
+        unless typesuffix.empty?
+          prefix += "/#{typesuffix}"
+        end
+
+        docstatus = isoxml&.at(ns("//bibdata/status"))
+        unless docstatus.nil?
+          status_text = docstatus.text
+          status = ::Metanorma::Csd::DOCSTATUS[status_text] || ""
+          unless status.empty?
+            set(:status, status_print(status_text))
+            prefix += "/#{status}"
+          end
+        end
+
+        docid = "#{prefix} #{dn}"
+
+        year = isoxml&.at(ns("//bibdata/copyright/from"))&.text
+        if year
+          docid += ":#{year}"
+        end
+
+        set(:docnumber, docid)
       end
 
       def status_print(status)
@@ -42,15 +69,7 @@ module IsoDoc
       end
 
       def status_abbr(status)
-        case status
-        when "working-draft" then "WD"
-        when "committee-draft" then "CD"
-        when "draft-standard" then "DS"
-        when "final-draft" then "FDS"
-        # when "published" then ""
-        else
-          ""
-        end
+        ::Metanorma::Csd::DOCSTATUS[status] || ""
       end
     end
   end

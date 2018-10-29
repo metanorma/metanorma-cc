@@ -1,6 +1,7 @@
 require "asciidoctor"
 require "isodoc/csd/html_convert"
 require "isodoc/csd/word_convert"
+require "metanorma/csd"
 require "asciidoctor/standoc/converter"
 require "fileutils"
 
@@ -57,31 +58,10 @@ module Asciidoctor
         end
       end
 
-      DOCSUFFIX = {
-        "standard" => "",
-        "directive" => "DIR",
-        "guide" => "Guide",
-        "specification" => "S",
-        "report" => "R",
-        "amendment" => "Amd",
-        "technical corrigendum" => "Cor",
-        "administrative" => "A",
-        "advisory" => "Adv",
-      }
-
-      DOCSTATUS = {
-        "working-draft" => "WD",
-        "committee-draft" => "CD",
-        "draft-standard" => "DS",
-        "final-draft" => "FDS",
-        "published" => "",
-        "cancelled" => "",
-        "withdrawn" => "",
-      }
 
       def metadata_status(node, xml)
         status = node.attr("status")
-        unless status && DOCSTATUS.keys.include?(status)
+        unless status && ::Metanorma::Csd::DOCSTATUS.keys.include?(status)
           warn "#{status} is not a legal status"
         end
         xml.status(**{ format: "plain" }) { |s| s << status }
@@ -89,21 +69,30 @@ module Asciidoctor
 
       def metadata_id(node, xml)
         id = node.attr("docnumber") || "???"
-        typesuffix = DOCSUFFIX[doctype(node)]
-        prefix = "CC"
-        prefix += "/#{typesuffix}" if typesuffix
-        status = DOCSTATUS[node.attr("status") || "published"]
-        prefix += "/#{status}" if status
+        # prefix = "CC"
+        doctype(node)
+        # unless typesuffix.empty?
+        #   prefix += "/#{typesuffix}"
+        # end
+        #
+        # status = DOCSTATUS[node.attr("status")] || ""
+        # unless status.empty?
+        #   prefix += "/#{status}"
+        # end
+        #
+        # id = "#{prefix} #{id}"
+        #
+        # year = node.attr("copyright-year")
+        # if year
+        #   id += ":#{year}"
+        # end
 
-        year = node.attr("copyright-year")
-        id = prefix + " " + id
-        id += ":#{year}" if year
         xml.docidentifier { |i| i << id }
       end
 
       def doctype(node)
         d = node.attr("doctype")
-        unless DOCSUFFIX.keys.include?(d)
+        unless ::Metanorma::Csd::DOCSUFFIX.keys.include?(d)
           warn "#{d} is not a legal document type: reverting to 'standard'"
           d = "standard"
         end

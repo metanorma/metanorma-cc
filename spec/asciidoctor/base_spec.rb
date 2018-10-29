@@ -56,7 +56,7 @@ RSpec.describe Asciidoctor::Csd do
     expect(File.exist?("test.html")).to be true
   end
 
-  it "processes default metadata" do
+  it "processes default metadata for final-draft directive" do
     expect(Asciidoctor.convert(<<~"INPUT", backend: :csd, header_footer: true)).to be_equivalent_to <<~'OUTPUT'
       = Document title
       Author
@@ -64,7 +64,7 @@ RSpec.describe Asciidoctor::Csd do
       :nodoc:
       :novalid:
       :docnumber: 1000
-      :doctype: code
+      :doctype: directive
       :edition: 2
       :revdate: 2000-01-01
       :draft: 3.4
@@ -76,11 +76,11 @@ RSpec.describe Asciidoctor::Csd do
       :language: en
       :title: Main Title
     INPUT
-    <?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <csd-standard xmlns="https://www.calconnect.org/standards/csd">
-<bibdata type="standard">
+<bibdata type="directive">
   <title language="en" format="plain">Main Title</title>
-  <docidentifier>CC/FDS 1000:2001</docidentifier>
+  <docidentifier>1000</docidentifier>
   <contributor>
     <role type="author"/>
     <organization>
@@ -117,7 +117,7 @@ RSpec.describe Asciidoctor::Csd do
     OUTPUT
   end
 
-    it "processes default metadata" do
+  it "processes default metadata for published technical-corrigendum" do
     expect(Asciidoctor.convert(<<~"INPUT", backend: :csd, header_footer: true)).to be_equivalent_to <<~'OUTPUT'
       = Document title
       Author
@@ -125,7 +125,7 @@ RSpec.describe Asciidoctor::Csd do
       :nodoc:
       :novalid:
       :docnumber: 1000
-      :doctype: technical corrigendum
+      :doctype: technical-corrigendum
       :edition: 2
       :technical-committee: TC 788
       :technical-committee-type: provisional
@@ -137,11 +137,11 @@ RSpec.describe Asciidoctor::Csd do
       :language: en
       :title: Main Title
     INPUT
-           <?xml version="1.0" encoding="UTF-8"?>
+       <?xml version="1.0" encoding="UTF-8"?>
        <csd-standard xmlns="https://www.calconnect.org/standards/csd">
-       <bibdata type="technical corrigendum">
+       <bibdata type="technical-corrigendum">
          <title language="en" format="plain">Main Title</title>
-         <docidentifier>CC 1000</docidentifier>
+         <docidentifier>1000</docidentifier>
          <contributor>
            <role type="author"/>
            <organization>
@@ -285,7 +285,7 @@ RSpec.describe Asciidoctor::Csd do
   it "processes inline_quoted formatting" do
     expect(strip_guid(Asciidoctor.convert(<<~"INPUT", backend: :csd, header_footer: true))).to be_equivalent_to <<~"OUTPUT"
       #{ASCIIDOC_BLANK_HDR}
-    
+
       _emphasis_
       *strong*
       `monospace`

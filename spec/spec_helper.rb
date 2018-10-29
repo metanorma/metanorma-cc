@@ -60,7 +60,7 @@ BLANK_HDR = <<~"HDR"
        <csd-standard xmlns="https://www.calconnect.org/standards/csd">
        <bibdata type="standard">
 
-         <docidentifier>CC ???</docidentifier>
+         <docidentifier>???</docidentifier>
          <contributor>
            <role type="author"/>
            <organization>

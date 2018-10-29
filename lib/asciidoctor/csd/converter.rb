@@ -58,20 +58,30 @@ module Asciidoctor
       end
 
       DOCSUFFIX = {
-        "standard": "",
-        "directive": "DIR",
-        "guide": "Guide",
-        "specification": "S",
-        "report": "R",
-        "amendment": "Amd",
-        "technical corrigendum": "Cor",
-        "administrative": "A",
-        "advisory": "Adv",
+        "standard" => "",
+        "directive" => "DIR",
+        "guide" => "Guide",
+        "specification" => "S",
+        "report" => "R",
+        "amendment" => "Amd",
+        "technical corrigendum" => "Cor",
+        "administrative" => "A",
+        "advisory" => "Adv",
+      }
+
+      DOCSTATUS = {
+        "working-draft" => "WD",
+        "committee-draft" => "CD",
+        "draft-standard" => "DS",
+        "final-draft" => "FDS",
+        "published" => "",
+        "cancelled" => "",
+        "withdrawn" => "",
       }
 
       def metadata_status(node, xml)
         status = node.attr("status")
-        unless status && %w(FDS DS CD WD published).include?(status)
+        unless status && DOCSTATUS.keys.include?(status)
           warn "#{status} is not a legal status"
         end
         xml.status(**{ format: "plain" }) { |s| s << status }
@@ -82,13 +92,22 @@ module Asciidoctor
         typesuffix = DOCSUFFIX[doctype(node)]
         prefix = "CC"
         prefix += "/#{typesuffix}" if typesuffix
-        status = node.attr("status")
-        status = nil if status == "published"
+        status = DOCSTATUS[node.attr("status") || "published"]
         prefix += "/#{status}" if status
+
         year = node.attr("copyright-year")
         id = prefix + " " + id
         id += ":#{year}" if year
         xml.docidentifier { |i| i << id }
+      end
+
+      def doctype(node)
+        d = node.attr("doctype")
+        unless DOCSUFFIX.keys.include?(d)
+          warn "#{d} is not a legal document type: reverting to 'standard'"
+          d = "standard"
+        end
+        d
       end
 
       def metadata_copyright(node, xml)
@@ -118,16 +137,6 @@ module Asciidoctor
         validate(ret1)
         ret1.root.add_namespace(nil, CSD_NAMESPACE)
         ret1
-      end
-
-      def doctype(node)
-        d = node.attr("doctype")
-        unless ["standard", "directive", "guide", "specification", "report",
-            "amendment", "technical corrigendum", "advisory" ].include?(d)
-          warn "#{d} is not a legal document type: reverting to 'standard'"
-          d = "standard"
-        end
-        d
       end
 
       def document(node)

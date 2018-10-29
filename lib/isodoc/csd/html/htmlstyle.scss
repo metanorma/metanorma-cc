@@ -2,7 +2,7 @@
     0 CSS RESET
 */
 
-/* http://meyerweb.com/eric/tools/css/reset/ 
+/* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
    License: none (public domain)
 */
@@ -59,9 +59,9 @@ time, mark, audio, video {
 
 
 html, body, div, span, applet, object, iframe,
-p, blockquote, 
-a, abbr, acronym, address, big, cite, 
-del, dfn, em, img, ins, q, s, 
+p, blockquote,
+a, abbr, acronym, address, big, cite,
+del, dfn, em, img, ins, q, s,
 small, strike, strong, sub, sup, var,
 b, u, i, center,
 dl, dt, dd, ol, ul, li,
@@ -101,7 +101,7 @@ dd p, dt p {
 
 
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
+article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
@@ -121,12 +121,12 @@ table {
 	border-spacing: 0;
 }
 
- 
+
 /*
     1. HTML & Body
 */
 
-  body { 
+  body {
     margin: 0;
     margin-left: auto;
     margin-right: auto;
@@ -161,7 +161,7 @@ table {
         overflow: auto;
         padding: 0 0 0 45px;
         margin-right: 30px;
-        background-color:#f7f7f7; 
+        background-color:#f7f7f7;
     }
 
     #toggle {
@@ -177,10 +177,10 @@ table {
     #toggle span {
         text-align: center;
         width: 100%;
-        position: absolute;             
+        position: absolute;
         top: 50%;
         transform: translate(0, -50%);
-        
+
     }
 
 
@@ -208,14 +208,14 @@ table {
         overflow: visible;
     }
 }
-  
+
 @media screen {
-  img { 
-      width: 100%;   
+  img {
+      width: 100%;
       height: auto;
   }
 }
-    
+
 
 #toc ul {
     margin: 0;
@@ -295,20 +295,18 @@ table {
 }
 
 p.document-type, p.document-stage {
-    color: white;
-    text-transform: uppercase;
-    font-size: 0.9em;
-    font-weight: 400;
-    letter-spacing: 0.05em;
-    margin:0;
-    margin-left: 6px;
-    writing-mode:tb-rl;
-	-webkit-transform:rotate(180deg);
-	-moz-transform:rotate(180deg);
-	-o-transform: rotate(180deg);
+  color: white;
+  text-transform: uppercase;
+  font-size: 0.9em;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  margin:0;
+  margin-left: 6px;
+  writing-mode:tb-rl;
+  transform:rotate(180deg);
 	white-space:nowrap;
 	display:block;
-    bottom:0;
+  bottom:0;
 }
 
 p.document-type {
@@ -326,93 +324,56 @@ p.document-stage {
     height:160px;
 }
 
-#standard-band {
-    background-color: #0ac442;
+
+
+$doctype-colors-list:(
+  standard: #0AC442,
+  governance: #540D6E,
+  guide: #D183C9,
+  specification: #65AFFF,
+  report: #3A405A,
+  amendment: #F26430,
+  corrigendum: #C84630,
+  administrative: #BFAE48,
+  advisory: #BD9391
+);
+
+@each $key,$val in $doctype-colors-list{
+  #{$key}-band {
+    background-color: #{$val};
+  }
+  #{$key} {
+    border-bottom: solid 3px #{$val};
+  }
 }
 
-#standard {
-    border-bottom: solid 3px #0ac442;
-}
+$docstage-colors-list:(
+  proposal: #39A0ED,
+  working-draft: #2D7393,
+  committee-draft: #2A6B7C,
+  draft-standard: #1C7F7A,
+  published: #069E2D,
+  withdrawn: #004E64,
+  cancelled: #2E382E,
+);
 
-#governance {
-    border-bottom: solid 3px #750697;
-}
-
-#governance-band {
-    background-color: #750697;
-}
-
-#guide {
-    border-bottom: solid 3px #48a0e7;
-}
-
-#guide-band {
-    background-color: #48a0e7;
+@each $key,$val in $docstage-colors-list{
+  #{$key}-band {
+    background-color: #{$val};
+  }
+  #{$key} {
+    border-bottom: solid 3px #{$val};
+  }
 }
 
 .coverpage-maturity {
-    font-family: $bodyfont;
-    font-weight: 400;
-    font-size: 1em;
-    margin: 0 0 2em 0;
-    text-transform: uppercase;
-    }
-
-#proposal {
-    border-bottom: solid 3px #00BFFF;
+  font-family: $bodyfont;
+  font-weight: 400;
+  font-size: 1em;
+  margin: 0 0 2em 0;
+  text-transform: uppercase;
 }
 
-#proposal-band {
-    background-color: #00BFFF;
-}
-
-#working-draft {
-    border-bottom: solid 3px #fda706;
-}
-
-#working-draft-band {
-    background-color: #fda706;
-}
-
-#committee-draft {
-    border-bottom: solid 3px #fd06fd;
-}
-
-#committee-draft-band {
-    background-color: #fd06fd;
-}
-
-#draft-standard {
-    border-bottom: solid 3px #fdf906;
-}
-
-#draft-standard-band {
-    background-color: #fdf906;
-}
-
-#final-draft {
-    border-bottom: solid 3px #7e0d13;
-}
-
-#final-draft-band {
-    background-color: #7e0d13;
-}
-
-#published {
-    border-bottom: solid 3px #0ac442;
-}
-
-#published-band {
-    background-color: #0ac442;
-}
-
-#withdrawn {
-    border-bottom: solid 3px #a0a0a0;
-}
-
-#withdrawn-band {
-    background-color: #a0a0a0;
-}
 
 /*
     3. TYPOGRAPHY
@@ -421,7 +382,7 @@ p.document-stage {
 /*
     3.1 Titles
 */
-  
+
   h1,h2,h3,h4,h5,h6 {
     font-family: $headerfont;
     color: #0e1a85;
@@ -431,7 +392,7 @@ p.document-stage {
   }
 
   h1 {
-    font-size: 1.4em; 
+    font-size: 1.4em;
     text-transform: uppercase;
     margin-top: 2em;
   }
@@ -439,15 +400,15 @@ p.document-stage {
   h1#content {
       margin-top: 2em;
   }
-  
+
   h2 {
-    font-size: 1.3em; 
+    font-size: 1.3em;
     font-weight: 400;
   }
-  
+
   h3 {
     font-size: 1.1em;
-    font-weight: 400;   
+    font-weight: 400;
   }
 
   /*
@@ -455,8 +416,8 @@ p.document-stage {
     float: left;
     padding-right: 4px;
     margin-left: -20px;
-    font-family: "Font Awesome 5 Free"; 
-    font-weight: 900; 
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
     font-size: 0.8em;
     color: #cfcfcf;
     content: "\f0c1";
@@ -480,7 +441,7 @@ p.document-stage {
     line-height: 1.7em;
     margin: 0;
   }
-  
+
   /*
   p.AltTerms {
     font-style: italic;
@@ -496,12 +457,12 @@ span.obligation {
 /*
     3.2 Links
 */
-  
+
     a, a:visited{
         text-decoration: none;
         color: #485094;
     }
-      
+
     a:hover {
         color: white;
         background: #1d1d1d;
@@ -526,15 +487,15 @@ span.obligation {
       }
 
 
-      
+
 /*
     3.3 Lists
 */
-        
+
     ul {
     margin-left: 1.2em;
   }
-      
+
 ol {
   margin-left: 1.2em; }
 
@@ -810,11 +771,11 @@ p {
       font-family: $headerfont;
       font-size: 1.2em;
 	line-height: 1.2em;
-	font-weight: 900; 
+	font-weight: 900;
 	padding-left: 1em;
 	padding-right: 1em;
   }
-  
+
   .title-section1 {
     padding: 0 2em 0 3em;
   }
@@ -822,8 +783,8 @@ p {
   .prefatory-section {
     padding: 0 3em 0 6em;
   }
-  
-  
+
+
   .zzSTDTitle1, .MsoCommentText {
     display: none;
   }
@@ -839,13 +800,13 @@ p {
       text-transform: uppercase;
       font-weight: 600;
   }
-  
+
   .coverpage-tc-name {
     font-size: 1.2em;
     line-height: 1.2em;
     margin: 0.25em 0;
   }
-  
+
 /*
     4.2 Document Identity
 */
@@ -854,8 +815,8 @@ p {
     font-size: 2em;
     line-height: 2em;
   }
-  
-  
+
+
   .coverpage-title .title-second {
     display: none;
   }
@@ -869,13 +830,13 @@ p {
   }
 
 
-  
-  
+
+
 /*
     4.3 Draft Warning
 */
 
-  
+
   .coverpage-warning {
     border-top: solid 1px #f36f36;
     border-bottom: solid 1px #f36f36;
@@ -883,7 +844,7 @@ p {
     color: #485094;
     padding: 1em;
   }
-  
+
   .coverpage-warning .title {
     color: #f36f36;
     font-family: $headerfont;
@@ -892,21 +853,21 @@ p {
     font-size: 1.2em;
   }
 
-  
-  
+
+
 /*
     4.4 Copyright
-*/  
+*/
 
   .copyright {
     padding: 1em;
     font-size: 0.8em;
     text-align: left;
   }
-  
-  
+
+
   .copyright .name, .copyright .address {color: #485094;}
-  
+
 
 
 /*
@@ -936,7 +897,7 @@ To top button
     padding: 10px 15px 10px 15px;
     border-radius: 4px;
   }
-  
+
   #myBtn:hover {
     opacity: 1;
   }

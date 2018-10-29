@@ -325,7 +325,6 @@ p.document-stage {
 }
 
 
-
 $doctype-colors-list:(
   standard: #0AC442,
   governance: #540D6E,
@@ -339,10 +338,10 @@ $doctype-colors-list:(
 );
 
 @each $key,$val in $doctype-colors-list{
-  #{$key}-band {
+  ##{$key}-band {
     background-color: #{$val};
   }
-  #{$key} {
+  ##{$key} {
     border-bottom: solid 3px #{$val};
   }
 }
@@ -358,10 +357,10 @@ $docstage-colors-list:(
 );
 
 @each $key,$val in $docstage-colors-list{
-  #{$key}-band {
+  ##{$key}-band {
     background-color: #{$val};
   }
-  #{$key} {
+  ##{$key} {
     border-bottom: solid 3px #{$val};
   }
 }

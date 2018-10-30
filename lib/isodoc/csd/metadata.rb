@@ -34,8 +34,10 @@ module IsoDoc
 
         if docnumber.nil?
           set(:docnumber, prefix)
+        else
+          set(:docnumber, docnumber.text)
         end
-
+=begin
         dn = docnumber&.text
 
         doctype = isoxml&.at(ns("//bibdata"))&.attr("type")
@@ -60,8 +62,8 @@ module IsoDoc
         if year
           docid += ":#{year}"
         end
-
         set(:docnumber, docid)
+=end
       end
 
       def status_print(status)

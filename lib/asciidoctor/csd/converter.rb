@@ -69,23 +69,24 @@ module Asciidoctor
 
       def metadata_id(node, xml)
         id = node.attr("docnumber") || "???"
-        # prefix = "CC"
-        doctype(node)
-        # unless typesuffix.empty?
-        #   prefix += "/#{typesuffix}"
-        # end
-        #
-        # status = DOCSTATUS[node.attr("status")] || ""
-        # unless status.empty?
-        #   prefix += "/#{status}"
-        # end
-        #
-        # id = "#{prefix} #{id}"
-        #
-        # year = node.attr("copyright-year")
-        # if year
-        #   id += ":#{year}"
-        # end
+        prefix = "CC"
+        type = doctype(node)
+        typesuffix = ::Metanorma::Csd::DOCSUFFIX[node.attr("doctype")] || ""
+        unless typesuffix.empty?
+           prefix += "/#{typesuffix}"
+        end
+        
+        status = ::Metanorma::Csd::DOCSTATUS[node.attr("status")] || ""
+        unless status.empty?
+          prefix += "/#{status}"
+        end
+        
+        id = "#{prefix} #{id}"
+       
+        year = node.attr("copyright-year")
+        if year
+          id += ":#{year}"
+        end
 
         xml.docidentifier { |i| i << id }
       end

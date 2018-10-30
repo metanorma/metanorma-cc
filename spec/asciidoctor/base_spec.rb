@@ -56,7 +56,7 @@ RSpec.describe Asciidoctor::Csd do
     expect(File.exist?("test.html")).to be true
   end
 
-  it "processes default metadata for final-draft directive" do
+  it "processes default metadata for final-draft directive with copyright year" do
     expect(Asciidoctor.convert(<<~"INPUT", backend: :csd, header_footer: true)).to be_equivalent_to <<~'OUTPUT'
       = Document title
       Author
@@ -71,7 +71,7 @@ RSpec.describe Asciidoctor::Csd do
       :technical-committee: TC
       :technical-committee-type: provisional
       :copyright-year: 2001
-      :status: FDS
+      :status: final-draft
       :iteration: 3
       :language: en
       :title: Main Title
@@ -80,7 +80,7 @@ RSpec.describe Asciidoctor::Csd do
 <csd-standard xmlns="https://www.calconnect.org/standards/csd">
 <bibdata type="directive">
   <title language="en" format="plain">Main Title</title>
-  <docidentifier>1000</docidentifier>
+  <docidentifier>CC/DIR/FDS 1000:2001</docidentifier>
   <contributor>
     <role type="author"/>
     <organization>
@@ -95,7 +95,7 @@ RSpec.describe Asciidoctor::Csd do
   </contributor>
   <language>en</language>
   <script>Latn</script>
-  <status format="plain">FDS</status>
+  <status format="plain">final-draft</status>
   <copyright>
     <from>2001</from>
     <owner>
@@ -141,7 +141,7 @@ RSpec.describe Asciidoctor::Csd do
        <csd-standard xmlns="https://www.calconnect.org/standards/csd">
        <bibdata type="technical-corrigendum">
          <title language="en" format="plain">Main Title</title>
-         <docidentifier>1000</docidentifier>
+         <docidentifier>CC/Cor 1000</docidentifier>
          <contributor>
            <role type="author"/>
            <organization>
@@ -157,6 +157,66 @@ RSpec.describe Asciidoctor::Csd do
          <language>en</language>
          <script>Latn</script>
          <status format="plain">published</status>
+         <copyright>
+           <from>2018</from>
+           <owner>
+             <organization>
+               <name>CalConnect</name>
+             </organization>
+           </owner>
+         </copyright>
+         <editorialgroup>
+           <technical-committee type="provisional">TC 788</technical-committee>
+           <technical-committee type="technical">TC 789</technical-committee>
+         </editorialgroup>
+       </bibdata><version>
+         <edition>2</edition>
+       </version>
+       <sections/>
+       </csd-standard>
+        OUTPUT
+    end
+
+  it "ignores unrecognised status" do
+    expect(Asciidoctor.convert(<<~"INPUT", backend: :csd, header_footer: true)).to be_equivalent_to <<~'OUTPUT'
+      = Document title
+      Author
+      :docfile: test.adoc
+      :nodoc:
+      :novalid:
+      :docnumber: 1000
+      :doctype: technical-corrigendum
+      :edition: 2
+      :technical-committee: TC 788
+      :technical-committee-type: provisional
+      :technical-committee_2: TC 789
+      :technical-committee-type_2: technical
+      :secretariat: SECRETARIAT
+      :status: pizza
+      :iteration: 3
+      :language: en
+      :title: Main Title
+    INPUT
+       <?xml version="1.0" encoding="UTF-8"?>
+       <csd-standard xmlns="https://www.calconnect.org/standards/csd">
+       <bibdata type="technical-corrigendum">
+         <title language="en" format="plain">Main Title</title>
+         <docidentifier>CC/Cor 1000</docidentifier>
+         <contributor>
+           <role type="author"/>
+           <organization>
+             <name>CalConnect</name>
+           </organization>
+         </contributor>
+         <contributor>
+           <role type="publisher"/>
+           <organization>
+             <name>CalConnect</name>
+           </organization>
+         </contributor>
+         <language>en</language>
+         <script>Latn</script>
+         <status format="plain">pizza</status>
          <copyright>
            <from>2018</from>
            <owner>

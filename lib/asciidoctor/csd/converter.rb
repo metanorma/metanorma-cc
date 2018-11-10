@@ -50,15 +50,6 @@ module Asciidoctor
         end
       end
 
-      def title(node, xml)
-        ["en"].each do |lang|
-          xml.title **{ language: lang, format: "plain" } do |t|
-            t << asciidoc_sub(node.attr("title"))
-          end
-        end
-      end
-
-
       def metadata_status(node, xml)
         status = node.attr("status")
         unless status && ::Metanorma::Csd::DOCSTATUS.keys.include?(status)

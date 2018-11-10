@@ -150,7 +150,7 @@ technical corrigendum:: Technical Corrigendum (suffix `Cor`)
 advisory:: Advisory (suffix `Adv`)
 --
 
-`:status:``:: The document status. The permitted types are: `proposal`,
+`:status:`:: The document status. The permitted types are: `proposal`,
 `working-draft`, `committee-draft`, `draft-standard`, `final-draft`,
 `published`, `withdrawn`.
 

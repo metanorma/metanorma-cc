@@ -79,8 +79,9 @@ RSpec.describe Asciidoctor::Csd do
 <?xml version="1.0" encoding="UTF-8"?>
 <csd-standard xmlns="https://www.calconnect.org/standards/csd">
 <bibdata type="directive">
-  <title language="en" format="plain">Main Title</title>
-  <docidentifier>CC/DIR/FDS 1000:2001</docidentifier>
+  <title language="en" format="text/plain">Main Title</title>
+  <docidentifier type="csd">CC/DIR/FDS 1000:2001</docidentifier>
+  <docnumber>1000</docnumber>
   <contributor>
     <role type="author"/>
     <organization>
@@ -140,8 +141,9 @@ RSpec.describe Asciidoctor::Csd do
        <?xml version="1.0" encoding="UTF-8"?>
        <csd-standard xmlns="https://www.calconnect.org/standards/csd">
        <bibdata type="technical-corrigendum">
-         <title language="en" format="plain">Main Title</title>
-         <docidentifier>CC/Cor 1000</docidentifier>
+         <title language="en" format="text/plain">Main Title</title>
+        <docidentifier type="csd">CC/Cor 1000</docidentifier>
+        <docnumber>1000</docnumber>
          <contributor>
            <role type="author"/>
            <organization>
@@ -200,8 +202,9 @@ RSpec.describe Asciidoctor::Csd do
        <?xml version="1.0" encoding="UTF-8"?>
        <csd-standard xmlns="https://www.calconnect.org/standards/csd">
        <bibdata type="technical-corrigendum">
-         <title language="en" format="plain">Main Title</title>
-         <docidentifier>CC/Cor 1000</docidentifier>
+         <title language="en" format="text/plain">Main Title</title>
+        <docidentifier type="csd">CC/Cor 1000</docidentifier>
+        <docnumber>1000</docnumber>
          <contributor>
            <role type="author"/>
            <organization>

@@ -29,41 +29,12 @@ module IsoDoc
 
       def docid(isoxml, _out)
         docnumber = isoxml.at(ns("//bibdata/docidentifier"))
-
         prefix = "CC"
-
         if docnumber.nil?
           set(:docnumber, prefix)
         else
           set(:docnumber, docnumber.text)
         end
-=begin
-        dn = docnumber&.text
-
-        doctype = isoxml&.at(ns("//bibdata"))&.attr("type")
-        typesuffix = ::Metanorma::Csd::DOCSUFFIX[doctype] || ""
-        unless typesuffix.empty?
-          prefix += "/#{typesuffix}"
-        end
-
-        docstatus = isoxml&.at(ns("//bibdata/status"))
-        unless docstatus.nil?
-          status_text = docstatus.text
-          status = ::Metanorma::Csd::DOCSTATUS[status_text] || ""
-          unless status.empty?
-            set(:status, status_print(status_text))
-            prefix += "/#{status}"
-          end
-        end
-
-        docid = "#{prefix} #{dn}"
-
-        year = isoxml&.at(ns("//bibdata/copyright/from"))&.text
-        if year
-          docid += ":#{year}"
-        end
-        set(:docnumber, docid)
-=end
       end
 
       def status_print(status)

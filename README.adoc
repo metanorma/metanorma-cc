@@ -120,8 +120,11 @@ tables etc, and automatically generating references and citations.
 
 == Document Attributes
 
+=== Common attributes
+
 The gem relies on Asciidoctor document attributes to provide necessary
-metadata about the document. These include:
+metadata about the document. The https://github.com/riboseinc/metanorma-standoc[metanorma-standoc]
+gem documents the Asciidoctor document attributes common to all metanorma gems. These include:
 
 `:edition:`:: The document edition
 
@@ -168,7 +171,11 @@ other committees are added as `_3`, `_4`...
 The attribute `:draft:`, if present, includes review notes in the XML output;
 these are otherwise suppressed.
 
-== AsciiCSD features not also present in AsciiISO
+== Asciidoctor features specific to CSAND
+
+The https://github.com/riboseinc/metanorma-standoc[metanorma-standoc]
+gem documents the customisations of Asciidoctor markup common to all metanorma gems.
+The following markup is specific to this gem:
 
 * `+[keyword]#...#+`: encodes keywords, such as "MUST", "MUST NOT". (Encoded as
 `<span class="keyword">...</span>`.

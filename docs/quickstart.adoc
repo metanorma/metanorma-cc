@@ -197,9 +197,9 @@ Technical committee; there can be more than one.
 do not get unnecessarily fetched all the time.
 
 
-==== Forewerd & Introduction
+==== Foreword & Introduction
 
-rd must be put before the first real section/clause (the `==` one).
+Foreword must be put before the first real section/clause (the `==` one).
 
 ----
 [[foreword]]

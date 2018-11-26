@@ -171,6 +171,17 @@ other committees are added as `_3`, `_4`...
 The attribute `:draft:`, if present, includes review notes in the XML output;
 these are otherwise suppressed.
 
+=== Attributs specific to CSD
+
+`:fullname{_i}:`:: The full name of a person who is a contributor to the document.
+A second person is indicated by using a numeric suffix: `:fullname:`, `:fullname_2:`, `fullname_3:`, &c.
+
+`:surname{_i}:`:: The surname of a person who is a contributor to the document.
+`:givenname{_i}:`:: The given name(s) of a person who is a contributor to the document.
+`:role{_i}:`:: The role of a a person who is a contributor to the document. By default,
+they are coded as an `editor`; they can also be represented as an `author`.
+
+
 == Asciidoctor features specific to CSAND
 
 The https://github.com/riboseinc/metanorma-standoc[metanorma-standoc]

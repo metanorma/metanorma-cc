@@ -15,6 +15,23 @@ RSpec.describe Asciidoctor::Csd do
       <name>CalConnect</name>
     </organization>
   </contributor>
+           <contributor>
+           <role type="editor"/>
+           <person>
+             <name>
+               <completename>Fred Flintstone</completename>
+             </name>
+           </person>
+         </contributor>
+         <contributor>
+           <role type="author"/>
+           <person>
+             <name>
+               <forename>Barney</forename>
+               <surname>Rubble</surname>
+             </name>
+           </person>
+         </contributor>
   <contributor>
     <role type="publisher"/>
     <organization>
@@ -44,8 +61,7 @@ RSpec.describe Asciidoctor::Csd do
 </csd-standard>
     INPUT
     expect(htmlencode(Hash[csdc.info(docxml, nil).sort].to_s)).to be_equivalent_to <<~"OUTPUT"
-
-           {:accesseddate=>"XXX", :confirmeddate=>"XXX", :createddate=>"XXX", :docnumber=>"CC/WD 1000:2001", :doctitle=>"Main Title", :doctype=>"Standard", :docyear=>"2001", :draft=>"3.4", :draftinfo=>" (draft 3.4, 2000-01-01)", :editorialgroup=>[], :ics=>"XXX", :implementeddate=>"XXX", :issueddate=>"XXX", :obsoleteddate=>"XXX", :obsoletes=>nil, :obsoletes_part=>nil, :publisheddate=>"XXX", :revdate=>"2000-01-01", :sc=>"XXXX", :secretariat=>"XXXX", :status=>"Working Draft", :tc=>"TC", :updateddate=>"XXX", :wg=>"XXXX"}
+{:accesseddate=>"XXX", :authors=>["BarneyRubble"], :confirmeddate=>"XXX", :createddate=>"XXX", :docnumber=>"CC/WD 1000:2001", :doctitle=>"Main Title", :doctype=>"Standard", :docyear=>"2001", :draft=>"3.4", :draftinfo=>" (draft 3.4, 2000-01-01)", :editorialgroup=>[], :editors=>["Fred Flintstone"], :ics=>"XXX", :implementeddate=>"XXX", :issueddate=>"XXX", :obsoleteddate=>"XXX", :obsoletes=>nil, :obsoletes_part=>nil, :publisheddate=>"XXX", :revdate=>"2000-01-01", :sc=>"XXXX", :secretariat=>"XXXX", :status=>"Working Draft", :tc=>"TC", :updateddate=>"XXX", :wg=>"XXXX"}
     OUTPUT
   end
 

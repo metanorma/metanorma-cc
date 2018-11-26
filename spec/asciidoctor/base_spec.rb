@@ -75,6 +75,11 @@ RSpec.describe Asciidoctor::Csd do
       :iteration: 3
       :language: en
       :title: Main Title
+      :fullname: Fred Flintstone
+      :role: author
+      :surname_2: Rubble
+      :givenname_2: Barney
+      :role: editor
     INPUT
 <?xml version="1.0" encoding="UTF-8"?>
 <csd-standard xmlns="https://www.calconnect.org/standards/csd">
@@ -88,6 +93,23 @@ RSpec.describe Asciidoctor::Csd do
       <name>CalConnect</name>
     </organization>
   </contributor>
+   <contributor>
+   <role type="editor"/>
+   <person>
+     <name>
+       <completename>Fred Flintstone</completename>
+     </name>
+   </person>
+ </contributor>
+ <contributor>
+   <role type="author"/>
+   <person>
+     <name>
+       <forename>Barney</forename>
+       <surname>Rubble</surname>
+     </name>
+   </person>
+ </contributor>
   <contributor>
     <role type="publisher"/>
     <organization>

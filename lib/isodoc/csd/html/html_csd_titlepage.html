@@ -36,6 +36,17 @@
   <div class="coverpage-tc-name">
     <span>TC {{ tc }}</span>
   </div>
+
+  {% if editors %}
+  <div class="coverpage-tc-name">
+    <span>Editors: {{ editors | join: ", " }}</span>
+  </div>
+  {% endif %}
+  {% if authors %}
+  <div class="coverpage-tc-name">
+    <span>Authors: {{ authors | join: ", " }}</span>
+  </div>
+  {% endif %}
   </div>
 
   <div class="title-section1">

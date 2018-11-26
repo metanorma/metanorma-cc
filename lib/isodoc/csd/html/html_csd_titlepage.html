@@ -55,10 +55,10 @@
   </div>
 
   <div class="coverpage-stage-block" >
-    <span class="coverpage-maturity" id="{{ status | replace: ' ', '-' | downcase }}">{{ status }}</span>
+    <span class="coverpage-maturity" id="{{ status | replace: ' ', '-' | downcase }}">{% if unpublished %}{{ status }}{% endif %}</span>
 </div>
 
-{% if status != "Published" and status != "Withdrawn" %}
+{% if unpublished %}
   <div class="coverpage-warning">
     <span class="title">Warning for Drafts</span>
 

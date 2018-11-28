@@ -37,12 +37,12 @@
     <span>TC {{ tc }}</span>
   </div>
 
-  {% if editors %}
+  {% if editors.size > 0 %}
   <div class="coverpage-tc-name">
     <span>Editors: {{ editors | join: ", " }}</span>
   </div>
   {% endif %}
-  {% if authors %}
+  {% if authors.size > 0 %}
   <div class="coverpage-tc-name">
     <span>Authors: {{ authors | join: ", " }}</span>
   </div>

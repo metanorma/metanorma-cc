@@ -38,7 +38,7 @@ To compile the document, run the Docker container as follows:
 
 [source,console]
 --
-docker run -v "$(pwd)":/metanorma/ -w /metanorma ribose/metanorma metanorma -t csd -x xml,html,pdf,doc rfc6350.adoc
+docker run -v "$(pwd)":/metanorma/ -w /metanorma ribose/metanorma "metanorma -t csd -x xml,html,pdf,doc rfc6350.adoc"
 --
 
 NOTE: If you use Metanorma-CLI instead of Docker,

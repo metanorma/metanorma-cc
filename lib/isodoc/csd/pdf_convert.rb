@@ -42,10 +42,6 @@ module IsoDoc
         end
       end
 
-      def pre_parse(node, out)
-        out.pre node.text # content.gsub(/</, "&lt;").gsub(/>/, "&gt;")
-      end
-
       def term_defs_boilerplate(div, source, term, preface)
         if source.empty? && term.nil?
           div << @no_terms_boilerplate
@@ -57,18 +53,6 @@ module IsoDoc
       def i18n_init(lang, script)
         super
         @annex_lbl = "Appendix"
-      end
-
-      def error_parse(node, out)
-        # catch elements not defined in ISO
-        case node.name
-        when "pre"
-          pre_parse(node, out)
-        when "keyword"
-          out.span node.text, **{ class: "keyword" }
-        else
-          super
-        end
       end
 
       def html_head()

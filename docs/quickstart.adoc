@@ -1,0 +1,368 @@
+= Quickstart Guide for Metanorma-CSD
+
+Start using Metanorma-CSD to author CalConnect docs in these steps:
+
+. Get Metanorma running on your machine
+. Fetch and compile an example Metanorma-CSD document
+. Modify the document to fit your goals while keeping it valid AsciiCSD
+
+This guide assumes proficiency with the terminal,
+and uses the Docker option of running Metanorma
+(there’re other
+https://www.metanorma.com/overview/getting-started/[options of installing Metanorma],
+too).
+
+
+== Get Metanorma running on your machine
+
+Assuming you have Docker installed, it’s as easy as:
+
+[source,console]
+--
+docker pull ribose/metanorma
+--
+
+
+== Fetch and compile an example Metanorma-CSD document
+
+We’re going to use the vCard Format Specification sample document here.
+Clone the Metanorma-CSD repository and change into the directory with the example:
+
+[source,console]
+--
+git clone https://github.com/riboseinc/metanorma-csd.git
+cd /spec/examples/
+--
+
+To compile the document, run the Docker container as follows:
+
+[source,console]
+--
+docker run -v "$(pwd)":/metanorma/ -w /metanorma ribose/metanorma "metanorma -t csd -x xml,html,pdf,doc rfc6350.adoc"
+--
+
+NOTE: If you use Metanorma-CLI instead of Docker,
+http://metanorma.com:4001/software/metanorma-cli/docs/usage/[see how to use the metanorma executable to compile documnts].
+
+
+== Write valid AsciiCSD
+
+A Metanorma-CSD is a file in AsciiDoc format with certain extensions
+specific to Metanorma as a whole and Metanorma-CSD in particular.
+(We call the format AsciiCSD for short.)
+
+
+=== AsciiDoc basics
+
+NOTE: Skip this section if you’re already familiar with AsciiDoc syntax.
+
+==== Inline formatting
+
+[source,asciidoc]
+--
+*bold emphasis*, _italic emphasis_, `monospace / code snippet`
+"`Typographic double quotes`", '`typographic single quotes`'
+Subscript: H~2~O; superscript: E=mc^2^
+--
+
+==== Sections, anchors and references
+
+[source,asciidoc]
+--
+== Section 1
+
+Content (see <<anchor>>)
+
+== Section 2
+
+=== Section 2.1
+
+[[anchor]]
+==== Section 2.2
+
+Content 2.2. http://www.calconnect.org/[CalConnect]
+--
+
+==== Lists and blocks
+
+[source,asciidoc]
+--
+* Unordered list item 1
+* Unordered list item 2
+
+. Ordered list item 1
+. Ordered list item 2
+
+Definition list:
+
+stem:[w]:: is the mass fraction of grains with defects in the test sample;
+stem:[m_D]:: is the mass, in grams, of grains with that defect;
+mag:: is the mass, in grams, of the aggregated test sample.
+--
+
+==== Tables, figures, footnotes
+
+A rather complex table:
+
+[source,adoc]
+----
+[[tableD-1]]
+[cols="<,^,^,^,^",headerrows=2]
+.Repeatability and reproducibility of husked rice yield
+|===
+.2+| Description 4+| Rice sample
+| Arborio | Drago footnote:[Parboiled rice.] | Balilla | Thaibonnet
+
+| Number of laboratories retained after eliminating outliers | 13 | 11 | 13 | 13
+| Mean value, g/100 g | 81,2 | 82,0 | 81,8 | 77,7
+|===
+----
+
+Images (figures) and footnotes:
+
+[source,adoc]
+----
+[[figureC-1]]
+.Typical gelatinization curve
+image::images/rice_image2.png[]
+footnote:[The time stem:[t_90] was estimated to be 18,2 min for this example.]
+----
+
+
+==== Admonition blocks, quotes & code listings
+
+Admonitions (notes, warnings, cautions, etc.) and examples:
+
+[source,adoc]
+----
+NOTE: It is unnecessary to compare rice yield across years.
+
+[example]
+5 + 3 = 8
+----
+
+Block quotes:
+
+[source,adoc]
+----
+[quote,ISO,"ISO7301,clause 1"]
+_____
+This Standard gives the minimum specifications for rice (_Oryza sativa_ L.)
+_____
+----
+
+Source code:
+
+[source,adoc]
+----
+[source,some-lang]
+------
+function () -> {}
+------
+----
+
+
+=== Extensions to AsciiDoc
+
+==== Document header & custom AsciiDoc attributes
+
+`:docnumber:`: CalConnect document number, as allocated by TCC.
+
+`:status:`: The status of the document can be one of:
+
+* proposal
+* working-draft
+* committee-draft
+* draft-standard
+* final-draft
+* published
+* withdrawn
+
+`:doctype:`: The type of the document can be one of:
+
+* standard
+* directive
+* guide
+* specification
+* report
+* amendment
+* technical-corrigendum
+
+`:technical-committee:`, `:technical-committee_N:` (where N is a positive integer):
+Technical committee; there can be more than one.
+
+`:draft:`: Enables comments in Word and XML.
+
+`:local-cache-only:`: Used with Metanorma under Docker to ensure bibliographic entries
+do not get unnecessarily fetched all the time.
+
+
+==== Foreword & Introduction
+
+Foreword must be put before the first real section/clause (the `==` one).
+
+----
+[[foreword]]
+.Foreword
+The Calendaring and Scheduling Consortium ("`CalConnect`") is global non-profit
+organization with the aim to facilitate interoperability of technologies across
+user-centric systems and applications...
+----
+
+Introduction comes after Foreword and is unnumbered (actually "`0`"):
+
+----
+[[introduction]]
+:sectnums!:     <== disables display of section number
+== Introduction
+
+<<ISO8601>> has been the international standard for date and time representations
+and is applied widely, including in the <<RFC5545>> and <<RFC6350>> standards
+...
+
+:sectnums:      <== re-enables display of section number
+----
+
+NOTE: Some ISO standards display Introduction section numbers (the "`0`") if there are
+too many sub-sections.
+
+
+==== Normative references & bibliography
+
+What is a normative vs informative reference?
+
+* A change to a normative reference requires updating of the document;
+* A change to an informative reference should not trigger a change in the document.
+
+
+Clause 2 must be this:
+
+----
+[bibliography]
+== Normative references
+
+* [[[ISO3696,ISO 3696]]], _Water for analytical laboratory use -- Test methods_
+----
+
+Last section must be this:
+
+----
+[bibliography]
+== Bibliography
+
+* [[[ISO5609,ISO 5609]]], _Soil for laboratory analysis -- Test methods_
+----
+
+NOTE: the Bibliography is identical in usage with the IETF RFC section "`Informative references`".
+
+
+==== Citations
+
+In a CSD you often want to cite external or internal references.
+
+Internal:
+[source,adoc]
+----
+[[dog-food]]
+== Dog food
+
+Dogs love food, not only bones. Mine especially loves eating Oreo's.
+
+== Living with your dog
+
+My dog, Cookie, loves to eat cookies (see <<dog-food>>).
+
+----
+
+
+External (remember to add the reference!):
+
+[source,adoc]
+----
+The quality requirements on wheat are described in <<ISO7301>>.
+
+In particular, those for bread wheat (T. aestivum) are given in
+<<ISO7301,clause=5.6>>.
+----
+
+
+==== Terms and definitions
+
+This must be clause 3.
+
+[source,adoc]
+----
+[[tda]]                      <= anchor if you want it
+[source=ISO8601-1]           <= allows inheriting terms and definitions from
+another document
+== Terms, definitions, symbols and abbreviations   <= can combine T&D and S&A
+
+=== Terms and definitions    <= the real T&D clause
+
+[[term-explicit]]            <= anchor if you want it
+==== explicit form           <= term item
+
+date and time representation that uses designator symbols to delimit
+time scale components
+----
+
+
+==== Term entry in T&D
+
+The structure is strict; the following illustrates the complete structure of a term entry.
+
+In the term source (`[.source]`), all content after the reference and the "`comma`" is about "`modifications`" to the original definition.
+
+[source,adoc]
+----
+[[paddy]]                  <= anchor
+=== paddy                  <= term
+alt:[paddy rice]           <= alternative term
+alt:[rough rice]           <= second alternative
+deprecated:[cargo rice]    <= deprecated term
+domain:[rice]              <= domain
+
+rice retaining its husk after threshing  <= definition
+
+[example]              <= example
+Foreign seeds, husks, bran, sand, dust.
+
+NOTE: The starch of waxy rice consists almost entirely of amylopectin. <= note
+
+[.source]
+<<ISO7301,section 3.2>>, The term "cargo rice" is shown as deprecated, <= source
+and Note 1 to entry is not included here.
+----
+
+
+==== Term entry sourced from IEC Electropedia (IEV)
+
+In the `[.source]`, a termbase such as the IEC Electropedia ("`IEV`") can be used, such as:
+
+[source,adoc]
+----
+[.source]
+<<IEV,clause "113-01-01">>, the term "space-time" is further explained
+in a new Note 2 to entry.
+----
+
+References to the specific IEC 60500 documents (where IEV terms came
+from) are automatically added to the Bibliography.
+
+
+==== Annex
+
+Annexes have to be placed before the "`Bibliography`".
+
+[source,adoc]
+----
+[[AnnexA]]
+[appendix,subtype=informative]
+== Example date and time expressions, and representations
+...
+----
+
+
+== Where next?
+
+* https://www.metanorma.com/overview/[Learn more about Metanorma]

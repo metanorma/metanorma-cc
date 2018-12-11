@@ -87,7 +87,11 @@ RSpec.describe Asciidoctor::Csd do
   <title language="en" format="text/plain">Main Title</title>
   <docidentifier type="csd">CC/DIR/FDS 1000:2001</docidentifier>
   <docnumber>1000</docnumber>
-  <contributor>
+  <edition>2</edition>
+<version>
+  <revision-date>2000-01-01</revision-date>
+  <draft>3.4</draft>
+</version>  <contributor>
     <role type="author"/>
     <organization>
       <name>CalConnect</name>
@@ -130,11 +134,7 @@ RSpec.describe Asciidoctor::Csd do
   <editorialgroup>
     <technical-committee type="provisional">TC</technical-committee>
   </editorialgroup>
-</bibdata><version>
-  <edition>2</edition>
-  <revision-date>2000-01-01</revision-date>
-  <draft>3.4</draft>
-</version>
+</bibdata>
 <sections/>
 </csd-standard>
     OUTPUT
@@ -166,6 +166,7 @@ RSpec.describe Asciidoctor::Csd do
          <title language="en" format="text/plain">Main Title</title>
         <docidentifier type="csd">CC/Cor 1000</docidentifier>
         <docnumber>1000</docnumber>
+         <edition>2</edition>
          <contributor>
            <role type="author"/>
            <organization>
@@ -193,9 +194,7 @@ RSpec.describe Asciidoctor::Csd do
            <technical-committee type="provisional">TC 788</technical-committee>
            <technical-committee type="technical">TC 789</technical-committee>
          </editorialgroup>
-       </bibdata><version>
-         <edition>2</edition>
-       </version>
+       </bibdata>
        <sections/>
        </csd-standard>
         OUTPUT
@@ -227,6 +226,7 @@ RSpec.describe Asciidoctor::Csd do
          <title language="en" format="text/plain">Main Title</title>
         <docidentifier type="csd">CC/Cor 1000</docidentifier>
         <docnumber>1000</docnumber>
+         <edition>2</edition>
          <contributor>
            <role type="author"/>
            <organization>
@@ -254,9 +254,7 @@ RSpec.describe Asciidoctor::Csd do
            <technical-committee type="provisional">TC 788</technical-committee>
            <technical-committee type="technical">TC 789</technical-committee>
          </editorialgroup>
-       </bibdata><version>
-         <edition>2</edition>
-       </version>
+       </bibdata>
        <sections/>
        </csd-standard>
         OUTPUT
@@ -364,8 +362,8 @@ RSpec.describe Asciidoctor::Csd do
         <p id="_"><em>emphasis</em>
        <strong>strong</strong>
        <tt>monospace</tt>
-       "double quote"
-       'single quote'
+       “double quote”
+       ‘single quote’
        super<sup>script</sup>
        sub<sub>script</sub>
        <stem type="AsciiMath">a_90</stem>

@@ -10,16 +10,23 @@ style='mso-no-proof:yes'>{{ tc | join: "/" }}</span></p>
 style='mso-bidi-font-weight:normal'><span lang="EN-GB" style='font-size:24.0pt'>{{ doctitle }}</span>
 </b><br/><span lang="EN-GB" style='font-size:16.0pt'>{{ docsubtitle }}</span></p>
 
-  {% if editors %}
+  {% capture tags %}
+  {% for tag in contributors %}
+    {{ tag[0] }}
+  {% endfor %}
+{% endcapture %}
+{% assign sortedtags = tags | split:' ' | sort %}
+
+  {% for tag in sortedtags %}
   <p class="MsoNormal" align="center" style='text-align:center'>
-    <span>Editors: {{ editors | join: ", " }}</span>
+    {% if contributors[tag].size > 1 %}
+    {{ tag | capitalize }}s:
+    {% else %}
+    {{ tag | capitalize }}:
+    {% endif %}
+    {{ contributors[tag] | join: ", " }}
   </p>
-  {% endif %}
-  {% if authors %}
-  <p class="MsoNormal" align="center" style='text-align:center'>
-    <span>Authors: {{ authors | join: ", " }}</span>
-  </p>
-  {% endif %}
+  {% endfor %}
 
 <p class="MsoNormal" style='margin-top:100.0pt'><span lang="EN-GB"><o:p>&nbsp;</o:p></span></p>
 

@@ -37,16 +37,24 @@
     <span>TC {{ tc }}</span>
   </div>
 
-  {% if editors.size > 0 %}
-  <div class="coverpage-tc-name">
-    <span>Editors: {{ editors | join: ", " }}</span>
-  </div>
-  {% endif %}
-  {% if authors.size > 0 %}
-  <div class="coverpage-tc-name">
-    <span>Authors: {{ authors | join: ", " }}</span>
-  </div>
-  {% endif %}
+  {% capture tags %}
+  {% for tag in contributors %}
+    {{ tag[0] }}
+  {% endfor %}
+{% endcapture %}
+{% assign sortedtags = tags | split:' ' | sort %}
+
+  {% for tag in sortedtags %}
+  <div class="coverpage-tc-name"><span>
+    {% if contributors[tag].size > 1 %}
+    {{ tag | capitalize }}s: 
+    {% else %}
+    {{ tag | capitalize }}:
+    {% endif %}
+    {{ contributors[tag] | join: ", " }}
+    </span></div>
+  {% endfor %}
+
   </div>
 
   <div class="title-section1">

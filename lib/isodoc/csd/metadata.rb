@@ -10,6 +10,7 @@ module IsoDoc
       def initialize(lang, script, labels)
         super
         set(:status, "XXX")
+        set(:tc, "XXXX")
       end
 
       def title(isoxml, _out)
@@ -22,13 +23,21 @@ module IsoDoc
       end
 
       def author(isoxml, _out)
-        set(:tc, "XXXX")
         tc = isoxml.at(ns("//bibdata/editorialgroup/technical-committee"))
         set(:tc, tc.text) if tc
-        authors = isoxml.xpath(ns("//bibdata/contributor[role/@type = 'author']/person/name"))
-        set(:authors, extract_person_names(authors))
-        editors = isoxml.xpath(ns("//bibdata/contributor[role/@type = 'editor']/person/name"))
-        set(:editors, extract_person_names(editors))
+        set(:contributors, personal_authors(isoxml))
+      end
+
+      def personal_authors(isoxml)
+        persons = {}
+        roles = isoxml.xpath(ns("//bibdata/contributor/role/@type")).
+          inject([]) { |m, t| m << t.value }
+        roles.uniq.sort.each do |r|
+          names = isoxml.xpath(ns("//bibdata/contributor[role/@type = '#{r}']"\
+                                    "/person/name"))
+          persons[r] = extract_person_names(names) unless names.empty?
+        end
+        persons
       end
 
       def extract_person_names(authors)
@@ -37,9 +46,7 @@ module IsoDoc
           if a.at(ns("./completename"))
             ret << a.at(ns("./completename")).text
           else
-            fn = []
-            forenames = a.xpath(ns("./forename"))
-            forenames.each { |f| fn << f.text }
+            fn = a.xpath(ns("./forename")).inject([]) { |m, f| m << f.text }
             surname = a&.at(ns("./surname"))&.text
             ret << fn.join(" ") + " " + surname
           end

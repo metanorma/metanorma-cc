@@ -76,10 +76,12 @@ time, mark, audio, video {
 
 code, pre, tt, kbd, samp {
   font-family: $monospacefont;
+  font-variant-ligatures: none;
 }
 
 code *, pre *, tt *, kbd *, samp * {
   font-family: $monospacefont !important;
+  font-variant-ligatures: none;
 }
 
 h1, h2, h3, h4, h5, h6, .h2Annex {
@@ -565,6 +567,7 @@ p.Biblio, p.NormRef {
 
 .figure, .Sourcecode {
     font-family: $monospacefont;
+    font-variant-ligatures: none;
     background-color: #f7f7f7;
     font-size: 0.8em;
     line-height: 1.6em;
@@ -702,6 +705,7 @@ a.footnote-number {
 
 .contact-info p, .contact-info a {
     font-family: $monospacefont;
+    font-variant-ligatures: none;
     font-weight: 400;
 }
 
@@ -886,6 +890,7 @@ To top button
 
 #myBtn {
     font-family: $monospacefont;
+    font-variant-ligatures: none;
     display: none;
     position: fixed;
     bottom: 20px;

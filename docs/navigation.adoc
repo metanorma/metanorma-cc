@@ -1,8 +1,8 @@
 ---
-sections:
-- name: Introduction
+items:
+- title: Introduction
   items:
-    - quickstart
+    - { title: Quickstart, path: quickstart/ }
 ---
 
 = Navigation

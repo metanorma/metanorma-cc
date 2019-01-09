@@ -141,7 +141,7 @@ RSpec.describe Asciidoctor::Csd do
   end
 
   it "processes default metadata for published technical-corrigendum" do
-    expect(Asciidoctor.convert(<<~"INPUT", backend: :csd, header_footer: true)).to be_equivalent_to <<~'OUTPUT'
+    expect(Asciidoctor.convert(<<~"INPUT", backend: :csd, header_footer: true)).to be_equivalent_to <<~"OUTPUT"
       = Document title
       Author
       :docfile: test.adoc
@@ -164,8 +164,8 @@ RSpec.describe Asciidoctor::Csd do
        <csd-standard xmlns="https://www.calconnect.org/standards/csd">
        <bibdata type="technical-corrigendum">
          <title language="en" format="text/plain">Main Title</title>
-        <docidentifier type="csd">CC/Cor 1000</docidentifier>
-        <docnumber>1000</docnumber>
+         <docidentifier type="csd">CC/Cor 1000</docidentifier>
+         <docnumber>1000</docnumber>
          <edition>2</edition>
          <contributor>
            <role type="author"/>
@@ -183,7 +183,7 @@ RSpec.describe Asciidoctor::Csd do
          <script>Latn</script>
          <status format="plain">published</status>
          <copyright>
-           <from>2018</from>
+           <from>#{Time.now.year}</from>
            <owner>
              <organization>
                <name>CalConnect</name>
@@ -201,7 +201,7 @@ RSpec.describe Asciidoctor::Csd do
     end
 
   it "ignores unrecognised status" do
-    expect(Asciidoctor.convert(<<~"INPUT", backend: :csd, header_footer: true)).to be_equivalent_to <<~'OUTPUT'
+    expect(Asciidoctor.convert(<<~"INPUT", backend: :csd, header_footer: true)).to be_equivalent_to <<~"OUTPUT"
       = Document title
       Author
       :docfile: test.adoc
@@ -224,8 +224,8 @@ RSpec.describe Asciidoctor::Csd do
        <csd-standard xmlns="https://www.calconnect.org/standards/csd">
        <bibdata type="technical-corrigendum">
          <title language="en" format="text/plain">Main Title</title>
-        <docidentifier type="csd">CC/Cor 1000</docidentifier>
-        <docnumber>1000</docnumber>
+         <docidentifier type="csd">CC/Cor 1000</docidentifier>
+         <docnumber>1000</docnumber>
          <edition>2</edition>
          <contributor>
            <role type="author"/>
@@ -243,7 +243,7 @@ RSpec.describe Asciidoctor::Csd do
          <script>Latn</script>
          <status format="plain">pizza</status>
          <copyright>
-           <from>2018</from>
+           <from>#{Time.now.year}</from>
            <owner>
              <organization>
                <name>CalConnect</name>

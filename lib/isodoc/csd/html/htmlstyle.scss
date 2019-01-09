@@ -498,36 +498,36 @@ span.obligation {
     3.3 Lists
 */
 
-    ul {
-    margin-left: 1.2em;
-  }
 
 ol {
-  margin-left: 1.2em; }
+  margin-left: 1.2em;
+}
 
-ul > li {
+ul {
+  position: relative;
+  margin-left: 0;
   list-style: none;
+  padding-left: 1.2em;
 }
 
-  ul > li:before {
-    content: "\2014";
-    display: inline-block; width: 1em;
-    margin-left: -1.2em;
-  }
-
-li p:first-child {
-  display: inline;
+ul > li:before {
+  content: "\2014";
+  position: absolute;
+  left: 0;
 }
 
-li:first-child {
+main li {
   margin-top: 1em;
+  padding-left: 0.5em;
 }
 
 #toc ul {
-  margin-bottom: 0.25em; }
+  margin-bottom: 0.25em;
+}
 
 #toc li {
-  list-style-type: none; }
+  list-style-type: none;
+}
 
 #toc li:before {
   content: " ";
@@ -556,9 +556,12 @@ h2 p {
 */
 
 p.Biblio, p.NormRef {
-    margin-top: 1em;
-    margin-left: 2em;
-    text-indent:-2em;
+  margin-top: 1em;
+}
+
+p.Biblio:before, p.NormRef:before {
+  content: "\2014";
+  padding-right: 1em;
 }
 
 /*
@@ -586,18 +589,22 @@ p.Biblio, p.NormRef {
     3.7 Notes
 */
 
-.Note {
-    background-color: #fff495;
+.Note, .Admonition {
     color: #47430c;
-    padding: 1.2em;
-    margin: 2em 0 1em 0;
+    padding: 0.25em;
+    margin: 0;
+}
+
+.Note p, .Admonition p {
+  margin: 1em;
+}
+
+.Note {
+  background-color: #fff495;
 }
 
 .Admonition {
-    background-color: #ffcccc;
-    color: #47430c;
-    padding: 1.2em;
-    margin: 2em 0 1em 0;
+  background-color: #ffcccc;
 }
 
 /*
@@ -701,31 +708,26 @@ a.footnote-number {
 */
 
 .contact-info {
-    background-color: #f7f7f7;
-    padding: 2em;
-    margin-top: 5em;
-    width: auto;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: left;
+  background-color: #f7f7f7;
+  padding: 1em;
+  margin-top: 2em;
+  width: auto;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
 }
 
 .contact-info p, .contact-info a {
-    font-family: $monospacefont;
-    font-variant-ligatures: none;
-    font-weight: 400;
+  font-family: $monospacefont;
+  font-variant-ligatures: none;
+  font-weight: 400;
+  line-height: 1.3em;
+  font-size: 1em;
+  margin: 0;
 }
 
 .contact-info .name {
-    font-weight: 700;
-    font-size: 1.2em;
-    margin-bottom:0;
-}
-
-.contact-info .address {
-    font-size: 1em;
-    line-height: 1.3em;
-    margin-top:0;
+  font-weight: 700;
 }
 
 /*
@@ -733,7 +735,7 @@ a.footnote-number {
 */
 
 span.keyword {
-    font-weight: 600;
+  font-weight: 600;
 }
 
 /*
@@ -776,51 +778,73 @@ p {
     padding: 2em 0;
 }
 
-  .doc-number {
-      font-size: 0.5em;
-      font-family: $bodyfont;
-  }
+.doc-number {
+  font-size: 0.5em;
+  font-family: $bodyfont;
+}
 
-  .coverpage-title {
-      padding-bottom: 0.5em;
-      font-family: $headerfont;
-      font-size: 1.2em;
+.coverpage-title {
+  padding-bottom: 0.5em;
+  font-family: $headerfont;
+  font-size: 1.2em;
 	line-height: 1.2em;
-	font-weight: 900;
+	font-weight: 600;
 	padding-left: 1em;
 	padding-right: 1em;
-  }
+}
 
-  .title-section1 {
-    padding: 0 2em 0 3em;
-  }
+.title-section1 {
+  padding: 0 2em 0 3em;
+}
 
-  .prefatory-section {
-    padding: 0 3em 0 6em;
-  }
-
-
-  .zzSTDTitle1, .MsoCommentText {
-    display: none;
-  }
+.prefatory-section {
+  padding: 0 3em 0 6em;
+}
 
 
-  .coverpage {
-    text-align: center;
-    padding-left: 1.5em;
-  }
+.zzSTDTitle1, .MsoCommentText {
+  display: none;
+}
 
-  .coverpage-logo span, .coverpage-tc-name span {
-    font-family: $bodyfont;
-      text-transform: uppercase;
-      font-weight: 600;
-  }
 
-  .coverpage-tc-name {
-    font-size: 1.2em;
-    line-height: 1.2em;
-    margin: 0.25em 0;
-  }
+.coverpage {
+  text-align: center;
+  padding-left: 1.5em;
+}
+
+.coverpage-logo span, .coverpage-tc-name span {
+  font-family: $bodyfont;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.coverpage-tc-name {
+  font-size: 1.2em;
+  line-height: 1.2em;
+  margin: 0.25em 0;
+}
+
+.coverpage-contributors {
+  margin-top: 1em;
+  line-height: 1.5em;
+  font-weight: 300;
+}
+
+.coverpage-contributors .role {
+  font-variant-caps: all-small-caps;
+  background: #f7f7f7;
+  border-radius: 5px;
+  padding: 0.1em 0.5em;
+  margin-left: 1em;
+  color: #485094;
+  font-size: 0.9em;
+  font-weight: 900;
+}
+
+.coverpage-contributors .person {
+  display: block;
+  font-weight: 300;
+}
 
 /*
     4.2 Document Identity
@@ -876,7 +900,7 @@ p {
 
   .copyright {
     padding: 1em;
-    font-size: 0.8em;
+    font-size: 0.9em;
     text-align: left;
   }
 

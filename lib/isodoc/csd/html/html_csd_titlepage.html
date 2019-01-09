@@ -1,16 +1,14 @@
 <div class="document-stage-band" id="{{ status | replace: ' ', '-' | downcase }}-band">
-    <p class="document-stage">{{ status }}</p>
+  <p class="document-stage">{{ status }}</p>
 </div>
 
 <div class="document-type-band" id="{{ doctype | replace: ' ', '-' | downcase }}-band">
-    <p class="document-type">CalConnect {{ doctype }}</p>
+  <p class="document-type">CalConnect {{ doctype }}</p>
 </div>
 
+<div id='toggle'> <span>•</span> </div>
 
-
-  <div id='toggle'> <span>•</span> </div>
-
-  <header>
+<header>
 
 <!--<div class="WordSection1">-->
   <div class="coverpage">
@@ -37,22 +35,22 @@
     <span>TC {{ tc }}</span>
   </div>
 
-  {% capture tags %}
-  {% for tag in contributors %}
-    {{ tag[0] }}
-  {% endfor %}
+{% capture tags %}
+{% for tag in contributors %}
+  {{ tag[0] }}
+{% endfor %}
 {% endcapture %}
+
 {% assign sortedtags = tags | split:' ' | sort %}
 
   {% for tag in sortedtags %}
-  <div class="coverpage-tc-name"><span>
-    {% if contributors[tag].size > 1 %}
-    {{ tag | capitalize }}s: 
-    {% else %}
-    {{ tag | capitalize }}:
-    {% endif %}
-    {{ contributors[tag] | join: ", " }}
-    </span></div>
+  <div class="coverpage-contributors">
+    <div class="group {{ tag }}">
+    {% for person in contributors[tag] %}
+    <span class="person {{ tag }}">{{ person }}<span class="role">{{ tag | capitalize }}</span></span>
+    {% endfor %}
+    </div>
+  </div>
   {% endfor %}
 
   </div>

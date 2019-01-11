@@ -61,7 +61,7 @@ RSpec.describe Asciidoctor::Csd do
 </csd-standard>
     INPUT
     expect(htmlencode(Hash[csdc.info(docxml, nil).sort].to_s)).to be_equivalent_to <<~"OUTPUT"
-    {:accesseddate=>"XXX", :confirmeddate=>"XXX", :contributors=>{"author"=>["Barney Rubble"], "editor"=>["Fred Flintstone"]}, :createddate=>"XXX", :docnumber=>"CC/WD 1000:2001", :doctitle=>"Main Title", :doctype=>"Standard", :docyear=>"2001", :draft=>"3.4", :draftinfo=>" (draft 3.4, 2000-01-01)", :editorialgroup=>[], :ics=>"XXX", :implementeddate=>"XXX", :issueddate=>"XXX", :obsoleteddate=>"XXX", :obsoletes=>nil, :obsoletes_part=>nil, :publisheddate=>"XXX", :receiveddate=>"XXX", :revdate=>"2000-01-01", :sc=>"XXXX", :secretariat=>"XXXX", :status=>"Working Draft", :tc=>"TC", :unpublished=>false, :updateddate=>"XXX", :wg=>"XXXX"}
+    {:accesseddate=>"XXX", :confirmeddate=>"XXX", :contributors=>{"author"=>["Barney Rubble"], "editor"=>["Fred Flintstone"]}, :createddate=>"XXX", :docnumber=>"CC/WD 1000:2001", :doctitle=>"Main Title", :doctype=>"Standard", :docyear=>"2001", :draft=>"3.4", :draftinfo=>" (draft 3.4, 2000-01-01)", :editorialgroup=>[], :ics=>"XXX", :implementeddate=>"XXX", :issueddate=>"XXX", :obsoleteddate=>"XXX", :obsoletes=>nil, :obsoletes_part=>nil, :publisheddate=>"XXX", :receiveddate=>"XXX", :revdate=>"2000-01-01", :sc=>"XXXX", :secretariat=>"XXXX", :status=>"Working Draft", :tc=>"TC", :unpublished=>true, :updateddate=>"XXX", :wg=>"XXXX"}
     OUTPUT
   end
 

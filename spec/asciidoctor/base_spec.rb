@@ -79,7 +79,7 @@ RSpec.describe Asciidoctor::Csd do
       :role: author
       :surname_2: Rubble
       :givenname_2: Barney
-      :role: editor
+      :role_2: editor
     INPUT
 <?xml version="1.0" encoding="UTF-8"?>
 <csd-standard xmlns="https://www.calconnect.org/standards/csd">
@@ -98,7 +98,7 @@ RSpec.describe Asciidoctor::Csd do
     </organization>
   </contributor>
    <contributor>
-   <role type="editor"/>
+   <role type="author"/>
    <person>
      <name>
        <completename>Fred Flintstone</completename>
@@ -106,7 +106,7 @@ RSpec.describe Asciidoctor::Csd do
    </person>
  </contributor>
  <contributor>
-   <role type="author"/>
+   <role type="editor"/>
    <person>
      <name>
        <forename>Barney</forename>

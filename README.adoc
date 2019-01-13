@@ -1,7 +1,7 @@
 = AsciiCSD: Metanorma processor for CSD standards
 
 image:https://img.shields.io/gem/v/metanorma-csd.svg["Gem Version", link="https://rubygems.org/gems/metanorma-csd"]
-image:https://img.shields.io/travis/riboseinc/metanorma-csd/master.svg["Build Status", link="https://travis-ci.org/riboseinc/metanorma-csd"]
+image:https://img.shields.io/travis/riboseinc/metanorma-csd/master.svg["Build Status", link="https://travis-ci.com/riboseinc/metanorma-csd"]
 image:https://codeclimate.com/github/riboseinc/metanorma-csd/badges/gpa.svg["Code Climate", link="https://codeclimate.com/github/riboseinc/metanorma-csd"]
 
 _Formerly known as_ `asciidoctor-csd`.
@@ -171,6 +171,7 @@ other committees are added as `_3`, `_4`...
 The attribute `:draft:`, if present, includes review notes in the XML output;
 these are otherwise suppressed.
 
+////
 === Attributs specific to CSD
 
 `:fullname{_i}:`:: The full name of a person who is a contributor to the document.
@@ -180,16 +181,16 @@ A second person is indicated by using a numeric suffix: `:fullname:`, `:fullname
 `:givenname{_i}:`:: The given name(s) of a person who is a contributor to the document.
 `:role{_i}:`:: The role of a a person who is a contributor to the document. By default,
 they are coded as an `editor`; they can also be represented as an `author`.
+////
 
-
-== Asciidoctor features specific to CSAND
+////
+== Asciidoctor features specific to CSD
 
 The https://github.com/riboseinc/metanorma-standoc[metanorma-standoc]
 gem documents the customisations of Asciidoctor markup common to all metanorma gems.
 The following markup is specific to this gem:
 
-* `+[keyword]#...#+`: encodes keywords, such as "MUST", "MUST NOT". (Encoded as
-`<span class="keyword">...</span>`.
+////
 
 == Data Models
 

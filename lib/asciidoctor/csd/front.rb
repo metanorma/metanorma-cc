@@ -17,33 +17,6 @@ module Asciidoctor
         personal_author(node, xml)
       end
 
-      def personal_author(node, xml)
-        if node.attr("fullname") || node.attr("surname")
-          personal_author1(node, xml, "")
-        end
-        i = 2
-        while node.attr("fullname_#{i}") || node.attr("surname_#{i}")
-          personal_author1(node, xml, "_#{i}")
-          i += 1
-        end
-      end
-
-      def personal_author1(node, xml, suffix)
-        xml.contributor do |c|
-          c.role **{ type: node.attr("role#{suffix}")&.downcase || "author" }
-          c.person do |p|
-            p.name do |n|
-              if node.attr("fullname#{suffix}")
-                n.completename node.attr("fullname#{suffix}")
-              else
-                n.forename node.attr("givenname#{suffix}")
-                n.surname node.attr("surname#{suffix}")
-              end
-            end
-          end
-        end
-      end
-
       def metadata_publisher(node, xml)
         xml.contributor do |c|
           c.role **{ type: "publisher" }

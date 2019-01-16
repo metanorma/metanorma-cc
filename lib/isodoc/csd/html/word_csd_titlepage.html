@@ -10,21 +10,19 @@ style='mso-no-proof:yes'>{{ tc | join: "/" }}</span></p>
 style='mso-bidi-font-weight:normal'><span lang="EN-GB" style='font-size:24.0pt'>{{ doctitle }}</span>
 </b><br/><span lang="EN-GB" style='font-size:16.0pt'>{{ docsubtitle }}</span></p>
 
-  {% capture tags %}
-  {% for tag in contributors %}
-    {{ tag[0] }}
-  {% endfor %}
+{% capture tags %}
+{% for tag in roles_authors_affiliations %}
+  {{ tag[0] }}
+{% endfor %}
 {% endcapture %}
+
 {% assign sortedtags = tags | split:' ' | sort %}
 
   {% for tag in sortedtags %}
   <p class="MsoNormal" align="center" style='text-align:center'>
-    {% if contributors[tag].size > 1 %}
-    {{ tag | capitalize }}s:
-    {% else %}
-    {{ tag | capitalize }}:
-    {% endif %}
-    {{ contributors[tag] | join: ", " }}
+{% for affiliation in roles_authors_affiliations[tag] %}
+<span class="person {{ tag }}">{{ affiliation[1] | join: "," }}{% if affiliation[0].size > 0 %}, {{affiliation[0]}}{% endif %}: <span class="role">{{ tag | capitalize }}</span></span>
+{% endfor %}
   </p>
   {% endfor %}
 

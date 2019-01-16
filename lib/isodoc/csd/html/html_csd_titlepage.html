@@ -36,7 +36,7 @@
   </div>
 
 {% capture tags %}
-{% for tag in contributors %}
+{% for tag in roles_authors_affiliations %}
   {{ tag[0] }}
 {% endfor %}
 {% endcapture %}
@@ -46,10 +46,12 @@
   {% for tag in sortedtags %}
   <div class="coverpage-contributors">
     <div class="group {{ tag }}">
-    {% for person in contributors[tag] %}
-    <span class="person {{ tag }}">{{ person }}<span class="role">{{ tag | capitalize }}</span></span>
-    {% endfor %}
-    </div>
+{% for affiliation in roles_authors_affiliations[tag] %}
+    {% for author in affiliation[1] %}
+    <span class="person {{ tag }}">{{ author }}<span class="role">{{ tag | capitalize }}</span></span>
+{% endfor %}
+<div class="affiliation">{{affiliation[0]}}</div>
+{% endfor %}
   </div>
   {% endfor %}
 

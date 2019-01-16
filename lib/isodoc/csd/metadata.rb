@@ -25,7 +25,7 @@ module IsoDoc
       def author(isoxml, _out)
         tc = isoxml.at(ns("//bibdata/editorialgroup/technical-committee"))
         set(:tc, tc.text) if tc
-        set(:contributors, personal_authors(isoxml))
+        personal_authors(isoxml)
       end
 
       def personal_authors(isoxml)
@@ -34,24 +34,11 @@ module IsoDoc
           inject([]) { |m, t| m << t.value }
         roles.uniq.sort.each do |r|
           names = isoxml.xpath(ns("//bibdata/contributor[role/@type = '#{r}']"\
-                                    "/person/name"))
-          persons[r] = extract_person_names(names) unless names.empty?
+                                    "/person"))
+          persons[r] = extract_person_names_affiliations(names) unless names.empty?
         end
-        persons
-      end
-
-      def extract_person_names(authors)
-        ret = []
-        authors.each do |a|
-          if a.at(ns("./completename"))
-            ret << a.at(ns("./completename")).text
-          else
-            fn = a.xpath(ns("./forename")).inject([]) { |m, f| m << f.text }
-            surname = a&.at(ns("./surname"))&.text
-            ret << fn.join(" ") + " " + surname
-          end
-        end
-        ret
+        set(:roles_authors_affiliations, persons)
+        super
       end
 
       def docid(isoxml, _out)

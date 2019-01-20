@@ -620,11 +620,23 @@ td.example {
     margin: 2em 0 1em 0;
 }
 
+.example {
+    background-color: #e1eef1;
+    padding: 0.5em;
+    margin: 2em 0 1em 0;
+    text-align: left;
+    padding-left: 2em;
+}
+
+.example p {
+    margin: 0;
+}
+
 .example .example-title {
     font-weight: 700;
     text-transform: uppercase;
-    text-align: center;
     margin-top:0;
+    margin-left:-1.5em;
 }
 
 /*

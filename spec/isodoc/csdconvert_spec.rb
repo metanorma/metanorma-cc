@@ -9,6 +9,11 @@ RSpec.describe Asciidoctor::Csd do
 <bibdata type="standard">
   <title language="en" format="plain">Main Title</title>
   <docidentifier>CC/WD 1000:2001</docidentifier>
+  <edition>2</edition>
+  <version>
+  <revision-date>2000-01-01</revision-date>
+  <draft>3.4</draft>
+</version>
   <contributor>
     <role type="author"/>
     <organization>
@@ -55,16 +60,12 @@ RSpec.describe Asciidoctor::Csd do
   <editorialgroup>
     <technical-committee type="A">TC</technical-committee>
   </editorialgroup>
-</bibdata><version>
-  <edition>2</edition>
-  <revision-date>2000-01-01</revision-date>
-  <draft>3.4</draft>
-</version>
+</bibdata>
 <sections/>
 </csd-standard>
     INPUT
     expect(htmlencode(Hash[csdc.info(docxml, nil).sort].to_s)).to be_equivalent_to <<~"OUTPUT"
-    {:accesseddate=>"XXX", :authors=>["Fred Flintstone", "Barney Rubble"], :authors_affiliations=>{""=>["Fred Flintstone"], "Bedrock Inc."=>["Barney Rubble"]}, :confirmeddate=>"XXX", :createddate=>"XXX", :docnumber=>"CC/WD 1000:2001", :doctitle=>"Main Title", :doctype=>"Standard", :docyear=>"2001", :draft=>"3.4", :draftinfo=>" (draft 3.4, 2000-01-01)", :editorialgroup=>[], :ics=>"XXX", :implementeddate=>"XXX", :issueddate=>"XXX", :obsoleteddate=>"XXX", :obsoletes=>nil, :obsoletes_part=>nil, :publisheddate=>"XXX", :receiveddate=>"XXX", :revdate=>"2000-01-01", :roles_authors_affiliations=>{"author"=>{"Bedrock Inc."=>["Barney Rubble"]}, "editor"=>{""=>["Fred Flintstone"]}}, :sc=>"XXXX", :secretariat=>"XXXX", :status=>"Working Draft", :tc=>"TC", :unpublished=>true, :updateddate=>"XXX", :wg=>"XXXX"}
+    {:accesseddate=>"XXX", :authors=>["Fred Flintstone", "Barney Rubble"], :authors_affiliations=>{""=>["Fred Flintstone"], "Bedrock Inc."=>["Barney Rubble"]}, :confirmeddate=>"XXX", :createddate=>"XXX", :docnumber=>"CC/WD 1000:2001", :doctitle=>"Main Title", :doctype=>"Standard", :docyear=>"2001", :draft=>"3.4", :draftinfo=>" (draft 3.4, 2000-01-01)", :edition=>"2", :editorialgroup=>[], :ics=>"XXX", :implementeddate=>"XXX", :issueddate=>"XXX", :obsoleteddate=>"XXX", :obsoletes=>nil, :obsoletes_part=>nil, :publisheddate=>"XXX", :receiveddate=>"XXX", :revdate=>"2000-01-01", :roles_authors_affiliations=>{"author"=>{"Bedrock Inc."=>["Barney Rubble"]}, "editor"=>{""=>["Fred Flintstone"]}}, :sc=>"XXXX", :secretariat=>"XXXX", :status=>"Working Draft", :tc=>"TC", :unpublished=>true, :updateddate=>"XXX", :wg=>"XXXX"}
     OUTPUT
   end
 

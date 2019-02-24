@@ -579,7 +579,7 @@ p.Biblio:before, p.NormRef:before {
     overflow: auto;
 }
 
-.FigureTitle {
+.FigureTitle, .SourceTitle, .AdmonitionTitle {
     font-weight: 700;
     font-size: 1em;
     text-align: center;

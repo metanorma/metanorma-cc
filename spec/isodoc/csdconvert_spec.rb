@@ -125,7 +125,7 @@ RSpec.describe Asciidoctor::Csd do
                <p class="zzSTDTitle1"/>
                <div id="H"><h1>1.&#160; Terms and definitions</h1><p>For the purposes of this document,
            the following terms and definitions apply.</p>
-       <p class="TermNum" id="J">1.1</p>
+       <p class="TermNum" id="J">1.1.</p>
          <p class="Terms" style="text-align:left;">Term2</p>
        </div>
              </div>
@@ -168,7 +168,7 @@ RSpec.describe Asciidoctor::Csd do
                </div>
                <div id="H"><h1>2.&#160; Terms and definitions</h1><p>For the purposes of this document, the terms and definitions
          given in <a href="#ISO712">ISO 712</a> and the following apply.</p>
-       <p class="TermNum" id="J">2.1</p>
+       <p class="TermNum" id="J">2.1.</p>
                 <p class="Terms" style="text-align:left;">Term2</p>
               </div>
              </div>
@@ -210,7 +210,7 @@ RSpec.describe Asciidoctor::Csd do
                <p class="zzSTDTitle1"/>
                <div id="H"><h1>1.&#160; Terms and definitions</h1><p>For the purposes of this document,
            the following terms and definitions apply.</p>
-       <p class="TermNum" id="J">1.1</p>
+       <p class="TermNum" id="J">1.1.</p>
          <p class="Terms" style="text-align:left;">Term2</p>
        </div>
              </div>
@@ -232,7 +232,7 @@ RSpec.describe Asciidoctor::Csd do
                   <p class="zzSTDTitle1"/>
                   <div id="H"><h1>1.&#xA0; Terms and definitions</h1><p>For the purposes of this document,
               the following terms and definitions apply.</p>
-          <p class="TermNum" id="J">1.1&#xA0;<p class="Terms" style="text-align:left;">Term2</p></p>
+          <p class="TermNum" id="J">1.1.&#xA0;<p class="Terms" style="text-align:left;">Term2</p></p>
 
           </div>
                 </div>
@@ -330,7 +330,7 @@ RSpec.describe Asciidoctor::Csd do
            the following terms and definitions apply.</p>
        <div id="I">
           <h2>3.1. Normal Terms</h2>
-          <p class="TermNum" id="J">3.1.1</p>
+          <p class="TermNum" id="J">3.1.1.</p>
           <p class="Terms" style="text-align:left;">Term2</p>
 
         </div><div id="K"><h2>3.2. Symbols and abbreviated terms</h2>

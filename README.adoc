@@ -1,8 +1,8 @@
 = AsciiCSD: Metanorma processor for CSD standards
 
 image:https://img.shields.io/gem/v/metanorma-csd.svg["Gem Version", link="https://rubygems.org/gems/metanorma-csd"]
-image:https://img.shields.io/travis/riboseinc/metanorma-csd/master.svg["Build Status", link="https://travis-ci.org/riboseinc/metanorma-csd"]
-image:https://codeclimate.com/github/riboseinc/metanorma-csd/badges/gpa.svg["Code Climate", link="https://codeclimate.com/github/riboseinc/metanorma-csd"]
+image:https://img.shields.io/travis/metanorma/metanorma-csd/master.svg["Build Status", link="https://travis-ci.org/metanorma/metanorma-csd"]
+image:https://codeclimate.com/github/metanorma/metanorma-csd/badges/gpa.svg["Code Climate", link="https://codeclimate.com/github/metanorma/metanorma-csd"]
 
 _Formerly known as_ `asciidoctor-csd`.
 
@@ -13,9 +13,9 @@ WARNING: This gem is still under development.
 This gem processes http://asciidoctor.org/[Asciidoctor] documents following
 a template for generating CSD International Standards.
 
-The gem currently inherits from the https://github.com/riboseinc/metanorma-standoc
+The gem currently inherits from the https://github.com/metanorma/metanorma-standoc
 gem, and aligns closely to it. Refer to the ISO gem documentation
-for guidance, including https://github.com/riboseinc/metanorma-iso/wiki/Guidance-for-authoring
+for guidance, including https://github.com/metanorma/metanorma-iso/wiki/Guidance-for-authoring
 
 The following outputs are generated.
 
@@ -66,13 +66,13 @@ $ asciidoctor -b csd -r 'metanorma-csd' a.adoc
 
 === Installation
 
-If you are using a Mac, the https://github.com/riboseinc/metanorma-macos-setup
+If you are using a Mac, the https://github.com/metanorma/metanorma-macos-setup
 repository has instructions on setting up your machine to run Metanorma
 scripts such as this one. You need only run the following in a Terminal console:
 
 [source,console]
 ----
-$ bash <(curl -s https://raw.githubusercontent.com/riboseinc/metanorma-macos-setup/master/metanorma-setup)
+$ bash <(curl -s https://raw.githubusercontent.com/metanorma/metanorma-macos-setup/master/metanorma-setup)
 $ gem install metanorma-csd
 ----
 
@@ -90,7 +90,7 @@ https://nodejs.org/en/download/package-manager/ . (For Mac, `brew install node`)
 * Install npm: https://docs.npmjs.com/getting-started/installing-node
 * Install puppeteer: `npm install -g --save --save-exact puppeteer`
 
-The https://github.com/riboseinc/metanorma-macos-setup script includes Puppeteer
+The https://github.com/metanorma/metanorma-macos-setup script includes Puppeteer
 installation.
 
 == Approach
@@ -98,7 +98,7 @@ installation.
 === Document model
 
 The CSD Standard Document model is an instance of the
-https://github.com/riboseinc/isodoc-models[StandardDocument model].
+https://github.com/metanorma/metanorma-model-standoc[StandardDocument model].
 
 The CSD format ("CSD XML") intends to introduce rigour into the CSD
 standards authoring process, and is prescribed in a separate document.
@@ -123,7 +123,7 @@ tables etc, and automatically generating references and citations.
 === Common attributes
 
 The gem relies on Asciidoctor document attributes to provide necessary
-metadata about the document. The https://github.com/riboseinc/metanorma-standoc[metanorma-standoc]
+metadata about the document. The https://github.com/metanorma/metanorma-standoc[metanorma-standoc]
 gem documents the Asciidoctor document attributes common to all metanorma gems. These include:
 
 `:edition:`:: The document edition
@@ -186,7 +186,7 @@ they are coded as an `editor`; they can also be represented as an `author`.
 ////
 == Asciidoctor features specific to CSD
 
-The https://github.com/riboseinc/metanorma-standoc[metanorma-standoc]
+The https://github.com/metanorma/metanorma-standoc[metanorma-standoc]
 gem documents the customisations of Asciidoctor markup common to all metanorma gems.
 The following markup is specific to this gem:
 
@@ -195,9 +195,9 @@ The following markup is specific to this gem:
 == Data Models
 
 The CSD Standard Document format is an instance of the
-https://github.com/riboseinc/isodoc-models[StandardDocument model]. Details of
+https://github.com/metanorma/metanorma-model-standoc[StandardDocument model]. Details of
 this general model can be found on its page. Details of the CSD modifications
-to this general model can be found on the https://github.com/riboseinc/csd[CSD model]
+to this general model can be found on the https://github.com/metanorma/metanorma-model-csd[CSD model]
 repository.
 
 == Examples

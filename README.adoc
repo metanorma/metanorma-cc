@@ -165,7 +165,7 @@ other committees are added as `_3`, `_4`...
 `:technical-committee-type_2:`:: The type of a second relevant CSD technical committee;
 other committees are added as `_3`, `_4`...
 
-`:language:` :: The language of the document (only `en` for now)  (mandatory)
+`:language:` :: The language of the document (only `en` for now)  
 
 
 The attribute `:draft:`, if present, includes review notes in the XML output;

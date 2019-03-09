@@ -30,7 +30,7 @@ Clone the Metanorma-CSD repository and change into the directory with the exampl
 
 [source,console]
 --
-git clone https://github.com/riboseinc/metanorma-csd.git
+git clone https://github.com/metanorma/metanorma-csd.git
 cd /spec/examples/
 --
 

@@ -43,8 +43,8 @@
 
 {% assign sortedtags = tags | split:' ' | sort %}
 
-  {% for tag in sortedtags %}
   <div class="coverpage-contributors">
+  {% for tag in sortedtags %}
     <div class="group {{ tag }}">
 {% for affiliation in roles_authors_affiliations[tag] %}
     {% for author in affiliation[1] %}

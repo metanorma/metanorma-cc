@@ -2,6 +2,7 @@
 
 image:https://img.shields.io/gem/v/metanorma-csd.svg["Gem Version", link="https://rubygems.org/gems/metanorma-csd"]
 image:https://img.shields.io/travis/metanorma/metanorma-csd/master.svg["Build Status", link="https://travis-ci.org/metanorma/metanorma-csd"]
+image:https://ci.appveyor.com/api/projects/status/t3h1p2ycut673n8j?svg=true["Appveyor Build Status", link="https://ci.appveyor.com/project/ribose/metanorma-csd"]
 image:https://codeclimate.com/github/metanorma/metanorma-csd/badges/gpa.svg["Code Climate", link="https://codeclimate.com/github/metanorma/metanorma-csd"]
 
 _Formerly known as_ `asciidoctor-csd`.
@@ -93,115 +94,8 @@ https://nodejs.org/en/download/package-manager/ . (For Mac, `brew install node`)
 The https://github.com/metanorma/metanorma-macos-setup script includes Puppeteer
 installation.
 
-== Approach
+== Documentation
 
-=== Document model
-
-The CSD Standard Document model is an instance of the
-https://github.com/metanorma/metanorma-model-standoc[StandardDocument model].
-
-The CSD format ("CSD XML") intends to introduce rigour into the CSD
-standards authoring process, and is prescribed in a separate document.
-
-=== Asciidoctor
-
-Asciidoctor has been selected as the authoring tool to generate the document
-model representation of CSD standards. It is a document formatting tool like
-Markdown and DocBook, which combines the relative ease of use of the former
-(using relatively lightweight markup), and the rigour and expressively of the
-latter (it has a well-defined syntax, and was in fact initially developed as a
-DocBook document authoring tool). Asciidoctor has built-in capability to output
-Text, DocBook and HTML; so it can be used to preview the file as it is being
-authored.
-
-Generating documents via a document model substantially automated formatting
-associated with the document, including automating numbering of headings, figures,
-tables etc, and automatically generating references and citations.
-
-== Document Attributes
-
-=== Common attributes
-
-The gem relies on Asciidoctor document attributes to provide necessary
-metadata about the document. The https://github.com/metanorma/metanorma-standoc[metanorma-standoc]
-gem documents the Asciidoctor document attributes common to all metanorma gems. These include:
-
-`:edition:`:: The document edition
-
-`:revdate:`:: The date the document was last updated
-
-`:copyright-year:`:: The year which will be claimed as when the copyright for
-the document was issued
-
-`:title:`:: The main component of the English title of the document
-(mandatory). (The first line of the AsciiDoc document, which contains the title
-introduced with `=`, is ignored)
-
-`:doctype:`:: The document type (see _CSD deliverables: The different types of
-CSD publications_) (mandatory). Note that the document types are reflected in the
-document identifier. The permitted types are:
-+
---
-standard:: Standard (no suffix on identifier; e.g. `CC 1`)
-directive:: Directive (suffix `DIR`, e.g. `CC/DIR 1`)
-guide:: Guide (suffix `Guide`)
-specification:: Specification (suffix `S`)
-report:: Report (suffix `R`)
-administrative:: Administrative (suffix `A`)
-amendment:: Amendment (suffix `Amd`)
-technical corrigendum:: Technical Corrigendum (suffix `Cor`)
-advisory:: Advisory (suffix `Adv`)
---
-
-`:status:`:: The document status. The permitted types are: `proposal`,
-`working-draft`, `committee-draft`, `draft-standard`, `final-draft`,
-`published`, `withdrawn`.
-
-`:technical-committee:`:: The name of the relevant CSD technical committee
-`:technical-committee-type:`:: The type of the relevant CSD technical committee
-(mandatory): `technical`, `provisional`
-`:technical-committee_2:`:: The name of a second relevant CSD technical committee;
-other committees are added as `_3`, `_4`...
-`:technical-committee-type_2:`:: The type of a second relevant CSD technical committee;
-other committees are added as `_3`, `_4`...
-
-`:language:` :: The language of the document (only `en` for now)  
+See https://www.metanorma.com/author/csd/[Author CalConnect documents with Metanorma-CSD].
 
 
-The attribute `:draft:`, if present, includes review notes in the XML output;
-these are otherwise suppressed.
-
-////
-=== Attributs specific to CSD
-
-`:fullname{_i}:`:: The full name of a person who is a contributor to the document.
-A second person is indicated by using a numeric suffix: `:fullname:`, `:fullname_2:`, `fullname_3:`, &c.
-
-`:surname{_i}:`:: The surname of a person who is a contributor to the document.
-`:givenname{_i}:`:: The given name(s) of a person who is a contributor to the document.
-`:role{_i}:`:: The role of a a person who is a contributor to the document. By default,
-they are coded as an `editor`; they can also be represented as an `author`.
-////
-
-////
-== Asciidoctor features specific to CSD
-
-The https://github.com/metanorma/metanorma-standoc[metanorma-standoc]
-gem documents the customisations of Asciidoctor markup common to all metanorma gems.
-The following markup is specific to this gem:
-
-////
-
-== Data Models
-
-The CSD Standard Document format is an instance of the
-https://github.com/metanorma/metanorma-model-standoc[StandardDocument model]. Details of
-this general model can be found on its page. Details of the CSD modifications
-to this general model can be found on the https://github.com/metanorma/metanorma-model-csd[CSD model]
-repository.
-
-== Examples
-
-* link:spec/examples/rfc6350.adoc[] is an AsciiCSD version of https://tools.ietf.org/html/rfc6350[RFC 6350].
-* link:spec/examples/rfc6350.html[] is an HTML file generated from the AsciiCSD.
-* link:spec/examples/rfc6350.doc[] is a Word document generated from the AsciiCSD.

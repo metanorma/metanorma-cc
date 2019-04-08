@@ -36,7 +36,7 @@ RSpec.describe Asciidoctor::Csd do
                <surname>Rubble</surname>
              </name>
                   <affiliation>
-      <org><name>Bedrock Inc.</name></org>
+      <organization><name>Bedrock Inc.</name></organization>
       </affiliation>
            </person>
          </contributor>

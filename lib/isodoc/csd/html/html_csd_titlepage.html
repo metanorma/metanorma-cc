@@ -1,5 +1,5 @@
-<div class="document-stage-band" id="{{ status | replace: ' ', '-' | downcase }}-band">
-  <p class="document-stage">{{ status }}</p>
+<div class="document-stage-band" id="{{ stage | replace: ' ', '-' | downcase }}-band">
+  <p class="document-stage">{{ stage }}</p>
 </div>
 
 <div class="document-type-band" id="{{ doctype | replace: ' ', '-' | downcase }}-band">
@@ -64,7 +64,7 @@
       </div>
 
       <div class="coverpage-stage-block" >
-        <span class="coverpage-maturity" id="{{ status | replace: ' ', '-' | downcase }}">{% if unpublished %}{{ status }}{% endif %}</span>
+        <span class="coverpage-maturity" id="{{ stage | replace: ' ', '-' | downcase }}">{% if unpublished %}{{ stage }}{% endif %}</span>
       </div>
 
       {% if unpublished %}

@@ -27,6 +27,7 @@ module Asciidoctor
       end
 
       def metadata_committee(node, xml)
+        return unless node.attr("technical-committee")
         xml.editorialgroup do |a|
           a.technical_committee node.attr("technical-committee"),
             **attr_code(type: node.attr("technical-committee-type"))
@@ -44,7 +45,7 @@ module Asciidoctor
         unless status && ::Metanorma::Csd::DOCSTATUS.keys.include?(status)
           warn "#{status} is not a legal status"
         end
-        xml.status(**{ format: "plain" }) { |s| s << status }
+        super
       end
 
       def prefix_id(node)

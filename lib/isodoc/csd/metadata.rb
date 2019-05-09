@@ -9,7 +9,6 @@ module IsoDoc
 
       def initialize(lang, script, labels)
         super
-        set(:status, "XXX")
         set(:tc, "XXXX")
       end
 
@@ -23,7 +22,7 @@ module IsoDoc
       end
 
       def author(isoxml, _out)
-        tc = isoxml.at(ns("//bibdata/editorialgroup/technical-committee"))
+        tc = isoxml.at(ns("//bibdata/ext/editorialgroup/technical-committee"))
         set(:tc, tc.text) if tc
         personal_authors(isoxml)
       end
@@ -49,10 +48,6 @@ module IsoDoc
         else
           set(:docnumber, docnumber.text)
         end
-      end
-
-      def status_print(status)
-        status.split(/-/).map{ |w| w.capitalize }.join(" ")
       end
 
       def status_abbr(status)

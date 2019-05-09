@@ -4,7 +4,7 @@ module Asciidoctor
   module Csd
     class Converter < Standoc::Converter
       def section_validate(doc)
-        advisory = doc.root.at("//bibdata[@type = 'advisory']")
+        advisory = doc.root.at("//bibdata/ext[doctype = 'advisory']")
         symbols_validate(doc.root) unless advisory
         sections_sequence_validate(doc.root) unless advisory
         super

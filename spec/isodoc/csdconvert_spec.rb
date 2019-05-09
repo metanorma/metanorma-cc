@@ -9,11 +9,6 @@ RSpec.describe Asciidoctor::Csd do
 <bibdata type="standard">
   <title language="en" format="plain">Main Title</title>
   <docidentifier>CC/WD 1000:2001</docidentifier>
-  <edition>2</edition>
-  <version>
-  <revision-date>2000-01-01</revision-date>
-  <draft>3.4</draft>
-</version>
   <contributor>
     <role type="author"/>
     <organization>
@@ -46,9 +41,16 @@ RSpec.describe Asciidoctor::Csd do
       <name>CalConnect</name>
     </organization>
   </contributor>
+  <edition>2</edition>
+  <version>
+  <revision-date>2000-01-01</revision-date>
+  <draft>3.4</draft>
+</version>
   <language>en</language>
   <script>Latn</script>
-  <status format="plain">working-draft</status>
+  <status>
+    <stage>working-draft</stage>
+  </status>
   <copyright>
     <from>2001</from>
     <owner>
@@ -57,15 +59,18 @@ RSpec.describe Asciidoctor::Csd do
       </organization>
     </owner>
   </copyright>
+  <ext>
+  <doctype>standard</doctype>
   <editorialgroup>
     <technical-committee type="A">TC</technical-committee>
   </editorialgroup>
+  </ext>
 </bibdata>
 <sections/>
 </csd-standard>
     INPUT
     expect(htmlencode(Hash[csdc.info(docxml, nil).sort].to_s)).to be_equivalent_to <<~"OUTPUT"
-    {:accesseddate=>"XXX", :authors=>["Fred Flintstone", "Barney Rubble"], :authors_affiliations=>{""=>["Fred Flintstone"], "Bedrock Inc."=>["Barney Rubble"]}, :circulateddate=>"XXX", :confirmeddate=>"XXX", :copieddate=>"XXX", :createddate=>"XXX", :docnumber=>"CC/WD 1000:2001", :doctitle=>"Main Title", :doctype=>"Standard", :docyear=>"2001", :draft=>"3.4", :draftinfo=>" (draft 3.4, 2000-01-01)", :edition=>"2", :editorialgroup=>[], :ics=>"XXX", :implementeddate=>"XXX", :issueddate=>"XXX", :obsoleteddate=>"XXX", :obsoletes=>nil, :obsoletes_part=>nil, :publisheddate=>"XXX", :receiveddate=>"XXX", :revdate=>"2000-01-01", :roles_authors_affiliations=>{"author"=>{"Bedrock Inc."=>["Barney Rubble"]}, "editor"=>{""=>["Fred Flintstone"]}}, :sc=>"XXXX", :secretariat=>"XXXX", :status=>"Working Draft", :tc=>"TC", :transmitteddate=>"XXX", :unchangeddate=>"XXX", :unpublished=>true, :updateddate=>"XXX", :wg=>"XXXX"}
+    {:accesseddate=>"XXX", :authors=>["Fred Flintstone", "Barney Rubble"], :authors_affiliations=>{""=>["Fred Flintstone"], "Bedrock Inc."=>["Barney Rubble"]}, :circulateddate=>"XXX", :confirmeddate=>"XXX", :copieddate=>"XXX", :createddate=>"XXX", :docnumber=>"CC/WD 1000:2001", :doctitle=>"Main Title", :doctype=>"Standard", :docyear=>"2001", :draft=>"3.4", :draftinfo=>" (draft 3.4, 2000-01-01)", :edition=>"2", :implementeddate=>"XXX", :issueddate=>"XXX", :obsoleteddate=>"XXX", :publisheddate=>"XXX", :receiveddate=>"XXX", :revdate=>"2000-01-01", :roles_authors_affiliations=>{"author"=>{"Bedrock Inc."=>["Barney Rubble"]}, "editor"=>{""=>["Fred Flintstone"]}}, :stage=>"Working Draft", :tc=>"TC", :transmitteddate=>"XXX", :unchangeddate=>"XXX", :unpublished=>true, :updateddate=>"XXX"}
     OUTPUT
   end
 

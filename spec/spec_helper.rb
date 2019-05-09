@@ -76,6 +76,9 @@ BLANK_HDR = <<~"HDR"
 
          <language>en</language>
          <script>Latn</script>
+        <status>
+          <stage>published</stage>
+        </status>
 
          <copyright>
            <from>#{Time.new.year}</from>
@@ -85,9 +88,9 @@ BLANK_HDR = <<~"HDR"
              </organization>
            </owner>
          </copyright>
-         <editorialgroup>
-           <technical-committee/>
-         </editorialgroup>
+         <ext>
+          <doctype>standard</doctype>
+        </ext>
        </bibdata>
 HDR
 

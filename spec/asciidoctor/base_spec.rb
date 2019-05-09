@@ -83,7 +83,7 @@ RSpec.describe Asciidoctor::Csd do
     INPUT
 <?xml version="1.0" encoding="UTF-8"?>
 <csd-standard xmlns="https://www.calconnect.org/standards/csd">
-<bibdata type="directive">
+<bibdata type="standard">
   <title language="en" format="text/plain">Main Title</title>
   <docidentifier type="csd">CC/DIR/FDS 1000:2001</docidentifier>
   <docnumber>1000</docnumber>
@@ -122,7 +122,10 @@ RSpec.describe Asciidoctor::Csd do
   </contributor>
   <language>en</language>
   <script>Latn</script>
-  <status format="plain">final-draft</status>
+  <status>
+    <stage>final-draft</stage>
+    <iteration>3</iteration>
+  </status>
   <copyright>
     <from>2001</from>
     <owner>
@@ -131,9 +134,12 @@ RSpec.describe Asciidoctor::Csd do
       </organization>
     </owner>
   </copyright>
+  <ext>
+  <doctype>directive</doctype>
   <editorialgroup>
     <technical-committee type="provisional">TC</technical-committee>
   </editorialgroup>
+  </ext>
 </bibdata>
 <sections/>
 </csd-standard>
@@ -162,7 +168,7 @@ RSpec.describe Asciidoctor::Csd do
     INPUT
        <?xml version="1.0" encoding="UTF-8"?>
        <csd-standard xmlns="https://www.calconnect.org/standards/csd">
-       <bibdata type="technical-corrigendum">
+       <bibdata type="standard">
          <title language="en" format="text/plain">Main Title</title>
          <docidentifier type="csd">CC/Cor 1000</docidentifier>
          <docnumber>1000</docnumber>
@@ -181,7 +187,10 @@ RSpec.describe Asciidoctor::Csd do
          </contributor>
          <language>en</language>
          <script>Latn</script>
-         <status format="plain">published</status>
+         <status>
+           <stage>published</stage>
+           <iteration>3</iteration>
+         </status>
          <copyright>
            <from>#{Time.now.year}</from>
            <owner>
@@ -190,10 +199,13 @@ RSpec.describe Asciidoctor::Csd do
              </organization>
            </owner>
          </copyright>
+         <ext>
+         <doctype>technical-corrigendum</doctype>
          <editorialgroup>
            <technical-committee type="provisional">TC 788</technical-committee>
            <technical-committee type="technical">TC 789</technical-committee>
          </editorialgroup>
+         </ext>
        </bibdata>
        <sections/>
        </csd-standard>
@@ -209,11 +221,6 @@ RSpec.describe Asciidoctor::Csd do
       :novalid:
       :docnumber: 1000
       :doctype: technical-corrigendum
-      :edition: 2
-      :technical-committee: TC 788
-      :technical-committee-type: provisional
-      :technical-committee_2: TC 789
-      :technical-committee-type_2: technical
       :secretariat: SECRETARIAT
       :status: pizza
       :iteration: 3
@@ -222,11 +229,10 @@ RSpec.describe Asciidoctor::Csd do
     INPUT
        <?xml version="1.0" encoding="UTF-8"?>
        <csd-standard xmlns="https://www.calconnect.org/standards/csd">
-       <bibdata type="technical-corrigendum">
+       <bibdata type="standard">
          <title language="en" format="text/plain">Main Title</title>
          <docidentifier type="csd">CC/Cor 1000</docidentifier>
          <docnumber>1000</docnumber>
-         <edition>2</edition>
          <contributor>
            <role type="author"/>
            <organization>
@@ -241,7 +247,10 @@ RSpec.describe Asciidoctor::Csd do
          </contributor>
          <language>en</language>
          <script>Latn</script>
-         <status format="plain">pizza</status>
+         <status>
+           <stage>pizza</stage>
+           <iteration>3</iteration>
+         </status>
          <copyright>
            <from>#{Time.now.year}</from>
            <owner>
@@ -250,10 +259,9 @@ RSpec.describe Asciidoctor::Csd do
              </organization>
            </owner>
          </copyright>
-         <editorialgroup>
-           <technical-committee type="provisional">TC 788</technical-committee>
-           <technical-committee type="technical">TC 789</technical-committee>
-         </editorialgroup>
+         <ext>
+         <doctype>technical-corrigendum</doctype>
+         </ext>
        </bibdata>
        <sections/>
        </csd-standard>

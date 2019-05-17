@@ -4,6 +4,7 @@ require "isodoc/csd/word_convert"
 require "metanorma/csd"
 require "asciidoctor/standoc/converter"
 require "fileutils"
+require_relative "validate"
 require_relative "validate_section"
 require_relative "front"
 

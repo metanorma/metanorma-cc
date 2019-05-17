@@ -3,6 +3,32 @@ require "fileutils"
 
 RSpec.describe Asciidoctor::Csd do
 
+  it "Warns of illegal doctype" do
+    expect { Asciidoctor.convert(<<~"INPUT", backend: :csd, header_footer: true) }.to output(/pizza is not a legal document type/).to_stderr
+  = Document title
+  Author
+  :docfile: test.adoc
+  :nodoc:
+  :no-isobib:
+  :doctype: pizza
+
+  text
+  INPUT
+end
+
+  it "Warns of illegal status" do
+    expect { Asciidoctor.convert(<<~"INPUT", backend: :csd, header_footer: true) }.to output(/pizza is not a recognised status/).to_stderr
+  = Document title
+  Author
+  :docfile: test.adoc
+  :nodoc:
+  :no-isobib:
+  :status: pizza
+
+  text
+  INPUT
+end
+
   it "does not validate section ordering if the docuemnt is advisory" do
   expect { Asciidoctor.convert(<<~"INPUT", backend: :csd, header_footer: true) }.not_to output(%r{only one Symbols and Abbreviated Terms section in the standard}).to_stderr
   = Document title

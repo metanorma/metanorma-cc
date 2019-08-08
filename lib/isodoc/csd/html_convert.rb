@@ -44,10 +44,6 @@ module IsoDoc
         end
       end
 
-      def html_toc(docxml)
-        docxml
-      end
-
       include BaseConvert
     end
   end

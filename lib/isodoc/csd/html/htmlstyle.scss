@@ -1,339 +1,4 @@
-/*
-    0 CSS RESET
-*/
-
-/* http://meyerweb.com/eric/tools/css/reset/
-   v2.0 | 20110126
-   License: none (public domain)
-*/
-
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-        margin: 0;
-        padding: 0;
-}
-
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-        border: 0;
-        font-size: 100%;
-}
-
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, tt, var,
-b, u, i, center,
-dl, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-        vertical-align: baseline;
-}
-
-
-html, body, div, span, applet, object, iframe,
-p, blockquote,
-a, abbr, acronym, address, big, cite,
-del, dfn, em, img, ins, q, s,
-small, strike, strong, sub, sup, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-  font-family: $bodyfont;
-}
-
-code, pre, tt, kbd, samp {
-  font-family: $monospacefont;
-  font-variant-ligatures: none;
-}
-
-code *, pre *, tt *, kbd *, samp * {
-  font-family: $monospacefont !important;
-  font-variant-ligatures: none;
-}
-
-h1, h2, h3, h4, h5, h6, .h2Annex {
-  font-family: $headerfont;
-}
-
-dl {
-  display: grid;
-  grid-template-columns: max-content auto;
-}
-
-dt {
-  grid-column-start: 1;
-}
-
-dd {
-  grid-column-start: 2;
-}
-
-dd p, dt p {
-  margin-top: 0px;
-}
-
-
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
-	display: block;
-}
-body {
-	line-height: 1;
-}
-blockquote, q {
-	quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
-}
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
-}
-
-
-/*
-    1. HTML & Body
-*/
-
-  body {
-    margin: 0;
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 100%;
-    color: #1d1d1d;
-    font-weight: 300;
-    font-size: 15px;
-    line-height: 1.4em;
-    background-color: #ffffff;
-  }
-
-  main {margin: 0 3em 0 6em;}
-
-  #toc{
-    font-family: $bodyfont;
-    font-weight: 400;
-  }
-
-/*
-    2. Responsive navigation layout
-*/
-
-
-@media screen and (min-width: 768px) {
-    nav {
-        position: fixed;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        width: 323px;
-        font-size: 0.9em;
-        overflow: auto;
-        padding: 0 0 0 45px;
-        margin-right: 30px;
-        background-color:#f7f7f7;
-    }
-
-    #toggle {
-        position: fixed;
-        height: 100%;
-        width: 30px;
-        background-color:#1d1d1d;
-        color: white!important;
-        cursor: pointer;
-        z-index: 100;
-    }
-
-    #toggle span {
-        text-align: center;
-        width: 100%;
-        position: absolute;
-        top: 50%;
-        transform: translate(0, -50%);
-
-    }
-
-
-    .container {
-        padding-left: 360px;
-    }
-
-    .rule.toc {
-        display: none;
-    }
-
-    h1.toc-contents {
-        margin-top: 1em;
-    }
-
-    ul#toc-list {
-        padding:0;
-        margin:0;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    #toc {
-        padding: 0 1.5em 0 1.5em;
-        overflow: visible;
-    }
-}
-
-  div.figure > img {
-    margin-left: auto;
-margin-right: auto;
-display: block;
-max-width: 100%;
-height: auto;
-  }
-
-
-#toc ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-#toc li a {
-    padding: 5px 10px;
-}
-
-#toc a {
-    color: #485094;
-    text-decoration: none;
-    display: block;
-}
-
-#toc a:hover {
-    box-shadow: none;
-    color: white;
-}
-
-#toc .h2 {
-    padding-left: 30px;
-}
-
-#toc .h3 {
-    padding-left: 50px;
-}
-
-#toc .toc-active a {
-    color: white;
-}
-
-#toc .toc-active, #toc li:hover {
-    background: #1d1d1d;
-    box-shadow: inset -5px 0px 10px -5px #1d1d1d!important;
-
-}
-
-#toc li:hover a {
-    color: white;
-}
-
-/*
-    Document types + stages
-*/
-
-.document-type-band {
-    left:0;
-    top:180px;
-    height: 100%;
-    position: fixed;
-    display: block;
-    z-index: 99;
-    /*box-shadow: -5px 0px 10px #1d1d1d*/
-
-}
-
-.document-stage-band {
-    left:0;
-    top:0;
-    height: 100%;
-    position: fixed;
-    display: block;
-    z-index: 98;
-    box-shadow: -5px 0px 10px #1d1d1d
-}
-
-.document-type {
-    position: relative;
-    width: 25px;
-}
-
-.document-stage {
-    position: relative;
-    width: 25px;
-}
-
-p.document-type, p.document-stage {
-  color: white;
-  text-transform: uppercase;
-  font-size: 0.9em;
-  font-weight: 400;
-  letter-spacing: 0.05em;
-  margin:0;
-  margin-left: 6px;
-  writing-mode:tb-rl;
-  transform:rotate(180deg);
-	white-space:nowrap;
-	display:block;
-  bottom:0;
-}
-
-p.document-type {
-    font-weight: 400;
-    height: 210px;
-}
-
-#governance-band p.document-type {
-    font-weight: 400;
-    height: 230px!important;
-}
-
-p.document-stage {
-    font-weight: 300;
-    height:160px;
-}
-
-
-$doctype-colors-list:(
+$doctype-colors-list: (
   standard: #0AC442,
   directive: #540D6E,
   guide: #D183C9,
@@ -345,16 +10,7 @@ $doctype-colors-list:(
   advisory: #BD9391
 );
 
-@each $key,$val in $doctype-colors-list{
-  ##{$key}-band {
-    background-color: #{$val};
-  }
-  ##{$key} {
-    border-bottom: solid 3px #{$val};
-  }
-}
-
-$docstage-colors-list:(
+$docstage-colors-list: (
   proposal: #39A0ED,
   working-draft: #2D7393,
   committee-draft: #2A6B7C,
@@ -365,13 +21,62 @@ $docstage-colors-list:(
   cancelled: #2E382E,
 );
 
-@each $key,$val in $docstage-colors-list{
-  ##{$key}-band {
-    background-color: #{$val};
+@import 'base_style/reset';
+@import 'base_style/typography';
+@import 'base_style/nav';
+@import 'base_style/blocks';
+@import 'base_style/bands';
+
+
+body {
+  // line-height: 1;
+
+  @include bodyStyle1(
+    $fontSize: 15px, $fontWeight: 300, $lineHeight: 1.4em,
+    $colorText: #1d1d1d, $colorBackground: #fff);
+}
+
+.container {
+  @include sidebarNavContainer(360px);
+}
+
+nav {
+  @include sidebarNav(
+    $offsetLeft: 45px,
+    $colorBg: #f7f7f7,
+    $width: 323px);
+
+  #toc {
+    @include sidebarToc();
   }
-  ##{$key} {
-    border-bottom: solid 3px #{$val};
+}
+
+#toggle {
+  @include sidebarNavToggle(
+    $colorBg: #1d1d1d,
+    $colorFg: white);
+
+  z-index: 100;
+}
+
+#toc {
+  @include toc($colorLink: #485094);
+}
+
+.rule {
+  @include rule(1px, #0e1a85, 2em 0);
+
+  &.toc {
+    @include tocSeparator();
   }
+}
+
+.document-stage-band {
+  @include docBand($order: 1, $textLength: 160px, $fontWeight: 300);
+}
+
+.document-type-band {
+  @include docBand($order: 2, $textLength: 210px, $offset: 180px);
 }
 
 .coverpage-maturity {
@@ -383,123 +88,71 @@ $docstage-colors-list:(
 }
 
 
-/*
-    3. TYPOGRAPHY
-*/
-
-/*
-    3.1 Titles
-*/
-
-  h1,h2,h3,h4,h5,h6 {
-    font-family: $headerfont;
-    color: #0e1a85;
-    font-weight: 600;
-    margin-top: 2em;
-    margin-bottom: 0.3em;
-  }
-
-  h1 {
-    font-size: 1.4em;
-    text-transform: uppercase;
-    margin-top: 2em;
-  }
-
-  h1#content {
-      margin-top: 2em;
-  }
-
-  h2 {
-    font-size: 1.3em;
-    font-weight: 400;
-  }
-
-  h3 {
-    font-size: 1.1em;
-    font-weight: 400;
-  }
-
-  /*
-  span[id^="toc"]:after {
-    float: left;
-    padding-right: 4px;
-    margin-left: -20px;
-    font-family: "Font Awesome 5 Free";
-    font-weight: 900;
-    font-size: 0.8em;
-    color: #cfcfcf;
-    content: "\f0c1";
-  }
-  */
-
-  .TermNum, .Terms, .AltTerms {
-    color: #485094;
-    font-weight: 400;
-  }
-
-  p.TermNum {
-    font-size: 0.9em;
-    line-height: 1em;
-    margin: 0;
-    margin-top: 2em;
-  }
-
-  p.Terms {
-    font-size: 1.1em;
-    line-height: 1.7em;
-    margin: 0;
-  }
-
-  /*
-  p.AltTerms {
-    font-style: italic;
-    margin: 0;
-  }
-  */
-
-span.obligation {
-    font-weight: 400;
+div.figure {
+  @include figureBlock();
 }
 
 
-/*
-    3.2 Links
-*/
 
-    a, a:visited{
-        text-decoration: none;
-        color: #485094;
-    }
+/* Titles */
 
-    a:hover {
-        color: white;
-        background: #1d1d1d;
-        box-shadow: 3px 0 0 #1d1d1d, -3px 0 0 #1d1d1d;
-        /* padding: 2px 0 2px 0; */
-    }
+h1, h2, h3, h4, h5, h6 {
+  color: #0e1a85;
+  font-weight: 600;
+  margin-top: 2em;
+  margin-bottom: 0.3em;
+}
 
-    ::selection {
-        background: #1d1d1d; /* WebKit/Blink Browsers */
-        color: white;
-      }
-      ::-moz-selection {
-        background: #1d1d1d; /* Gecko Browsers */
-        color: white;
-      }
+h1 {
+  font-size: 1.4em;
+  text-transform: uppercase;
+  margin-top: 2em;
 
-      .contact-info a:hover {
-          color: #485094;
-          text-decoration: underline;
-          background: none;
-          box-shadow: 0 0 0 0;
-      }
+  &#content {
+    margin-top: 2em;
+  }
+}
 
+h2 {
+  font-size: 1.3em;
+  font-weight: 400;
+}
+
+h3 {
+  font-size: 1.1em;
+  font-weight: 400;
+}
+
+
+/* Terms */
+
+.TermNum, .Terms, .AltTerms {
+  color: #485094;
+  font-weight: 400;
+}
+
+p.TermNum {
+  font-size: 0.9em;
+  line-height: 1em;
+  margin: 0;
+  margin-top: 2em;
+}
+
+p.Terms {
+  font-size: 1.1em;
+  line-height: 1.7em;
+  margin: 0;
+}
+
+@include elementStyles(
+  $color: #485094,
+  $colorHighlightBg: #1d1d1d,
+  $colorHighlightFg: white);
 
 
 /*
     3.3 Lists
 */
-
 
 ol {
   margin-left: 1.2em;
@@ -637,7 +290,6 @@ td.example {
 .example .example-title {
     font-weight: 700;
     text-transform: uppercase;
-    margin-top:0;
     margin-left:-1.5em;
 }
 
@@ -651,7 +303,6 @@ td.example {
 */
 
 table {
-  border-collapse: collapse;
   width: 100%;
   font-weight: 300;
   margin: 1em 0 2em 0;

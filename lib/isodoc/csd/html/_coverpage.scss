@@ -16,7 +16,7 @@
 }
 
 .coverpage-maturity {
-  @coverpageStageBlock();
+  @include coverpageStageBlock();
 }
 
 .coverpage-title {

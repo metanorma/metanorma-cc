@@ -53,8 +53,6 @@ nav {
   @include sidebarNavToggle(
     $colorBg: #1d1d1d,
     $colorFg: white);
-
-  z-index: 100;
 }
 
 #toc {

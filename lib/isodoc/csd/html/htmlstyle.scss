@@ -57,6 +57,19 @@ nav {
 
 #toc {
   @include toc($colorLink: #485094, $colorLinkActiveBg: #1d1d1d, $colorLinkActiveFg: white);
+
+  ul {
+    margin-bottom: 0.25em;
+  }
+
+  li {
+    list-style-type: none;
+
+    &:before {
+      content: " " !important;
+      display: none;
+    }
+  }
 }
 
 .rule {
@@ -169,19 +182,6 @@ main li {
   padding-left: 0.5em;
 }
 
-#toc ul {
-  margin-bottom: 0.25em;
-}
-
-#toc li {
-  list-style-type: none;
-}
-
-#toc li:before {
-  content: " ";
-  display: none;
-}
-
 
 /* Bibliograhy */
 
@@ -228,7 +228,12 @@ p.Biblio:before, p.NormRef:before {
   }
 }
 
-.Admonition {
+.blockquote, .Quote {
+  @include blockquoteBlock(#f7f7f7, $rightAlignAttribution: true);
+}
+
+.formula, .Formula {
+  @include formulaBlock(#f7f7f7);
 }
 
 
@@ -282,36 +287,12 @@ p.TableTitle {
 /* Footnotes */
 
 a.footnote-number {
-    vertical-align: super;
-    font-size: 0.8em;
+  vertical-align: super;
+  font-size: 0.8em;
 }
 
 .footnote {
-    font-size: 0.9em;
-}
-
-
-/* Blockquotes */
-
-.Quote {
-  background-color: #f7f7f7;
-  font-style: italic;
-  width: 80%;
-  padding: 1.5em;
-  margin-top: 2em;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.QuoteAttribution {
-  text-align: right;
-}
-
-
-/* Formulas */
-
-.formula, .Formula {
-  @include formulaBlock(#f7f7f7);
+  font-size: 0.9em;
 }
 
 
@@ -370,7 +351,7 @@ span.keyword {
 }
 
 
-@import '_coverpage';
+@import 'coverpage';
 
 
 // To top button

@@ -210,6 +210,15 @@ p.Biblio:before, p.NormRef:before {
   }
 }
 
+.pseudocode{
+  @include pseudocodeBlock(#f7f7f7);
+
+  .example & {
+    background: none;
+  }
+}
+
+
 .Admonition {
   @include admonitionBlock();
 }
@@ -266,7 +275,7 @@ td.example {
   margin-left:-1.5em;
 }
 
-.example .Sourcecode {
+.example .Sourcecode, .example .pseudocode {
   background: none;
 }
 

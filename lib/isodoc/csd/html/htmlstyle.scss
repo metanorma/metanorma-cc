@@ -210,6 +210,14 @@ p.Biblio:before, p.NormRef:before {
   }
 }
 
+.pseudocode{
+  @include pseudocodeBlock(#f7f7f7);
+
+  .example & {
+    background: none;
+  }
+}
+
 .Admonition {
   @include admonitionBlock();
 }

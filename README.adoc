@@ -98,4 +98,8 @@ installation.
 
 See https://www.metanorma.com/author/csd/[Author CalConnect documents with Metanorma-CSD].
 
+== Examples
+
+* Example documents are avalable at the https://github.com/metanorma/mn-samples-cc[mn-samples-cc] repository.
+* Document templates are available at the https://github.com/metanorma/mn-templates-csd[mn-templates-csd] repository.
 

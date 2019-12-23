@@ -210,7 +210,7 @@ p.Biblio:before, p.NormRef:before {
   }
 }
 
-.pseudocode{
+.pseudocode {
   @include pseudocodeBlock(#f7f7f7);
 
   .example & {

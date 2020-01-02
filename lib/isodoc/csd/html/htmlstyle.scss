@@ -222,6 +222,19 @@ p.Biblio:before, p.NormRef:before {
   @include admonitionBlock();
 }
 
+.recommend {
+  @include recommendationBlock();
+}
+
+.require {
+  @include recommendationBlock();
+}
+
+.permission {
+  @include recommendationBlock();
+}
+
+
 .Note, .Admonition {
   color: #47430c;
   padding: 0.25em;

@@ -23,7 +23,7 @@ RSpec.describe Metanorma::Csd::Processor do
   end
 
   it "generates IsoDoc XML from a blank document" do
-    expect(xmlpp(processor.input_to_isodoc(<<~"INPUT", nil))).to be_equivalent_to xmlpp(<<~"OUTPUT")
+    expect(xmlpp(strip_guid(processor.input_to_isodoc(<<~"INPUT", nil)))).to be_equivalent_to xmlpp(<<~"OUTPUT")
     #{ASCIIDOC_BLANK_HDR}
     INPUT
     #{BLANK_HDR}

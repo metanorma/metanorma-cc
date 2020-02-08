@@ -10,29 +10,17 @@ require_relative "front"
 
 module Asciidoctor
   module Csd
-    CSD_NAMESPACE = "https://www.calconnect.org/standards/csd"
 
     # A {Converter} implementation that generates CSD output, and a document
     # schema encapsulation of the document for validation
     class Converter < Standoc::Converter
+      XML_ROOT_TAG = "csd-standard".freeze
+      XML_NAMESPACE = "https://www.metanorma.com/ns/csd".freeze
 
       register_for "csd"
 
       def initialize(backend, opts)
         super
-      end
-
-      def makexml(node)
-        result = ["<?xml version='1.0' encoding='UTF-8'?>\n<csd-standard>"]
-        @draft = node.attributes.has_key?("draft")
-        result << noko { |ixml| front node, ixml }
-        result << noko { |ixml| middle node, ixml }
-        result << "</csd-standard>"
-        result = textcleanup(result)
-        ret1 = cleanup(Nokogiri::XML(result))
-        validate(ret1) unless @novalid
-        ret1.root.add_namespace(nil, CSD_NAMESPACE)
-        ret1
       end
 
       def document(node)

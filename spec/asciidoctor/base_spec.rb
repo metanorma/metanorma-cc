@@ -82,7 +82,7 @@ RSpec.describe Asciidoctor::Csd do
       :role_2: editor
     INPUT
 <?xml version="1.0" encoding="UTF-8"?>
-<csd-standard xmlns="https://www.calconnect.org/standards/csd">
+<csd-standard xmlns="https://www.metanorma.com/ns/csd">
 <bibdata type="standard">
   <title language="en" format="text/plain">Main Title</title>
   <docidentifier type="csd">CC/DIR/FDS 1000:2001</docidentifier>
@@ -168,7 +168,7 @@ RSpec.describe Asciidoctor::Csd do
       :title: Main Title
     INPUT
        <?xml version="1.0" encoding="UTF-8"?>
-       <csd-standard xmlns="https://www.calconnect.org/standards/csd">
+       <csd-standard xmlns="https://www.metanorma.com/ns/csd">
        <bibdata type="standard">
          <title language="en" format="text/plain">Main Title</title>
          <docidentifier type="csd">CC/Cor 1000</docidentifier>
@@ -230,7 +230,7 @@ RSpec.describe Asciidoctor::Csd do
       :title: Main Title
     INPUT
        <?xml version="1.0" encoding="UTF-8"?>
-       <csd-standard xmlns="https://www.calconnect.org/standards/csd">
+       <csd-standard xmlns="https://www.metanorma.com/ns/csd">
        <bibdata type="standard">
          <title language="en" format="text/plain">Main Title</title>
          <docidentifier type="csd">CC/Cor 1000</docidentifier>

@@ -50,7 +50,7 @@ module IsoDoc
         end
       end
 
-      def status_abbr(status)
+      def stage_abbr(status)
         ::Metanorma::Csd::DOCSTATUS[status] || ""
       end
 

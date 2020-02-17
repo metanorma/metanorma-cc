@@ -9,6 +9,7 @@ RSpec.describe Asciidoctor::Csd do
 <bibdata type="standard">
   <title language="en" format="plain">Main Title</title>
   <docidentifier>CC/WD 1000:2001</docidentifier>
+  <docnumber>1000</docnumber>
   <contributor>
     <role type="author"/>
     <organization>
@@ -70,7 +71,7 @@ RSpec.describe Asciidoctor::Csd do
 </csd-standard>
     INPUT
     expect(htmlencode(Hash[csdc.info(docxml, nil).sort].to_s)).to be_equivalent_to <<~"OUTPUT"
-    {:accesseddate=>"XXX", :authors=>["Fred Flintstone", "Barney Rubble"], :authors_affiliations=>{""=>["Fred Flintstone"], "Bedrock Inc."=>["Barney Rubble"]}, :circulateddate=>"XXX", :confirmeddate=>"XXX", :copieddate=>"XXX", :createddate=>"XXX", :docnumber=>"CC/WD 1000:2001", :doctitle=>"Main Title", :doctype=>"Standard", :docyear=>"2001", :draft=>"3.4", :draftinfo=>" (draft 3.4, 2000-01-01)", :edition=>"2", :implementeddate=>"XXX", :issueddate=>"XXX", :obsoleteddate=>"XXX", :publisheddate=>"XXX", :receiveddate=>"XXX", :revdate=>"2000-01-01", :roles_authors_affiliations=>{"author"=>{"Bedrock Inc."=>["Barney Rubble"]}, "editor"=>{""=>["Fred Flintstone"]}}, :stage=>"Working Draft", :tc=>"TC", :transmitteddate=>"XXX", :unchangeddate=>"XXX", :unpublished=>true, :updateddate=>"XXX"}
+    {:accesseddate=>"XXX", :authors=>["Fred Flintstone", "Barney Rubble"], :authors_affiliations=>{""=>["Fred Flintstone"], "Bedrock Inc."=>["Barney Rubble"]}, :circulateddate=>"XXX", :confirmeddate=>"XXX", :copieddate=>"XXX", :createddate=>"XXX", :docnumber=>"CC/WD 1000:2001", :docnumeric=>"1000", :doctitle=>"Main Title", :doctype=>"Standard", :docyear=>"2001", :draft=>"3.4", :draftinfo=>" (draft 3.4, 2000-01-01)", :edition=>"2", :implementeddate=>"XXX", :issueddate=>"XXX", :obsoleteddate=>"XXX", :publisheddate=>"XXX", :receiveddate=>"XXX", :revdate=>"2000-01-01", :roles_authors_affiliations=>{"author"=>{"Bedrock Inc."=>["Barney Rubble"]}, "editor"=>{""=>["Fred Flintstone"]}}, :stage=>"Working Draft", :stageabbr=>"WD", :tc=>"TC", :transmitteddate=>"XXX", :unchangeddate=>"XXX", :unpublished=>true, :updateddate=>"XXX"}
     OUTPUT
   end
 

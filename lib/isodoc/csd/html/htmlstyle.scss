@@ -202,7 +202,11 @@ p.Biblio:before, p.NormRef:before {
   @include monospaceBlockStyle();
 }
 
-.Sourcecode {
+.SourceTitle {
+  @include blockTitle();
+}
+
+pre {
   @include sourceBlock(#f7f7f7);
 
   .example & {
@@ -287,7 +291,7 @@ td.example {
   margin-left:-1.5em;
 }
 
-.example .Sourcecode, .example .pseudocode {
+.example pre, .example .pseudocode {
   background: none;
 }
 

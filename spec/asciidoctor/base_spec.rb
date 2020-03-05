@@ -279,7 +279,7 @@ RSpec.describe Asciidoctor::Csd do
       == Section 1
       INPUT
     #{BLANK_HDR}
-             <preface><foreword obligation="informative">
+             <preface><foreword id="_" obligation="informative">
          <title>Foreword</title>
          <p id="_">This is a preamble</p>
        </foreword></preface><sections>

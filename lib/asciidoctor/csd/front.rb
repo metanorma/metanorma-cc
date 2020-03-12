@@ -43,7 +43,7 @@ module Asciidoctor
       def metadata_status(node, xml)
         status = node.attr("status")
         unless status && ::Metanorma::Csd::DOCSTATUS.keys.include?(status)
-          warn "#{status} is not a legal status"
+          @log.add("Document Attributes", nil, "#{status} is not a legal status")
         end
         super
       end
@@ -70,7 +70,8 @@ module Asciidoctor
       def doctype(node)
         d = node.attr("doctype")
         unless ::Metanorma::Csd::DOCSUFFIX.keys.include?(d)
-          warn "#{d} is not a legal document type: reverting to 'standard'"
+          @log.add("Document Attributes", nil,
+                   "#{d} is not a legal document type: reverting to 'standard'")
           d = "standard"
         end
         d

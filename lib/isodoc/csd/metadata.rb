@@ -24,7 +24,7 @@ module IsoDoc
       def author(isoxml, _out)
         tc = isoxml.at(ns("//bibdata/ext/editorialgroup/technical-committee"))
         set(:tc, tc.text) if tc
-        personal_authors(isoxml)
+        super
       end
 
       def personal_authors(isoxml)

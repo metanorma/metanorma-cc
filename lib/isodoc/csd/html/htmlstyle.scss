@@ -85,9 +85,12 @@ nav {
 }
 
 .document-type-band {
-  @include docBand($order: 2, $textLength: 210px, $offset: 180px);
-}
+  @include docBand($order: 2, $offset: 180px);
 
+  .document-type {
+    top: 20px;
+  }
+}
 
 
 /* Typograpy */

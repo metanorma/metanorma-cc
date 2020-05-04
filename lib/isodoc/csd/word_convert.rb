@@ -13,9 +13,9 @@ module IsoDoc
 
       def default_fonts(options)
         {
-          bodyfont: (options[:script] == "Hans" ? '"SimSun",serif' : '"Arial",sans-serif'),
-          headerfont: (options[:script] == "Hans" ? '"SimHei",sans-serif' : '"Arial",sans-serif'),
-          monospacefont: '"Courier New",monospace'
+          bodyfont: (options[:script] == "Hans" ? '"SimSun",serif' : '"Source Sans Pro","Arial",sans-serif'),
+          headerfont: (options[:script] == "Hans" ? '"SimHei",sans-serif' : '"Source Sans Pro","Arial",sans-serif'),
+          monospacefont: '"Source Code Pro","Courier New",monospace'
         }
       end
 

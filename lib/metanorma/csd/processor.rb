@@ -2,7 +2,7 @@ require "metanorma/processor"
 
 module Metanorma
   module Csd
-    def self.pdf_fonts
+    def self.fonts_used
       %w(SourceSansPro SourceSerifPro SourceCodePro HanSans)
     end
 

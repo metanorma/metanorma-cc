@@ -332,7 +332,7 @@ RSpec.describe Asciidoctor::Csd do
     OUTPUT
     html = File.read("test.html", encoding: "utf-8")
     expect(html).to match(%r{jquery\.min\.js})
-    expect(html).to match(%r{Overpass})
+    expect(html).to match(%r{Source Code Pro})
     expect(html).to match(%r{<main class="main-section"><button})
   end
 

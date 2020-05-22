@@ -4,8 +4,8 @@ module Metanorma
   module Csd
     def self.fonts_used
       {
-        html: %w(SourceSansPro SourceSerifPro SourceCodePro HanSans)
-        doc: %w(SourceSansPro SourceSerifPro SourceCodePro HanSans)
+        html: %w(SourceSansPro SourceSerifPro SourceCodePro HanSans),
+        doc: %w(SourceSansPro SourceSerifPro SourceCodePro HanSans),
         pdf: %w(SourceSansPro SourceSerifPro SourceCodePro HanSans)
       }
     end

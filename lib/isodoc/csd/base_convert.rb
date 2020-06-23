@@ -10,7 +10,7 @@ module IsoDoc
 
       def annex_name(annex, name, div)
         div.h1 **{ class: "Annex" } do |t|
-          t << "#{anchor(annex['id'], :label)} "
+          t << "#{@xrefs.anchor(annex['id'], :label)} "
           t.br
           t.b do |b|
             name&.children&.each { |c2| parse(c2, b) }
@@ -21,6 +21,7 @@ module IsoDoc
       def i18n_init(lang, script)
         super
         @annex_lbl = "Appendix"
+        @labels["annex"] = "Appendix"
       end
       
       def cleanup(docxml)

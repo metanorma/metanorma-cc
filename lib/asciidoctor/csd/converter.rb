@@ -1,6 +1,7 @@
 require "asciidoctor"
 require "isodoc/csd/html_convert"
 require "isodoc/csd/word_convert"
+require "isodoc/csd/presentation_xml_convert"
 require "metanorma/csd"
 require "asciidoctor/standoc/converter"
 require "fileutils"
@@ -23,21 +24,12 @@ module Asciidoctor
         super
       end
 
-      def document(node)
-        init(node)
-        ret1 = makexml(node)
-        ret = ret1.to_xml(indent: 2)
-        unless node.attr("nodoc") || !node.attr("docfile")
-          filename = node.attr("docfile").gsub(/\.adoc$/, ".xml").
-            gsub(%r{^.*/}, "")
-          File.open(filename, "w") { |f| f.write(ret) }
-          html_converter(node).convert filename
-          word_converter(node).convert filename
-          pdf_converter(node).convert filename
-        end
-        @log.write(@localdir + @filename + ".err") unless @novalid
-        @files_to_delete.each { |f| FileUtils.rm f }
-        ret
+      def outputs(node, ret)
+         File.open(@filename + ".xml", "w:UTF-8") { |f| f.write(ret) }
+          presentation_xml_converter(node).convert(@filename + ".xml")
+          html_converter(node).convert(@filename + ".presentation.xml", nil, false, "#{@filename}.html")
+          doc_converter(node).convert(@filename + ".presentation.xml", nil, false, "#{@filename}.doc")
+          pdf_converter(node)&.convert(@filename + ".presentation.xml", nil, false, "#{@filename}.pdf")
       end
 
       def validate(doc)
@@ -65,8 +57,12 @@ module Asciidoctor
         IsoDoc::Csd::PdfConvert.new(html_extract_attributes(node))
       end
 
-      def word_converter(node)
+      def doc_converter(node)
         IsoDoc::Csd::WordConvert.new(doc_extract_attributes(node))
+      end
+
+      def presentation_xml_converter(node)
+        IsoDoc::Csd::PresentationXMLConvert.new(doc_extract_attributes(node))
       end
     end
   end

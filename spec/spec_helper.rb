@@ -5,16 +5,16 @@ end
 
 require "bundler/setup"
 require "asciidoctor"
-require "metanorma-csd"
-require "asciidoctor/csd"
-require "isodoc/csd/html_convert"
-require "isodoc/csd/word_convert"
+require "metanorma-cc"
+require "asciidoctor/cc"
+require "isodoc/cc/html_convert"
+require "isodoc/cc/word_convert"
 require "asciidoctor/standoc/converter"
 require "rspec/matchers"
 require "equivalent-xml"
 require "htmlentities"
 require "metanorma"
-require "metanorma/csd"
+require "metanorma/cc"
 require "rexml/document"
 
 RSpec.configure do |config|
@@ -66,7 +66,7 @@ HDR
 
 BOILERPLATE =
   HTMLEntities.new.decode(
-  File.read(File.join(File.dirname(__FILE__), "..", "lib", "asciidoctor", "csd", "boilerplate.xml"), encoding: "utf-8").
+  File.read(File.join(File.dirname(__FILE__), "..", "lib", "asciidoctor", "cc", "boilerplate.xml"), encoding: "utf-8").
   gsub(/\{\{ docyear \}\}/, Date.today.year.to_s).
   gsub(/<p>/, '<p id="_">').
   gsub(/\{% if unpublished %\}.+?\{% endif %\}/m, "").
@@ -93,7 +93,7 @@ BLANK_HDR = <<~"HDR"
        <csd-standard xmlns="https://www.metanorma.org/ns/csd">
        <bibdata type="standard">
         <title language="en" format="text/plain">Document title</title>
-         <docidentifier type="csd">CC ???</docidentifier>
+         <docidentifier type="CalConnect">CC ???</docidentifier>
          <contributor>
            <role type="author"/>
            <organization>

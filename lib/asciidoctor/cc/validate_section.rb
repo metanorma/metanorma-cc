@@ -1,7 +1,7 @@
 require "nokogiri"
 
 module Asciidoctor
-  module Csd
+  module CC
     class Converter < Standoc::Converter
       def section_validate(doc)
         advisory = doc.root.at("//bibdata/ext[doctype = 'advisory']")

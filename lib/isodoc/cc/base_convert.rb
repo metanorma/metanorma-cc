@@ -2,7 +2,7 @@ require "isodoc"
 require_relative "metadata"
 
 module IsoDoc
-  module Csd
+  module CC
   	module BaseConvert
       def metadata_init(lang, script, labels)
         @meta = Metadata.new(lang, script, labels)

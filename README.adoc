@@ -1,41 +1,22 @@
-= AsciiCSD: Metanorma processor for CSD standards
+= metanorma-cc: Metanorma processor for CalConnect standards
 
-image:https://img.shields.io/gem/v/metanorma-csd.svg["Gem Version", link="https://rubygems.org/gems/metanorma-csd"]
-image:https://github.com/metanorma/metanorma-csd/workflows/macos/badge.svg["Build Status (macOS)", link="https://github.com/metanorma/metanorma-csd/actions?workflow=macos"]
-image:https://github.com/metanorma/metanorma-csd/workflows/ubuntu/badge.svg["Build Status (ubuntu)", link="https://github.com/metanorma/metanorma-csd/actions?workflow=ubuntu"]
-image:https://github.com/metanorma/metanorma-csd/workflows/windows/badge.svg["Build Status (Windows)", link="https://github.com/metanorma/metanorma-csd/actions?workflow=windows"]
-image:https://codeclimate.com/github/metanorma/metanorma-csd/badges/gpa.svg["Code Climate", link="https://codeclimate.com/github/metanorma/metanorma-csd"]
-image:https://img.shields.io/github/issues-pr-raw/metanorma/metanorma-csd.svg["Pull Requests", link="https://github.com/metanorma/metanorma-csd/pulls"]
-image:https://img.shields.io/github/commits-since/metanorma/metanorma-csd/latest.svg["Commits since latest",link="https://github.com/metanorma/metanorma-csd/releases"]
+image:https://img.shields.io/gem/v/metanorma-cc.svg["Gem Version", link="https://rubygems.org/gems/metanorma-cc"]
+image:https://github.com/metanorma/metanorma-cc/workflows/macos/badge.svg["Build Status (macOS)", link="https://github.com/metanorma/metanorma-cc/actions?workflow=macos"]
+image:https://github.com/metanorma/metanorma-cc/workflows/ubuntu/badge.svg["Build Status (ubuntu)", link="https://github.com/metanorma/metanorma-cc/actions?workflow=ubuntu"]
+image:https://github.com/metanorma/metanorma-cc/workflows/windows/badge.svg["Build Status (Windows)", link="https://github.com/metanorma/metanorma-cc/actions?workflow=windows"]
+image:https://codeclimate.com/github/metanorma/metanorma-cc/badges/gpa.svg["Code Climate", link="https://codeclimate.com/github/metanorma/metanorma-cc"]
+image:https://img.shields.io/github/issues-pr-raw/metanorma/metanorma-cc.svg["Pull Requests", link="https://github.com/metanorma/metanorma-cc/pulls"]
+image:https://img.shields.io/github/commits-since/metanorma/metanorma-cc/latest.svg["Commits since latest",link="https://github.com/metanorma/metanorma-cc/releases"]
 
-_Formerly known as_ `asciidoctor-csd`.
+_Formerly known as_ `asciidoctor-csd`, `metanorma-csd`.
 
 == Functionality
 
 This gem processes http://asciidoctor.org/[Asciidoctor] documents following
-a template for generating CSD International Standards.
+a template for generating CalConnect Standards.
 
 The gem currently inherits from the https://github.com/metanorma/metanorma-standoc
-gem, and aligns closely to it. Refer to the ISO gem documentation
-for guidance, including https://github.com/metanorma/metanorma-iso/wiki/Guidance-for-authoring
-
-The following outputs are generated.
-
-* (Optional) An HTML preview generated directly from the Asciidoctor document,
-using native Asciidoc formatting.
-** http://asciimath.org[AsciiMathML] is to be used for mathematical formatting.
-The gem uses the https://github.com/asciidoctor/asciimath[Ruby AsciiMath parser],
-which is syntactically stricter than the common MathJax processor;
-if you do not get expected results, try bracketting terms your in AsciiMathML
-expressions.
-* an XML representation of the document, intended as a document model for CSD
-International Standards.
-* The XML representation is processed in turn to generate the following outputs
-as end deliverable CSD standard drafts.
-** HTML
-** PDF
-
-This AsciiDoc syntax for writing CSD standards is hereby named "AsciiCSD".
+gem, and aligns closely to it. Refer to the https://metanorma.com[] for guidance.
 
 == Usage
 
@@ -43,28 +24,19 @@ The preferred way to invoke this gem is via the `metanorma` script:
 
 [source,console]
 ----
-$ metanorma --type csd a.adoc                   # output HTML and PDF
-$ metanorma --type csd --extensions html a.adoc # output just HTML
-$ metanorma --type csd --extensions pdf a.adoc  # output just PDF
-$ metanorma --type csd --extensions xml a.adoc  # output CSD XML
+$ metanorma --type cc a.adoc                   # output HTML and PDF
+$ metanorma --type cc --extensions html a.adoc # output just HTML
+$ metanorma --type cc --extensions pdf a.adoc  # output just PDF
+$ metanorma --type cc --extensions xml a.adoc  # output Metanorma XML
 ----
 
-The gem translates the document into CSD XML format, and then
-validates its output against the CSD XML document model; errors are
+The gem translates the document into Metanorma XML format, and then
+validates its output against the CSD Metanorma XML document model; errors are
 reported to console against the XML, and are intended for users to
 check that they have provided all necessary components of the
 document.
 
-The gem then converts the XML into HTML and PDF.
-
-////
-The gem can also be invoked directly within asciidoctor, though this is deprecated:
-
-[source,console]
-----
-$ asciidoctor -b csd -r 'metanorma-csd' a.adoc
-----
-////
+The gem then converts the XML into output formats such as HTML and PDF.
 
 === Installation
 
@@ -75,32 +47,15 @@ scripts such as this one. You need only run the following in a Terminal console:
 [source,console]
 ----
 $ bash <(curl -s https://raw.githubusercontent.com/metanorma/metanorma-macos-setup/master/metanorma-setup)
-$ gem install metanorma-csd
+$ gem install metanorma-cc
 ----
-
-=== PDF output
-
-PDF output is generated by printing the HTML output as PDF. This is done
-within the gem, using
-https://developers.google.com/web/updates/2017/04/headless-chrome[Headless Chrome],
-via the https://github.com/GoogleChrome/puppeteer[Puppeteer] Node library.
-
-To get the PDF output working, do the following:
-
-* Install Node, with at least version 7.6.0: https://nodejs.org/en/download/,
-https://nodejs.org/en/download/package-manager/ . (For Mac, `brew install node`)
-* Install npm: https://docs.npmjs.com/getting-started/installing-node
-* Install puppeteer: `npm install -g --save --save-exact puppeteer`
-
-The https://github.com/metanorma/metanorma-macos-setup script includes Puppeteer
-installation.
 
 == Documentation
 
-See https://www.metanorma.com/author/csd/[Author CalConnect documents with Metanorma-CSD].
+See https://www.metanorma.com/author/cc/[Author CalConnect documents with Metanorma CC].
 
 == Examples
 
 * Example documents are avalable at the https://github.com/metanorma/mn-samples-cc[mn-samples-cc] repository.
-* Document templates are available at the https://github.com/metanorma/mn-templates-csd[mn-templates-csd] repository.
+* Document templates are available at the https://github.com/metanorma/mn-templates-cc[mn-templates-cc] repository.
 

@@ -2,8 +2,8 @@ require_relative "base_convert"
 require "isodoc"
 
 module IsoDoc
-  module Csd
-    # A {Converter} implementation that generates CSD output, and a document
+  module CC
+    # A {Converter} implementation that generates CC output, and a document
     # schema encapsulation of the document for validation
     class HtmlConvert < IsoDoc::HtmlConvert
       def initialize(options)
@@ -22,8 +22,8 @@ module IsoDoc
       def default_file_locations(options)
         {
           htmlstylesheet: html_doc_path("htmlstyle.scss"),
-          htmlcoverpage: html_doc_path("html_csd_titlepage.html"),
-          htmlintropage: html_doc_path("html_csd_intro.html"),
+          htmlcoverpage: html_doc_path("html_cc_titlepage.html"),
+          htmlintropage: html_doc_path("html_cc_intro.html"),
           scripts: html_doc_path("scripts.html"),
         }
       end

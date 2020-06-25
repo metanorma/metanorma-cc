@@ -1,7 +1,7 @@
 require "metanorma/processor"
 
 module Metanorma
-  module Csd
+  module CC
     def self.fonts_used
       {
         html: %w(SourceSansPro SourceSerifPro SourceCodePro HanSans),
@@ -13,9 +13,9 @@ module Metanorma
     class Processor < Metanorma::Processor
 
       def initialize
-        @short = :csd
+        @short = [:csd, :cc]
         @input_format = :asciidoc
-        @asciidoctor_backend = :csd
+        @asciidoctor_backend = :cc
       end
 
       def output_formats
@@ -27,7 +27,7 @@ module Metanorma
       end
 
       def version
-        "Metanorma::Csd #{Metanorma::Csd::VERSION}"
+        "Metanorma::CC #{Metanorma::CC::VERSION}"
       end
 
       def input_to_isodoc(file, filename)
@@ -37,13 +37,13 @@ module Metanorma
       def output(isodoc_node, inname, outname, format, options={})
         case format
         when :html
-          IsoDoc::Csd::HtmlConvert.new(options).convert(inname, isodoc_node, nil, outname)
+          IsoDoc::CC::HtmlConvert.new(options).convert(inname, isodoc_node, nil, outname)
         when :doc
-          IsoDoc::Csd::WordConvert.new(options).convert(inname, isodoc_node, nil, outname)
+          IsoDoc::CC::WordConvert.new(options).convert(inname, isodoc_node, nil, outname)
         when :pdf
-          IsoDoc::Csd::PdfConvert.new(options).convert(inname, isodoc_node, nil, outname)
+          IsoDoc::CC::PdfConvert.new(options).convert(inname, isodoc_node, nil, outname)
         when :pdf
-          IsoDoc::Csd::PresentationXMLConvert.new(options).convert(inname, isodoc_node, nil, outname)
+          IsoDoc::CC::PresentationXMLConvert.new(options).convert(inname, isodoc_node, nil, outname)
         else
           super
         end

@@ -2,7 +2,7 @@ require_relative "base_convert"
 require "isodoc"
 
 module IsoDoc
-  module Csd
+  module CC
     # A {Converter} implementation that generates CSD output, and a document
     # schema encapsulation of the document for validation
     class PdfConvert < IsoDoc::XslfoPdfConvert

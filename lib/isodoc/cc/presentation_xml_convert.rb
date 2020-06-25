@@ -2,7 +2,7 @@ require_relative "base_convert"
 require "isodoc"
 
 module IsoDoc
-  module Csd
+  module CC
     class PresentationXMLConvert < IsoDoc::PresentationXMLConvert
     end
   end

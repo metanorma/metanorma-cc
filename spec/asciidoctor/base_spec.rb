@@ -1,15 +1,15 @@
 require "spec_helper"
 require "fileutils"
 
-RSpec.describe Asciidoctor::Csd do
+RSpec.describe Asciidoctor::CC do
   it "has a version number" do
-    expect(Metanorma::Csd::VERSION).not_to be nil
+    expect(Metanorma::CC::VERSION).not_to be nil
   end
 
   #it "generates output for the Rice document" do
   #  FileUtils.rm_rf %w(spec/examples/rfc6350.doc spec/examples/rfc6350.html spec/examples/rfc6350.pdf)
   #  FileUtils.cd "spec/examples"
-  #  Asciidoctor.convert_file "rfc6350.adoc", {:attributes=>{"backend"=>"csd"}, :safe=>0, :header_footer=>true, :requires=>["metanorma-csd"], :failure_level=>4, :mkdirs=>true, :to_file=>nil}
+  #  Asciidoctor.convert_file "rfc6350.adoc", {:attributes=>{"backend"=>"cc"}, :safe=>0, :header_footer=>true, :requires=>["metanorma-cc"], :failure_level=>4, :mkdirs=>true, :to_file=>nil}
   #  FileUtils.cd "../.."
   #  expect(File.exist?("spec/examples/rfc6350.doc")).to be true
   #  expect(File.exist?("spec/examples/rfc6350.html")).to be true
@@ -17,7 +17,7 @@ RSpec.describe Asciidoctor::Csd do
   #end
 
   it "processes a blank document" do
-    expect(xmlpp(strip_guid(Asciidoctor.convert(<<~"INPUT", backend: :csd, header_footer: true)))).to be_equivalent_to xmlpp(<<~"OUTPUT")
+    expect(xmlpp(strip_guid(Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)))).to be_equivalent_to xmlpp(<<~"OUTPUT")
     #{ASCIIDOC_BLANK_HDR}
     INPUT
     #{BLANK_HDR}
@@ -28,7 +28,7 @@ RSpec.describe Asciidoctor::Csd do
 
   it "converts a blank document" do
     FileUtils.rm_f "test.html"
-    expect(xmlpp(strip_guid(Asciidoctor.convert(<<~"INPUT", backend: :csd, header_footer: true)))).to be_equivalent_to xmlpp(<<~"OUTPUT")
+    expect(xmlpp(strip_guid(Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)))).to be_equivalent_to xmlpp(<<~"OUTPUT")
       = Document title
       Author
       :docfile: test.adoc
@@ -43,7 +43,7 @@ RSpec.describe Asciidoctor::Csd do
 
   it "overrides invalid document type" do
     FileUtils.rm_f "test.html"
-    expect(xmlpp(strip_guid(Asciidoctor.convert(<<~"INPUT", backend: :csd, header_footer: true)))).to be_equivalent_to xmlpp(<<~"OUTPUT")
+    expect(xmlpp(strip_guid(Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)))).to be_equivalent_to xmlpp(<<~"OUTPUT")
       = Document title
       Author
       :docfile: test.adoc
@@ -57,7 +57,7 @@ RSpec.describe Asciidoctor::Csd do
   end
 
   it "processes default metadata for final-draft directive with copyright year" do
-    expect(xmlpp(strip_guid(Asciidoctor.convert(<<~"INPUT", backend: :csd, header_footer: true)))).to be_equivalent_to xmlpp(<<~"OUTPUT")
+    expect(xmlpp(strip_guid(Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)))).to be_equivalent_to xmlpp(<<~"OUTPUT")
       = Document title
       Author
       :docfile: test.adoc
@@ -85,7 +85,7 @@ RSpec.describe Asciidoctor::Csd do
 <csd-standard xmlns="https://www.metanorma.org/ns/csd">
 <bibdata type="standard">
   <title language="en" format="text/plain">Main Title</title>
-  <docidentifier type="csd">CC/DIR/FDS 1000:2001</docidentifier>
+  <docidentifier type="CalConnect">CC/DIR/FDS 1000:2001</docidentifier>
   <docnumber>1000</docnumber>
   <edition>2</edition>
 <version>
@@ -148,7 +148,7 @@ RSpec.describe Asciidoctor::Csd do
   end
 
   it "processes default metadata for published technical-corrigendum" do
-    expect(xmlpp(strip_guid(Asciidoctor.convert(<<~"INPUT", backend: :csd, header_footer: true)))).to be_equivalent_to xmlpp(<<~"OUTPUT")
+    expect(xmlpp(strip_guid(Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)))).to be_equivalent_to xmlpp(<<~"OUTPUT")
       = Document title
       Author
       :docfile: test.adoc
@@ -171,7 +171,7 @@ RSpec.describe Asciidoctor::Csd do
        <csd-standard xmlns="https://www.metanorma.org/ns/csd">
        <bibdata type="standard">
          <title language="en" format="text/plain">Main Title</title>
-         <docidentifier type="csd">CC/Cor 1000</docidentifier>
+         <docidentifier type="CalConnect">CC/Cor 1000</docidentifier>
          <docnumber>1000</docnumber>
          <edition>2</edition>
          <contributor>
@@ -215,7 +215,7 @@ RSpec.describe Asciidoctor::Csd do
     end
 
   it "ignores unrecognised status" do
-    expect(xmlpp(strip_guid(Asciidoctor.convert(<<~"INPUT", backend: :csd, header_footer: true)))).to be_equivalent_to xmlpp(<<~"OUTPUT")
+    expect(xmlpp(strip_guid(Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)))).to be_equivalent_to xmlpp(<<~"OUTPUT")
       = Document title
       Author
       :docfile: test.adoc
@@ -233,7 +233,7 @@ RSpec.describe Asciidoctor::Csd do
        <csd-standard xmlns="https://www.metanorma.org/ns/csd">
        <bibdata type="standard">
          <title language="en" format="text/plain">Main Title</title>
-         <docidentifier type="csd">CC/Cor 1000</docidentifier>
+         <docidentifier type="CalConnect">CC/Cor 1000</docidentifier>
          <docnumber>1000</docnumber>
          <contributor>
            <role type="author"/>
@@ -272,7 +272,7 @@ RSpec.describe Asciidoctor::Csd do
     end
 
   it "strips inline header" do
-    expect(xmlpp(strip_guid(Asciidoctor.convert(<<~"INPUT", backend: :csd, header_footer: true)))).to be_equivalent_to xmlpp(<<~"OUTPUT")
+    expect(xmlpp(strip_guid(Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)))).to be_equivalent_to xmlpp(<<~"OUTPUT")
       #{ASCIIDOC_BLANK_HDR}
       This is a preamble
 
@@ -292,7 +292,7 @@ RSpec.describe Asciidoctor::Csd do
 
   it "uses default fonts" do
     FileUtils.rm_f "test.html"
-    Asciidoctor.convert(<<~"INPUT", backend: :csd, header_footer: true)
+    Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)
       = Document title
       Author
       :docfile: test.adoc
@@ -306,7 +306,7 @@ RSpec.describe Asciidoctor::Csd do
 
   it "uses default fonts (Word)" do
     FileUtils.rm_f "test.doc"
-    Asciidoctor.convert(<<~"INPUT", backend: :csd, header_footer: true)
+    Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)
       = Document title
       Author
       :docfile: test.adoc
@@ -320,7 +320,7 @@ RSpec.describe Asciidoctor::Csd do
 
   it "uses Chinese fonts" do
     FileUtils.rm_f "test.html"
-    Asciidoctor.convert(<<~"INPUT", backend: :csd, header_footer: true)
+    Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)
       = Document title
       Author
       :docfile: test.adoc
@@ -335,7 +335,7 @@ RSpec.describe Asciidoctor::Csd do
 
   it "uses specified fonts" do
     FileUtils.rm_f "test.html"
-    Asciidoctor.convert(<<~"INPUT", backend: :csd, header_footer: true)
+    Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)
       = Document title
       Author
       :docfile: test.adoc
@@ -352,7 +352,7 @@ RSpec.describe Asciidoctor::Csd do
   end
 
   it "processes inline_quoted formatting" do
-    expect(xmlpp(strip_guid(Asciidoctor.convert(<<~"INPUT", backend: :csd, header_footer: true)))).to be_equivalent_to xmlpp(<<~"OUTPUT")
+    expect(xmlpp(strip_guid(Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)))).to be_equivalent_to xmlpp(<<~"OUTPUT")
       #{ASCIIDOC_BLANK_HDR}
 
       _emphasis_
@@ -391,7 +391,7 @@ RSpec.describe Asciidoctor::Csd do
 end
 
 RSpec.describe "warns when missing a title" do
-  specify { expect { Asciidoctor.convert(<<~"INPUT", backend: :csd, header_footer: true) }.to output(/is not a legal document type/).to_stderr }
+  specify { expect { Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true) }.to output(/is not a legal document type/).to_stderr }
   #{VALIDATING_BLANK_HDR}
       = Document title
       Author
@@ -402,7 +402,7 @@ RSpec.describe "warns when missing a title" do
 end
 
 RSpec.describe "warns about illegal status" do
-  specify { expect { Asciidoctor.convert(<<~"INPUT", backend: :csd, header_footer: true) }.to output(/is not a legal status/).to_stderr }
+  specify { expect { Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true) }.to output(/is not a legal status/).to_stderr }
   #{VALIDATING_BLANK_HDR}
       = Document title
       Author

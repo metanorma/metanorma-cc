@@ -3,7 +3,7 @@ require "asciidoctor/standoc/converter"
 require "fileutils"
 
 module Asciidoctor
-  module Csd
+  module CC
 
     class Converter < Standoc::Converter
 
@@ -42,7 +42,7 @@ module Asciidoctor
 
       def metadata_status(node, xml)
         status = node.attr("status")
-        unless status && ::Metanorma::Csd::DOCSTATUS.keys.include?(status)
+        unless status && ::Metanorma::CC::DOCSTATUS.keys.include?(status)
           @log.add("Document Attributes", nil, "#{status} is not a legal status")
         end
         super
@@ -50,9 +50,9 @@ module Asciidoctor
 
       def prefix_id(node)
         prefix = "CC"
-        typesuffix = ::Metanorma::Csd::DOCSUFFIX[node.attr("doctype")] || ""
+        typesuffix = ::Metanorma::CC::DOCSUFFIX[node.attr("doctype")] || ""
         prefix += "/#{typesuffix}" unless typesuffix.empty?
-        status = ::Metanorma::Csd::DOCSTATUS[node.attr("status")] || ""
+        status = ::Metanorma::CC::DOCSTATUS[node.attr("status")] || ""
         prefix += "/#{status}" unless status.empty?
         prefix
       end
@@ -63,13 +63,13 @@ module Asciidoctor
         id = "#{prefix} #{id}"
         year = node.attr("copyright-year")
         id += ":#{year}" if year
-        xml.docidentifier id, **{type: "csd"}
+        xml.docidentifier id, **{type: "CalConnect"}
         xml.docnumber node.attr("docnumber")
       end
 
       def doctype(node)
         d = node.attr("doctype")
-        unless ::Metanorma::Csd::DOCSUFFIX.keys.include?(d)
+        unless ::Metanorma::CC::DOCSUFFIX.keys.include?(d)
           @log.add("Document Attributes", nil,
                    "#{d} is not a legal document type: reverting to 'standard'")
           d = "standard"

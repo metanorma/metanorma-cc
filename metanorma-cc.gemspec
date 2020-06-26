@@ -1,23 +1,23 @@
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "metanorma/csd/version"
+require "metanorma/cc/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "metanorma-csd"
-  spec.version       = Metanorma::Csd::VERSION
+  spec.name          = "metanorma-cc"
+  spec.version       = Metanorma::CC::VERSION
   spec.authors       = ["Ribose Inc."]
   spec.email         = ["open.source@ribose.com"]
 
-  spec.summary       = "metanorma-csd lets you write CSD in AsciiDoc."
+  spec.summary       = "metanorma-cc lets you write CalConnect standards in AsciiDoc."
   spec.description   = <<~DESCRIPTION
-    metanorma-csd lets you write CSD in AsciiDoc syntax.
+    metanorma-cc lets you write CalConnect standards in AsciiDoc syntax.
 
     This gem is in active development.
 
-    Formerly known as asciidoctor-csd.
+    Formerly known as asciidoctor-csd, metanorma-csd.
   DESCRIPTION
 
-  spec.homepage      = "https://github.com/metanorma/metanorma-csd"
+  spec.homepage      = "https://github.com/metanorma/metanorma-cc"
   spec.license       = "BSD-2-Clause"
 
   spec.files         = `git ls-files -z`.split("\x0").reject do |f|

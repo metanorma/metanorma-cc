@@ -1,12 +1,11 @@
 require "spec_helper"
 require "metanorma"
 
-#RSpec.describe Asciidoctor::Csand do
-RSpec.describe Metanorma::Csd::Processor do
+RSpec.describe Metanorma::CC::Processor do
 
   registry = Metanorma::Registry.instance
-  registry.register(Metanorma::Csd::Processor)
-  processor = registry.find_processor(:csd)
+  registry.register(Metanorma::CC::Processor)
+  processor = registry.find_processor(:cc)
 
   it "registers against metanorma" do
     expect(processor).not_to be nil
@@ -14,12 +13,12 @@ RSpec.describe Metanorma::Csd::Processor do
 
   it "registers output formats against metanorma" do
     expect(processor.output_formats.sort.to_s).to be_equivalent_to <<~"OUTPUT"
-    [[:doc, "doc"], [:html, "html"], [:pdf, "pdf"], [:rxl, "rxl"], [:xml, "xml"]]
+    [[:doc, "doc"], [:html, "html"], [:pdf, "pdf"], [:presentation, "presentation.xml"], [:rxl, "rxl"], [:xml, "xml"]]
     OUTPUT
   end
 
   it "registers version against metanorma" do
-    expect(processor.version.to_s).to match(%r{^Metanorma::Csd })
+    expect(processor.version.to_s).to match(%r{^Metanorma::CC })
   end
 
   it "generates IsoDoc XML from a blank document" do
@@ -34,7 +33,7 @@ RSpec.describe Metanorma::Csd::Processor do
 
   it "generates HTML from IsoDoc XML" do
     FileUtils.rm_f "test.xml"
-    processor.output(<<~"INPUT", "test.html", :html)
+    processor.output(<<~"INPUT", "test.xml", "test.html", :html)
                <csd-standard xmlns="http://riboseinc.com/isoxml">
        <sections>
        <terms id="H" obligation="normative"><title>Terms, Definitions, Symbols and Abbreviated Terms</title>

@@ -1,7 +1,7 @@
-require_relative "./csd/processor"
+require_relative "./cc/processor"
 
 module Metanorma
-  module Csd
+  module CC
 
     DOCSUFFIX = {
       "standard" => "",

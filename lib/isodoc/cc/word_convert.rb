@@ -2,7 +2,7 @@ require_relative "base_convert"
 require "isodoc"
 
 module IsoDoc
-  module Csd
+  module CC
     # A {Converter} implementation that generates CSD output, and a document
     # schema encapsulation of the document for validation
     class WordConvert < IsoDoc::WordConvert
@@ -22,10 +22,10 @@ module IsoDoc
       def default_file_locations(options)
         {
           wordstylesheet: html_doc_path("wordstyle.scss"),
-          standardstylesheet: html_doc_path("csd.scss"),
+          standardstylesheet: html_doc_path("cc.scss"),
           header: html_doc_path("header.html"),
-          wordcoverpage: html_doc_path("word_csd_titlepage.html"),
-          wordintropage: html_doc_path("word_csd_intro.html"),
+          wordcoverpage: html_doc_path("word_cc_titlepage.html"),
+          wordintropage: html_doc_path("word_cc_intro.html"),
           ulstyle: "l3",
           olstyle: "l2",
         }

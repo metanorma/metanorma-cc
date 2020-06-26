@@ -1,9 +1,9 @@
 require "isodoc"
-require "metanorma/csd"
+require "metanorma/cc"
 
 module IsoDoc
-  module Csd
-    # A {Converter} implementation that generates CSD output, and a document
+  module CC
+    # A {Converter} implementation that generates CC output, and a document
     # schema encapsulation of the document for validation
     class Metadata < IsoDoc::Metadata
 
@@ -51,7 +51,7 @@ module IsoDoc
       end
 
       def stage_abbr(status)
-        ::Metanorma::Csd::DOCSTATUS[status] || ""
+        ::Metanorma::CC::DOCSTATUS[status] || ""
       end
 
       def unpublished(status)

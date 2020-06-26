@@ -13,10 +13,10 @@ _Formerly known as_ `asciidoctor-csd`, `metanorma-csd`.
 == Functionality
 
 This gem processes http://asciidoctor.org/[Asciidoctor] documents following
-a template for generating CalConnect Standards.
+the Metanorma model for generating CalConnect Standards.
 
 The gem currently inherits from the https://github.com/metanorma/metanorma-standoc
-gem, and aligns closely to it. Refer to the https://metanorma.com[] for guidance.
+gem, and aligns closely to it. Refer to https://metanorma.com[] for guidance.
 
 == Usage
 
@@ -31,7 +31,7 @@ $ metanorma --type cc --extensions xml a.adoc  # output Metanorma XML
 ----
 
 The gem translates the document into Metanorma XML format, and then
-validates its output against the CSD Metanorma XML document model; errors are
+validates its output against the CC Metanorma XML document model; errors are
 reported to console against the XML, and are intended for users to
 check that they have provided all necessary components of the
 document.

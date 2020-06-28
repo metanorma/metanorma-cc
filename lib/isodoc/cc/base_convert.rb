@@ -1,13 +1,8 @@
 require "isodoc"
-require_relative "metadata"
 
 module IsoDoc
   module CC
-  	module BaseConvert
-      def metadata_init(lang, script, labels)
-        @meta = Metadata.new(lang, script, labels)
-      end
-
+    module BaseConvert
       def annex_name(annex, name, div)
         div.h1 **{ class: "Annex" } do |t|
           t << "#{@xrefs.anchor(annex['id'], :label)} "
@@ -23,7 +18,7 @@ module IsoDoc
         @annex_lbl = "Appendix"
         @labels["annex"] = "Appendix"
       end
-      
+
       def cleanup(docxml)
         super
         term_cleanup(docxml)
@@ -37,6 +32,6 @@ module IsoDoc
         end
         docxml
       end
-  	end
+    end
   end
 end

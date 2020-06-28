@@ -6,7 +6,6 @@ module IsoDoc
     # A {Converter} implementation that generates CC output, and a document
     # schema encapsulation of the document for validation
     class Metadata < IsoDoc::Metadata
-
       def initialize(lang, script, labels)
         super
         set(:tc, "XXXX")

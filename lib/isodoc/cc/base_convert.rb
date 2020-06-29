@@ -13,12 +13,6 @@ module IsoDoc
         end
       end
 
-      def i18n_init(lang, script)
-        super
-        @annex_lbl = "Appendix"
-        @labels["annex"] = "Appendix"
-      end
-
       def cleanup(docxml)
         super
         term_cleanup(docxml)

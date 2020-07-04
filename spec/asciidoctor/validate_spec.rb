@@ -83,6 +83,8 @@ it "Warning if do not start with scope or introduction" do
   Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true) 
   #{VALIDATING_BLANK_HDR}
 
+  Foreword 
+
   == Symbols and Abbreviated Terms
 
   Paragraph
@@ -155,29 +157,6 @@ it "Warning if scope occurs after Terms and Definitions" do
 
   .Foreword
   Foreword
-
-  == Scope
-
-  [bibliography]
-  == Normative References
-
-  == Terms and Definitions
-
-  == Scope
-
-  INPUT
-    expect(File.read("test.err")).to include "Scope must occur before Terms and Definitions"
-end
-
-it "Warning if scope occurs after Terms and Definitions" do
-      FileUtils.rm_f "test.err"
-  Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true) 
-  #{VALIDATING_BLANK_HDR}
-
-  .Foreword
-  Foreword
-
-  == Scope
 
   [bibliography]
   == Normative References

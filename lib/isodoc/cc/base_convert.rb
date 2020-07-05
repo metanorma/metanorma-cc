@@ -3,16 +3,6 @@ require "isodoc"
 module IsoDoc
   module CC
     module BaseConvert
-      def annex_name(annex, name, div)
-        div.h1 **{ class: "Annex" } do |t|
-          t << "#{@xrefs.anchor(annex['id'], :label)} "
-          t.br
-          t.b do |b|
-            name&.children&.each { |c2| parse(c2, b) }
-          end
-        end
-      end
-
       def cleanup(docxml)
         super
         term_cleanup(docxml)

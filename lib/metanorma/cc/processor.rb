@@ -38,7 +38,7 @@ module Metanorma
           IsoDoc::CC::WordConvert.new(options).convert(inname, isodoc_node, nil, outname)
         when :pdf
           IsoDoc::CC::PdfConvert.new(options).convert(inname, isodoc_node, nil, outname)
-        when :pdf
+        when :presentation
           IsoDoc::CC::PresentationXMLConvert.new(options).convert(inname, isodoc_node, nil, outname)
         else
           super

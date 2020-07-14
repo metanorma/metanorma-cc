@@ -29,9 +29,10 @@ Gem::Specification.new do |spec|
   spec.required_ruby_version = Gem::Requirement.new(">= 2.4.0")
 
   spec.add_dependency "metanorma-standoc", "~> 1.4.0"
-  spec.add_dependency "isodoc", "~> 1.1.0"
+  # spec.add_dependency "isodoc", "~> 1.1.0"
 
   spec.add_development_dependency "byebug", "~> 9.1"
+  spec.add_development_dependency "sassc", "2.4.0"
   spec.add_development_dependency "equivalent-xml", "~> 0.6"
   spec.add_development_dependency "guard", "~> 2.14"
   spec.add_development_dependency "guard-rspec", "~> 4.7"

@@ -1,22 +1,21 @@
 require "isodoc"
 require_relative "metadata"
 require_relative "xref"
+require_relative "i18n"
 
 module IsoDoc
   module CC
     module Init
-      def metadata_init(lang, script, labels)
-        @meta = Metadata.new(lang, script, labels)
+      def metadata_init(lang, script, i18n)
+        @meta = Metadata.new(lang, script, i18n)
       end
 
-      def xref_init(lang, script, klass, labels, options)
-        @xrefs = Xref.new(lang, script, HtmlConvert.new(language: lang, script: script), labels, options)
+      def xref_init(lang, script, klass, i18n, options)
+        @xrefs = Xref.new(lang, script, HtmlConvert.new(language: lang, script: script), i18n, options)
       end
 
-      def i18n_init(lang, script)
-        super
-        @annex_lbl = "Appendix"
-        @labels["annex"] = "Appendix"
+      def i18n_init(lang, script, i18nyaml = nil)
+        @i18n = I18n.new(lang, script, i18nyaml || @i18nyaml)
       end
     end
   end

@@ -4,26 +4,9 @@ require "fileutils"
 
 module Asciidoctor
   module CC
-
     class Converter < Standoc::Converter
-
-      def metadata_author(node, xml)
-        xml.contributor do |c|
-          c.role **{ type: "author" }
-          c.organization do |a|
-            a.name "CalConnect"
-          end
-        end
-        personal_author(node, xml)
-      end
-
-      def metadata_publisher(node, xml)
-        xml.contributor do |c|
-          c.role **{ type: "publisher" }
-          c.organization do |a|
-            a.name "CalConnect"
-          end
-        end
+      def default_publisher
+        "CalConnect"
       end
 
       def metadata_committee(node, xml)
@@ -75,18 +58,6 @@ module Asciidoctor
           d = "standard"
         end
         d
-      end
-
-      def metadata_copyright(node, xml)
-        from = node.attr("copyright-year") || Date.today.year
-        xml.copyright do |c|
-          c.from from
-          c.owner do |owner|
-            owner.organization do |o|
-              o.name "CalConnect"
-            end
-          end
-        end
       end
     end
   end

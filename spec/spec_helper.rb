@@ -90,7 +90,7 @@ END
 
 BLANK_HDR = <<~"HDR"
        <?xml version="1.0" encoding="UTF-8"?>
-       <csd-standard xmlns="https://www.metanorma.org/ns/csd">
+       <csd-standard xmlns="https://www.metanorma.org/ns/csd" type="semantic" version="#{Metanorma::CC::VERSION}">
        <bibdata type="standard">
         <title language="en" format="text/plain">Document title</title>
          <docidentifier type="CalConnect">CC ???</docidentifier>

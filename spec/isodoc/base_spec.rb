@@ -283,7 +283,7 @@ RSpec.describe Asciidoctor::CC do
        </bibliography>
        </csd-standard>
     INPUT
-       <csd-standard xmlns='http://riboseinc.com/isoxml'>
+       <csd-standard xmlns='http://riboseinc.com/isoxml' type="presentation">
          <preface>
            <foreword obligation='informative'>
              <title>Foreword</title>

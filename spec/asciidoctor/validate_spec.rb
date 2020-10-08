@@ -2,10 +2,30 @@ require "spec_helper"
 require "fileutils"
 
 RSpec.describe Asciidoctor::CC do
+  context "when xref_error.adoc compilation" do
+    around do |example|
+      FileUtils.rm_f "spec/assets/xref_error.err"
+      example.run
+      Dir["spec/assets/xref_error*"].each do |file|
+        next if file.match?(/adoc$/)
+
+        FileUtils.rm_f(file)
+      end
+    end
+
+    it "generates error file" do
+      expect do
+        Metanorma::Compile
+          .new
+          .compile("spec/assets/xref_error.adoc", type: "cc")
+      end.to(change { File.exist?("spec/assets/xref_error.err") }
+              .from(false).to(true))
+    end
+  end
 
   it "Warns of illegal doctype" do
       FileUtils.rm_f "test.err"
-    Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true) 
+    Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)
   = Document title
   Author
   :docfile: test.adoc
@@ -20,7 +40,7 @@ end
 
   it "Warns of illegal status" do
       FileUtils.rm_f "test.err"
-    Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true) 
+    Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)
   = Document title
   Author
   :docfile: test.adoc
@@ -35,7 +55,7 @@ end
 
   it "does not validate section ordering if the docuemnt is advisory" do
       FileUtils.rm_f "test.err"
-  Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true) 
+  Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)
   = Document title
   Author
   :docfile: test.adoc
@@ -54,7 +74,7 @@ end
 
 it "Style warning if two Symbols and Abbreviated Terms sections" do
       FileUtils.rm_f "test.err"
-  Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true) 
+  Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)
   #{VALIDATING_BLANK_HDR}
 
   == Terms and Abbreviations
@@ -68,7 +88,7 @@ end
 
 it "Style warning if Symbols and Abbreviated Terms contains extraneous matter" do
       FileUtils.rm_f "test.err"
-  Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true) 
+  Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)
   #{VALIDATING_BLANK_HDR}
 
   == Symbols and Abbreviated Terms
@@ -80,10 +100,10 @@ end
 
 it "Warning if do not start with scope or introduction" do
       FileUtils.rm_f "test.err"
-  Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true) 
+  Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)
   #{VALIDATING_BLANK_HDR}
 
-  Foreword 
+  Foreword
 
   == Symbols and Abbreviated Terms
 
@@ -94,10 +114,10 @@ end
 
 it "Warning if introduction not followed by scope" do
       FileUtils.rm_f "test.err"
-  Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true) 
+  Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)
   #{VALIDATING_BLANK_HDR}
 
-  .Foreword 
+  .Foreword
   Foreword
 
   == Introduction
@@ -111,10 +131,10 @@ end
 
 it "Warning if normative references not followed by terms and definitions" do
       FileUtils.rm_f "test.err"
-  Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true) 
+  Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)
   #{VALIDATING_BLANK_HDR}
 
-  .Foreword 
+  .Foreword
   Foreword
 
   == Scope
@@ -131,10 +151,10 @@ end
 
 it "Warning if there are no clauses in the document" do
       FileUtils.rm_f "test.err"
-  Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true) 
+  Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)
   #{VALIDATING_BLANK_HDR}
 
-  .Foreword 
+  .Foreword
   Foreword
 
   == Scope
@@ -152,7 +172,7 @@ end
 
 it "Warning if scope occurs after Terms and Definitions" do
       FileUtils.rm_f "test.err"
-  Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true) 
+  Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)
   #{VALIDATING_BLANK_HDR}
 
   .Foreword
@@ -173,7 +193,7 @@ end
 
 it "Warning if Symbols and Abbreviated Terms does not occur immediately after Terms and Definitions" do
       FileUtils.rm_f "test.err"
-  Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true) 
+  Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)
   #{VALIDATING_BLANK_HDR}
 
   .Foreword
@@ -196,7 +216,7 @@ end
 
 it "Warning if no normative references" do
       FileUtils.rm_f "test.err"
-  Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true) 
+  Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)
   #{VALIDATING_BLANK_HDR}
 
   .Foreword
@@ -223,7 +243,7 @@ end
 
 it "Warning if final section is not named Bibliography" do
       FileUtils.rm_f "test.err"
-  Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true) 
+  Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)
   #{VALIDATING_BLANK_HDR}
 
   .Foreword
@@ -256,7 +276,7 @@ end
 
 it "Warning if final section is not styled Bibliography" do
       FileUtils.rm_f "test.err"
-  Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true) 
+  Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)
   #{VALIDATING_BLANK_HDR}
 
   .Foreword

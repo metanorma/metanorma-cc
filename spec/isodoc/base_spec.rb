@@ -70,7 +70,7 @@ RSpec.describe Asciidoctor::CC do
 <sections/>
 </csd-standard>
     INPUT
-    expect(htmlencode(Hash[csdc.info(docxml, nil).sort].to_s.gsub(/, :/, ",\n:"))).to be_equivalent_to <<~"OUTPUT"
+    expect(htmlencode(metadata(csdc.info(docxml, nil)).to_s.gsub(/, :/, ",\n:"))).to be_equivalent_to <<~"OUTPUT"
 {:accesseddate=>"XXX",
 :agency=>"CalConnect",
 :authors=>["Fred Flintstone", "Barney Rubble"],
@@ -89,7 +89,6 @@ RSpec.describe Asciidoctor::CC do
 :edition=>"2",
 :implementeddate=>"XXX",
 :issueddate=>"XXX",
-:keywords=>[],
 :obsoleteddate=>"XXX",
 :publisheddate=>"XXX",
 :publisher=>"CalConnect",

@@ -407,6 +407,7 @@ RSpec.describe Asciidoctor::CC do
       Author
       :docfile: test.adoc
       :novalid:
+      :no-pdf:
     INPUT
     #{BLANK_HDR}
 <sections/>

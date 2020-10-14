@@ -28,6 +28,8 @@ RSpec.describe Asciidoctor::CC do
 
   it "converts a blank document" do
     FileUtils.rm_f "test.html"
+    FileUtils.rm_f "test.pdf"
+    FileUtils.rm_f "test.doc"
     expect(xmlpp(strip_guid(Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)))).to be_equivalent_to xmlpp(<<~"OUTPUT")
       = Document title
       Author
@@ -39,6 +41,8 @@ RSpec.describe Asciidoctor::CC do
 </csd-standard>
     OUTPUT
     expect(File.exist?("test.html")).to be true
+    expect(File.exist?("test.pdf")).to be true
+    expect(File.exist?("test.doc")).to be true
   end
 
   it "overrides invalid document type" do
@@ -48,6 +52,7 @@ RSpec.describe Asciidoctor::CC do
       Author
       :docfile: test.adoc
       :doctype: dinosaur
+      :no-pdf:
     INPUT
     #{BLANK_HDR}
 <sections/>
@@ -292,26 +297,18 @@ RSpec.describe Asciidoctor::CC do
 
   it "uses default fonts" do
     FileUtils.rm_f "test.html"
-    Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)
-      = Document title
-      Author
-      :docfile: test.adoc
-      :novalid:
-    INPUT
-    html = File.read("test.html", encoding: "utf-8")
-    expect(html).to match(%r[\bpre[^{]+\{[^}]+font-family: "Source Code Pro", monospace;]m)
-    expect(html).to match(%r[ div[^{]+\{[^}]+font-family: "Source Sans Pro", sans-serif;]m)
-    expect(html).to match(%r[h1, h2, h3, h4, h5, h6 \{[^}]+font-family: "Source Sans Pro", sans-serif;]m)
-  end
-
-  it "uses default fonts (Word)" do
     FileUtils.rm_f "test.doc"
     Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)
       = Document title
       Author
       :docfile: test.adoc
       :novalid:
+      :no-pdf:
     INPUT
+    html = File.read("test.html", encoding: "utf-8")
+    expect(html).to match(%r[\bpre[^{]+\{[^}]+font-family: "Source Code Pro", monospace;]m)
+    expect(html).to match(%r[ div[^{]+\{[^}]+font-family: "Source Sans Pro", sans-serif;]m)
+    expect(html).to match(%r[h1, h2, h3, h4, h5, h6 \{[^}]+font-family: "Source Sans Pro", sans-serif;]m)
     html = File.read("test.doc", encoding: "utf-8")
     expect(html).to match(%r[\bpre[^{]+\{[^}]+font-family: "Source Code Pro", "Courier New", monospace;]m)
     expect(html).to match(%r[ div[^{]+\{[^}]+font-family: "Source Sans Pro", "Arial", sans-serif;]m)
@@ -326,6 +323,7 @@ RSpec.describe Asciidoctor::CC do
       :docfile: test.adoc
       :novalid:
       :script: Hans
+      :no-pdf:
     INPUT
     html = File.read("test.html", encoding: "utf-8")
     expect(html).to match(%r[\bpre[^{]+\{[^}]+font-family: "Source Code Pro", monospace;]m)
@@ -344,6 +342,7 @@ RSpec.describe Asciidoctor::CC do
       :body-font: Zapf Chancery
       :header-font: Comic Sans
       :monospace-font: Andale Mono
+      :no-pdf:
     INPUT
     html = File.read("test.html", encoding: "utf-8")
     expect(html).to match(%r[\bpre[^{]+\{[^{]+font-family: Andale Mono;]m)

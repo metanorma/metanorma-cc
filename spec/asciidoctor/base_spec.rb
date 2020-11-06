@@ -92,11 +92,7 @@ RSpec.describe Asciidoctor::CC do
   <title language="en" format="text/plain">Main Title</title>
   <docidentifier type="CalConnect">CC/DIR/FDS 1000:2001</docidentifier>
   <docnumber>1000</docnumber>
-  <edition>2</edition>
-<version>
-  <revision-date>2000-01-01</revision-date>
-  <draft>3.4</draft>
-</version>  <contributor>
+<contributor>
     <role type="author"/>
     <organization>
       <name>CalConnect</name>
@@ -125,6 +121,11 @@ RSpec.describe Asciidoctor::CC do
       <name>CalConnect</name>
     </organization>
   </contributor>
+  <edition>2</edition>
+<version>
+  <revision-date>2000-01-01</revision-date>
+  <draft>3.4</draft>
+</version>
   <language>en</language>
   <script>Latn</script>
   <status>
@@ -140,9 +141,9 @@ RSpec.describe Asciidoctor::CC do
     </owner>
   </copyright>
   <ext>
-  <doctype>directive</doctype>
+  <doctype abbreviation="DIR">directive</doctype>
   <editorialgroup>
-    <technical-committee type="provisional">TC</technical-committee>
+    <committee type="provisional">TC</committee>
   </editorialgroup>
   </ext>
 </bibdata>
@@ -176,9 +177,8 @@ RSpec.describe Asciidoctor::CC do
        <csd-standard xmlns="https://www.metanorma.org/ns/csd" type="semantic" version="#{Metanorma::CC::VERSION}">
        <bibdata type="standard">
          <title language="en" format="text/plain">Main Title</title>
-         <docidentifier type="CalConnect">CC/Cor 1000</docidentifier>
+         <docidentifier type="CalConnect">CC/Cor 1000:2020</docidentifier>
          <docnumber>1000</docnumber>
-         <edition>2</edition>
          <contributor>
            <role type="author"/>
            <organization>
@@ -191,6 +191,7 @@ RSpec.describe Asciidoctor::CC do
              <name>CalConnect</name>
            </organization>
          </contributor>
+         <edition>2</edition>
          <language>en</language>
          <script>Latn</script>
          <status>
@@ -206,10 +207,10 @@ RSpec.describe Asciidoctor::CC do
            </owner>
          </copyright>
          <ext>
-         <doctype>technical-corrigendum</doctype>
+         <doctype abbreviation="Cor">technical-corrigendum</doctype>
          <editorialgroup>
-           <technical-committee type="provisional">TC 788</technical-committee>
-           <technical-committee type="technical">TC 789</technical-committee>
+           <committee type="provisional">TC 788</committee>
+           <committee type="technical">TC 789</committee>
          </editorialgroup>
          </ext>
        </bibdata>
@@ -238,7 +239,7 @@ RSpec.describe Asciidoctor::CC do
        <csd-standard xmlns="https://www.metanorma.org/ns/csd" type="semantic" version="#{Metanorma::CC::VERSION}">
        <bibdata type="standard">
          <title language="en" format="text/plain">Main Title</title>
-         <docidentifier type="CalConnect">CC/Cor 1000</docidentifier>
+         <docidentifier type="CalConnect">CC/Cor 1000:2020</docidentifier>
          <docnumber>1000</docnumber>
          <contributor>
            <role type="author"/>
@@ -267,7 +268,7 @@ RSpec.describe Asciidoctor::CC do
            </owner>
          </copyright>
          <ext>
-         <doctype>technical-corrigendum</doctype>
+         <doctype abbreviation="Cor">technical-corrigendum</doctype>
          </ext>
        </bibdata>
     #{BOILERPLATE.sub(/<legal-statement/, "#{BOILERPLATE_LICENSE}\n<legal-statement")}
@@ -392,28 +393,4 @@ RSpec.describe Asciidoctor::CC do
     OUTPUT
   end
 
-
 end
-
-RSpec.describe "warns when missing a title" do
-  specify { expect { Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true) }.to output(/is not a legal document type/).to_stderr }
-  #{VALIDATING_BLANK_HDR}
-      = Document title
-      Author
-      :docfile: test.adoc
-      :doctype: dinosaur
-
-  INPUT
-end
-
-RSpec.describe "warns about illegal status" do
-  specify { expect { Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true) }.to output(/is not a legal status/).to_stderr }
-  #{VALIDATING_BLANK_HDR}
-      = Document title
-      Author
-      :docfile: test.adoc
-      :status: dinosaur
-
-  INPUT
-end
-

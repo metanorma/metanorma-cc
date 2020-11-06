@@ -1,29 +1,32 @@
+require "metanorma"
+require "metanorma-generic"
 require_relative "./cc/processor"
 
 module Metanorma
   module CC
+    class Configuration < Metanorma::Generic::Configuration
+      def initialize(*args)
+        super
+      end
+    end
 
-    DOCSUFFIX = {
-      "standard" => "",
-      "directive" => "DIR",
-      "guide" => "Guide",
-      "specification" => "S",
-      "report" => "R",
-      "amendment" => "Amd",
-      "technical-corrigendum" => "Cor",
-      "administrative" => "A",
-      "advisory" => "Adv",
-    }
+    class << self
+      extend Forwardable
 
-    DOCSTATUS = {
-      "working-draft" => "WD",
-      "committee-draft" => "CD",
-      "draft-standard" => "DS",
-      "final-draft" => "FDS",
-      "published" => "",
-      "cancelled" => "",
-      "withdrawn" => "",
-    }
+      attr_accessor :configuration
 
+      Configuration::CONFIG_ATTRS.each do |attr_name|
+        def_delegator :@configuration, attr_name
+      end
+
+      def configure
+        self.configuration ||= Configuration.new
+        yield(configuration)
+      end
+    end
+
+    configure {}
   end
 end
+Metanorma::Registry.instance.register(Metanorma::CC::Processor)
+

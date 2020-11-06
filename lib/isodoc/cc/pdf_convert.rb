@@ -1,4 +1,5 @@
 require_relative "base_convert"
+require "metanorma-generic"
 require "isodoc"
 
 module IsoDoc

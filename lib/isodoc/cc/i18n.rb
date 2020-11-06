@@ -1,9 +1,8 @@
 module IsoDoc
   module CC
-    class I18n < IsoDoc::I18n
-      def load_yaml1(lang, script)
-        y = YAML.load_file(File.join(File.dirname(__FILE__), "i18n-en.yaml"))
-        super.merge(y)
+    class I18n < IsoDoc::Generic::I18n
+      def configuration
+        Metanorma::CC.configuration
       end
     end
   end

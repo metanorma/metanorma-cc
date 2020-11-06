@@ -1,9 +1,10 @@
 require_relative "init"
+require "metanorma-generic"
 require "isodoc"
 
 module IsoDoc
   module CC
-    class PresentationXMLConvert < IsoDoc::PresentationXMLConvert
+    class PresentationXMLConvert < IsoDoc::Generic::PresentationXMLConvert
       def annex1(f)
         lbl = @xrefs.anchor(f['id'], :label)
         if t = f.at(ns("./title"))

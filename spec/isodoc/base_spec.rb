@@ -63,7 +63,7 @@ RSpec.describe Asciidoctor::CC do
   <ext>
   <doctype>standard</doctype>
   <editorialgroup>
-    <technical-committee type="A">TC</technical-committee>
+    <committee type="A">TC</committee>
   </editorialgroup>
   </ext>
 </bibdata>
@@ -91,6 +91,7 @@ RSpec.describe Asciidoctor::CC do
 :implementeddate=>"XXX",
 :issueddate=>"XXX",
 :lang=>"en",
+:metadata_extensions=>{"doctype"=>"standard", "editorialgroup"=>{"committee_type"=>"A", "committee"=>"TC"}},
 :obsoleteddate=>"XXX",
 :publisheddate=>"XXX",
 :publisher=>"CalConnect",

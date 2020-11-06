@@ -1,18 +1,14 @@
 = metanorma-cc: Metanorma processor for CalConnect standards
 
 image:https://img.shields.io/gem/v/metanorma-cc.svg["Gem Version", link="https://rubygems.org/gems/metanorma-cc"]
-image:https://github.com/metanorma/metanorma-cc/workflows/macos/badge.svg["Build Status (macOS)", link="https://github.com/metanorma/metanorma-cc/actions?workflow=macos"]
-image:https://github.com/metanorma/metanorma-cc/workflows/ubuntu/badge.svg["Build Status (ubuntu)", link="https://github.com/metanorma/metanorma-cc/actions?workflow=ubuntu"]
-image:https://github.com/metanorma/metanorma-cc/workflows/windows/badge.svg["Build Status (Windows)", link="https://github.com/metanorma/metanorma-cc/actions?workflow=windows"]
+image:https://github.com/metanorma/metanorma-cc/workflows/rake/badge.svg["Build Status", link="https://github.com/metanorma/metanorma-cc/actions?workflow=rake"]
 image:https://codeclimate.com/github/metanorma/metanorma-cc/badges/gpa.svg["Code Climate", link="https://codeclimate.com/github/metanorma/metanorma-cc"]
 image:https://img.shields.io/github/issues-pr-raw/metanorma/metanorma-cc.svg["Pull Requests", link="https://github.com/metanorma/metanorma-cc/pulls"]
 image:https://img.shields.io/github/commits-since/metanorma/metanorma-cc/latest.svg["Commits since latest",link="https://github.com/metanorma/metanorma-cc/releases"]
 
-_Formerly known as_ `asciidoctor-csd`, `metanorma-csd`.
-
 == Functionality
 
-This gem processes https://www.metanorma.com[Metanorma documents] following
+This gem processes https://www.metanorma.com/[Metanorma documents] following
 the Metanorma model for generating CalConnect Standards.
 
 The gem currently inherits from the https://github.com/metanorma/metanorma-standoc
@@ -59,3 +55,6 @@ See https://www.metanorma.com/author/cc/[Author CalConnect documents with Metano
 * Example documents are avalable at the https://github.com/metanorma/mn-samples-cc[mn-samples-cc] repository.
 * Document templates are available at the https://github.com/metanorma/mn-templates-cc[mn-templates-cc] repository.
 
+== Notes
+
+Metanorma-CC was formerly published as `asciidoctor-csd` and `metanorma-csd`.

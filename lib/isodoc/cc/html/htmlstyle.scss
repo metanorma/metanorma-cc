@@ -24,6 +24,7 @@ $docstage-colors-list: (
 
 
 @import 'base_style/all';
+@import 'coverpage';
 
 
 body {
@@ -378,8 +379,6 @@ span.keyword {
   }
 }
 
-
-@import 'coverpage';
 
 
 // To top button

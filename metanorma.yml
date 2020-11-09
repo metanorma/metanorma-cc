@@ -1,0 +1,52 @@
+metanorma_name: cc
+organization_name_short: CalConnect
+organization_name_long: CalConnect
+document_namespace: https://www.metanorma.org/ns/csd
+xml_root_tag: csd-standard
+html_bodyfont: '"Source Sans Pro",sans-serif'
+html_headerfont: '"Source Sans Pro",sans-serif'
+html_monospacefont: '"Source Code Pro",monospace'
+validate_rng_file: lib/asciidoctor/cc/cc.rng
+htmlcoverpage: lib/isodoc/cc/html/html_cc_titlepage.html
+htmlintropage: lib/isodoc/cc/html/html_cc_intro.html
+htmlstylesheet: lib/isodoc/cc/html/htmlstyle.scss
+scripts: lib/isodoc/cc/html/scripts.html
+i18nyaml: lib/isodoc/cc/i18n-en.yaml
+word_bodyfont: '"Source Sans Pro","Arial",sans-serif'
+word_headerfont: '"Source Sans Pro","Arial",sans-serif'
+word_monospacefont: '"Source Code Pro","Courier New",monospace'
+standardstylesheet: lib/isodoc/cc/html/cc.scss
+header: lib/isodoc/cc/html/header.html
+wordcoverpage: lib/isodoc/cc/html/word_cc_titlepage.html
+wordintropage: lib/isodoc/cc/html/word_cc_intro.html
+wordstylesheet: lib/isodoc/cc/html/wordstyle.scss
+webfont:
+  - "https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700"
+  - "https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400;1,700"
+docid_template: "CC{% if doctype_abbr %}/{{ doctype_abbr }}{%endif%}{% if stageabbr %}/{{ stageabbr }}{%endif%} {{ docnumeric }}{% if docyear %}:{{docyear}}{%endif%}"
+doctypes:
+  standard: 
+  directive: DIR
+  guide: Guide
+  specification: S
+  report: R
+  amendment: Amd
+  technical-corrigendum: Cor
+  administrative: A
+  advisory: Adv
+default_doctype: standard
+published_stages:
+  - published
+  - cancelled
+  - withdrawn
+default_stage: published
+stage_abbreviations:
+  working-draft: WD
+  committee-draft: CD
+  draft-standard: DS
+  final-draft: FDS
+  published:
+  cancelled:
+  withdrawn:
+logo_path: ""
+

@@ -3,9 +3,11 @@ require "metanorma/cc"
 
 module IsoDoc
   module CC
-    # A {Converter} implementation that generates CC output, and a document
-    # schema encapsulation of the document for validation
-    class Metadata < IsoDoc::Metadata
+    class Metadata < IsoDoc::Generic::Metadata
+      def configuration
+        Metanorma::CC.configuration
+      end
+
       def initialize(lang, script, labels)
         super
         set(:tc, "XXXX")
@@ -21,7 +23,7 @@ module IsoDoc
       end
 
       def author(isoxml, _out)
-        tc = isoxml.at(ns("//bibdata/ext/editorialgroup/technical-committee"))
+        tc = isoxml.at(ns("//bibdata/ext/editorialgroup/committee"))
         set(:tc, tc.text) if tc
         super
       end
@@ -37,24 +39,6 @@ module IsoDoc
         end
         set(:roles_authors_affiliations, persons)
         super
-      end
-
-      def docid(isoxml, _out)
-        docnumber = isoxml.at(ns("//bibdata/docidentifier"))
-        prefix = "CC"
-        if docnumber.nil?
-          set(:docnumber, prefix)
-        else
-          set(:docnumber, docnumber.text)
-        end
-      end
-
-      def stage_abbr(status)
-        ::Metanorma::CC::DOCSTATUS[status] || ""
-      end
-
-      def unpublished(status)
-        !%w(published withdrawn).include? status.downcase
       end
     end
   end

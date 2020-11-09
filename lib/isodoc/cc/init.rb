@@ -11,7 +11,8 @@ module IsoDoc
       end
 
       def xref_init(lang, script, klass, i18n, options)
-        @xrefs = Xref.new(lang, script, HtmlConvert.new(language: lang, script: script), i18n, options)
+        html = HtmlConvert.new(language: lang, script: script)
+        @xrefs = Xref.new(lang, script, html, i18n, options)
       end
 
       def i18n_init(lang, script, i18nyaml = nil)

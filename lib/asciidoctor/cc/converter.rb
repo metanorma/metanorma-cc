@@ -4,24 +4,33 @@ require "isodoc/cc/word_convert"
 require "isodoc/cc/presentation_xml_convert"
 require "metanorma/cc"
 require "asciidoctor/standoc/converter"
-require "fileutils"
-require_relative "validate"
+require 'asciidoctor/generic/converter'
 require_relative "validate_section"
-require_relative "front"
 
 module Asciidoctor
   module CC
-
-    # A {Converter} implementation that generates CC output, and a document
-    # schema encapsulation of the document for validation
-    class Converter < Standoc::Converter
+    class Converter < Asciidoctor::Generic::Converter
       XML_ROOT_TAG = "csd-standard".freeze
       XML_NAMESPACE = "https://www.metanorma.org/ns/csd".freeze
 
       register_for "cc"
 
-      def initialize(backend, opts)
-        super
+      def configuration
+        Metanorma::CC.configuration
+      end
+
+      def metadata_committee(node, xml)
+        return unless node.attr("technical-committee")
+        xml.editorialgroup do |a|
+          a.committee node.attr("technical-committee"),
+            **attr_code(type: node.attr("technical-committee-type"))
+          i = 2
+          while node.attr("technical-committee_#{i}") do
+            a.committee node.attr("technical-committee_#{i}"),
+              **attr_code(type: node.attr("technical-committee-type_#{i}"))
+            i += 1
+          end
+        end
       end
 
       def outputs(node, ret)
@@ -33,23 +42,6 @@ module Asciidoctor
                                       nil, false, "#{@filename}.doc")
           pdf_converter(node)&.convert(@filename + ".presentation.xml", 
                                        nil, false, "#{@filename}.pdf")
-      end
-
-      def validate(doc)
-        content_validate(doc)
-        schema_validate(formattedstr_strip(doc.dup),
-                        File.join(File.dirname(__FILE__), "cc.rng"))
-      end
-
-      def sections_cleanup(x)
-        super
-        x.xpath("//*[@inline-header]").each do |h|
-          h.delete("inline-header")
-        end
-      end
-
-      def style(n, t)
-        return
       end
 
       def html_converter(node)

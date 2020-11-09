@@ -10,7 +10,7 @@ module Metanorma
       }
     end
 
-    class Processor < Metanorma::Processor
+    class Processor < Metanorma::Generic::Processor
 
       def initialize
         @short = [:csd, :cc]

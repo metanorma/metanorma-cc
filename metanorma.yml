@@ -10,11 +10,17 @@ validate_rng_file: lib/asciidoctor/cc/cc.rng
 htmlcoverpage: lib/isodoc/cc/html/html_cc_titlepage.html
 htmlintropage: lib/isodoc/cc/html/html_cc_intro.html
 htmlstylesheet: lib/isodoc/cc/html/htmlstyle.scss
+html_normalfontsize: "15px"
+html_footnotefontsize: "0.9em"
 scripts: lib/isodoc/cc/html/scripts.html
 i18nyaml: lib/isodoc/cc/i18n-en.yaml
 word_bodyfont: '"Source Sans Pro","Arial",sans-serif'
 word_headerfont: '"Source Sans Pro","Arial",sans-serif'
 word_monospacefont: '"Source Code Pro","Courier New",monospace'
+word_normalfontsize: "10.5pt"
+word_smallerfontsize: "10.0pt"
+word_monospacefontsize: "10.0pt"
+word_footnotefontsize: "10.0pt"
 standardstylesheet: lib/isodoc/cc/html/cc.scss
 header: lib/isodoc/cc/html/header.html
 wordcoverpage: lib/isodoc/cc/html/word_cc_titlepage.html

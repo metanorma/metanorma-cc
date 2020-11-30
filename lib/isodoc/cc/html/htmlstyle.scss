@@ -31,7 +31,7 @@ body {
   // line-height: 1;
 
   @include bodyStyle1(
-    $fontSize: 15px, $fontWeight: 300, $lineHeight: 1.4em,
+    $fontSize: $normalfontsize, $fontWeight: 300, $lineHeight: 1.4em,
     $colorText: #1d1d1d, $colorBackground: #fff);
 }
 
@@ -321,7 +321,7 @@ a.footnote-number {
 }
 
 .footnote {
-  font-size: 0.9em;
+  font-size: $footnotefontsize;
 }
 
 

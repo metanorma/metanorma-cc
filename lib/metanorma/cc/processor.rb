@@ -2,14 +2,6 @@ require "metanorma/processor"
 
 module Metanorma
   module CC
-    def self.fonts_used
-      {
-        html: %w(SourceSansPro SourceSerifPro SourceCodePro HanSans),
-        doc: %w(SourceSansPro SourceSerifPro SourceCodePro HanSans),
-        pdf: %w(SourceSansPro SourceSerifPro SourceCodePro HanSans)
-      }
-    end
-
     class Processor < Metanorma::Generic::Processor
 
       def initialize

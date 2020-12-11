@@ -18,6 +18,16 @@ module Metanorma
         )
       end
 
+      def fonts_manifest
+        {
+          "Source Sans Pro" => nil,
+          "Source Serif Pro" => nil,
+          "Source Code Pro" => nil,
+          "Source Han Sans" => nil,
+          "STIX Two Math" => nil,
+        }
+      end
+
       def version
         "Metanorma::CC #{Metanorma::CC::VERSION}"
       end

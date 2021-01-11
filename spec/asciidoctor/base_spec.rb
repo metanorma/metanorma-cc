@@ -177,7 +177,7 @@ RSpec.describe Asciidoctor::CC do
        <csd-standard xmlns="https://www.metanorma.org/ns/csd" type="semantic" version="#{Metanorma::CC::VERSION}">
        <bibdata type="standard">
          <title language="en" format="text/plain">Main Title</title>
-         <docidentifier type="CalConnect">CC/Cor 1000:2020</docidentifier>
+         <docidentifier type="CalConnect">CC/Cor 1000:#{Time.now.year}</docidentifier>
          <docnumber>1000</docnumber>
          <contributor>
            <role type="author"/>
@@ -239,7 +239,7 @@ RSpec.describe Asciidoctor::CC do
        <csd-standard xmlns="https://www.metanorma.org/ns/csd" type="semantic" version="#{Metanorma::CC::VERSION}">
        <bibdata type="standard">
          <title language="en" format="text/plain">Main Title</title>
-         <docidentifier type="CalConnect">CC/Cor 1000:2020</docidentifier>
+         <docidentifier type="CalConnect">CC/Cor 1000:#{Time.now.year}</docidentifier>
          <docnumber>1000</docnumber>
          <contributor>
            <role type="author"/>

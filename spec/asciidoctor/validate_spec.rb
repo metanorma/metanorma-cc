@@ -17,7 +17,7 @@ RSpec.describe Asciidoctor::CC do
       expect do
         Metanorma::Compile
           .new
-          .compile("spec/assets/xref_error.adoc", type: "cc")
+          .compile("spec/assets/xref_error.adoc", type: "cc", :"agree-to-terms" => true)
       end.to(change { File.exist?("spec/assets/xref_error.err") }
               .from(false).to(true))
     end

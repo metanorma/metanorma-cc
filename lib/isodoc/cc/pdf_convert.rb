@@ -13,7 +13,7 @@ module IsoDoc
       end
 
       def pdf_stylesheet(docxml)
-        "csd.standard.xsl"
+        "cc.standard.xsl"
       end
     end
   end

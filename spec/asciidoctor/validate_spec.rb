@@ -3,304 +3,289 @@ require "fileutils"
 
 RSpec.describe Asciidoctor::CC do
   context "when xref_error.adoc compilation" do
-    around do |example|
-      FileUtils.rm_f "spec/assets/xref_error.err"
-      example.run
-      Dir["spec/assets/xref_error*"].each do |file|
-        next if file.match?(/adoc$/)
-
-        FileUtils.rm_f(file)
-      end
-    end
-
     it "generates error file" do
+      File.write("xref_error.adoc", <<~"CONTENT")
+        = X
+        A
+
+        == Clause
+
+        <<a,b>>
+      CONTENT
+
       expect do
         mock_pdf
         Metanorma::Compile
           .new
-          .compile("spec/assets/xref_error.adoc", type: "cc", :"agree-to-terms" => true)
-      end.to(change { File.exist?("spec/assets/xref_error.err") }
+          .compile("xref_error.adoc", type: "cc", no_install_fonts: true)
+      end.to(change { File.exist?("xref_error.err") }
               .from(false).to(true))
     end
   end
 
   it "Warns of illegal doctype" do
-      FileUtils.rm_f "test.err"
     Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)
-  = Document title
-  Author
-  :docfile: test.adoc
-  :nodoc:
-  :no-isobib:
-  :doctype: pizza
+      = Document title
+      Author
+      :docfile: test.adoc
+      :nodoc:
+      :no-isobib:
+      :doctype: pizza
 
-  text
-  INPUT
+      text
+    INPUT
     expect(File.read("test.err")).to include "pizza is not a legal document type"
-end
+  end
 
   it "Warns of illegal status" do
-      FileUtils.rm_f "test.err"
     Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)
-  = Document title
-  Author
-  :docfile: test.adoc
-  :nodoc:
-  :no-isobib:
-  :status: pizza
+      = Document title
+      Author
+      :docfile: test.adoc
+      :nodoc:
+      :no-isobib:
+      :status: pizza
 
-  text
-  INPUT
+      text
+    INPUT
     expect(File.read("test.err")).to include "pizza is not a recognised status"
-end
+  end
 
   it "does not validate section ordering if the docuemnt is advisory" do
-      FileUtils.rm_f "test.err"
-  Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)
-  = Document title
-  Author
-  :docfile: test.adoc
-  :nodoc:
-  :doctype: advisory
+    Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)
+      = Document title
+      Author
+      :docfile: test.adoc
+      :nodoc:
+      :doctype: advisory
 
 
-  == Terms and Abbreviations
+      == Terms and Abbreviations
 
-  === Symbols and Abbreviated Terms
+      === Symbols and Abbreviated Terms
 
-  == Symbols and Abbreviated Terms
-  INPUT
+      == Symbols and Abbreviated Terms
+    INPUT
     expect(File.read("test.err")).not_to include "only one Symbols and Abbreviated Terms section in the standard"
   end
 
-it "Style warning if two Symbols and Abbreviated Terms sections" do
-      FileUtils.rm_f "test.err"
-  Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)
-  #{VALIDATING_BLANK_HDR}
+  it "Style warning if two Symbols and Abbreviated Terms sections" do
+    Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)
+      #{VALIDATING_BLANK_HDR}
 
-  == Terms and Abbreviations
+      == Terms and Abbreviations
 
-  === Symbols and Abbreviated Terms
+      === Symbols and Abbreviated Terms
 
-  == Symbols and Abbreviated Terms
-  INPUT
+      == Symbols and Abbreviated Terms
+    INPUT
     expect(File.read("test.err")).to include "Only one Symbols and Abbreviated Terms section in the standard"
-end
+  end
 
-it "Style warning if Symbols and Abbreviated Terms contains extraneous matter" do
-      FileUtils.rm_f "test.err"
-  Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)
-  #{VALIDATING_BLANK_HDR}
+  it "Style warning if Symbols and Abbreviated Terms contains extraneous matter" do
+    Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)
+      #{VALIDATING_BLANK_HDR}
 
-  == Symbols and Abbreviated Terms
+      == Symbols and Abbreviated Terms
 
-  Paragraph
-  INPUT
+      Paragraph
+    INPUT
     expect(File.read("test.err")).to include "Symbols and Abbreviated Terms can only contain a definition list"
-end
+  end
 
-it "Warning if do not start with scope or introduction" do
-      FileUtils.rm_f "test.err"
-  Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)
-  #{VALIDATING_BLANK_HDR}
+  it "Warning if do not start with scope or introduction" do
+    Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)
+      #{VALIDATING_BLANK_HDR}
 
-  Foreword
+      Foreword
 
-  == Symbols and Abbreviated Terms
+      == Symbols and Abbreviated Terms
 
-  Paragraph
-  INPUT
+      Paragraph
+    INPUT
     expect(File.read("test.err")).to include "Prefatory material must be followed by (clause) Scope"
-end
+  end
 
-it "Warning if introduction not followed by scope" do
-      FileUtils.rm_f "test.err"
-  Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)
-  #{VALIDATING_BLANK_HDR}
+  it "Warning if introduction not followed by scope" do
+    Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)
+      #{VALIDATING_BLANK_HDR}
 
-  .Foreword
-  Foreword
+      .Foreword
+      Foreword
 
-  == Introduction
+      == Introduction
 
-  == Symbols and Abbreviated Terms
+      == Symbols and Abbreviated Terms
 
-  Paragraph
-  INPUT
+      Paragraph
+    INPUT
     expect(File.read("test.err")).to include "Prefatory material must be followed by (clause) Scope"
-end
+  end
 
-it "Warning if normative references not followed by terms and definitions" do
-      FileUtils.rm_f "test.err"
-  Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)
-  #{VALIDATING_BLANK_HDR}
+  it "Warning if normative references not followed by terms and definitions" do
+    Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)
+      #{VALIDATING_BLANK_HDR}
 
-  .Foreword
-  Foreword
+      .Foreword
+      Foreword
 
-  == Scope
+      == Scope
 
-  [bibliography]
-  == Normative References
+      [bibliography]
+      == Normative References
 
-  == Symbols and Abbreviated Terms
+      == Symbols and Abbreviated Terms
 
-  Paragraph
-  INPUT
+      Paragraph
+    INPUT
     expect(File.read("test.err")).to include "Normative References must be followed by Terms and Definitions"
-end
+  end
 
-it "Warning if there are no clauses in the document" do
-      FileUtils.rm_f "test.err"
-  Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)
-  #{VALIDATING_BLANK_HDR}
+  it "Warning if there are no clauses in the document" do
+    Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)
+      #{VALIDATING_BLANK_HDR}
 
-  .Foreword
-  Foreword
+      .Foreword
+      Foreword
 
-  == Scope
+      == Scope
 
-  [bibliography]
-  == Normative References
+      [bibliography]
+      == Normative References
 
-  == Terms and Definitions
+      == Terms and Definitions
 
-  == Symbols and Abbreviated Terms
+      == Symbols and Abbreviated Terms
 
-  INPUT
+    INPUT
     expect(File.read("test.err")).to include "Document must contain clause after Terms and Definitions"
-end
+  end
 
-it "Warning if scope occurs after Terms and Definitions" do
-      FileUtils.rm_f "test.err"
-  Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)
-  #{VALIDATING_BLANK_HDR}
+  it "Warning if scope occurs after Terms and Definitions" do
+    Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)
+      #{VALIDATING_BLANK_HDR}
 
-  .Foreword
-  Foreword
+      .Foreword
+      Foreword
 
-  [bibliography]
-  == Normative References
+      [bibliography]
+      == Normative References
 
-  == Terms and Definitions
+      == Terms and Definitions
 
-  == Clause
+      == Clause
 
-  == Scope
+      == Scope
 
-  INPUT
+    INPUT
     expect(File.read("test.err")).to include "Scope must occur before Terms and Definitions"
-end
+  end
 
-it "Warning if Symbols and Abbreviated Terms does not occur immediately after Terms and Definitions" do
-      FileUtils.rm_f "test.err"
-  Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)
-  #{VALIDATING_BLANK_HDR}
+  it "Warning if Symbols and Abbreviated Terms does not occur immediately after Terms and Definitions" do
+    Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)
+      #{VALIDATING_BLANK_HDR}
 
-  .Foreword
-  Foreword
+      .Foreword
+      Foreword
 
-  == Scope
+      == Scope
 
-  [bibliography]
-  == Normative References
+      [bibliography]
+      == Normative References
 
-  == Terms and Definitions
+      == Terms and Definitions
 
-  == Clause
+      == Clause
 
-  == Symbols and Abbreviated Terms
+      == Symbols and Abbreviated Terms
 
-  INPUT
+    INPUT
     expect(File.read("test.err")).to include "Only annexes and references can follow clauses"
-end
+  end
 
-it "Warning if no normative references" do
-      FileUtils.rm_f "test.err"
-  Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)
-  #{VALIDATING_BLANK_HDR}
+  it "Warning if no normative references" do
+    Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)
+      #{VALIDATING_BLANK_HDR}
 
-  .Foreword
-  Foreword
+      .Foreword
+      Foreword
 
-  == Scope
+      == Scope
 
-  == Terms and Definitions
+      == Terms and Definitions
 
-  == Clause
+      == Clause
 
-  [appendix]
-  == Appendix A
+      [appendix]
+      == Appendix A
 
-  [appendix]
-  == Appendix B
+      [appendix]
+      == Appendix B
 
-  [appendix]
-  == Appendix C
+      [appendix]
+      == Appendix C
 
-  INPUT
+    INPUT
     expect(File.read("test.err")).to include "Document must include (references) Normative References"
-end
+  end
 
-it "Warning if final section is not named Bibliography" do
-      FileUtils.rm_f "test.err"
-  Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)
-  #{VALIDATING_BLANK_HDR}
+  it "Warning if final section is not named Bibliography" do
+    Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)
+      #{VALIDATING_BLANK_HDR}
 
-  .Foreword
-  Foreword
+      .Foreword
+      Foreword
 
-  == Scope
+      == Scope
 
-  [bibliography]
-  == Normative References
+      [bibliography]
+      == Normative References
 
-  == Terms and Definitions
+      == Terms and Definitions
 
-  == Clause
+      == Clause
 
-  [appendix]
-  == Appendix A
+      [appendix]
+      == Appendix A
 
-  [appendix]
-  == Appendix B
+      [appendix]
+      == Appendix B
 
-  [bibliography]
-  == Bibliography
+      [bibliography]
+      == Bibliography
 
-  [bibliography]
-  == Appendix C
+      [bibliography]
+      == Appendix C
 
-  INPUT
+    INPUT
     expect(File.read("test.err")).to include "There are sections after the final Bibliography"
-end
+  end
 
-it "Warning if final section is not styled Bibliography" do
-      FileUtils.rm_f "test.err"
-  Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)
-  #{VALIDATING_BLANK_HDR}
+  it "Warning if final section is not styled Bibliography" do
+    Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)
+      #{VALIDATING_BLANK_HDR}
 
-  .Foreword
-  Foreword
+      .Foreword
+      Foreword
 
-  == Scope
+      == Scope
 
-  [bibliography]
-  == Normative References
+      [bibliography]
+      == Normative References
 
-  == Terms and Definitions
+      == Terms and Definitions
 
-  == Clause
+      == Clause
 
-  [appendix]
-  == Appendix A
+      [appendix]
+      == Appendix A
 
-  [appendix]
-  == Appendix B
+      [appendix]
+      == Appendix B
 
-  == Bibliography
+      == Bibliography
 
-  INPUT
+    INPUT
     expect(File.read("test.err")).to include "Section not marked up as [bibliography]!"
-end
+  end
 end

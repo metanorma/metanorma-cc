@@ -4,425 +4,435 @@ require "fileutils"
 RSpec.describe Asciidoctor::CC do
   it "processes default metadata" do
     csdc = IsoDoc::CC::HtmlConvert.new({})
-    docxml, filename, dir = csdc.convert_init(<<~"INPUT", "test", true)
-<csd-standard xmlns="https://www.calconnect.org/standards/csd">
-<bibdata type="standard">
-  <title language="en" format="plain">Main Title</title>
-  <docidentifier>CC/WD 1000:2001</docidentifier>
-  <docnumber>1000</docnumber>
-  <contributor>
-    <role type="author"/>
-    <organization>
-      <name>CalConnect</name>
-    </organization>
-  </contributor>
-           <contributor>
-           <role type="editor"/>
-           <person>
-             <name>
-               <completename>Fred Flintstone</completename>
-             </name>
-           </person>
-         </contributor>
-         <contributor>
-           <role type="author"/>
-           <person>
-             <name>
-               <forename>Barney</forename>
-               <surname>Rubble</surname>
-             </name>
-                  <affiliation>
-      <organization><name>Bedrock Inc.</name></organization>
-      </affiliation>
-           </person>
-         </contributor>
-  <contributor>
-    <role type="publisher"/>
-    <organization>
-      <name>CalConnect</name>
-    </organization>
-  </contributor>
-  <edition>2</edition>
-  <version>
-  <revision-date>2000-01-01</revision-date>
-  <draft>3.4</draft>
-</version>
-  <language>en</language>
-  <script>Latn</script>
-  <status>
-    <stage>working-draft</stage>
-  </status>
-  <copyright>
-    <from>2001</from>
-    <owner>
-      <organization>
-        <name>CalConnect</name>
-      </organization>
-    </owner>
-  </copyright>
-  <ext>
-  <doctype>standard</doctype>
-  <editorialgroup>
-    <committee type="A">TC</committee>
-  </editorialgroup>
-  </ext>
-</bibdata>
-<sections/>
-</csd-standard>
+    docxml, = csdc.convert_init(<<~"INPUT", "test", true)
+      <csd-standard xmlns="https://www.calconnect.org/standards/csd">
+      <bibdata type="standard">
+        <title language="en" format="plain">Main Title</title>
+        <docidentifier>CC/WD 1000:2001</docidentifier>
+        <docnumber>1000</docnumber>
+        <contributor>
+          <role type="author"/>
+          <organization>
+            <name>CalConnect</name>
+          </organization>
+        </contributor>
+        <contributor>
+          <role type="editor"/>
+          <person>
+            <name>
+              <completename>Fred Flintstone</completename>
+            </name>
+          </person>
+        </contributor>
+        <contributor>
+          <role type="author"/>
+          <person>
+            <name>
+              <forename>Barney</forename>
+              <surname>Rubble</surname>
+            </name>
+            <affiliation>
+              <organization><name>Bedrock Inc.</name></organization>
+            </affiliation>
+          </person>
+        </contributor>
+        <contributor>
+          <role type="publisher"/>
+          <organization>
+            <name>CalConnect</name>
+          </organization>
+        </contributor>
+        <edition>2</edition>
+        <version>
+          <revision-date>2000-01-01</revision-date>
+          <draft>3.4</draft>
+        </version>
+        <language>en</language>
+        <script>Latn</script>
+        <status>
+          <stage>working-draft</stage>
+        </status>
+        <copyright>
+          <from>2001</from>
+          <owner>
+            <organization>
+              <name>CalConnect</name>
+            </organization>
+          </owner>
+        </copyright>
+        <ext>
+          <doctype>standard</doctype>
+          <editorialgroup>
+            <committee type="A">TC</committee>
+          </editorialgroup>
+        </ext>
+      </bibdata>
+      <sections/>
+      </csd-standard>
     INPUT
     expect(htmlencode(metadata(csdc.info(docxml, nil)).to_s.gsub(/, :/, ",\n:"))).to be_equivalent_to <<~"OUTPUT"
-{:accesseddate=>"XXX",
-:agency=>"CalConnect",
-:authors=>["Fred Flintstone", "Barney Rubble"],
-:authors_affiliations=>{""=>["Fred Flintstone"], "Bedrock Inc."=>["Barney Rubble"]},
-:circulateddate=>"XXX",
-:confirmeddate=>"XXX",
-:copieddate=>"XXX",
-:createddate=>"XXX",
-:docnumber=>"CC/WD 1000:2001",
-:docnumeric=>"1000",
-:doctitle=>"Main Title",
-:doctype=>"Standard",
-:doctype_display=>"Standard",
-:docyear=>"2001",
-:draft=>"3.4",
-:draftinfo=>" (draft 3.4, 2000-01-01)",
-:edition=>"2",
-:implementeddate=>"XXX",
-:issueddate=>"XXX",
-:lang=>"en",
-:metadata_extensions=>{"doctype"=>"standard", "editorialgroup"=>{"committee_type"=>"A", "committee"=>"TC"}},
-:obsoleteddate=>"XXX",
-:publisheddate=>"XXX",
-:publisher=>"CalConnect",
-:receiveddate=>"XXX",
-:revdate=>"2000-01-01",
-:revdate_monthyear=>"January 2000",
-:roles_authors_affiliations=>{"author"=>{"Bedrock Inc."=>["Barney Rubble"]}, "editor"=>{""=>["Fred Flintstone"]}},
-:script=>"Latn",
-:stage=>"Working Draft",
-:stage_display=>"Working Draft",
-:stageabbr=>"WD",
-:tc=>"TC",
-:transmitteddate=>"XXX",
-:unchangeddate=>"XXX",
-:unpublished=>true,
-:updateddate=>"XXX",
-:vote_endeddate=>"XXX",
-:vote_starteddate=>"XXX"}
+      {:accesseddate=>"XXX",
+      :agency=>"CalConnect",
+      :authors=>["Fred Flintstone", "Barney Rubble"],
+      :authors_affiliations=>{""=>["Fred Flintstone"], "Bedrock Inc."=>["Barney Rubble"]},
+      :circulateddate=>"XXX",
+      :confirmeddate=>"XXX",
+      :copieddate=>"XXX",
+      :createddate=>"XXX",
+      :docnumber=>"CC/WD 1000:2001",
+      :docnumeric=>"1000",
+      :doctitle=>"Main Title",
+      :doctype=>"Standard",
+      :doctype_display=>"Standard",
+      :docyear=>"2001",
+      :draft=>"3.4",
+      :draftinfo=>" (draft 3.4, 2000-01-01)",
+      :edition=>"2",
+      :implementeddate=>"XXX",
+      :issueddate=>"XXX",
+      :lang=>"en",
+      :metadata_extensions=>{"doctype"=>"standard", "editorialgroup"=>{"committee_type"=>"A", "committee"=>"TC"}},
+      :obsoleteddate=>"XXX",
+      :publisheddate=>"XXX",
+      :publisher=>"CalConnect",
+      :receiveddate=>"XXX",
+      :revdate=>"2000-01-01",
+      :revdate_monthyear=>"January 2000",
+      :roles_authors_affiliations=>{"author"=>{"Bedrock Inc."=>["Barney Rubble"]}, "editor"=>{""=>["Fred Flintstone"]}},
+      :script=>"Latn",
+      :stage=>"Working Draft",
+      :stage_display=>"Working Draft",
+      :stageabbr=>"WD",
+      :tc=>"TC",
+      :transmitteddate=>"XXX",
+      :unchangeddate=>"XXX",
+      :unpublished=>true,
+      :updateddate=>"XXX",
+      :vote_endeddate=>"XXX",
+      :vote_starteddate=>"XXX"}
     OUTPUT
   end
 
   it "processes pre" do
-    expect(xmlpp(IsoDoc::CC::HtmlConvert.new({}).convert("test", <<~"INPUT", true).gsub(%r{^.*<body}m, "<body").gsub(%r{</body>.*$}m, "</body>"))).to be_equivalent_to xmlpp(<<~"OUTPUT")
-<csd-standard xmlns="https://www.calconnect.org/standards/csd">
-<preface><foreword>
-<pre>ABC</pre>
-</foreword></preface>
-</csd-standard>
+    input = <<~"INPUT"
+      <csd-standard xmlns="https://www.calconnect.org/standards/csd">
+        <preface>
+          <foreword>
+            <pre>ABC</pre>
+          </foreword>
+        </preface>
+      </csd-standard>
     INPUT
-    #{HTML_HDR}
-             <br/>
-             <div>
-               <h1 class="ForewordTitle">Foreword</h1>
-               <pre>ABC</pre>
-             </div>
-             <p class="zzSTDTitle1"/>
-           </div>
-         </body>
-    OUTPUT
+    expect(xmlpp(IsoDoc::CC::HtmlConvert.new({})
+      .convert("test", input, true)
+      .gsub(%r{^.*<body}m, "<body")
+      .gsub(%r{</body>.*$}m, "</body>"))).to be_equivalent_to xmlpp(<<~"OUTPUT")
+            #{HTML_HDR}
+            <br/>
+            <div>
+              <h1 class="ForewordTitle">Foreword</h1>
+              <pre>ABC</pre>
+            </div>
+            <p class="zzSTDTitle1"/>
+          </div>
+        </body>
+      OUTPUT
   end
 
   it "processes keyword" do
-    expect(xmlpp(IsoDoc::CC::HtmlConvert.new({}).convert("test", <<~"INPUT", true).gsub(%r{^.*<body}m, "<body").gsub(%r{</body>.*$}m, "</body>"))).to be_equivalent_to xmlpp(<<~"OUTPUT")
-<csd-standard xmlns="https://www.calconnect.org/standards/csd">
-<preface><foreword>
-<keyword>ABC</keyword>
-</foreword></preface>
-</csd-standard>
+    input = <<~"INPUT"
+      <csd-standard xmlns="https://www.calconnect.org/standards/csd">
+        <preface><foreword>
+        <keyword>ABC</keyword>
+        </foreword></preface>
+      </csd-standard>
     INPUT
-        #{HTML_HDR}
-             <br/>
-             <div>
-               <h1 class="ForewordTitle">Foreword</h1>
-               <span class="keyword">ABC</span>
-             </div>
-             <p class="zzSTDTitle1"/>
-           </div>
-         </body>
-    OUTPUT
+    expect(xmlpp(IsoDoc::CC::HtmlConvert.new({})
+      .convert("test", input, true)
+      .gsub(%r{^.*<body}m, "<body")
+      .gsub(%r{</body>.*$}m, "</body>"))).to be_equivalent_to xmlpp(<<~"OUTPUT")
+            #{HTML_HDR}
+            <br/>
+            <div>
+              <h1 class="ForewordTitle">Foreword</h1>
+              <span class="keyword">ABC</span>
+            </div>
+            <p class="zzSTDTitle1"/>
+          </div>
+        </body>
+      OUTPUT
   end
 
   it "processes simple terms & definitions" do
-    expect(xmlpp(IsoDoc::CC::HtmlConvert.new({}).convert("test", <<~"INPUT", true).gsub(%r{^.*<body}m, "<body").gsub(%r{</body>.*$}m, "</body>"))).to be_equivalent_to xmlpp(<<~"OUTPUT")
-               <csd-standard xmlns="http://riboseinc.com/isoxml">
-       <sections>
-       <terms id="H" obligation="normative"><title>1.<tab/>Terms, Definitions, Symbols and Abbreviated Terms</title>
-         <term id="J">
-         <name>1.1.</name>
-         <preferred>Term2</preferred>
-       </term>
-        </terms>
+    input = <<~"INPUT"
+      <csd-standard xmlns="http://riboseinc.com/isoxml">
+        <sections>
+          <terms id="H" obligation="normative"><title>1.<tab/>Terms, Definitions, Symbols and Abbreviated Terms</title>
+            <term id="J">
+              <name>1.1.</name>
+              <preferred>Term2</preferred>
+            </term>
+          </terms>
         </sections>
-        </csd-standard>
+      </csd-standard>
     INPUT
-        #{HTML_HDR}
-               <p class="zzSTDTitle1"/>
-               <div id="H"><h1>1.&#160; Terms, Definitions, Symbols and Abbreviated Terms</h1>
-       <p class="TermNum" id="J">1.1.</p>
-         <p class="Terms" style="text-align:left;">Term2</p>
-       </div>
-             </div>
-           </body>
-    OUTPUT
-  end
-
-    it "rearranges term headers" do
-    expect(xmlpp(IsoDoc::CC::HtmlConvert.new({}).cleanup(Nokogiri::XML(<<~"INPUT")).to_s)).to be_equivalent_to xmlpp(<<~"OUTPUT")
-    <html>
-           <body lang="EN-US" link="blue" vlink="#954F72" xml:lang="EN-US" class="container">
-             <div class="title-section">
-               <p>&#160;</p>
-             </div>
-             <br/>
-             <div class="WordSection2">
-               <p>&#160;</p>
-             </div>
-             <br/>
-             <div class="WordSection3">
-               <p class="zzSTDTitle1"/>
-               <div id="H"><h1>1.&#160; Terms and definitions</h1><p>For the purposes of this document,
-           the following terms and definitions apply.</p>
-       <p class="TermNum" id="J">1.1.</p>
-         <p class="Terms" style="text-align:left;">Term2</p>
-       </div>
-             </div>
-           </body>
-           </html>
-           INPUT
-                 <?xml version="1.0"?>
-       <html>
-              <body lang="EN-US" link="blue" vlink="#954F72" xml:lang="EN-US" class="container">
-                <div class="title-section">
-                  <p>&#xA0;</p>
-                </div>
-                <br/>
-                <div class="WordSection2">
-                  <p>&#xA0;</p>
-                </div>
-                <br/>
-                <div class="WordSection3">
-                  <p class="zzSTDTitle1"/>
-                  <div id="H"><h1>1.&#xA0; Terms and definitions</h1><p>For the purposes of this document,
-              the following terms and definitions apply.</p>
-          <p class="TermNum" id="J">1.1.&#xA0;<p class="Terms" style="text-align:left;">Term2</p></p>
-
+    expect(xmlpp(IsoDoc::CC::HtmlConvert.new({})
+      .convert("test", input, true)
+      .gsub(%r{^.*<body}m, "<body")
+      .gsub(%r{</body>.*$}m, "</body>"))).to be_equivalent_to xmlpp(<<~"OUTPUT")
+            #{HTML_HDR}
+            <p class="zzSTDTitle1"/>
+            <div id="H">
+              <h1>1.&#160; Terms, Definitions, Symbols and Abbreviated Terms</h1>
+              <p class="TermNum" id="J">1.1.</p>
+              <p class="Terms" style="text-align:left;">Term2</p>
+            </div>
           </div>
-                </div>
-              </body>
-              </html>
-    OUTPUT
+        </body>
+      OUTPUT
   end
 
+  it "rearranges term headers" do
+    input = <<~"INPUT"
+      <html>
+        <body lang="EN-US" link="blue" vlink="#954F72" xml:lang="EN-US" class="container">
+          <div class="title-section">
+            <p>&#160;</p>
+          </div>
+          <br/>
+          <div class="WordSection2">
+            <p>&#160;</p>
+          </div>
+          <br/>
+          <div class="WordSection3">
+            <p class="zzSTDTitle1"/>
+            <div id="H"><h1>1.&#160; Terms and definitions</h1><p>For the purposes of this document,
+              the following terms and definitions apply.</p>
+              <p class="TermNum" id="J">1.1.</p>
+              <p class="Terms" style="text-align:left;">Term2</p>
+            </div>
+          </div>
+        </body>
+      </html>
+    INPUT
+    expect(xmlpp(IsoDoc::CC::HtmlConvert.new({})
+      .cleanup(Nokogiri::XML(input)).to_s)).to be_equivalent_to xmlpp(<<~"OUTPUT")
+        <?xml version="1.0"?>
+        <html>
+          <body lang="EN-US" link="blue" vlink="#954F72" xml:lang="EN-US" class="container">
+            <div class="title-section">
+              <p>&#xA0;</p>
+            </div>
+            <br/>
+            <div class="WordSection2">
+              <p>&#xA0;</p>
+            </div>
+            <br/>
+            <div class="WordSection3">
+              <p class="zzSTDTitle1"/>
+              <div id="H"><h1>1.&#xA0; Terms and definitions</h1>
+                <p>For the purposes of this document, the following terms and definitions apply.</p>
+                <p class="TermNum" id="J">1.1.&#xA0;<p class="Terms" style="text-align:left;">Term2</p></p>
+              </div>
+            </div>
+          </body>
+        </html>
+      OUTPUT
+  end
 
   it "processes section names" do
-    expect(xmlpp(IsoDoc::CC::PresentationXMLConvert.new({}).convert("test", <<~"INPUT", true).gsub(%r{^.*<body}m, "<body").gsub(%r{</body>.*$}m, "</body>"))).to be_equivalent_to xmlpp(<<~"OUTPUT")
-               <csd-standard xmlns="http://riboseinc.com/isoxml">
-      <preface>
-      <foreword obligation="informative">
-         <title>Foreword</title>
-         <p id="A">This is a preamble</p>
-       </foreword>
-        <introduction id="B" obligation="informative"><title>Introduction</title><clause id="C" inline-header="false" obligation="informative">
-         <title>Introduction Subsection</title>
-       </clause>
-       </introduction></preface><sections>
-       <clause id="D" obligation="normative">
-         <title>Scope</title>
-         <p id="E">Text</p>
-       </clause>
-
-       <clause id="H" obligation="normative"><title>Terms, Definitions, Symbols and Abbreviated Terms</title><terms id="I" obligation="normative">
-         <title>Normal Terms</title>
-         <term id="J">
-         <preferred>Term2</preferred>
-       </term>
-       </terms>
-       <definitions id="K">
-         <dl>
-         <dt>Symbol</dt>
-         <dd>Definition</dd>
-         </dl>
-       </definitions>
-       </clause>
-       <definitions id="L">
-         <dl>
-         <dt>Symbol</dt>
-         <dd>Definition</dd>
-         </dl>
-       </definitions>
-       <clause id="M" inline-header="false" obligation="normative"><title>Clause 4</title><clause id="N" inline-header="false" obligation="normative">
-         <title>Introduction</title>
-       </clause>
-       <clause id="O" inline-header="false" obligation="normative">
-         <title>Clause 4.2</title>
-       </clause></clause>
-
-       </sections><annex id="P" inline-header="false" obligation="normative">
-         <title>Annex</title>
-         <clause id="Q" inline-header="false" obligation="normative">
-         <title>Annex A.1</title>
-         <clause id="Q1" inline-header="false" obligation="normative">
-         <title>Annex A.1a</title>
-         </clause>
-       </clause>
-       </annex><bibliography><references id="R" obligation="informative" normative="true">
-         <title>Normative References</title>
-       </references><clause id="S" obligation="informative">
-         <title>Bibliography</title>
-         <references id="T" obligation="informative" normative="false">
-         <title>Bibliography Subsection</title>
-       </references>
-       </clause>
-       </bibliography>
-       </csd-standard>
+    input = <<~"INPUT"
+      <csd-standard xmlns="http://riboseinc.com/isoxml">
+        <preface>
+          <foreword obligation="informative">
+            <title>Foreword</title>
+            <p id="A">This is a preamble</p>
+          </foreword>
+          <introduction id="B" obligation="informative">
+            <title>Introduction</title>
+            <clause id="C" inline-header="false" obligation="informative">
+              <title>Introduction Subsection</title>
+            </clause>
+          </introduction>
+        </preface>
+        <sections>
+          <clause id="D" obligation="normative">
+            <title>Scope</title>
+            <p id="E">Text</p>
+          </clause>
+          <clause id="H" obligation="normative">
+            <title>Terms, Definitions, Symbols and Abbreviated Terms</title>
+            <terms id="I" obligation="normative">
+              <title>Normal Terms</title>
+              <term id="J">
+                <preferred>Term2</preferred>
+              </term>
+            </terms>
+            <definitions id="K">
+              <dl>
+                <dt>Symbol</dt>
+                <dd>Definition</dd>
+              </dl>
+            </definitions>
+          </clause>
+          <definitions id="L">
+            <dl>
+              <dt>Symbol</dt>
+              <dd>Definition</dd>
+            </dl>
+          </definitions>
+          <clause id="M" inline-header="false" obligation="normative">
+            <title>Clause 4</title>
+            <clause id="N" inline-header="false" obligation="normative">
+              <title>Introduction</title>
+            </clause>
+            <clause id="O" inline-header="false" obligation="normative">
+              <title>Clause 4.2</title>
+            </clause>
+          </clause>
+        </sections>
+        <annex id="P" inline-header="false" obligation="normative">
+          <title>Annex</title>
+          <clause id="Q" inline-header="false" obligation="normative">
+            <title>Annex A.1</title>
+            <clause id="Q1" inline-header="false" obligation="normative">
+              <title>Annex A.1a</title>
+            </clause>
+          </clause>
+        </annex>
+        <bibliography>
+          <references id="R" normative="true" obligation="informative">
+            <title>Normative References</title>
+          </references>
+          <clause id="S" obligation="informative">
+            <title>Bibliography</title>
+            <references id="T" normative="false" obligation="informative">
+              <title>Bibliography Subsection</title>
+            </references>
+          </clause>
+        </bibliography>
+      </csd-standard>
     INPUT
-       <csd-standard xmlns='http://riboseinc.com/isoxml' type="presentation">
-         <preface>
-           <foreword obligation='informative'>
-             <title>Foreword</title>
-             <p id='A'>This is a preamble</p>
-           </foreword>
-           <introduction id='B' obligation='informative'>
-             <title>Introduction</title>
-             <clause id='C' inline-header='false' obligation='informative'>
-               <title depth='2'>Introduction Subsection</title>
-             </clause>
-           </introduction>
-         </preface>
-         <sections>
-           <clause id='D' obligation='normative'>
-             <title depth='1'>
-               4.
-               <tab/>
-               Scope
-             </title>
-             <p id='E'>Text</p>
-           </clause>
-           <clause id='H' obligation='normative'>
-             <title depth='1'>
-               2.
-               <tab/>
-               Terms, Definitions, Symbols and Abbreviated Terms
-             </title>
-             <terms id='I' obligation='normative'>
-               <title depth='2'>
-                 2.1.
-                 <tab/>
-                 Normal Terms
-               </title>
-               <term id='J'>
-                 <name>2.1.1.</name>
-                 <preferred>Term2</preferred>
-               </term>
-             </terms>
-             <definitions id='K'>
-               <title>2.2.</title>
-               <dl>
-                 <dt>Symbol</dt>
-                 <dd>Definition</dd>
-               </dl>
-             </definitions>
-           </clause>
-           <definitions id='L'>
-             <title>3.</title>
-             <dl>
-               <dt>Symbol</dt>
-               <dd>Definition</dd>
-             </dl>
-           </definitions>
-           <clause id='M' inline-header='false' obligation='normative'>
-             <title depth='1'>
-               5.
-               <tab/>
-               Clause 4
-             </title>
-             <clause id='N' inline-header='false' obligation='normative'>
-               <title depth='2'>
-                 5.1.
-                 <tab/>
-                 Introduction
-               </title>
-             </clause>
-             <clause id='O' inline-header='false' obligation='normative'>
-               <title depth='2'>
-                 5.2.
-                 <tab/>
-                 Clause 4.2
-               </title>
-             </clause>
-           </clause>
-         </sections>
-         <annex id='P' inline-header='false' obligation='normative'>
-           <title>
-             <strong>Appendix A</strong>
-             <br/>
-             (normative)
-             <br/>
-             <strong>Annex</strong>
-           </title>
-           <clause id='Q' inline-header='false' obligation='normative'>
-             <title depth='2'>
-               A.1.
-               <tab/>
-               Annex A.1
-             </title>
-             <clause id='Q1' inline-header='false' obligation='normative'>
-               <title depth='3'>
-                 A.1.1.
-                 <tab/>
-                 Annex A.1a
-               </title>
-             </clause>
-           </clause>
-         </annex>
-         <bibliography>
-           <references id='R' obligation='informative' normative='true'>
-             <title depth='1'>
-               1.
-               <tab/>
-               Normative References
-             </title>
-           </references>
-           <clause id='S' obligation='informative'>
-             <title depth='1'>Bibliography</title>
-             <references id='T' obligation='informative' normative='false'>
-               <title depth='2'>Bibliography Subsection</title>
-             </references>
-           </clause>
-         </bibliography>
-       </csd-standard>
-    OUTPUT
+
+    expect(xmlpp(IsoDoc::CC::PresentationXMLConvert.new({})
+      .convert("test", input, true)
+      .gsub(%r{^.*<body}m, "<body")
+      .gsub(%r{</body>.*$}m, "</body>"))).to be_equivalent_to xmlpp(<<~"OUTPUT")
+
+        <csd-standard type="presentation" xmlns="http://riboseinc.com/isoxml">
+          <preface>
+            <foreword obligation="informative">
+              <title>Foreword</title>
+              <p id="A">This is a preamble</p>
+            </foreword>
+            <introduction id="B" obligation="informative">
+              <title>Introduction</title>
+              <clause id="C" inline-header="false" obligation="informative">
+                <title depth="2">Introduction Subsection</title>
+              </clause>
+            </introduction>
+          </preface>
+          <sections>
+            <clause id="D" obligation="normative">
+              <title depth="1">4.
+                <tab/>
+                Scope</title>
+              <p id="E">Text</p>
+            </clause>
+            <clause id="H" obligation="normative">
+              <title depth="1">2.
+                <tab/>
+                Terms, Definitions, Symbols and Abbreviated Terms</title>
+              <terms id="I" obligation="normative">
+                <title depth="2">2.1.
+                  <tab/>
+                  Normal Terms</title>
+                <term id="J">
+                  <name>2.1.1.</name>
+                  <preferred>Term2</preferred>
+                </term>
+              </terms>
+              <definitions id="K">
+                <title>2.2.</title>
+                <dl>
+                  <dt>Symbol</dt>
+                  <dd>Definition</dd>
+                </dl>
+              </definitions>
+            </clause>
+            <definitions id="L">
+              <title>3.</title>
+              <dl>
+                <dt>Symbol</dt>
+                <dd>Definition</dd>
+              </dl>
+            </definitions>
+            <clause id="M" inline-header="false" obligation="normative">
+              <title depth="1">5.
+                <tab/>
+                Clause 4</title>
+              <clause id="N" inline-header="false" obligation="normative">
+                <title depth="2">5.1.
+                  <tab/>
+                  Introduction</title>
+              </clause>
+              <clause id="O" inline-header="false" obligation="normative">
+                <title depth="2">5.2.
+                  <tab/>
+                  Clause 4.2</title>
+              </clause>
+            </clause>
+          </sections>
+          <annex id="P" inline-header="false" obligation="normative">
+            <title>
+              <strong>Appendix A</strong>
+              <br/>(normative)
+              <br/>
+              <strong>Annex</strong></title>
+            <clause id="Q" inline-header="false" obligation="normative">
+              <title depth="2">A.1.
+                <tab/>
+                Annex A.1</title>
+              <clause id="Q1" inline-header="false" obligation="normative">
+                <title depth="3">A.1.1.
+                  <tab/>
+                  Annex A.1a</title>
+              </clause>
+            </clause>
+          </annex>
+          <bibliography>
+            <references id="R" normative="true" obligation="informative">
+              <title depth="1">1.
+                <tab/>
+                Normative References</title>
+            </references>
+            <clause id="S" obligation="informative">
+              <title depth="1">Bibliography</title>
+              <references id="T" normative="false" obligation="informative">
+                <title depth="2">Bibliography Subsection</title>
+              </references>
+            </clause>
+          </bibliography>
+        </csd-standard>
+      OUTPUT
   end
 
   it "injects JS into blank html" do
-    FileUtils.rm_f "test.html"
-    expect(xmlpp(strip_guid(Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)))).to be_equivalent_to xmlpp(<<~"OUTPUT")
+    options = [backend: :cc, header_footer: true]
+    expect(xmlpp(strip_guid(Asciidoctor.convert(<<~"INPUT", *options)))).to be_equivalent_to xmlpp(<<~"OUTPUT")
       = Document title
       Author
       :docfile: test.adoc
       :novalid:
       :no-pdf:
     INPUT
-    #{BLANK_HDR}
-<sections/>
-</csd-standard>
+        #{BLANK_HDR}
+        <sections/>
+      </csd-standard>
     OUTPUT
     html = File.read("test.html", encoding: "utf-8")
     expect(html).to match(%r{jquery\.min\.js})
     expect(html).to match(%r{Source Code Pro})
     expect(html).to match(%r{<main class="main-section"><button})
   end
-
-
 end

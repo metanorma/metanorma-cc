@@ -6,39 +6,28 @@ RSpec.describe Asciidoctor::CC do
     expect(Metanorma::CC::VERSION).not_to be nil
   end
 
-  #it "generates output for the Rice document" do
-  #  FileUtils.rm_rf %w(spec/examples/rfc6350.doc spec/examples/rfc6350.html spec/examples/rfc6350.pdf)
-  #  FileUtils.cd "spec/examples"
-  #  Asciidoctor.convert_file "rfc6350.adoc", {:attributes=>{"backend"=>"cc"}, :safe=>0, :header_footer=>true, :requires=>["metanorma-cc"], :failure_level=>4, :mkdirs=>true, :to_file=>nil}
-  #  FileUtils.cd "../.."
-  #  expect(File.exist?("spec/examples/rfc6350.doc")).to be true
-  #  expect(File.exist?("spec/examples/rfc6350.html")).to be true
-  #  expect(File.exist?("spec/examples/rfc6350.pdf")).to be true
-  #end
-
   it "processes a blank document" do
-    expect(xmlpp(strip_guid(Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)))).to be_equivalent_to xmlpp(<<~"OUTPUT")
-    #{ASCIIDOC_BLANK_HDR}
+    options = [backend: :cc, header_footer: true]
+    expect(xmlpp(strip_guid(Asciidoctor.convert(<<~"INPUT", *options)))).to be_equivalent_to xmlpp(<<~"OUTPUT")
+      #{ASCIIDOC_BLANK_HDR}
     INPUT
-    #{BLANK_HDR}
-<sections/>
-</csd-standard>
+        #{BLANK_HDR}
+        <sections/>
+      </csd-standard>
     OUTPUT
   end
 
   it "converts a blank document" do
-    FileUtils.rm_f "test.html"
-    FileUtils.rm_f "test.pdf"
-    FileUtils.rm_f "test.doc"
-    expect(xmlpp(strip_guid(Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)))).to be_equivalent_to xmlpp(<<~"OUTPUT")
+    options = [backend: :cc, header_footer: true]
+    expect(xmlpp(strip_guid(Asciidoctor.convert(<<~"INPUT", *options)))).to be_equivalent_to xmlpp(<<~"OUTPUT")
       = Document title
       Author
       :docfile: test.adoc
       :novalid:
     INPUT
-    #{BLANK_HDR}
-<sections/>
-</csd-standard>
+        #{BLANK_HDR}
+        <sections/>
+      </csd-standard>
     OUTPUT
     expect(File.exist?("test.html")).to be true
     expect(File.exist?("test.pdf")).to be true
@@ -46,23 +35,24 @@ RSpec.describe Asciidoctor::CC do
   end
 
   it "overrides invalid document type" do
-    FileUtils.rm_f "test.html"
-    expect(xmlpp(strip_guid(Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)))).to be_equivalent_to xmlpp(<<~"OUTPUT")
+    options = [backend: :cc, header_footer: true]
+    expect(xmlpp(strip_guid(Asciidoctor.convert(<<~"INPUT", *options)))).to be_equivalent_to xmlpp(<<~"OUTPUT")
       = Document title
       Author
       :docfile: test.adoc
       :doctype: dinosaur
       :no-pdf:
     INPUT
-    #{BLANK_HDR}
-<sections/>
-</csd-standard>
+        #{BLANK_HDR}
+        <sections/>
+      </csd-standard>
     OUTPUT
     expect(File.exist?("test.html")).to be true
   end
 
   it "processes default metadata for final-draft directive with copyright year" do
-    expect(xmlpp(strip_guid(Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)))).to be_equivalent_to xmlpp(<<~"OUTPUT")
+    options = [backend: :cc, header_footer: true]
+    expect(xmlpp(strip_guid(Asciidoctor.convert(<<~"INPUT", *options)))).to be_equivalent_to xmlpp(<<~"OUTPUT")
       = Document title
       Author
       :docfile: test.adoc
@@ -86,75 +76,78 @@ RSpec.describe Asciidoctor::CC do
       :givenname_2: Barney
       :role_2: editor
     INPUT
-<?xml version="1.0" encoding="UTF-8"?>
-<csd-standard xmlns="https://www.metanorma.org/ns/csd" type="semantic" version="#{Metanorma::CC::VERSION}">
-<bibdata type="standard">
-  <title language="en" format="text/plain">Main Title</title>
-  <docidentifier type="CalConnect">CC/DIR/FDS 1000:2001</docidentifier>
-  <docnumber>1000</docnumber>
-<contributor>
-    <role type="author"/>
-    <organization>
-      <name>CalConnect</name>
-    </organization>
-  </contributor>
-   <contributor>
-   <role type="author"/>
-   <person>
-     <name>
-       <completename>Fred Flintstone</completename>
-     </name>
-   </person>
- </contributor>
- <contributor>
-   <role type="editor"/>
-   <person>
-     <name>
-       <forename>Barney</forename>
-       <surname>Rubble</surname>
-     </name>
-   </person>
- </contributor>
-  <contributor>
-    <role type="publisher"/>
-    <organization>
-      <name>CalConnect</name>
-    </organization>
-  </contributor>
-  <edition>2</edition>
-<version>
-  <revision-date>2000-01-01</revision-date>
-  <draft>3.4</draft>
-</version>
-  <language>en</language>
-  <script>Latn</script>
-  <status>
-    <stage>final-draft</stage>
-    <iteration>3</iteration>
-  </status>
-  <copyright>
-    <from>2001</from>
-    <owner>
-      <organization>
-        <name>CalConnect</name>
-      </organization>
-    </owner>
-  </copyright>
-  <ext>
-  <doctype abbreviation="DIR">directive</doctype>
-  <editorialgroup>
-    <committee type="provisional">TC</committee>
-  </editorialgroup>
-  </ext>
-</bibdata>
-    #{BOILERPLATE.sub(/<legal-statement/, "#{BOILERPLATE_LICENSE}\n<legal-statement").sub(/#{Date.today.year} The Calendaring and Scheduling Consortium/, "2001 The Calendaring and Scheduling Consortium")}
-<sections/>
-</csd-standard>
+      <?xml version="1.0" encoding="UTF-8"?>
+      <csd-standard xmlns="https://www.metanorma.org/ns/csd" type="semantic" version="#{Metanorma::CC::VERSION}">
+      <bibdata type="standard">
+        <title language="en" format="text/plain">Main Title</title>
+        <docidentifier type="CalConnect">CC/DIR/FDS 1000:2001</docidentifier>
+        <docnumber>1000</docnumber>
+        <contributor>
+          <role type="author"/>
+          <organization>
+            <name>CalConnect</name>
+          </organization>
+        </contributor>
+        <contributor>
+          <role type="author"/>
+          <person>
+             <name>
+               <completename>Fred Flintstone</completename>
+            </name>
+          </person>
+        </contributor>
+        <contributor>
+          <role type="editor"/>
+          <person>
+            <name>
+              <forename>Barney</forename>
+              <surname>Rubble</surname>
+            </name>
+          </person>
+        </contributor>
+        <contributor>
+          <role type="publisher"/>
+          <organization>
+            <name>CalConnect</name>
+          </organization>
+        </contributor>
+        <edition>2</edition>
+        <version>
+          <revision-date>2000-01-01</revision-date>
+          <draft>3.4</draft>
+        </version>
+        <language>en</language>
+        <script>Latn</script>
+        <status>
+          <stage>final-draft</stage>
+          <iteration>3</iteration>
+        </status>
+        <copyright>
+          <from>2001</from>
+          <owner>
+            <organization>
+              <name>CalConnect</name>
+            </organization>
+          </owner>
+        </copyright>
+        <ext>
+          <doctype abbreviation="DIR">directive</doctype>
+          <editorialgroup>
+            <committee type="provisional">TC</committee>
+          </editorialgroup>
+        </ext>
+      </bibdata>
+      #{BOILERPLATE.sub(/<legal-statement/, "#{BOILERPLATE_LICENSE}\n<legal-statement") \
+        .sub(/#{Date.today.year} The Calendaring and Scheduling Consortium/, \
+             '2001 The Calendaring and Scheduling Consortium')}
+      <sections/>
+      </csd-standard>
     OUTPUT
   end
 
   it "processes default metadata for published technical-corrigendum" do
-    expect(xmlpp(strip_guid(Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)))).to be_equivalent_to xmlpp(<<~"OUTPUT")
+    options = [backend: :cc, header_footer: true]
+    expect(xmlpp(strip_guid(Asciidoctor.convert(<<~"INPUT", *options)))).to be_equivalent_to xmlpp(<<~"OUTPUT")
       = Document title
       Author
       :docfile: test.adoc
@@ -173,55 +166,56 @@ RSpec.describe Asciidoctor::CC do
       :language: en
       :title: Main Title
     INPUT
-       <?xml version="1.0" encoding="UTF-8"?>
-       <csd-standard xmlns="https://www.metanorma.org/ns/csd" type="semantic" version="#{Metanorma::CC::VERSION}">
-       <bibdata type="standard">
-         <title language="en" format="text/plain">Main Title</title>
-         <docidentifier type="CalConnect">CC/Cor 1000:#{Time.now.year}</docidentifier>
-         <docnumber>1000</docnumber>
-         <contributor>
-           <role type="author"/>
-           <organization>
-             <name>CalConnect</name>
-           </organization>
-         </contributor>
-         <contributor>
-           <role type="publisher"/>
-           <organization>
-             <name>CalConnect</name>
-           </organization>
-         </contributor>
-         <edition>2</edition>
-         <language>en</language>
-         <script>Latn</script>
-         <status>
-           <stage>published</stage>
-           <iteration>3</iteration>
-         </status>
-         <copyright>
-           <from>#{Time.now.year}</from>
-           <owner>
-             <organization>
-               <name>CalConnect</name>
-             </organization>
-           </owner>
-         </copyright>
-         <ext>
-         <doctype abbreviation="Cor">technical-corrigendum</doctype>
-         <editorialgroup>
-           <committee type="provisional">TC 788</committee>
-           <committee type="technical">TC 789</committee>
-         </editorialgroup>
-         </ext>
-       </bibdata>
-#{BOILERPLATE}
-       <sections/>
-       </csd-standard>
-        OUTPUT
-    end
+      <?xml version="1.0" encoding="UTF-8"?>
+      <csd-standard xmlns="https://www.metanorma.org/ns/csd" type="semantic" version="#{Metanorma::CC::VERSION}">
+        <bibdata type="standard">
+          <title language="en" format="text/plain">Main Title</title>
+          <docidentifier type="CalConnect">CC/Cor 1000:#{Time.now.year}</docidentifier>
+          <docnumber>1000</docnumber>
+          <contributor>
+            <role type="author"/>
+            <organization>
+              <name>CalConnect</name>
+            </organization>
+          </contributor>
+          <contributor>
+            <role type="publisher"/>
+            <organization>
+              <name>CalConnect</name>
+            </organization>
+          </contributor>
+          <edition>2</edition>
+          <language>en</language>
+          <script>Latn</script>
+          <status>
+            <stage>published</stage>
+            <iteration>3</iteration>
+          </status>
+          <copyright>
+            <from>#{Time.now.year}</from>
+            <owner>
+              <organization>
+                <name>CalConnect</name>
+              </organization>
+            </owner>
+          </copyright>
+          <ext>
+          <doctype abbreviation="Cor">technical-corrigendum</doctype>
+          <editorialgroup>
+            <committee type="provisional">TC 788</committee>
+            <committee type="technical">TC 789</committee>
+          </editorialgroup>
+          </ext>
+        </bibdata>
+         #{BOILERPLATE}
+        <sections/>
+      </csd-standard>
+    OUTPUT
+  end
 
   it "ignores unrecognised status" do
-    expect(xmlpp(strip_guid(Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)))).to be_equivalent_to xmlpp(<<~"OUTPUT")
+    options = [backend: :cc, header_footer: true]
+    expect(xmlpp(strip_guid(Asciidoctor.convert(<<~"INPUT", *options)))).to be_equivalent_to xmlpp(<<~"OUTPUT")
       = Document title
       Author
       :docfile: test.adoc
@@ -235,70 +229,73 @@ RSpec.describe Asciidoctor::CC do
       :language: en
       :title: Main Title
     INPUT
-       <?xml version="1.0" encoding="UTF-8"?>
-       <csd-standard xmlns="https://www.metanorma.org/ns/csd" type="semantic" version="#{Metanorma::CC::VERSION}">
-       <bibdata type="standard">
-         <title language="en" format="text/plain">Main Title</title>
-         <docidentifier type="CalConnect">CC/Cor 1000:#{Time.now.year}</docidentifier>
-         <docnumber>1000</docnumber>
-         <contributor>
-           <role type="author"/>
-           <organization>
-             <name>CalConnect</name>
-           </organization>
-         </contributor>
-         <contributor>
-           <role type="publisher"/>
-           <organization>
-             <name>CalConnect</name>
-           </organization>
-         </contributor>
-         <language>en</language>
-         <script>Latn</script>
-         <status>
-           <stage>pizza</stage>
-           <iteration>3</iteration>
-         </status>
-         <copyright>
-           <from>#{Time.now.year}</from>
-           <owner>
-             <organization>
-               <name>CalConnect</name>
-             </organization>
-           </owner>
-         </copyright>
-         <ext>
-         <doctype abbreviation="Cor">technical-corrigendum</doctype>
-         </ext>
-       </bibdata>
-    #{BOILERPLATE.sub(/<legal-statement/, "#{BOILERPLATE_LICENSE}\n<legal-statement")}
-       <sections/>
-       </csd-standard>
-        OUTPUT
-    end
+      <?xml version="1.0" encoding="UTF-8"?>
+      <csd-standard xmlns="https://www.metanorma.org/ns/csd" type="semantic" version="#{Metanorma::CC::VERSION}">
+        <bibdata type="standard">
+          <title language="en" format="text/plain">Main Title</title>
+          <docidentifier type="CalConnect">CC/Cor 1000:#{Time.now.year}</docidentifier>
+          <docnumber>1000</docnumber>
+          <contributor>
+            <role type="author"/>
+            <organization>
+              <name>CalConnect</name>
+            </organization>
+          </contributor>
+          <contributor>
+            <role type="publisher"/>
+            <organization>
+              <name>CalConnect</name>
+            </organization>
+          </contributor>
+          <language>en</language>
+          <script>Latn</script>
+          <status>
+            <stage>pizza</stage>
+            <iteration>3</iteration>
+          </status>
+          <copyright>
+            <from>#{Time.now.year}</from>
+            <owner>
+              <organization>
+                <name>CalConnect</name>
+              </organization>
+            </owner>
+          </copyright>
+          <ext>
+          <doctype abbreviation="Cor">technical-corrigendum</doctype>
+          </ext>
+        </bibdata>
+          #{BOILERPLATE.sub(/<legal-statement/, "#{BOILERPLATE_LICENSE}\n<legal-statement")}
+        <sections/>
+      </csd-standard>
+    OUTPUT
+  end
 
   it "strips inline header" do
-    expect(xmlpp(strip_guid(Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)))).to be_equivalent_to xmlpp(<<~"OUTPUT")
+    options = [backend: :cc, header_footer: true]
+    expect(xmlpp(strip_guid(Asciidoctor.convert(<<~"INPUT", *options)))).to be_equivalent_to xmlpp(<<~"OUTPUT")
       #{ASCIIDOC_BLANK_HDR}
       This is a preamble
 
       == Section 1
-      INPUT
-    #{BLANK_HDR}
-             <preface><foreword id="_" obligation="informative">
-         <title>Foreword</title>
-         <p id="_">This is a preamble</p>
-       </foreword></preface><sections>
-       <clause id="_" obligation="normative">
-         <title>Section 1</title>
-       </clause></sections>
-       </csd-standard>
+    INPUT
+      #{BLANK_HDR}
+      <preface>
+        <foreword id="_" obligation="informative">
+          <title>Foreword</title>
+          <p id="_">This is a preamble</p>
+        </foreword>
+      </preface>
+      <sections>
+        <clause id="_" obligation="normative">
+          <title>Section 1</title>
+        </clause>
+      </sections>
+      </csd-standard>
     OUTPUT
   end
 
   it "uses default fonts" do
-    FileUtils.rm_f "test.html"
-    FileUtils.rm_f "test.doc"
     Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)
       = Document title
       Author
@@ -317,7 +314,6 @@ RSpec.describe Asciidoctor::CC do
   end
 
   it "uses specified fonts" do
-    FileUtils.rm_f "test.html"
     Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)
       = Document title
       Author
@@ -336,7 +332,8 @@ RSpec.describe Asciidoctor::CC do
   end
 
   it "processes inline_quoted formatting" do
-    expect(xmlpp(strip_guid(Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)))).to be_equivalent_to xmlpp(<<~"OUTPUT")
+    options = [backend: :cc, header_footer: true]
+    expect(xmlpp(strip_guid(Asciidoctor.convert(<<~"INPUT", *options)))).to be_equivalent_to xmlpp(<<~"OUTPUT")
       #{ASCIIDOC_BLANK_HDR}
 
       _emphasis_
@@ -352,29 +349,37 @@ RSpec.describe Asciidoctor::CC do
       [strike]#strike#
       [smallcap]#smallcap#
     INPUT
-    #{BLANK_HDR}
-       <sections>
+      #{BLANK_HDR}
+      <sections>
         <p id="_"><em>emphasis</em>
-       <strong>strong</strong>
-       <tt>monospace</tt>
-       “double quote”
-       ‘single quote’
-       super<sup>script</sup>
-       sub<sub>script</sub>
-       <stem type="MathML"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mrow>
-  <mi>a</mi>
-</mrow>
-<mrow>
-  <mn>90</mn>
-</mrow>
-</msub></math></stem>
-       <stem type="MathML"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub> <mrow> <mrow> <mi mathvariant="bold-italic">F</mi> </mrow> </mrow> <mrow> <mrow> <mi mathvariant="bold-italic">Α</mi> </mrow> </mrow> </msub> </math></stem>
-       <keyword>keyword</keyword>
-       <strike>strike</strike>
-       <smallcap>smallcap</smallcap></p>
-       </sections>
-       </csd-standard>
+          <strong>strong</strong>
+          <tt>monospace</tt>
+          “double quote”
+          ‘single quote’
+          super<sup>script</sup>
+          sub<sub>script</sub>
+          <stem type="MathML">
+            <math xmlns="http://www.w3.org/1998/Math/MathML">
+              <msub>
+                <mrow><mi>a</mi></mrow>
+                <mrow><mn>90</mn></mrow>
+              </msub>
+            </math>
+          </stem>
+          <stem type="MathML">
+            <math xmlns="http://www.w3.org/1998/Math/MathML">
+              <msub>
+                <mrow> <mrow> <mi mathvariant="bold-italic">F</mi> </mrow> </mrow>
+                <mrow> <mrow> <mi mathvariant="bold-italic">Α</mi> </mrow> </mrow>
+              </msub>
+            </math>
+          </stem>
+          <keyword>keyword</keyword>
+          <strike>strike</strike>
+          <smallcap>smallcap</smallcap>
+        </p>
+      </sections>
+      </csd-standard>
     OUTPUT
   end
-
 end

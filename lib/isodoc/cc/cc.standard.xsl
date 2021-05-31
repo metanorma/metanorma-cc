@@ -1105,6 +1105,7 @@
 		
 		
 		
+		
 	</xsl:attribute-set><xsl:attribute-set name="appendix-style">
 				
 			<xsl:attribute name="font-size">12pt</xsl:attribute>
@@ -1305,7 +1306,9 @@
 	</xsl:attribute-set><xsl:attribute-set name="admitted-style">
 		
 		
+		
 	</xsl:attribute-set><xsl:attribute-set name="deprecates-style">
+		
 		
 	</xsl:attribute-set><xsl:attribute-set name="definition-style">
 		
@@ -2054,6 +2057,7 @@
 			
 			
 			
+			
 			<xsl:if test="$lang = 'ar'">
 				<xsl:attribute name="padding-right">1mm</xsl:attribute>
 			</xsl:if>
@@ -2412,6 +2416,7 @@
 					</xsl:when>
 					<xsl:when test="$parent = 'figure' and  (not(../@class) or ../@class !='pseudocode')">
 						<fo:block font-weight="bold" text-align="left" margin-bottom="12pt" keep-with-next="always">
+							
 							
 							
 							

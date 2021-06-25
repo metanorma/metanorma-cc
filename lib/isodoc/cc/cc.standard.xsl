@@ -2208,6 +2208,7 @@
 						
 						
 						
+						
 						<xsl:value-of select="@reference"/>
 						
 						
@@ -2345,6 +2346,9 @@
 	</xsl:template><xsl:template match="*[local-name()='fn']">
 		<!-- <xsl:variable name="namespace" select="substring-before(name(/*), '-')"/> -->
 		<fo:inline font-size="80%" keep-with-previous.within-line="always">
+			
+			
+			
 			
 			
 			

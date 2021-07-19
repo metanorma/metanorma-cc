@@ -18,6 +18,9 @@ RSpec.describe Asciidoctor::CC do
   end
 
   it "converts a blank document" do
+    FileUtils.rm_f "test.html"
+    FileUtils.rm_f "test.pdf"
+    FileUtils.rm_f "test.doc"
     options = [backend: :cc, header_footer: true]
     expect(xmlpp(strip_guid(Asciidoctor.convert(<<~"INPUT", *options)))).to be_equivalent_to xmlpp(<<~"OUTPUT")
       = Document title

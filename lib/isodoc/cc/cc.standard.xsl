@@ -5067,7 +5067,6 @@
 	</xsl:template><xsl:template name="processBibitem">
 		
 		
-		<!-- end BIPM bibitem processing-->
 		
 		 
 		

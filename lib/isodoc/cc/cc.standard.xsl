@@ -4782,6 +4782,9 @@
 						
 					</xsl:if>	
 					
+					<xsl:variable name="citeas" select="java:replaceAll(java:java.lang.String.new(@citeas),'^\[?(.+?)\]?$','$1')"/> <!-- remove leading and trailing brackets -->
+					<xsl:variable name="text" select="normalize-space()"/>
+					
 					
             
 					<fo:basic-link internal-destination="{@bibitemid}" fox:alt-text="{@citeas}">
@@ -4797,7 +4800,9 @@
 							
 							
 						</xsl:if>
-
+						
+						
+						
 						<xsl:apply-templates/>
 					</fo:basic-link>
 							

@@ -135,9 +135,12 @@ p {
 
 /* Terms */
 
+.TermNum {
+  font-weight: 400;
+}
+
 .TermNum, .Terms, .AltTerms {
   color: #485094;
-  font-weight: 400;
 }
 
 p.TermNum {

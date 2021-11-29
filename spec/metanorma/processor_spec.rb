@@ -21,13 +21,16 @@ RSpec.describe Metanorma::CC::Processor do
   end
 
   it "generates IsoDoc XML from a blank document" do
-    expect(xmlpp(strip_guid(processor.input_to_isodoc(<<~"INPUT", nil)))).to be_equivalent_to xmlpp(<<~"OUTPUT")
+    input = <<~INPUT
       #{ASCIIDOC_BLANK_HDR}
     INPUT
+    output = <<~OUTPUT
       #{BLANK_HDR}
       <sections/>
       </csd-standard>
     OUTPUT
+    expect(xmlpp(strip_guid(processor.input_to_isodoc(input, nil))))
+      .to be_equivalent_to xmlpp(output)
   end
 
   it "generates HTML from IsoDoc XML" do
@@ -51,7 +54,7 @@ RSpec.describe Metanorma::CC::Processor do
           <p class="zzSTDTitle1"></p>
           <div id="H">
             <h1 id="toc0">1.&#xA0; Terms, Definitions, Symbols and Abbreviated Terms</h1>
-            <h2 class="TermNum" id="J">1.1.&#xA0;<p class="Terms" style="text-align:left;">Term2</p></h2>
+            <p class='Terms' style='text-align:left;' id='J'><strong>1.1.</strong>&#xA0;Term2</p>
           </div>
         </main>
       OUTPUT

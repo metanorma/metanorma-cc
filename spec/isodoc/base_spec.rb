@@ -171,7 +171,7 @@ RSpec.describe Asciidoctor::CC do
           <terms id="H" obligation="normative"><title>1.<tab/>Terms, Definitions, Symbols and Abbreviated Terms</title>
             <term id="J">
               <name>1.1.</name>
-              <preferred><expression><name>Term2</name></expression></preferred>
+              <preferred><strong>Term2</strong></preferred>
             </term>
           </terms>
         </sections>

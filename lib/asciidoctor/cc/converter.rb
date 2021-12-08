@@ -35,13 +35,13 @@ module Asciidoctor
       end
 
       def outputs(node, ret)
-        File.open(@filename + ".xml", "w:UTF-8") { |f| f.write(ret) }
-        presentation_xml_converter(node).convert(@filename + ".xml")
-        html_converter(node).convert(@filename + ".presentation.xml",
+        File.open("#{@filename}.xml", "w:UTF-8") { |f| f.write(ret) }
+        presentation_xml_converter(node).convert("#{@filename}.xml")
+        html_converter(node).convert("#{@filename}.presentation.xml",
                                      nil, false, "#{@filename}.html")
-        doc_converter(node).convert(@filename + ".presentation.xml",
+        doc_converter(node).convert("#{@filename}.presentation.xml",
                                     nil, false, "#{@filename}.doc")
-        pdf_converter(node)&.convert(@filename + ".presentation.xml",
+        pdf_converter(node)&.convert("#{@filename}.presentation.xml",
                                      nil, false, "#{@filename}.pdf")
       end
 
@@ -52,7 +52,7 @@ module Asciidoctor
       def pdf_converter(node)
         return if node.attr("no-pdf")
 
-        IsoDoc::CC::PdfConvert.new(html_extract_attributes(node))
+        IsoDoc::CC::PdfConvert.new(pdf_extract_attributes(node))
       end
 
       def doc_converter(node)

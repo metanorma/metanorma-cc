@@ -1,9 +1,9 @@
 require "nokogiri"
 require "metanorma-generic"
 
-module Asciidoctor
+module Metanorma
   module CC
-    class Converter < Asciidoctor::Generic::Converter
+    class Converter < Metanorma::Generic::Converter
       def section_validate(doc)
         advisory = doc.root.at("//bibdata/ext[doctype = 'advisory']")
         symbols_validate(doc.root) unless advisory

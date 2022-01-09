@@ -1,7 +1,7 @@
 require "spec_helper"
 require "fileutils"
 
-RSpec.describe Asciidoctor::CC do
+RSpec.describe Metanorma::CC do
   it "has a version number" do
     expect(Metanorma::CC::VERSION).not_to be nil
   end

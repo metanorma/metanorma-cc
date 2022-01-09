@@ -6,15 +6,14 @@ end
 require "bundler/setup"
 require "asciidoctor"
 require "metanorma-cc"
-require "asciidoctor/cc"
+require "metanorma/cc"
 require "isodoc/cc/html_convert"
 require "isodoc/cc/word_convert"
-require "asciidoctor/standoc/converter"
+require "metanorma/standoc/converter"
 require "rspec/matchers"
 require "equivalent-xml"
 require "htmlentities"
 require "metanorma"
-require "metanorma/cc"
 require "rexml/document"
 
 RSpec.configure do |config|
@@ -76,7 +75,7 @@ HDR
 
 BOILERPLATE =
   HTMLEntities.new.decode(
-  File.read(File.join(File.dirname(__FILE__), "..", "lib", "asciidoctor", "cc", "boilerplate.xml"), encoding: "utf-8").
+  File.read(File.join(File.dirname(__FILE__), "..", "lib", "metanorma", "cc", "boilerplate.xml"), encoding: "utf-8").
   gsub(/\{\{ docyear \}\}/, Date.today.year.to_s).
   gsub(/<p>/, '<p id="_">').
   gsub(/\{% if unpublished %\}.+?\{% endif %\}/m, "").

@@ -6,7 +6,7 @@ xml_root_tag: csd-standard
 html_bodyfont: '"Source Sans Pro",sans-serif'
 html_headerfont: '"Source Sans Pro",sans-serif'
 html_monospacefont: '"Source Code Pro",monospace'
-validate_rng_file: lib/asciidoctor/cc/cc.rng
+validate_rng_file: lib/metanorma/cc/cc.rng
 htmlcoverpage: lib/isodoc/cc/html/html_cc_titlepage.html
 htmlintropage: lib/isodoc/cc/html/html_cc_intro.html
 htmlstylesheet: lib/isodoc/cc/html/htmlstyle.scss

@@ -1,7 +1,7 @@
 require "spec_helper"
 require "fileutils"
 
-RSpec.describe Asciidoctor::CC do
+RSpec.describe Metanorma::CC do
   it "processes default metadata" do
     csdc = IsoDoc::CC::HtmlConvert.new({})
     docxml, = csdc.convert_init(<<~"INPUT", "test", true)

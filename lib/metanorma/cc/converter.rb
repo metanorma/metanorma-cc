@@ -3,13 +3,13 @@ require "isodoc/cc/html_convert"
 require "isodoc/cc/word_convert"
 require "isodoc/cc/presentation_xml_convert"
 require "metanorma/cc"
-require "asciidoctor/standoc/converter"
-require "asciidoctor/generic/converter"
+require "metanorma/standoc/converter"
+require "metanorma/generic/converter"
 require_relative "validate_section"
 
-module Asciidoctor
+module Metanorma
   module CC
-    class Converter < Asciidoctor::Generic::Converter
+    class Converter < Metanorma::Generic::Converter
       XML_ROOT_TAG = "csd-standard".freeze
       XML_NAMESPACE = "https://www.metanorma.org/ns/csd".freeze
 

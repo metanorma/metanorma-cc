@@ -666,17 +666,6 @@
 	</xsl:template>
 
 
-	
-	<xsl:template match="csd:admonition">
-		<fo:block margin-bottom="12pt" font-weight="bold"> <!-- text-align="center"  -->
-			<xsl:value-of select="java:toUpperCase(java:java.lang.String.new(@type))"/>
-			<xsl:text> — </xsl:text>
-			<xsl:apply-templates/>
-		</fo:block>
-	</xsl:template>
-	
-
-	
 	<xsl:template match="csd:formula/csd:stem">
 		<fo:block margin-top="6pt" margin-bottom="12pt">
 			<fo:table table-layout="fixed" width="100%">
@@ -1544,6 +1533,62 @@
 		
 		
 		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</xsl:attribute-set><xsl:attribute-set name="admonition-style">
+		
+		
+			<xsl:attribute name="margin-bottom">12pt</xsl:attribute>
+			<xsl:attribute name="font-weight">bold</xsl:attribute>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</xsl:attribute-set><xsl:attribute-set name="admonition-container-style">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</xsl:attribute-set><xsl:attribute-set name="admonition-name-style">
+		<xsl:attribute name="keep-with-next">always</xsl:attribute>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</xsl:attribute-set><xsl:attribute-set name="admonition-p-style">
 		
 		
 		
@@ -5597,6 +5642,56 @@
 		<xsl:copy-of select="."/>
 	</xsl:template><xsl:template match="*[local-name() = 'p'][@type = 'floating-title']" priority="4">
 		<xsl:call-template name="title"/>
+	</xsl:template><xsl:template match="*[local-name() = 'admonition']">
+		
+		
+		
+		
+		
+		
+				<fo:block xsl:use-attribute-sets="admonition-style">
+				
+					
+					
+					
+					
+					
+						<xsl:call-template name="displayAdmonitionName"/>
+						<xsl:text> — </xsl:text>
+					
+					
+					<xsl:apply-templates select="node()[not(local-name() = 'name')]"/>
+				</fo:block>
+			
+	</xsl:template><xsl:template name="displayAdmonitionName">
+		
+				<xsl:apply-templates select="*[local-name() = 'name']"/>
+				<xsl:if test="not(*[local-name() = 'name'])">
+					<xsl:apply-templates select="@type"/>
+				</xsl:if>
+			
+	</xsl:template><xsl:template match="*[local-name() = 'admonition']/*[local-name() = 'name']">
+		<xsl:apply-templates/>
+	</xsl:template><xsl:template match="*[local-name() = 'admonition']/@type">
+		<xsl:variable name="admonition_type_">
+			<xsl:call-template name="getLocalizedString">
+				<xsl:with-param name="key">admonition.<xsl:value-of select="."/></xsl:with-param>
+			</xsl:call-template>
+		</xsl:variable>
+		<xsl:variable name="admonition_type" select="normalize-space(java:toUpperCase(java:java.lang.String.new($admonition_type_)))"/>
+		<xsl:value-of select="$admonition_type"/>
+		<xsl:if test="$admonition_type = ''">
+			<xsl:value-of select="java:toUpperCase(java:java.lang.String.new(.))"/>
+		</xsl:if>
+	</xsl:template><xsl:template match="*[local-name() = 'admonition']/*[local-name() = 'p']">
+		
+				<fo:block xsl:use-attribute-sets="admonition-p-style">
+				
+					
+					
+					<xsl:apply-templates/>
+				</fo:block>
+			
 	</xsl:template><xsl:template name="convertDate">
 		<xsl:param name="date"/>
 		<xsl:param name="format" select="'short'"/>

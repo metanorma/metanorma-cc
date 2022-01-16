@@ -56,7 +56,7 @@ nav {
     $colorFg: white);
 }
 
-#toc {
+#toc, #toc > ul > :is(.h1, .h2, .h3, .h4, .h5, .h6) {
   @include toc($colorLink: #485094, $colorLinkActiveBg: #1d1d1d, $colorLinkActiveFg: white);
 
   ul {
@@ -72,6 +72,11 @@ nav {
     }
   }
 }
+
+#toc > ul > :is(.h1, .h2, .h3, .h4, .h5, .h6) {
+   margin-top: 0;
+   margin-bottom: 0;
+ }
 
 .rule {
   @include rule(1px, #0e1a85, 2em 0);

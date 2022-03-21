@@ -35,13 +35,17 @@ RSpec.configure do |config|
 end
 
 def metadata(x)
-  Hash[x.sort].delete_if{ |k, v| v.nil? || v.respond_to?(:empty?) && v.empty? }
+  x.sort.to_h.delete_if do |_k, v|
+    v.nil? || (v.respond_to?(:empty?) && v.empty?)
+  end
 end
 
 def htmlencode(x)
-  HTMLEntities.new.encode(x, :hexadecimal).gsub(/&#x3e;/, ">").gsub(/&#xa;/, "\n").
-    gsub(/&#x22;/, '"').gsub(/&#x3c;/, "<").gsub(/&#x26;/, '&').gsub(/&#x27;/, "'").
-    gsub(/\\u(....)/) { |s| "&#x#{$1.downcase};" }
+  HTMLEntities.new.encode(x, :hexadecimal).gsub(/&#x3e;/, ">").gsub(/&#xa;/, "\n")
+    .gsub(/&#x22;/, '"').gsub(/&#x3c;/, "<").gsub(/&#x26;/, "&").gsub(/&#x27;/, "'")
+    .gsub(/\\u(....)/) do |_s|
+    "&#x#{$1.downcase};"
+  end
 end
 
 def strip_guid(x)
@@ -52,106 +56,107 @@ def xmlpp(x)
   s = ""
   f = REXML::Formatters::Pretty.new(2)
   f.compact = true
-  f.write(REXML::Document.new(x),s)
+  f.write(REXML::Document.new(x), s)
   s
 end
 
-ASCIIDOC_BLANK_HDR = <<~"HDR"
-      = Document title
-      Author
-      :docfile: test.adoc
-      :nodoc:
-      :novalid:
+ASCIIDOC_BLANK_HDR = <<~"HDR".freeze
+  = Document title
+  Author
+  :docfile: test.adoc
+  :nodoc:
+  :novalid:
 
 HDR
 
-VALIDATING_BLANK_HDR = <<~"HDR"
-      = Document title
-      Author
-      :docfile: test.adoc
-      :nodoc:
+VALIDATING_BLANK_HDR = <<~"HDR".freeze
+  = Document title
+  Author
+  :docfile: test.adoc
+  :nodoc:
 
 HDR
 
 BOILERPLATE =
   HTMLEntities.new.decode(
-  File.read(File.join(File.dirname(__FILE__), "..", "lib", "metanorma", "cc", "boilerplate.xml"), encoding: "utf-8").
-  gsub(/\{\{ docyear \}\}/, Date.today.year.to_s).
-  gsub(/<p>/, '<p id="_">').
-  gsub(/\{% if unpublished %\}.+?\{% endif %\}/m, "").
-  gsub(/\{% if ip_notice_received %\}\{% else %\}not\{% endif %\}/m, ""))
+    File.read(File.join(File.dirname(__FILE__), "..", "lib", "metanorma", "cc", "boilerplate.xml"), encoding: "utf-8")
+    .gsub(/\{\{ docyear \}\}/, Date.today.year.to_s)
+    .gsub(/<p>/, '<p id="_">')
+    .gsub(/\{% if unpublished %\}.+?\{% endif %\}/m, "")
+    .gsub(/\{% if ip_notice_received %\}\{% else %\}not\{% endif %\}/m, ""),
+  )
 
-BOILERPLATE_LICENSE = <<~END
-<license-statement>
-  <clause>
-    <title>Warning for Drafts</title>
-    <p id='_'>
-      This document is not a CalConnect Standard. It is distributed for
-      review and comment, and is subject to change without notice and may
-      not be referred to as a Standard. Recipients of this draft are invited
-      to submit, with their comments, notification of any relevant patent
-      rights of which they are aware and to provide supporting
-      documentation.
-    </p>
-  </clause>
-</license-statement>
-END
+BOILERPLATE_LICENSE = <<~BOILERPLATE.freeze
+  <license-statement>
+    <clause>
+      <title>Warning for Drafts</title>
+      <p id='_'>
+        This document is not a CalConnect Standard. It is distributed for
+        review and comment, and is subject to change without notice and may
+        not be referred to as a Standard. Recipients of this draft are invited
+        to submit, with their comments, notification of any relevant patent
+        rights of which they are aware and to provide supporting
+        documentation.
+      </p>
+    </clause>
+  </license-statement>
+BOILERPLATE
 
-BLANK_HDR = <<~"HDR"
-       <?xml version="1.0" encoding="UTF-8"?>
-       <csd-standard xmlns="https://www.metanorma.org/ns/csd" type="semantic" version="#{Metanorma::CC::VERSION}">
-       <bibdata type="standard">
-        <title language="en" format="text/plain">Document title</title>
-         <docidentifier type="CalConnect">CC :#{Time.now.year}</docidentifier>
-         <contributor>
-           <role type="author"/>
-           <organization>
-             <name>CalConnect</name>
-           </organization>
-         </contributor>
-         <contributor>
-           <role type="publisher"/>
-           <organization>
-             <name>CalConnect</name>
-           </organization>
-         </contributor>
+BLANK_HDR = <<~"HDR".freeze
+  <?xml version="1.0" encoding="UTF-8"?>
+  <csd-standard xmlns="https://www.metanorma.org/ns/csd" type="semantic" version="#{Metanorma::CC::VERSION}">
+  <bibdata type="standard">
+   <title language="en" format="text/plain">Document title</title>
+    <docidentifier type="CalConnect">CC :#{Time.now.year}</docidentifier>
+    <contributor>
+      <role type="author"/>
+      <organization>
+        <name>CalConnect</name>
+      </organization>
+    </contributor>
+    <contributor>
+      <role type="publisher"/>
+      <organization>
+        <name>CalConnect</name>
+      </organization>
+    </contributor>
 
-         <language>en</language>
-         <script>Latn</script>
-        <status>
-          <stage>published</stage>
-        </status>
+    <language>en</language>
+    <script>Latn</script>
+   <status>
+     <stage>published</stage>
+   </status>
 
-         <copyright>
-           <from>#{Time.new.year}</from>
-           <owner>
-             <organization>
-               <name>CalConnect</name>
-             </organization>
-           </owner>
-         </copyright>
-         <ext>
-          <doctype>standard</doctype>
-        </ext>
-       </bibdata>
-       #{BOILERPLATE}
+    <copyright>
+      <from>#{Time.new.year}</from>
+      <owner>
+        <organization>
+          <name>CalConnect</name>
+        </organization>
+      </owner>
+    </copyright>
+    <ext>
+     <doctype>standard</doctype>
+   </ext>
+  </bibdata>
+  #{BOILERPLATE}
 HDR
 
-HTML_HDR = <<~"HDR"
-         <body lang="EN-US" link="blue" vlink="#954F72" xml:lang="EN-US" class="container">
-           <div class="title-section">
-             <p>&#160;</p>
-           </div>
-           <br/>
-           <div class="prefatory-section">
-             <p>&#160;</p>
-           </div>
-           <br/>
-           <div class="main-section">
+HTML_HDR = <<~"HDR".freeze
+  <body lang="EN-US" link="blue" vlink="#954F72" xml:lang="EN-US" class="container">
+    <div class="title-section">
+      <p>&#160;</p>
+    </div>
+    <br/>
+    <div class="prefatory-section">
+      <p>&#160;</p>
+    </div>
+    <br/>
+    <div class="main-section">
 HDR
 
 def mock_pdf
-  allow(::Mn2pdf).to receive(:convert) do |url, output, c, d|
+  allow(::Mn2pdf).to receive(:convert) do |url, output, _c, _d|
     FileUtils.cp(url.gsub(/"/, ""), output.gsub(/"/, ""))
   end
 end

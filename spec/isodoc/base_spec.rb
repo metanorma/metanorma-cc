@@ -234,7 +234,7 @@ RSpec.describe Metanorma::CC do
               <p class="zzSTDTitle1"/>
               <div id="H"><h1>1.&#xA0; Terms and definitions</h1>
                 <p>For the purposes of this document, the following terms and definitions apply.</p>
-                <p class='Terms' style='text-align:left;' id='J'><strong>1.1.</strong>&#xA0;Term2</p>
+                <p class='Terms' style='text-align:left;' id='J'><strong>1.1.</strong>Term2</p>
               </div>
             </div>
           </body>

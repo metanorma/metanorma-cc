@@ -251,6 +251,7 @@ pre {
   @include recommendationBlock();
 }
 
+@include listBlock();
 
 .Note, .Admonition {
   color: #47430c;

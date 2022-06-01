@@ -1,8 +1,0 @@
----
-items:
-- title: Introduction
-  items:
-    - { title: Quickstart, path: quickstart/ }
----
-
-= Navigation

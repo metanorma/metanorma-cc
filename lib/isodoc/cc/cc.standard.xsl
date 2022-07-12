@@ -722,7 +722,7 @@
 		
 		
 		
-			<xsl:attribute name="font-family">Source Sans Pro, STIX Two Math, <xsl:value-of select="$font_noto_sans"/></xsl:attribute>
+			<xsl:attribute name="font-family"><xsl:value-of select="$font_noto_sans"/>, STIX Two Math</xsl:attribute>
 			<xsl:attribute name="font-family-generic">Sans</xsl:attribute>
 			<xsl:attribute name="font-size">10.5pt</xsl:attribute>
 		
@@ -870,7 +870,7 @@
 		
 		
 		
-			<xsl:attribute name="font-family">Source Code Pro, <xsl:value-of select="$font_noto_sans_mono"/></xsl:attribute>			
+			<xsl:attribute name="font-family"><xsl:value-of select="$font_noto_sans_mono"/></xsl:attribute>			
 			<xsl:attribute name="margin-bottom">6pt</xsl:attribute>
 			<xsl:attribute name="keep-with-next">always</xsl:attribute>					
 		
@@ -1497,7 +1497,7 @@
 		
 	</xsl:attribute-set><xsl:attribute-set name="tt-style">
 		
-			<xsl:attribute name="font-family">Source Code Pro, <xsl:value-of select="$font_noto_sans_mono"/></xsl:attribute>			
+			<xsl:attribute name="font-family"><xsl:value-of select="$font_noto_sans_mono"/></xsl:attribute>			
 		
 		
 		

@@ -4,8 +4,9 @@ require_relative "isodoc/cc/html_convert"
 require_relative "isodoc/cc/word_convert"
 require_relative "isodoc/cc/pdf_convert"
 require_relative "metanorma/cc/version"
+require "metanorma"
 
-if defined? Metanorma
+if defined? Metanorma::Registry
   require_relative "metanorma/cc"
   Metanorma::Registry.instance.register(Metanorma::CC::Processor)
 end

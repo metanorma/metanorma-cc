@@ -8,7 +8,7 @@ module IsoDoc
         Metanorma::CC.configuration
       end
 
-      def initialize(lang, script, labels)
+      def initialize(lang, script, locale, labels)
         super
         set(:tc, "XXXX")
       end
@@ -29,16 +29,18 @@ module IsoDoc
       end
 
       def personal_authors(isoxml)
-        persons = {}
-        roles = isoxml.xpath(ns("//bibdata/contributor/role/@type")).
-          inject([]) { |m, t| m << t.value }
-        roles.uniq.sort.each do |r|
-          names = isoxml.xpath(ns("//bibdata/contributor[role/@type = '#{r}']"\
-                                    "/person"))
-          persons[r] = extract_person_names_affiliations(names) unless names.empty?
-        end
-        set(:roles_authors_affiliations, persons)
+        set(:roles_authors_affiliations, roles_authors_affiliations(isoxml))
         super
+      end
+
+      def roles_authors_affiliations(isoxml)
+        isoxml.xpath(ns("//bibdata/contributor/role/@type"))
+          .inject([]) { |m, t| m << t.value }
+          .uniq.sort.each_with_object({}) do |r, m|
+          names = isoxml.xpath(ns("//bibdata/contributor[role/@type = '#{r}']"\
+                                  "/person"))
+          names.empty? or m[r] = extract_person_names_affiliations(names)
+        end
       end
     end
   end

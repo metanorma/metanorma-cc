@@ -556,6 +556,8 @@
 		</fo:static-content>
 	</xsl:template>
 
+			<xsl:strip-space elements="csd:xref"/>
+
 	<!-- external parameters -->
 
 	<xsl:param name="svg_images"/> <!-- svg images array -->

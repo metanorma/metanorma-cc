@@ -3,6 +3,5 @@
 .rubocop-https--*
 
 /.rspec_status
-/Gemfile.devel
 /Gemfile.lock
 /coverage/

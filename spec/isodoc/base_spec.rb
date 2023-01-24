@@ -316,7 +316,7 @@ RSpec.describe Metanorma::CC do
       </csd-standard>
     INPUT
 
-    expect(xmlpp(IsoDoc::CC::PresentationXMLConvert.new({})
+    expect(xmlpp(IsoDoc::CC::PresentationXMLConvert.new(presxml_options)
       .convert("test", input, true)
       .gsub(%r{^.*<body}m, "<body")
       .gsub(%r{</body>.*$}m, "</body>"))).to be_equivalent_to xmlpp(<<~"OUTPUT")
@@ -395,17 +395,20 @@ RSpec.describe Metanorma::CC do
 
   it "injects JS into blank html" do
     options = [backend: :cc, header_footer: true]
-    expect(xmlpp(strip_guid(Asciidoctor.convert(<<~"INPUT", *options)))).to be_equivalent_to xmlpp(<<~"OUTPUT")
+    input = <<~INPUT
       = Document title
       Author
       :docfile: test.adoc
       :novalid:
       :no-pdf:
     INPUT
+    output = <<~OUTPUT
         #{BLANK_HDR}
         <sections/>
       </csd-standard>
     OUTPUT
+    expect(xmlpp(strip_guid(Asciidoctor.convert(input, *options))))
+      .to be_equivalent_to xmlpp(output)
     html = File.read("test.html", encoding: "utf-8")
     expect(html).to match(%r{jquery\.min\.js})
     expect(html).to match(%r{Source Code Pro})

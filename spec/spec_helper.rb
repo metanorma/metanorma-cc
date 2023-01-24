@@ -39,6 +39,10 @@ def metadata(xml)
   end
 end
 
+def presxml_options
+  { semanticxmlinsert: "false" }
+end
+
 def htmlencode(xml)
   HTMLEntities.new.encode(xml, :hexadecimal)
     .gsub(/&#x3e;/, ">").gsub(/&#xa;/, "\n")

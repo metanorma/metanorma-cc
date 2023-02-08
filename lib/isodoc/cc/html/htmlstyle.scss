@@ -215,6 +215,12 @@ p.Biblio:before, p.NormRef:before {
   @include monospaceBlockStyle();
 }
 
+table div.figure {
+  padding: 0;
+  margin: 0;
+}
+
+
 .SourceTitle {
   @include blockTitle();
 }

@@ -22,16 +22,19 @@ RSpec.describe Metanorma::CC do
     FileUtils.rm_f "test.pdf"
     FileUtils.rm_f "test.doc"
     options = [backend: :cc, header_footer: true]
-    expect(xmlpp(strip_guid(Asciidoctor.convert(<<~"INPUT", *options)))).to be_equivalent_to xmlpp(<<~"OUTPUT")
+    input = <<~INPUT
       = Document title
       Author
       :docfile: test.adoc
       :novalid:
     INPUT
+    output = <<~OUTPUT
         #{BLANK_HDR}
         <sections/>
       </csd-standard>
     OUTPUT
+    expect(xmlpp(strip_guid(Asciidoctor.convert(input, *options))))
+      .to be_equivalent_to xmlpp(output)
     expect(File.exist?("test.html")).to be true
     expect(File.exist?("test.pdf")).to be true
     expect(File.exist?("test.doc")).to be true
@@ -39,23 +42,26 @@ RSpec.describe Metanorma::CC do
 
   it "overrides invalid document type" do
     options = [backend: :cc, header_footer: true]
-    expect(xmlpp(strip_guid(Asciidoctor.convert(<<~"INPUT", *options)))).to be_equivalent_to xmlpp(<<~"OUTPUT")
+    input = <<~INPUT
       = Document title
       Author
       :docfile: test.adoc
       :doctype: dinosaur
       :no-pdf:
     INPUT
+    output = <<~OUTPUT
         #{BLANK_HDR}
         <sections/>
       </csd-standard>
     OUTPUT
+    expect(xmlpp(strip_guid(Asciidoctor.convert(input, *options))))
+      .to be_equivalent_to xmlpp(output)
     expect(File.exist?("test.html")).to be true
   end
 
   it "processes default metadata for final-draft directive with copyright year" do
     options = [backend: :cc, header_footer: true]
-    expect(xmlpp(strip_guid(Asciidoctor.convert(<<~"INPUT", *options)))).to be_equivalent_to xmlpp(<<~"OUTPUT")
+    input = <<~INPUT
       = Document title
       Author
       :docfile: test.adoc
@@ -79,6 +85,7 @@ RSpec.describe Metanorma::CC do
       :givenname_2: Barney
       :role_2: editor
     INPUT
+    output = <<~OUTPUT
       <?xml version="1.0" encoding="UTF-8"?>
       <csd-standard xmlns="https://www.metanorma.org/ns/csd" type="semantic" version="#{Metanorma::CC::VERSION}">
       <bibdata type="standard">
@@ -140,17 +147,33 @@ RSpec.describe Metanorma::CC do
           </editorialgroup>
         </ext>
       </bibdata>
+               <metanorma-extension>
+           <presentation-metadata>
+             <name>TOC Heading Levels</name>
+             <value>2</value>
+           </presentation-metadata>
+           <presentation-metadata>
+             <name>HTML TOC Heading Levels</name>
+             <value>2</value>
+           </presentation-metadata>
+           <presentation-metadata>
+             <name>DOC TOC Heading Levels</name>
+             <value>2</value>
+           </presentation-metadata>
+         </metanorma-extension>
       #{BOILERPLATE.sub(/<legal-statement/, "#{BOILERPLATE_LICENSE}\n<legal-statement") \
         .sub(/#{Date.today.year} The Calendaring and Scheduling Consortium/, \
              '2001 The Calendaring and Scheduling Consortium')}
       <sections/>
       </csd-standard>
     OUTPUT
+    expect(xmlpp(strip_guid(Asciidoctor.convert(input, *options))))
+      .to be_equivalent_to xmlpp(output)
   end
 
   it "processes default metadata for published technical-corrigendum" do
     options = [backend: :cc, header_footer: true]
-    expect(xmlpp(strip_guid(Asciidoctor.convert(<<~"INPUT", *options)))).to be_equivalent_to xmlpp(<<~"OUTPUT")
+    input = <<~INPUT
       = Document title
       Author
       :docfile: test.adoc
@@ -169,6 +192,7 @@ RSpec.describe Metanorma::CC do
       :language: en
       :title: Main Title
     INPUT
+    output = <<~OUTPUT
       <?xml version="1.0" encoding="UTF-8"?>
       <csd-standard xmlns="https://www.metanorma.org/ns/csd" type="semantic" version="#{Metanorma::CC::VERSION}">
         <bibdata type="standard">
@@ -210,15 +234,31 @@ RSpec.describe Metanorma::CC do
           </editorialgroup>
           </ext>
         </bibdata>
+                 <metanorma-extension>
+           <presentation-metadata>
+             <name>TOC Heading Levels</name>
+             <value>2</value>
+           </presentation-metadata>
+           <presentation-metadata>
+             <name>HTML TOC Heading Levels</name>
+             <value>2</value>
+           </presentation-metadata>
+           <presentation-metadata>
+             <name>DOC TOC Heading Levels</name>
+             <value>2</value>
+           </presentation-metadata>
+         </metanorma-extension>
          #{BOILERPLATE}
         <sections/>
       </csd-standard>
     OUTPUT
+    expect(xmlpp(strip_guid(Asciidoctor.convert(input, *options))))
+      .to be_equivalent_to xmlpp(output)
   end
 
   it "ignores unrecognised status" do
     options = [backend: :cc, header_footer: true]
-    expect(xmlpp(strip_guid(Asciidoctor.convert(<<~"INPUT", *options)))).to be_equivalent_to xmlpp(<<~"OUTPUT")
+    input = <<~INPUT
       = Document title
       Author
       :docfile: test.adoc
@@ -232,6 +272,7 @@ RSpec.describe Metanorma::CC do
       :language: en
       :title: Main Title
     INPUT
+    output = <<~OUTPUT
       <?xml version="1.0" encoding="UTF-8"?>
       <csd-standard xmlns="https://www.metanorma.org/ns/csd" type="semantic" version="#{Metanorma::CC::VERSION}">
         <bibdata type="standard">
@@ -268,20 +309,37 @@ RSpec.describe Metanorma::CC do
           <doctype abbreviation="Cor">technical-corrigendum</doctype>
           </ext>
         </bibdata>
+                 <metanorma-extension>
+           <presentation-metadata>
+             <name>TOC Heading Levels</name>
+             <value>2</value>
+           </presentation-metadata>
+           <presentation-metadata>
+             <name>HTML TOC Heading Levels</name>
+             <value>2</value>
+           </presentation-metadata>
+           <presentation-metadata>
+             <name>DOC TOC Heading Levels</name>
+             <value>2</value>
+           </presentation-metadata>
+         </metanorma-extension>
           #{BOILERPLATE.sub(/<legal-statement/, "#{BOILERPLATE_LICENSE}\n<legal-statement")}
         <sections/>
       </csd-standard>
     OUTPUT
+    expect(xmlpp(strip_guid(Asciidoctor.convert(input, *options))))
+      .to be_equivalent_to xmlpp(output)
   end
 
   it "strips inline header" do
     options = [backend: :cc, header_footer: true]
-    expect(xmlpp(strip_guid(Asciidoctor.convert(<<~"INPUT", *options)))).to be_equivalent_to xmlpp(<<~"OUTPUT")
+    input = <<~INPUT
       #{ASCIIDOC_BLANK_HDR}
       This is a preamble
 
       == Section 1
     INPUT
+    output = <<~OUTPUT
       #{BLANK_HDR}
       <preface>
         <foreword id="_" obligation="informative">
@@ -296,6 +354,8 @@ RSpec.describe Metanorma::CC do
       </sections>
       </csd-standard>
     OUTPUT
+    expect(xmlpp(strip_guid(Asciidoctor.convert(input, *options))))
+      .to be_equivalent_to xmlpp(output)
   end
 
   it "uses default fonts" do

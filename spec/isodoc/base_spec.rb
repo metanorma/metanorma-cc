@@ -316,17 +316,20 @@ RSpec.describe Metanorma::CC do
       </csd-standard>
     INPUT
 
-    expect(xmlpp(IsoDoc::CC::PresentationXMLConvert.new(presxml_options)
+    expect(xmlpp(strip_guid(IsoDoc::CC::PresentationXMLConvert.new(presxml_options)
       .convert("test", input, true)
       .gsub(%r{^.*<body}m, "<body")
-      .gsub(%r{</body>.*$}m, "</body>"))).to be_equivalent_to xmlpp(<<~"OUTPUT")
+      .gsub(%r{</body>.*$}m, "</body>")))).to be_equivalent_to xmlpp(<<~"OUTPUT")
             <csd-standard xmlns="http://riboseinc.com/isoxml" type="presentation">
           <preface>
-            <foreword obligation="informative" displayorder="1">
+              <clause type="toc" id="_" displayorder="1">
+              <title depth="1">Table of contents</title>
+            </clause>
+            <foreword obligation="informative" displayorder="2">
               <title>Foreword</title>
               <p id="A">This is a preamble</p>
             </foreword>
-            <introduction id="B" obligation="informative" displayorder="2">
+            <introduction id="B" obligation="informative" displayorder="3">
               <title>Introduction</title>
               <clause id="C" inline-header="false" obligation="informative">
                 <title depth="2">Introduction Subsection</title>
@@ -334,11 +337,11 @@ RSpec.describe Metanorma::CC do
             </introduction>
           </preface>
           <sections>
-            <clause id="D" obligation="normative" displayorder="6">
+            <clause id="D" obligation="normative" displayorder="7">
               <title depth="1">4.<tab/>Scope</title>
               <p id="E">Text</p>
             </clause>
-            <clause id="H" obligation="normative" displayorder="4">
+            <clause id="H" obligation="normative" displayorder="5">
               <title depth="1">2.<tab/>Terms, Definitions, Symbols and Abbreviated Terms</title>
               <terms id="I" obligation="normative">
                 <title depth="2">2.1.<tab/>Normal Terms</title>
@@ -353,13 +356,13 @@ RSpec.describe Metanorma::CC do
                 </dl>
               </definitions>
             </clause>
-            <definitions id="L" displayorder="5"><title>3.</title>
+            <definitions id="L" displayorder="6"><title>3.</title>
               <dl>
                 <dt>Symbol</dt>
                 <dd>Definition</dd>
               </dl>
             </definitions>
-            <clause id="M" inline-header="false" obligation="normative" displayorder="7">
+            <clause id="M" inline-header="false" obligation="normative" displayorder="8">
               <title depth="1">5.<tab/>Clause 4</title>
               <clause id="N" inline-header="false" obligation="normative">
                 <title depth="2">5.1.<tab/>Introduction</title>
@@ -369,7 +372,7 @@ RSpec.describe Metanorma::CC do
               </clause>
             </clause>
           </sections>
-          <annex id="P" inline-header="false" obligation="normative" displayorder="8">
+          <annex id="P" inline-header="false" obligation="normative" displayorder="9">
             <title><strong>Appendix A</strong><br/>(normative)<br/><strong>Annex</strong></title>
             <clause id="Q" inline-header="false" obligation="normative">
               <title depth="2">A.1.<tab/>Annex A.1</title>
@@ -379,10 +382,10 @@ RSpec.describe Metanorma::CC do
             </clause>
           </annex>
           <bibliography>
-            <references id="R" normative="true" obligation="informative" displayorder="3">
+            <references id="R" normative="true" obligation="informative" displayorder="4">
               <title depth="1">1.<tab/>Normative References</title>
             </references>
-            <clause id="S" obligation="informative" displayorder="9">
+            <clause id="S" obligation="informative" displayorder="10">
               <title depth="1">Bibliography</title>
               <references id="T" normative="false" obligation="informative">
                 <title depth="2">Bibliography Subsection</title>

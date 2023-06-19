@@ -98,9 +98,17 @@ VALIDATING_BLANK_HDR = <<~"HDR".freeze
 
 HDR
 
-BOILERPLATE =
+def boilerplate_read(file)
   HTMLEntities.new.decode(
-    File.read(File.join(File.dirname(__FILE__), "..", "lib", "metanorma", "cc", "boilerplate.xml"), encoding: "utf-8")
+    Metanorma::CC::Converter.new(:cc, {}).boilerplate_file_restructure(file)
+    .to_xml.gsub(/<(\/)?sections>/, "<\\1boilerplate>")
+      .gsub(/ id="_[^"]+"/, " id='_'"),
+  )
+end
+
+BOILERPLATE =
+  boilerplate_read(
+    File.read(File.join(File.dirname(__FILE__), "..", "lib", "metanorma", "cc", "boilerplate.adoc"), encoding: "utf-8")
     .gsub(/\{\{ docyear \}\}/, Date.today.year.to_s)
     .gsub(/<p>/, '<p id="_">')
     .gsub(/\{% if unpublished %\}.+?\{% endif %\}/m, "")
@@ -109,7 +117,7 @@ BOILERPLATE =
 
 BOILERPLATE_LICENSE = <<~BOILERPLATE.freeze
   <license-statement>
-    <clause>
+    <clause id="_" obligation="normative">
       <title>Warning for Drafts</title>
       <p id='_'>
         This document is not a CalConnect Standard. It is distributed for

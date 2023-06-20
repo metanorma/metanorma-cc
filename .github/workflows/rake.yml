@@ -10,6 +10,6 @@ on:
 
 jobs:
   notify:
-    uses: metanorma/ci/.github/workflows/mn-processor-rake.yml@main
+    uses: metanorma/ci/.github/workflows/mn-processor-rake.yml@feature/gem-install-with-explicit-platform
     secrets:
       pat_token: ${{ secrets.METANORMA_CI_PAT_TOKEN }}

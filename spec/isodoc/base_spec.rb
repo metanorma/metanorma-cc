@@ -323,7 +323,7 @@ RSpec.describe Metanorma::CC do
             <csd-standard xmlns="http://riboseinc.com/isoxml" type="presentation">
           <preface>
               <clause type="toc" id="_" displayorder="1">
-              <title depth="1">Table of contents</title>
+              <title depth="1">Contents</title>
             </clause>
             <foreword obligation="informative" displayorder="2">
               <title>Foreword</title>

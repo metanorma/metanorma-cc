@@ -234,9 +234,9 @@
 				</fo:static-content>
 				<xsl:call-template name="insertHeaderFooter"/>
 				<fo:flow flow-name="xsl-region-body">
-					<fo:block font-size="16pt" font-weight="bold" margin-bottom="17pt" role="H1">
+					<!-- <fo:block font-size="16pt" font-weight="bold" margin-bottom="17pt" role="H1">
 						<xsl:value-of select="/csd:csd-standard/csd:bibdata/csd:title[@language = 'en']"/>
-					</fo:block>
+					</fo:block> -->
 					<fo:block>
 						<xsl:call-template name="processMainSectionsDefault"/>
 					</fo:block>
@@ -416,6 +416,12 @@
 
 	<!-- ============================= -->
 	<!-- ============================= -->
+
+	<xsl:template match="csd:sections/csd:p[@class = 'zzSTDTitle1']" priority="4">
+		<fo:block font-size="16pt" font-weight="bold" margin-bottom="17pt" role="H1">
+			<xsl:apply-templates/>
+		</fo:block>
+	</xsl:template>
 
 	<xsl:template match="csd:title" name="title">
 
@@ -4438,6 +4444,9 @@
 	<!-- ===================== -->
 	<!-- END Definition List -->
 	<!-- ===================== -->
+
+	<!-- default: ignore title in sections/p -->
+	<xsl:template match="*[local-name() = 'sections']/*[local-name() = 'p'][starts-with(@class, 'zzSTDTitle')]" priority="3"/>
 
 	<!-- ========================= -->
 	<!-- Rich text formatting -->
@@ -10201,7 +10210,7 @@
 	<xsl:template match="*[local-name() = 'span']" mode="update_xml_step1">
 		<xsl:apply-templates mode="update_xml_step1"/>
 	</xsl:template>
-	<xsl:template match="*[local-name() = 'sourcecode']//*[local-name() = 'span'][@class]" mode="update_xml_step1" priority="2">
+	<xsl:template match="*[local-name() = 'sections']/*[local-name() = 'p'][starts-with(@class, 'zzSTDTitle')]/*[local-name() = 'span'][@class] | *[local-name() = 'sourcecode']//*[local-name() = 'span'][@class]" mode="update_xml_step1" priority="2">
 		<xsl:copy>
 			<xsl:copy-of select="@*"/>
 			<xsl:apply-templates mode="update_xml_step1"/>

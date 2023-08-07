@@ -4,7 +4,7 @@ require "fileutils"
 RSpec.describe Metanorma::CC do
   it "processes default metadata" do
     csdc = IsoDoc::CC::HtmlConvert.new({})
-    docxml, = csdc.convert_init(<<~"INPUT", "test", true)
+    docxml, = csdc.convert_init(<<~INPUT, "test", true)
       <csd-standard xmlns="https://www.calconnect.org/standards/csd">
       <bibdata type="standard">
         <title language="en" format="plain">Main Title</title>
@@ -71,7 +71,7 @@ RSpec.describe Metanorma::CC do
       </csd-standard>
     INPUT
     expect(htmlencode(metadata(csdc.info(docxml, nil)).to_s
-      .gsub(/, :/, ",\n:"))).to be_equivalent_to <<~"OUTPUT"
+      .gsub(", :", ",\n:"))).to be_equivalent_to <<~OUTPUT
         {:accesseddate=>"XXX",
         :agency=>"CalConnect",
         :authors=>["Fred Flintstone", "Barney Rubble"],
@@ -115,10 +115,10 @@ RSpec.describe Metanorma::CC do
   end
 
   it "processes pre" do
-    input = <<~"INPUT"
+    input = <<~INPUT
       <csd-standard xmlns="https://www.calconnect.org/standards/csd">
         <preface>
-          <foreword>
+          <foreword displayorder="1">
             <pre>ABC</pre>
           </foreword>
         </preface>
@@ -134,16 +134,15 @@ RSpec.describe Metanorma::CC do
               <h1 class="ForewordTitle">Foreword</h1>
               <pre>ABC</pre>
             </div>
-            <p class="zzSTDTitle1"/>
           </div>
         </body>
       OUTPUT
   end
 
   it "processes keyword" do
-    input = <<~"INPUT"
+    input = <<~INPUT
       <csd-standard xmlns="https://www.calconnect.org/standards/csd">
-        <preface><foreword>
+        <preface><foreword displayorder="1">
         <keyword>ABC</keyword>
         </foreword></preface>
       </csd-standard>
@@ -158,17 +157,17 @@ RSpec.describe Metanorma::CC do
               <h1 class="ForewordTitle">Foreword</h1>
               <span class="keyword">ABC</span>
             </div>
-            <p class="zzSTDTitle1"/>
           </div>
         </body>
       OUTPUT
   end
 
   it "processes simple terms & definitions" do
-    input = <<~"INPUT"
+    input = <<~INPUT
       <csd-standard xmlns="http://riboseinc.com/isoxml">
         <sections>
-          <terms id="H" obligation="normative"><title>1.<tab/>Terms, Definitions, Symbols and Abbreviated Terms</title>
+          <terms id="H" obligation="normative" displayorder="1">
+            <title>1.<tab/>Terms, Definitions, Symbols and Abbreviated Terms</title>
             <term id="J">
               <name>1.1.</name>
               <preferred><strong>Term2</strong></preferred>
@@ -182,7 +181,6 @@ RSpec.describe Metanorma::CC do
       .gsub(%r{^.*<body}m, "<body")
       .gsub(%r{</body>.*$}m, "</body>"))).to be_equivalent_to xmlpp(<<~"OUTPUT")
             #{HTML_HDR}
-            <p class="zzSTDTitle1"/>
             <div id="H">
               <h1>1.&#160; Terms, Definitions, Symbols and Abbreviated Terms</h1>
               <p class="TermNum" id="J">1.1.</p>
@@ -194,7 +192,7 @@ RSpec.describe Metanorma::CC do
   end
 
   it "rearranges term headers" do
-    input = <<~"INPUT"
+    input = <<~INPUT
       <html>
         <body lang="EN-US" link="blue" vlink="#954F72" xml:lang="EN-US" class="container">
           <div class="title-section">
@@ -206,7 +204,6 @@ RSpec.describe Metanorma::CC do
           </div>
           <br/>
           <div class="WordSection3">
-            <p class="zzSTDTitle1"/>
             <div id="H"><h1>1.&#160; Terms and definitions</h1><p>For the purposes of this document,
               the following terms and definitions apply.</p>
               <p class="TermNum" id="J">1.1.</p>
@@ -218,7 +215,7 @@ RSpec.describe Metanorma::CC do
     INPUT
     expect(xmlpp(IsoDoc::CC::HtmlConvert.new({})
       .cleanup(Nokogiri::XML(input)).to_s))
-      .to be_equivalent_to xmlpp(<<~"OUTPUT")
+      .to be_equivalent_to xmlpp(<<~OUTPUT)
         <?xml version="1.0"?>
         <html>
           <body lang="EN-US" link="blue" vlink="#954F72" xml:lang="EN-US" class="container">
@@ -231,7 +228,6 @@ RSpec.describe Metanorma::CC do
             </div>
             <br/>
             <div class="WordSection3">
-              <p class="zzSTDTitle1"/>
               <div id="H"><h1>1.&#xA0; Terms and definitions</h1>
                 <p>For the purposes of this document, the following terms and definitions apply.</p>
                 <p class='Terms' style='text-align:left;' id='J'><strong>1.1.</strong>&#xa0;Term2</p>
@@ -243,7 +239,7 @@ RSpec.describe Metanorma::CC do
   end
 
   it "processes section names" do
-    input = <<~"INPUT"
+    input = <<~INPUT
       <csd-standard xmlns="http://riboseinc.com/isoxml">
         <preface>
           <foreword obligation="informative">
@@ -319,7 +315,7 @@ RSpec.describe Metanorma::CC do
     expect(xmlpp(strip_guid(IsoDoc::CC::PresentationXMLConvert.new(presxml_options)
       .convert("test", input, true)
       .gsub(%r{^.*<body}m, "<body")
-      .gsub(%r{</body>.*$}m, "</body>")))).to be_equivalent_to xmlpp(<<~"OUTPUT")
+      .gsub(%r{</body>.*$}m, "</body>")))).to be_equivalent_to xmlpp(<<~OUTPUT)
             <csd-standard xmlns="http://riboseinc.com/isoxml" type="presentation">
           <preface>
               <clause type="toc" id="_" displayorder="1">
@@ -371,6 +367,9 @@ RSpec.describe Metanorma::CC do
                 <title depth="2">5.2.<tab/>Clause 4.2</title>
               </clause>
             </clause>
+            <references id="R" normative="true" obligation="informative" displayorder="4">
+              <title depth="1">1.<tab/>Normative References</title>
+            </references>
           </sections>
           <annex id="P" inline-header="false" obligation="normative" displayorder="9">
             <title><strong>Appendix A</strong><br/>(normative)<br/><strong>Annex</strong></title>
@@ -382,9 +381,6 @@ RSpec.describe Metanorma::CC do
             </clause>
           </annex>
           <bibliography>
-            <references id="R" normative="true" obligation="informative" displayorder="4">
-              <title depth="1">1.<tab/>Normative References</title>
-            </references>
             <clause id="S" obligation="informative" displayorder="10">
               <title depth="1">Bibliography</title>
               <references id="T" normative="false" obligation="informative">

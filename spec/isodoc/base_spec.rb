@@ -79,6 +79,7 @@ RSpec.describe Metanorma::CC do
         :circulateddate=>"XXX",
         :confirmeddate=>"XXX",
         :copieddate=>"XXX",
+        :correcteddate=>"XXX",
         :createddate=>"XXX",
         :docnumber=>"CC/WD 1000:2001",
         :docnumeric=>"1000",

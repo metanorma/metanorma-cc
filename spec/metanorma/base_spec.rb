@@ -160,6 +160,10 @@ RSpec.describe Metanorma::CC do
              <name>DOC TOC Heading Levels</name>
              <value>2</value>
            </presentation-metadata>
+           <presentation-metadata>
+             <name>PDF TOC Heading Levels</name>
+             <value>2</value>
+           </presentation-metadata>
          </metanorma-extension>
       #{BOILERPLATE.sub(/<legal-statement/, "#{BOILERPLATE_LICENSE}\n<legal-statement") \
         .sub(/#{Date.today.year} The Calendaring and Scheduling Consortium/, \
@@ -247,6 +251,10 @@ RSpec.describe Metanorma::CC do
              <name>DOC TOC Heading Levels</name>
              <value>2</value>
            </presentation-metadata>
+           <presentation-metadata>
+             <name>PDF TOC Heading Levels</name>
+             <value>2</value>
+           </presentation-metadata>
          </metanorma-extension>
          #{BOILERPLATE}
         <sections/>
@@ -320,6 +328,10 @@ RSpec.describe Metanorma::CC do
            </presentation-metadata>
            <presentation-metadata>
              <name>DOC TOC Heading Levels</name>
+             <value>2</value>
+           </presentation-metadata>
+           <presentation-metadata>
+             <name>PDF TOC Heading Levels</name>
              <value>2</value>
            </presentation-metadata>
          </metanorma-extension>

@@ -73,7 +73,9 @@ RSpec.describe Metanorma::CC do
     expect(htmlencode(metadata(csdc.info(docxml, nil)).to_s
       .gsub(", :", ",\n:"))).to be_equivalent_to <<~OUTPUT
         {:accesseddate=>"XXX",
+        :adapteddate=>"XXX",
         :agency=>"CalConnect",
+        :announceddate=>"XXX",
         :authors=>["Fred Flintstone", "Barney Rubble"],
         :authors_affiliations=>{""=>["Fred Flintstone"], "Bedrock Inc."=>["Barney Rubble"]},
         :circulateddate=>"XXX",
@@ -102,6 +104,7 @@ RSpec.describe Metanorma::CC do
         :revdate_monthyear=>"January 2000",
         :roles_authors_affiliations=>{"author"=>{"Bedrock Inc."=>["Barney Rubble"]}, "editor"=>{""=>["Fred Flintstone"]}},
         :script=>"Latn",
+        :stable_untildate=>"XXX",
         :stage=>"Working Draft",
         :stage_display=>"Working Draft",
         :stageabbr=>"WD",

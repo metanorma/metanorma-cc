@@ -136,7 +136,7 @@ BLANK_HDR = <<~"HDR".freeze
   <csd-standard xmlns="https://www.metanorma.org/ns/csd" type="semantic" version="#{Metanorma::CC::VERSION}">
   <bibdata type="standard">
    <title language="en" format="text/plain">Document title</title>
-    <docidentifier type="CalConnect">CC :#{Time.now.year}</docidentifier>
+    <docidentifier primary="true" type="CalConnect">CC :#{Time.now.year}</docidentifier>
     <contributor>
       <role type="author"/>
       <organization>

@@ -90,7 +90,7 @@ RSpec.describe Metanorma::CC do
       <csd-standard xmlns="https://www.metanorma.org/ns/csd" type="semantic" version="#{Metanorma::CC::VERSION}">
       <bibdata type="standard">
         <title language="en" format="text/plain">Main Title</title>
-        <docidentifier type="CalConnect">CC/DIR/FDS 1000:2001</docidentifier>
+        <docidentifier primary="true" type="CalConnect">CC/DIR/FDS 1000:2001</docidentifier>
         <docnumber>1000</docnumber>
         <contributor>
           <role type="author"/>
@@ -201,7 +201,7 @@ RSpec.describe Metanorma::CC do
       <csd-standard xmlns="https://www.metanorma.org/ns/csd" type="semantic" version="#{Metanorma::CC::VERSION}">
         <bibdata type="standard">
           <title language="en" format="text/plain">Main Title</title>
-          <docidentifier type="CalConnect">CC/Cor 1000:#{Time.now.year}</docidentifier>
+          <docidentifier primary="true" type="CalConnect">CC/Cor 1000:#{Time.now.year}</docidentifier>
           <docnumber>1000</docnumber>
           <contributor>
             <role type="author"/>
@@ -285,7 +285,7 @@ RSpec.describe Metanorma::CC do
       <csd-standard xmlns="https://www.metanorma.org/ns/csd" type="semantic" version="#{Metanorma::CC::VERSION}">
         <bibdata type="standard">
           <title language="en" format="text/plain">Main Title</title>
-          <docidentifier type="CalConnect">CC/Cor 1000:#{Time.now.year}</docidentifier>
+          <docidentifier primary="true" type="CalConnect">CC/Cor 1000:#{Time.now.year}</docidentifier>
           <docnumber>1000</docnumber>
           <contributor>
             <role type="author"/>

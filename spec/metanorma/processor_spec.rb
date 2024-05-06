@@ -51,10 +51,14 @@ RSpec.describe Metanorma::CC::Processor do
       .gsub(%r{^.*<main}m, "<main")
       .gsub(%r{</main>.*}m, "</main>"))))
       .to be_equivalent_to xmlpp(strip_guid(<<~OUTPUT))
-        <main class="main-section"><button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+        <main class="main-section">
+          <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
           <div id="H">
-            <h1 id="_">1.&#xA0; Terms, Definitions, Symbols and Abbreviated Terms</h1>
-            <p class='Terms' style='text-align:left;' id='J'><strong>1.1.</strong>&#xa0;Term2</p>
+            <h1 id="_">
+              <a class="anchor" href="#H"/>
+              <a class="header" href="#H">1.  Terms, Definitions, Symbols and Abbreviated Terms</a>
+            </h1>
+            <p class="Terms" style="text-align:left;" id="J"><strong>1.1.</strong> Term2</p>
           </div>
         </main>
       OUTPUT

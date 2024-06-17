@@ -17,7 +17,7 @@ RSpec.describe Metanorma::CC do
         mock_pdf
         Metanorma::Compile
           .new
-          .compile("xref_error.adoc", type: "cc", no_install_fonts: true)
+          .compile("xref_error.adoc", type: "cc", install_fonts: false)
       end.to(change { File.exist?("xref_error.err.html") }
               .from(false).to(true))
     end

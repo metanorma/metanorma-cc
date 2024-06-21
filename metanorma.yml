@@ -12,7 +12,6 @@ htmlintropage: lib/isodoc/cc/html/html_cc_intro.html
 htmlstylesheet: lib/isodoc/cc/html/htmlstyle.scss
 html_normalfontsize: "15px"
 html_footnotefontsize: "0.9em"
-scripts: lib/isodoc/cc/html/scripts.html
 i18nyaml: lib/isodoc/cc/i18n-en.yaml
 word_bodyfont: '"Source Sans Pro","Arial",sans-serif'
 word_headerfont: '"Source Sans Pro","Arial",sans-serif'

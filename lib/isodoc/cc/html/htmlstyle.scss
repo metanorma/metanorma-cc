@@ -41,7 +41,7 @@ body {
 
 nav {
   @include sidebarNav(
-    $offsetLeft: 45px,
+    $offsetLeft: 30px,
     $colorBg: #f7f7f7,
     $width: 323px);
 

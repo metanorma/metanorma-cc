@@ -8,7 +8,7 @@ RSpec.describe Metanorma::CC do
 
   it "processes a blank document" do
     options = [backend: :cc, header_footer: true]
-    expect(xmlpp(strip_guid(Asciidoctor.convert(<<~"INPUT", *options)))).to be_equivalent_to xmlpp(<<~"OUTPUT")
+    expect(Xml::C14n.format(strip_guid(Asciidoctor.convert(<<~"INPUT", *options)))).to be_equivalent_to Xml::C14n.format(<<~"OUTPUT")
       #{ASCIIDOC_BLANK_HDR}
     INPUT
         #{BLANK_HDR}
@@ -33,8 +33,8 @@ RSpec.describe Metanorma::CC do
         <sections/>
       </csd-standard>
     OUTPUT
-    expect(xmlpp(strip_guid(Asciidoctor.convert(input, *options))))
-      .to be_equivalent_to xmlpp(output)
+    expect(Xml::C14n.format(strip_guid(Asciidoctor.convert(input, *options))))
+      .to be_equivalent_to Xml::C14n.format(output)
     expect(File.exist?("test.html")).to be true
     expect(File.exist?("test.pdf")).to be true
     expect(File.exist?("test.doc")).to be true
@@ -54,8 +54,8 @@ RSpec.describe Metanorma::CC do
         <sections/>
       </csd-standard>
     OUTPUT
-    expect(xmlpp(strip_guid(Asciidoctor.convert(input, *options))))
-      .to be_equivalent_to xmlpp(output)
+    expect(Xml::C14n.format(strip_guid(Asciidoctor.convert(input, *options))))
+      .to be_equivalent_to Xml::C14n.format(output)
     expect(File.exist?("test.html")).to be true
   end
 
@@ -171,8 +171,8 @@ RSpec.describe Metanorma::CC do
       <sections/>
       </csd-standard>
     OUTPUT
-    expect(xmlpp(strip_guid(Asciidoctor.convert(input, *options))))
-      .to be_equivalent_to xmlpp(output)
+    expect(Xml::C14n.format(strip_guid(Asciidoctor.convert(input, *options))))
+      .to be_equivalent_to Xml::C14n.format(output)
   end
 
   it "processes default metadata for published technical-corrigendum" do
@@ -260,8 +260,8 @@ RSpec.describe Metanorma::CC do
         <sections/>
       </csd-standard>
     OUTPUT
-    expect(xmlpp(strip_guid(Asciidoctor.convert(input, *options))))
-      .to be_equivalent_to xmlpp(output)
+    expect(Xml::C14n.format(strip_guid(Asciidoctor.convert(input, *options))))
+      .to be_equivalent_to Xml::C14n.format(output)
   end
 
   it "ignores unrecognised status" do
@@ -339,8 +339,8 @@ RSpec.describe Metanorma::CC do
         <sections/>
       </csd-standard>
     OUTPUT
-    expect(xmlpp(strip_guid(Asciidoctor.convert(input, *options))))
-      .to be_equivalent_to xmlpp(output)
+    expect(Xml::C14n.format(strip_guid(Asciidoctor.convert(input, *options))))
+      .to be_equivalent_to Xml::C14n.format(output)
   end
 
   it "strips inline header" do
@@ -366,8 +366,8 @@ RSpec.describe Metanorma::CC do
       </sections>
       </csd-standard>
     OUTPUT
-    expect(xmlpp(strip_guid(Asciidoctor.convert(input, *options))))
-      .to be_equivalent_to xmlpp(output)
+    expect(Xml::C14n.format(strip_guid(Asciidoctor.convert(input, *options))))
+      .to be_equivalent_to Xml::C14n.format(output)
   end
 
   it "uses default fonts" do

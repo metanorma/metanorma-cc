@@ -128,10 +128,10 @@ RSpec.describe Metanorma::CC do
         </preface>
       </csd-standard>
     INPUT
-    expect(xmlpp(IsoDoc::CC::HtmlConvert.new({})
+    expect(Xml::C14n.format(IsoDoc::CC::HtmlConvert.new({})
       .convert("test", input, true)
       .gsub(%r{^.*<body}m, "<body")
-      .gsub(%r{</body>.*$}m, "</body>"))).to be_equivalent_to xmlpp(<<~"OUTPUT")
+      .gsub(%r{</body>.*$}m, "</body>"))).to be_equivalent_to Xml::C14n.format(<<~"OUTPUT")
             #{HTML_HDR}
             <br/>
             <div>
@@ -151,10 +151,10 @@ RSpec.describe Metanorma::CC do
         </foreword></preface>
       </csd-standard>
     INPUT
-    expect(xmlpp(IsoDoc::CC::HtmlConvert.new({})
+    expect(Xml::C14n.format(IsoDoc::CC::HtmlConvert.new({})
       .convert("test", input, true)
       .gsub(%r{^.*<body}m, "<body")
-      .gsub(%r{</body>.*$}m, "</body>"))).to be_equivalent_to xmlpp(<<~"OUTPUT")
+      .gsub(%r{</body>.*$}m, "</body>"))).to be_equivalent_to Xml::C14n.format(<<~"OUTPUT")
             #{HTML_HDR}
             <br/>
             <div>
@@ -180,10 +180,10 @@ RSpec.describe Metanorma::CC do
         </sections>
       </csd-standard>
     INPUT
-    expect(xmlpp(IsoDoc::CC::HtmlConvert.new({})
+    expect(Xml::C14n.format(IsoDoc::CC::HtmlConvert.new({})
       .convert("test", input, true)
       .gsub(%r{^.*<body}m, "<body")
-      .gsub(%r{</body>.*$}m, "</body>"))).to be_equivalent_to xmlpp(<<~"OUTPUT")
+      .gsub(%r{</body>.*$}m, "</body>"))).to be_equivalent_to Xml::C14n.format(<<~"OUTPUT")
             #{HTML_HDR}
             <div id="H">
               <h1>1.&#160; Terms, Definitions, Symbols and Abbreviated Terms</h1>
@@ -217,9 +217,9 @@ RSpec.describe Metanorma::CC do
         </body>
       </html>
     INPUT
-    expect(xmlpp(IsoDoc::CC::HtmlConvert.new({})
+    expect(Xml::C14n.format(IsoDoc::CC::HtmlConvert.new({})
       .cleanup(Nokogiri::XML(input)).to_s))
-      .to be_equivalent_to xmlpp(<<~OUTPUT)
+      .to be_equivalent_to Xml::C14n.format(<<~OUTPUT)
         <?xml version="1.0"?>
         <html>
           <body lang="EN-US" link="blue" vlink="#954F72" xml:lang="EN-US" class="container">
@@ -316,10 +316,10 @@ RSpec.describe Metanorma::CC do
       </csd-standard>
     INPUT
 
-    expect(xmlpp(strip_guid(IsoDoc::CC::PresentationXMLConvert.new(presxml_options)
+    expect(Xml::C14n.format(strip_guid(IsoDoc::CC::PresentationXMLConvert.new(presxml_options)
       .convert("test", input, true)
       .gsub(%r{^.*<body}m, "<body")
-      .gsub(%r{</body>.*$}m, "</body>")))).to be_equivalent_to xmlpp(<<~OUTPUT)
+      .gsub(%r{</body>.*$}m, "</body>")))).to be_equivalent_to Xml::C14n.format(<<~OUTPUT)
             <csd-standard xmlns="http://riboseinc.com/isoxml" type="presentation">
           <preface>
               <clause type="toc" id="_" displayorder="1">
@@ -410,8 +410,8 @@ RSpec.describe Metanorma::CC do
         <sections/>
       </csd-standard>
     OUTPUT
-    expect(xmlpp(strip_guid(Asciidoctor.convert(input, *options))))
-      .to be_equivalent_to xmlpp(output)
+    expect(Xml::C14n.format(strip_guid(Asciidoctor.convert(input, *options))))
+      .to be_equivalent_to Xml::C14n.format(output)
     html = File.read("test.html", encoding: "utf-8")
     expect(html).to match(%r{jquery\.min\.js})
     expect(html).to match(%r{Source Code Pro})

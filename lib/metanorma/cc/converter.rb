@@ -10,9 +10,6 @@ require_relative "validate_section"
 module Metanorma
   module CC
     class Converter < Metanorma::Generic::Converter
-      XML_ROOT_TAG = "csd-standard".freeze
-      XML_NAMESPACE = "https://www.metanorma.org/ns/csd".freeze
-
       register_for "cc"
 
       def configuration

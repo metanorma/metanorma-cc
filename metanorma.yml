@@ -55,4 +55,10 @@ stage_abbreviations:
   cancelled:
   withdrawn:
 logo_path: ""
+fonts_manifest:
+  Source Sans Pro:
+  Source Serif Pro:
+  Source Code Pro:
+  Source Han Sans:
+  STIX Two Math:
 

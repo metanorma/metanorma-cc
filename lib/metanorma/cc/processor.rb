@@ -3,6 +3,9 @@ require "metanorma/processor"
 module Metanorma
   module CC
     class Processor < Metanorma::Generic::Processor
+      def configuration
+        Metanorma::CC.configuration
+      end
 
       def initialize
         @short = [:csd, :cc]
@@ -16,16 +19,6 @@ module Metanorma
           pdf: "pdf",
           doc: "doc"
         )
-      end
-
-      def fonts_manifest
-        {
-          "Source Sans Pro" => nil,
-          "Source Serif Pro" => nil,
-          "Source Code Pro" => nil,
-          "Source Han Sans" => nil,
-          "STIX Two Math" => nil,
-        }
       end
 
       def version

@@ -21,6 +21,7 @@ word_smallerfontsize: "10.0pt"
 word_monospacefontsize: "10.0pt"
 word_footnotefontsize: "10.0pt"
 standardstylesheet: lib/isodoc/cc/html/cc.scss
+pdf_stylesheet: lib/isodoc/cc/cc.standard.xsl
 header: lib/isodoc/cc/html/header.html
 wordcoverpage: lib/isodoc/cc/html/word_cc_titlepage.html
 wordintropage: lib/isodoc/cc/html/word_cc_intro.html
@@ -55,4 +56,10 @@ stage_abbreviations:
   cancelled:
   withdrawn:
 logo_path: ""
+fonts_manifest:
+  Source Sans Pro:
+  Source Serif Pro:
+  Source Code Pro:
+  Source Han Sans:
+  STIX Two Math:
 

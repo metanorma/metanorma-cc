@@ -258,7 +258,7 @@ RSpec.describe Metanorma::CC do
       == Appendix C
 
     INPUT
-    expect(File.read("test.err.html")).to include "There are sections after the final Bibliography"
+    expect(File.read("test.err.html")).to include("There are sections after the final Bibliography")
   end
 
   it "Warning if final section is not styled Bibliography" do
@@ -286,6 +286,6 @@ RSpec.describe Metanorma::CC do
       == Bibliography
 
     INPUT
-    expect(File.read("test.err.html")).to include "Section not marked up as [bibliography]!"
+    expect(File.read("test.err.html")).to include("Section not marked up as [bibliography]!")
   end
 end

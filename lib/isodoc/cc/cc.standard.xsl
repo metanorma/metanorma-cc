@@ -355,21 +355,21 @@
 
 	<xsl:template name="insertListOf_Item">
 		<fo:block role="TOCI">
-			<fo:list-block provisional-distance-between-starts="8mm">
-				<fo:list-item>
-					<fo:list-item-label end-indent="label-end()">
+			<fo:list-block provisional-distance-between-starts="8mm" role="SKIP">
+				<fo:list-item role="SKIP">
+					<fo:list-item-label end-indent="label-end()" role="SKIP">
 						<fo:block/>
 					</fo:list-item-label>
-					<fo:list-item-body start-indent="body-start()">
-						<fo:block text-align-last="justify" margin-left="12mm" text-indent="-12mm">
+					<fo:list-item-body start-indent="body-start()" role="SKIP">
+						<fo:block text-align-last="justify" margin-left="12mm" text-indent="-12mm" role="SKIP">
 							<fo:basic-link internal-destination="{@id}">
 								<xsl:call-template name="setAltText">
 									<xsl:with-param name="value" select="@alt-text"/>
 								</xsl:call-template>
 								<xsl:apply-templates select="." mode="contents"/>
-								<fo:inline keep-together.within-line="always">
+								<fo:inline keep-together.within-line="always" role="SKIP">
 									<fo:leader leader-pattern="dots"/>
-									<fo:inline><fo:page-number-citation ref-id="{@id}"/></fo:inline>
+									<fo:inline role="SKIP"><fo:wrapper role="artifact"><fo:page-number-citation ref-id="{@id}"/></fo:wrapper></fo:inline>
 								</fo:inline>
 							</fo:basic-link>
 						</fo:block>
@@ -380,10 +380,12 @@
 	</xsl:template>
 
 	<xsl:template match="csd:preface//csd:clause[@type = 'toc']" priority="3">
-		<fo:block-container font-weight="bold" line-height="115%">
+		<fo:block-container font-weight="bold" line-height="115%" role="SKIP">
+			<!-- render 'Contents' outside if role="TOC" -->
+			<xsl:apply-templates select="*[local-name() = 'title']"/>
 			<fo:block role="TOC">
 
-				<xsl:apply-templates/>
+				<xsl:apply-templates select="node()[not(local-name() = 'title')]"/>
 
 				<xsl:if test="count(*) = 1 and *[local-name() = 'title']"> <!-- if there isn't user ToC -->
 
@@ -394,33 +396,35 @@
 								<xsl:attribute name="margin-top">6pt</xsl:attribute>
 							</xsl:if>
 
-							<fo:list-block>
-								<xsl:attribute name="provisional-distance-between-starts">
-									<xsl:choose>
-										<!-- skip 0 section without subsections -->
-										<xsl:when test="@section != ''">8mm</xsl:when> <!-- and not(@display-section = 'false') -->
-										<xsl:otherwise>0mm</xsl:otherwise>
-									</xsl:choose>
-								</xsl:attribute>
-								<fo:list-item>
-									<fo:list-item-label end-indent="label-end()">
-										<fo:block>
-											<xsl:value-of select="@section"/>
-										</fo:block>
-									</fo:list-item-label>
-									<fo:list-item-body start-indent="body-start()">
-										<fo:block text-align-last="justify" margin-left="12mm" text-indent="-12mm">
-											<fo:basic-link internal-destination="{@id}" fox:alt-text="{title}">
-												<xsl:apply-templates select="title"/>
-												<fo:inline keep-together.within-line="always">
-													<fo:leader leader-pattern="dots"/>
-													<fo:inline><fo:page-number-citation ref-id="{@id}"/></fo:inline>
-												</fo:inline>
-											</fo:basic-link>
-										</fo:block>
-									</fo:list-item-body>
-								</fo:list-item>
-							</fo:list-block>
+							<fo:basic-link internal-destination="{@id}" fox:alt-text="{@section} {title}"> <!-- link at this level needs for PDF structure tags -->
+								<fo:list-block role="SKIP">
+									<xsl:attribute name="provisional-distance-between-starts">
+										<xsl:choose>
+											<!-- skip 0 section without subsections -->
+											<xsl:when test="@section != ''">8mm</xsl:when> <!-- and not(@display-section = 'false') -->
+											<xsl:otherwise>0mm</xsl:otherwise>
+										</xsl:choose>
+									</xsl:attribute>
+									<fo:list-item role="SKIP">
+										<fo:list-item-label end-indent="label-end()" role="SKIP">
+											<fo:block role="SKIP" id="__internal_layout__toc_label_{@id}">
+												<xsl:value-of select="@section"/>
+											</fo:block>
+										</fo:list-item-label>
+										<fo:list-item-body start-indent="body-start()" role="SKIP">
+											<fo:block text-align-last="justify" margin-left="12mm" text-indent="-12mm" role="SKIP">
+												<fo:basic-link internal-destination="{@id}" fox:alt-text="{title}" role="SKIP">
+													<xsl:apply-templates select="title"/>
+													<fo:inline keep-together.within-line="always" role="SKIP">
+														<fo:leader leader-pattern="dots"/>
+														<fo:inline role="SKIP"><fo:wrapper role="artifact"><fo:page-number-citation ref-id="{@id}"/></fo:wrapper></fo:inline>
+													</fo:inline>
+												</fo:basic-link>
+											</fo:block>
+										</fo:list-item-body>
+									</fo:list-item>
+								</fo:list-block>
+							</fo:basic-link>
 						</fo:block>
 					</xsl:for-each>
 
@@ -3997,8 +4001,10 @@
 
 				<xsl:call-template name="insert_basic_link">
 					<xsl:with-param name="element">
-						<fo:basic-link internal-destination="{$ref_id}" fox:alt-text="footnote {$current_fn_number}" role="Lbl">
-							<xsl:copy-of select="$current_fn_number_text"/>
+						<fo:basic-link internal-destination="{$ref_id}" fox:alt-text="footnote {$current_fn_number}"> <!-- note: role="Lbl" removed in https://github.com/metanorma/mn2pdf/issues/291 -->
+							<fo:inline role="Lbl"> <!-- need for https://github.com/metanorma/metanorma-iso/issues/1003 -->
+								<xsl:copy-of select="$current_fn_number_text"/>
+							</fo:inline>
 						</fo:basic-link>
 					</xsl:with-param>
 				</xsl:call-template>
@@ -4279,7 +4285,7 @@
 
 			<xsl:call-template name="refine_fn-reference-style"/>
 
-			<fo:basic-link internal-destination="{@reference}_{ancestor::*[@id][1]/@id}" fox:alt-text="{@reference}"> <!-- @reference   | ancestor::*[local-name()='clause'][1]/@id-->
+			<fo:basic-link internal-destination="{@reference}_{ancestor::*[@id][1]/@id}" fox:alt-text="footnote {@reference}"> <!-- @reference   | ancestor::*[local-name()='clause'][1]/@id-->
 				<xsl:if test="ancestor::*[local-name()='table'][1]/@id"> <!-- for footnotes in tables -->
 					<xsl:attribute name="internal-destination">
 						<xsl:value-of select="concat(@reference, '_', ancestor::*[local-name()='table'][1]/@id)"/>
@@ -6728,9 +6734,12 @@
 					<xsl:apply-templates/>
 				</xsl:when>
 				<xsl:otherwise>
+					<xsl:variable name="alt_text">
+						<xsl:call-template name="getAltText"/>
+					</xsl:variable>
 					<xsl:call-template name="insert_basic_link">
 						<xsl:with-param name="element">
-							<fo:basic-link external-destination="{$target}" fox:alt-text="{$target}">
+							<fo:basic-link external-destination="{$target}" fox:alt-text="{$alt_text}">
 								<xsl:if test="$isLinkToEmbeddedFile = 'true'">
 									<xsl:attribute name="role">Annot</xsl:attribute>
 								</xsl:if>
@@ -6756,6 +6765,14 @@
 			</xsl:choose>
 		</fo:inline>
 	</xsl:template> <!-- link -->
+
+	<xsl:template name="getAltText">
+		<xsl:choose>
+			<xsl:when test="normalize-space(.) = ''"><xsl:value-of select="@target"/></xsl:when>
+			<xsl:otherwise><xsl:value-of select="normalize-space(translate(normalize-space(), ' —', ' -'))"/></xsl:otherwise>
+			<!-- <xsl:otherwise><xsl:value-of select="@target"/></xsl:otherwise> -->
+		</xsl:choose>
+	</xsl:template>
 
 	<!-- ======================== -->
 	<!-- Appendix processing -->
@@ -6787,7 +6804,7 @@
 	<xsl:template match="*[local-name() = 'callout']">
 		<xsl:choose>
 			<xsl:when test="normalize-space(@target) = ''">&lt;<xsl:apply-templates/>&gt;</xsl:when>
-			<xsl:otherwise><fo:basic-link internal-destination="{@target}" fox:alt-text="{@target}">&lt;<xsl:apply-templates/>&gt;</fo:basic-link></xsl:otherwise>
+			<xsl:otherwise><fo:basic-link internal-destination="{@target}" fox:alt-text="{normalize-space()}">&lt;<xsl:apply-templates/>&gt;</fo:basic-link></xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
 
@@ -6816,7 +6833,10 @@
 	<xsl:template match="*[local-name() = 'xref']">
 		<xsl:call-template name="insert_basic_link">
 			<xsl:with-param name="element">
-				<fo:basic-link internal-destination="{@target}" fox:alt-text="{@target}" xsl:use-attribute-sets="xref-style">
+				<xsl:variable name="alt_text">
+					<xsl:call-template name="getAltText"/>
+				</xsl:variable>
+				<fo:basic-link internal-destination="{@target}" fox:alt-text="{$alt_text}" xsl:use-attribute-sets="xref-style">
 					<xsl:if test="string-length(normalize-space()) &lt; 30 and not(contains(normalize-space(), 'http://')) and not(contains(normalize-space(), 'https://')) and not(ancestor::*[local-name() = 'table' or local-name() = 'dl'])">
 						<xsl:attribute name="keep-together.within-line">always</xsl:attribute>
 					</xsl:if>

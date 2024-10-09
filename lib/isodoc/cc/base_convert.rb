@@ -1,10 +1,10 @@
 require "isodoc"
 
 module IsoDoc
-  module CC
+  module Cc
     module BaseConvert
       def configuration
-        Metanorma::CC.configuration
+        Metanorma::Cc.configuration
       end
     end
   end

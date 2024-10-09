@@ -4,7 +4,7 @@ require_relative "xref"
 require_relative "i18n"
 
 module IsoDoc
-  module CC
+  module Cc
     module Init
       def metadata_init(lang, script, locale, i18n)
         @meta = Metadata.new(lang, script, locale, i18n)

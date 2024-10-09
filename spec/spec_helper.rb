@@ -80,7 +80,7 @@ HDR
 
 def boilerplate_read(file)
   HTMLEntities.new.decode(
-    Metanorma::CC::Converter.new(:cc, {}).boilerplate_file_restructure(file)
+    Metanorma::Cc::Converter.new(:cc, {}).boilerplate_file_restructure(file)
     .to_xml.gsub(/<(\/)?sections>/, "<\\1boilerplate>")
       .gsub(/ id="_[^"]+"/, " id='_'"),
   )
@@ -113,7 +113,7 @@ BOILERPLATE
 
 BLANK_HDR = <<~"HDR".freeze
   <?xml version="1.0" encoding="UTF-8"?>
-  <csd-standard xmlns="https://www.metanorma.org/ns/csd" type="semantic" version="#{Metanorma::CC::VERSION}">
+  <csd-standard xmlns="https://www.metanorma.org/ns/csd" type="semantic" version="#{Metanorma::Cc::VERSION}">
   <bibdata type="standard">
    <title language="en" format="text/plain">Document title</title>
     <docidentifier primary="true" type="CalConnect">CC :#{Time.now.year}</docidentifier>
@@ -146,6 +146,7 @@ BLANK_HDR = <<~"HDR".freeze
     </copyright>
     <ext>
      <doctype>standard</doctype>
+     <flavor>cc</flavor>
    </ext>
   </bibdata>
                     <metanorma-extension>
@@ -184,6 +185,6 @@ HDR
 
 def mock_pdf
   allow(::Mn2pdf).to receive(:convert) do |url, output, _c, _d|
-    FileUtils.cp(url.gsub(/"/, ""), output.gsub(/"/, ""))
+    FileUtils.cp(url.delete('"'), output.delete('"'))
   end
 end

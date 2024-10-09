@@ -1,8 +1,8 @@
 module IsoDoc
-  module CC
+  module Cc
     class I18n < IsoDoc::Generic::I18n
       def configuration
-        Metanorma::CC.configuration
+        Metanorma::Cc.configuration
       end
     end
   end

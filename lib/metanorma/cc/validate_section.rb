@@ -2,7 +2,7 @@ require "nokogiri"
 require "metanorma-generic"
 
 module Metanorma
-  module CC
+  module Cc
     class Converter < Metanorma::Generic::Converter
       def section_validate(doc)
         advisory = doc.root.at("//bibdata/ext[doctype = 'advisory']")

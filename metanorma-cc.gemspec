@@ -4,7 +4,7 @@ require "metanorma/cc/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "metanorma-cc"
-  spec.version       = Metanorma::CC::VERSION
+  spec.version       = Metanorma::Cc::VERSION
   spec.authors       = ["Ribose Inc."]
   spec.email         = ["open.source@ribose.com"]
 

@@ -1,9 +1,9 @@
 require "spec_helper"
 require "fileutils"
 
-RSpec.describe Metanorma::CC do
+RSpec.describe Metanorma::Cc do
   it "has a version number" do
-    expect(Metanorma::CC::VERSION).not_to be nil
+    expect(Metanorma::Cc::VERSION).not_to be nil
   end
 
   it "processes a blank document" do
@@ -87,7 +87,7 @@ RSpec.describe Metanorma::CC do
     INPUT
     output = <<~OUTPUT
       <?xml version="1.0" encoding="UTF-8"?>
-      <csd-standard xmlns="https://www.metanorma.org/ns/csd" type="semantic" version="#{Metanorma::CC::VERSION}">
+      <csd-standard xmlns="https://www.metanorma.org/ns/csd" type="semantic" version="#{Metanorma::Cc::VERSION}">
       <bibdata type="standard">
         <title language="en" format="text/plain">Main Title</title>
         <docidentifier primary="true" type="CalConnect">CC/DIR/FDS 1000:2001</docidentifier>
@@ -142,6 +142,7 @@ RSpec.describe Metanorma::CC do
         </copyright>
         <ext>
           <doctype abbreviation="DIR">directive</doctype>
+          <flavor>cc</flavor>
           <editorialgroup>
             <committee type="provisional">TC</committee>
           </editorialgroup>
@@ -198,7 +199,7 @@ RSpec.describe Metanorma::CC do
     INPUT
     output = <<~OUTPUT
       <?xml version="1.0" encoding="UTF-8"?>
-      <csd-standard xmlns="https://www.metanorma.org/ns/csd" type="semantic" version="#{Metanorma::CC::VERSION}">
+      <csd-standard xmlns="https://www.metanorma.org/ns/csd" type="semantic" version="#{Metanorma::Cc::VERSION}">
         <bibdata type="standard">
           <title language="en" format="text/plain">Main Title</title>
           <docidentifier primary="true" type="CalConnect">CC/Cor 1000:#{Time.now.year}</docidentifier>
@@ -232,6 +233,7 @@ RSpec.describe Metanorma::CC do
           </copyright>
           <ext>
           <doctype abbreviation="Cor">technical-corrigendum</doctype>
+          <flavor>cc</flavor>
           <editorialgroup>
             <committee type="provisional">TC 788</committee>
             <committee type="technical">TC 789</committee>
@@ -282,7 +284,7 @@ RSpec.describe Metanorma::CC do
     INPUT
     output = <<~OUTPUT
       <?xml version="1.0" encoding="UTF-8"?>
-      <csd-standard xmlns="https://www.metanorma.org/ns/csd" type="semantic" version="#{Metanorma::CC::VERSION}">
+      <csd-standard xmlns="https://www.metanorma.org/ns/csd" type="semantic" version="#{Metanorma::Cc::VERSION}">
         <bibdata type="standard">
           <title language="en" format="text/plain">Main Title</title>
           <docidentifier primary="true" type="CalConnect">CC/Cor 1000:#{Time.now.year}</docidentifier>
@@ -315,6 +317,7 @@ RSpec.describe Metanorma::CC do
           </copyright>
           <ext>
           <doctype abbreviation="Cor">technical-corrigendum</doctype>
+          <flavor>cc</flavor>
           </ext>
         </bibdata>
                  <metanorma-extension>

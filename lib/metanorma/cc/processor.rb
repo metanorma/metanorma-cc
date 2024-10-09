@@ -1,10 +1,10 @@
 require "metanorma/processor"
 
 module Metanorma
-  module CC
+  module Cc
     class Processor < Metanorma::Generic::Processor
       def configuration
-        Metanorma::CC.configuration
+        Metanorma::Cc.configuration
       end
 
       def initialize
@@ -22,20 +22,20 @@ module Metanorma
       end
 
       def version
-        "Metanorma::CC #{Metanorma::CC::VERSION}"
+        "Metanorma::Cc #{Metanorma::Cc::VERSION}"
       end
 
       def output(isodoc_node, inname, outname, format, options={})
         options_preprocess(options)
         case format
         when :html
-          IsoDoc::CC::HtmlConvert.new(options).convert(inname, isodoc_node, nil, outname)
+          IsoDoc::Cc::HtmlConvert.new(options).convert(inname, isodoc_node, nil, outname)
         when :doc
-          IsoDoc::CC::WordConvert.new(options).convert(inname, isodoc_node, nil, outname)
+          IsoDoc::Cc::WordConvert.new(options).convert(inname, isodoc_node, nil, outname)
         when :pdf
-          IsoDoc::CC::PdfConvert.new(options).convert(inname, isodoc_node, nil, outname)
+          IsoDoc::Cc::PdfConvert.new(options).convert(inname, isodoc_node, nil, outname)
         when :presentation
-          IsoDoc::CC::PresentationXMLConvert.new(options).convert(inname, isodoc_node, nil, outname)
+          IsoDoc::Cc::PresentationXMLConvert.new(options).convert(inname, isodoc_node, nil, outname)
         else
           super
         end

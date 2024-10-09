@@ -3,7 +3,7 @@ require "metanorma-generic"
 require "isodoc"
 
 module IsoDoc
-  module CC
+  module Cc
     class PdfConvert < IsoDoc::Generic::PdfConvert
       def initialize(options)
         @libdir = File.dirname(__FILE__)

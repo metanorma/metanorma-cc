@@ -3,7 +3,7 @@ require "metanorma-generic"
 require "isodoc"
 
 module IsoDoc
-  module CC
+  module Cc
     class PresentationXMLConvert < IsoDoc::Generic::PresentationXMLConvert
       def annex1(elem)
         lbl = @xrefs.anchor(elem["id"], :label)

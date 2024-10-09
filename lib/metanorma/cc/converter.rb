@@ -8,12 +8,12 @@ require "metanorma/generic/converter"
 require_relative "validate_section"
 
 module Metanorma
-  module CC
+  module Cc
     class Converter < Metanorma::Generic::Converter
       register_for "cc"
 
       def configuration
-        Metanorma::CC.configuration
+        Metanorma::Cc.configuration
       end
 
       def metadata_committee(node, xml)
@@ -43,23 +43,23 @@ module Metanorma
       end
 
       def html_converter(node)
-        IsoDoc::CC::HtmlConvert.new(html_extract_attributes(node))
+        IsoDoc::Cc::HtmlConvert.new(html_extract_attributes(node))
       end
 
       def pdf_converter(node)
         return if node.attr("no-pdf")
 
-        IsoDoc::CC::PdfConvert.new(pdf_extract_attributes(node))
+        IsoDoc::Cc::PdfConvert.new(pdf_extract_attributes(node))
       end
 
       def doc_converter(node)
-        IsoDoc::CC::WordConvert.new(doc_extract_attributes(node))
+        IsoDoc::Cc::WordConvert.new(doc_extract_attributes(node))
       end
 
       def presentation_xml_converter(node)
-        IsoDoc::CC::PresentationXMLConvert
+        IsoDoc::Cc::PresentationXMLConvert
           .new(doc_extract_attributes(node)
-          .merge(output_formats: ::Metanorma::CC::Processor.new.output_formats))
+          .merge(output_formats: ::Metanorma::Cc::Processor.new.output_formats))
       end
     end
   end

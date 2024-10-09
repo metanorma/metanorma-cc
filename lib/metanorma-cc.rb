@@ -8,5 +8,5 @@ require "metanorma"
 
 if defined? Metanorma::Registry
   require_relative "metanorma/cc"
-  Metanorma::Registry.instance.register(Metanorma::CC::Processor)
+  Metanorma::Registry.instance.register(Metanorma::Cc::Processor)
 end

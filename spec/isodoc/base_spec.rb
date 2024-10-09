@@ -1,9 +1,9 @@
 require "spec_helper"
 require "fileutils"
 
-RSpec.describe Metanorma::CC do
+RSpec.describe Metanorma::Cc do
   it "processes default metadata" do
-    csdc = IsoDoc::CC::HtmlConvert.new({})
+    csdc = IsoDoc::Cc::HtmlConvert.new({})
     docxml, = csdc.convert_init(<<~INPUT, "test", true)
       <csd-standard xmlns="https://www.calconnect.org/standards/csd">
       <bibdata type="standard">
@@ -128,7 +128,7 @@ RSpec.describe Metanorma::CC do
         </preface>
       </csd-standard>
     INPUT
-    expect(Xml::C14n.format(IsoDoc::CC::HtmlConvert.new({})
+    expect(Xml::C14n.format(IsoDoc::Cc::HtmlConvert.new({})
       .convert("test", input, true)
       .gsub(%r{^.*<body}m, "<body")
       .gsub(%r{</body>.*$}m, "</body>"))).to be_equivalent_to Xml::C14n.format(<<~"OUTPUT")
@@ -151,7 +151,7 @@ RSpec.describe Metanorma::CC do
         </foreword></preface>
       </csd-standard>
     INPUT
-    expect(Xml::C14n.format(IsoDoc::CC::HtmlConvert.new({})
+    expect(Xml::C14n.format(IsoDoc::Cc::HtmlConvert.new({})
       .convert("test", input, true)
       .gsub(%r{^.*<body}m, "<body")
       .gsub(%r{</body>.*$}m, "</body>"))).to be_equivalent_to Xml::C14n.format(<<~"OUTPUT")
@@ -180,7 +180,7 @@ RSpec.describe Metanorma::CC do
         </sections>
       </csd-standard>
     INPUT
-    expect(Xml::C14n.format(IsoDoc::CC::HtmlConvert.new({})
+    expect(Xml::C14n.format(IsoDoc::Cc::HtmlConvert.new({})
       .convert("test", input, true)
       .gsub(%r{^.*<body}m, "<body")
       .gsub(%r{</body>.*$}m, "</body>"))).to be_equivalent_to Xml::C14n.format(<<~"OUTPUT")
@@ -217,7 +217,7 @@ RSpec.describe Metanorma::CC do
         </body>
       </html>
     INPUT
-    expect(Xml::C14n.format(IsoDoc::CC::HtmlConvert.new({})
+    expect(Xml::C14n.format(IsoDoc::Cc::HtmlConvert.new({})
       .cleanup(Nokogiri::XML(input)).to_s))
       .to be_equivalent_to Xml::C14n.format(<<~OUTPUT)
         <?xml version="1.0"?>
@@ -316,7 +316,7 @@ RSpec.describe Metanorma::CC do
       </csd-standard>
     INPUT
 
-    expect(Xml::C14n.format(strip_guid(IsoDoc::CC::PresentationXMLConvert.new(presxml_options)
+    expect(Xml::C14n.format(strip_guid(IsoDoc::Cc::PresentationXMLConvert.new(presxml_options)
       .convert("test", input, true)
       .gsub(%r{^.*<body}m, "<body")
       .gsub(%r{</body>.*$}m, "</body>")))).to be_equivalent_to Xml::C14n.format(<<~OUTPUT)

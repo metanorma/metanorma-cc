@@ -3,7 +3,7 @@ require "metanorma-generic"
 require_relative "./cc/processor"
 
 module Metanorma
-  module CC
+  module Cc
     class Configuration < Metanorma::Generic::Configuration
       def initialize(*args)
         super
@@ -28,5 +28,5 @@ module Metanorma
     configure {}
   end
 end
-Metanorma::Registry.instance.register(Metanorma::CC::Processor)
+Metanorma::Registry.instance.register(Metanorma::Cc::Processor)
 

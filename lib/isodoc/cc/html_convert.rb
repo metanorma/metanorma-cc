@@ -4,7 +4,7 @@ require_relative "init"
 require "isodoc"
 
 module IsoDoc
-  module CC
+  module Cc
     # A {Converter} implementation that generates CC output, and a document
     # schema encapsulation of the document for validation
     class HtmlConvert < IsoDoc::Generic::HtmlConvert

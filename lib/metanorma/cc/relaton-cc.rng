@@ -24,6 +24,7 @@
       <optional>
         <ref name="docsubtype"/>
       </optional>
+      <ref name="flavor"/>
       <ref name="editorialgroup"/>
       <zeroOrMore>
         <ref name="ics"/>

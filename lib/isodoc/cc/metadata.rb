@@ -2,10 +2,10 @@ require "isodoc"
 require "metanorma/cc"
 
 module IsoDoc
-  module CC
+  module Cc
     class Metadata < IsoDoc::Generic::Metadata
       def configuration
-        Metanorma::CC.configuration
+        Metanorma::Cc.configuration
       end
 
       def initialize(lang, script, locale, labels)

@@ -1,5 +1,5 @@
 module IsoDoc
-  module CC
+  module Cc
     class Xref < IsoDoc::Generic::Xref
     end
   end

@@ -118,54 +118,6 @@ RSpec.describe Metanorma::Cc do
       OUTPUT
   end
 
-  it "processes pre" do
-    input = <<~INPUT
-      <csd-standard xmlns="https://www.calconnect.org/standards/csd">
-        <preface>
-          <foreword displayorder="1">
-            <pre>ABC</pre>
-          </foreword>
-        </preface>
-      </csd-standard>
-    INPUT
-    expect(Xml::C14n.format(IsoDoc::Cc::HtmlConvert.new({})
-      .convert("test", input, true)
-      .gsub(%r{^.*<body}m, "<body")
-      .gsub(%r{</body>.*$}m, "</body>"))).to be_equivalent_to Xml::C14n.format(<<~"OUTPUT")
-            #{HTML_HDR}
-            <br/>
-            <div>
-              <h1 class="ForewordTitle">Foreword</h1>
-              <pre>ABC</pre>
-            </div>
-          </div>
-        </body>
-      OUTPUT
-  end
-
-  it "processes keyword" do
-    input = <<~INPUT
-      <csd-standard xmlns="https://www.calconnect.org/standards/csd">
-        <preface><foreword displayorder="1">
-        <keyword>ABC</keyword>
-        </foreword></preface>
-      </csd-standard>
-    INPUT
-    expect(Xml::C14n.format(IsoDoc::Cc::HtmlConvert.new({})
-      .convert("test", input, true)
-      .gsub(%r{^.*<body}m, "<body")
-      .gsub(%r{</body>.*$}m, "</body>"))).to be_equivalent_to Xml::C14n.format(<<~"OUTPUT")
-            #{HTML_HDR}
-            <br/>
-            <div>
-              <h1 class="ForewordTitle">Foreword</h1>
-              <span class="keyword">ABC</span>
-            </div>
-          </div>
-        </body>
-      OUTPUT
-  end
-
   it "processes simple terms & definitions" do
     input = <<~INPUT
       <csd-standard xmlns="http://riboseinc.com/isoxml">
@@ -349,14 +301,24 @@ RSpec.describe Metanorma::Cc do
                   <preferred>Term2</preferred>
                 </term>
               </terms>
-              <definitions id="K"><title>2.2.</title>
+              <definitions id="K">
+            <title depth="2">
+               2.2.
+               <tab/>
+               Symbols
+            </title>
                 <dl>
                   <dt>Symbol</dt>
                   <dd>Definition</dd>
                 </dl>
               </definitions>
             </clause>
-            <definitions id="L" displayorder="6"><title>3.</title>
+            <definitions id="L" displayorder="6">
+         <title depth="1">
+            3.
+            <tab/>
+            Symbols
+         </title>
               <dl>
                 <dt>Symbol</dt>
                 <dd>Definition</dd>

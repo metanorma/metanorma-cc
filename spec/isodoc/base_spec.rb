@@ -70,8 +70,8 @@ RSpec.describe Metanorma::Cc do
       <sections/>
       </csd-standard>
     INPUT
-    expect(htmlencode(metadata(csdc.info(docxml, nil)).to_s
-      .gsub(", :", ",\n:"))).to be_equivalent_to <<~OUTPUT
+    expect(metadata(csdc.info(docxml, nil)))
+      .to be_equivalent_to (
         {:accesseddate=>"XXX",
         :adapteddate=>"XXX",
         :agency=>"CalConnect",
@@ -115,7 +115,7 @@ RSpec.describe Metanorma::Cc do
         :updateddate=>"XXX",
         :vote_endeddate=>"XXX",
         :vote_starteddate=>"XXX"}
-      OUTPUT
+      )
   end
 
   it "processes simple terms & definitions" do

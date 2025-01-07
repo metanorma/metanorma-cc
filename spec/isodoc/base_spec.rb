@@ -190,7 +190,7 @@ RSpec.describe Metanorma::Cc do
             <terms id="I" obligation="normative">
               <title>Normal Terms</title>
               <term id="J">
-                <preferred>Term2</preferred>
+                <preferred><expression><name>Term2</name></expression></preferred>
               </term>
             </terms>
             <definitions id="K">
@@ -341,7 +341,18 @@ RSpec.describe Metanorma::Cc do
                          <span class="fmt-autonum-delim">.</span>
                          <semx element="autonum" source="J">1</semx>
                       </fmt-xref-label>
-                      <preferred>Term2</preferred>
+               <preferred id="_">
+                  <expression>
+                     <name>Term2</name>
+                  </expression>
+               </preferred>
+               <fmt-preferred>
+                  <p>
+                     <semx element="preferred" source="_">
+                        <strong>Term2</strong>
+                     </semx>
+                  </p>
+               </fmt-preferred>
                    </term>
                 </terms>
                 <definitions id="K">

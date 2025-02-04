@@ -13,7 +13,7 @@ RSpec.describe Metanorma::Cc do
     INPUT
         #{BLANK_HDR}
         <sections/>
-      </csd-standard>
+      </metanorma>
     OUTPUT
   end
 
@@ -31,7 +31,7 @@ RSpec.describe Metanorma::Cc do
     output = <<~OUTPUT
         #{BLANK_HDR}
         <sections/>
-      </csd-standard>
+      </metanorma>
     OUTPUT
     expect(Xml::C14n.format(strip_guid(Asciidoctor.convert(input, *options))))
       .to be_equivalent_to Xml::C14n.format(output)
@@ -52,7 +52,7 @@ RSpec.describe Metanorma::Cc do
     output = <<~OUTPUT
         #{BLANK_HDR}
         <sections/>
-      </csd-standard>
+      </metanorma>
     OUTPUT
     expect(Xml::C14n.format(strip_guid(Asciidoctor.convert(input, *options))))
       .to be_equivalent_to Xml::C14n.format(output)
@@ -87,7 +87,7 @@ RSpec.describe Metanorma::Cc do
     INPUT
     output = <<~OUTPUT
       <?xml version="1.0" encoding="UTF-8"?>
-      <csd-standard xmlns="https://www.metanorma.org/ns/csd" type="semantic" version="#{Metanorma::Cc::VERSION}">
+      <metanorma xmlns="https://www.metanorma.org/ns/standoc" type="semantic" version="#{Metanorma::Cc::VERSION}">
       <bibdata type="standard">
         <title language="en" format="text/plain">Main Title</title>
         <docidentifier primary="true" type="CalConnect">CC/DIR/FDS 1000:2001</docidentifier>
@@ -170,7 +170,7 @@ RSpec.describe Metanorma::Cc do
         .sub(/#{Date.today.year} The Calendaring and Scheduling Consortium/, \
              '2001 The Calendaring and Scheduling Consortium')}
       <sections/>
-      </csd-standard>
+      </metanorma>
     OUTPUT
     expect(Xml::C14n.format(strip_guid(Asciidoctor.convert(input, *options))))
       .to be_equivalent_to Xml::C14n.format(output)
@@ -199,7 +199,7 @@ RSpec.describe Metanorma::Cc do
     INPUT
     output = <<~OUTPUT
       <?xml version="1.0" encoding="UTF-8"?>
-      <csd-standard xmlns="https://www.metanorma.org/ns/csd" type="semantic" version="#{Metanorma::Cc::VERSION}">
+      <metanorma xmlns="https://www.metanorma.org/ns/standoc" type="semantic" version="#{Metanorma::Cc::VERSION}">
         <bibdata type="standard">
           <title language="en" format="text/plain">Main Title</title>
           <docidentifier primary="true" type="CalConnect">CC/Cor 1000:#{Time.now.year}</docidentifier>
@@ -260,7 +260,7 @@ RSpec.describe Metanorma::Cc do
          </metanorma-extension>
          #{BOILERPLATE}
         <sections/>
-      </csd-standard>
+      </metanorma>
     OUTPUT
     expect(Xml::C14n.format(strip_guid(Asciidoctor.convert(input, *options))))
       .to be_equivalent_to Xml::C14n.format(output)
@@ -284,7 +284,7 @@ RSpec.describe Metanorma::Cc do
     INPUT
     output = <<~OUTPUT
       <?xml version="1.0" encoding="UTF-8"?>
-      <csd-standard xmlns="https://www.metanorma.org/ns/csd" type="semantic" version="#{Metanorma::Cc::VERSION}">
+      <metanorma xmlns="https://www.metanorma.org/ns/standoc" type="semantic" version="#{Metanorma::Cc::VERSION}">
         <bibdata type="standard">
           <title language="en" format="text/plain">Main Title</title>
           <docidentifier primary="true" type="CalConnect">CC/Cor 1000:#{Time.now.year}</docidentifier>
@@ -340,7 +340,7 @@ RSpec.describe Metanorma::Cc do
          </metanorma-extension>
           #{BOILERPLATE.sub(/<legal-statement/, "#{BOILERPLATE_LICENSE}\n<legal-statement")}
         <sections/>
-      </csd-standard>
+      </metanorma>
     OUTPUT
     expect(Xml::C14n.format(strip_guid(Asciidoctor.convert(input, *options))))
       .to be_equivalent_to Xml::C14n.format(output)
@@ -367,7 +367,7 @@ RSpec.describe Metanorma::Cc do
           <title>Section 1</title>
         </clause>
       </sections>
-      </csd-standard>
+      </metanorma>
     OUTPUT
     expect(Xml::C14n.format(strip_guid(Asciidoctor.convert(input, *options))))
       .to be_equivalent_to Xml::C14n.format(output)

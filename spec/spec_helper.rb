@@ -114,7 +114,7 @@ BOILERPLATE
 
 BLANK_HDR = <<~"HDR".freeze
   <?xml version="1.0" encoding="UTF-8"?>
-  <csd-standard xmlns="https://www.metanorma.org/ns/csd" type="semantic" version="#{Metanorma::Cc::VERSION}">
+  <metanorma xmlns="https://www.metanorma.org/ns/standoc" type="semantic" version="#{Metanorma::Cc::VERSION}">
   <bibdata type="standard">
    <title language="en" format="text/plain">Document title</title>
     <docidentifier primary="true" type="CalConnect">CC :#{Time.now.year}</docidentifier>

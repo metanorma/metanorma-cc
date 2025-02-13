@@ -52,6 +52,7 @@ stage_abbreviations:
   committee-draft: CD
   draft-standard: DS
   final-draft: FDS
+  proposal:
   published:
   cancelled:
   withdrawn:

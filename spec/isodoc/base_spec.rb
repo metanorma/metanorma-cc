@@ -247,7 +247,7 @@ RSpec.describe Metanorma::Cc do
              <clause type="toc" id="_" displayorder="1">
                 <fmt-title depth="1">Contents</fmt-title>
              </clause>
-             <foreword obligation="informative" displayorder="2">
+             <foreword obligation="informative" displayorder="2" id="_">
                 <title id="_">Foreword</title>
                 <fmt-title depth="1">
                    <semx element="title" source="_">Foreword</semx>

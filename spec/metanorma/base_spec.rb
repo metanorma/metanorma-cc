@@ -87,7 +87,7 @@ RSpec.describe Metanorma::Cc do
     INPUT
     output = <<~OUTPUT
       <?xml version="1.0" encoding="UTF-8"?>
-      <metanorma xmlns="https://www.metanorma.org/ns/standoc" type="semantic" version="#{Metanorma::Cc::VERSION}">
+      <metanorma xmlns="https://www.metanorma.org/ns/standoc" type="semantic" version="#{Metanorma::Cc::VERSION}" flavor="cc">
       <bibdata type="standard">
         <title language="en" format="text/plain">Main Title</title>
         <docidentifier primary="true" type="CalConnect">CC/DIR/FDS 1000:2001</docidentifier>
@@ -199,7 +199,7 @@ RSpec.describe Metanorma::Cc do
     INPUT
     output = <<~OUTPUT
       <?xml version="1.0" encoding="UTF-8"?>
-      <metanorma xmlns="https://www.metanorma.org/ns/standoc" type="semantic" version="#{Metanorma::Cc::VERSION}">
+      <metanorma xmlns="https://www.metanorma.org/ns/standoc" type="semantic" version="#{Metanorma::Cc::VERSION}" flavor="cc">
         <bibdata type="standard">
           <title language="en" format="text/plain">Main Title</title>
           <docidentifier primary="true" type="CalConnect">CC/Cor 1000:#{Time.now.year}</docidentifier>
@@ -284,7 +284,7 @@ RSpec.describe Metanorma::Cc do
     INPUT
     output = <<~OUTPUT
       <?xml version="1.0" encoding="UTF-8"?>
-      <metanorma xmlns="https://www.metanorma.org/ns/standoc" type="semantic" version="#{Metanorma::Cc::VERSION}">
+      <metanorma xmlns="https://www.metanorma.org/ns/standoc" type="semantic" version="#{Metanorma::Cc::VERSION}" flavor="cc">
         <bibdata type="standard">
           <title language="en" format="text/plain">Main Title</title>
           <docidentifier primary="true" type="CalConnect">CC/Cor 1000:#{Time.now.year}</docidentifier>

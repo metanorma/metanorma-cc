@@ -288,4 +288,18 @@ RSpec.describe Metanorma::Cc do
     INPUT
     expect(File.read("test.err.html")).to include("Section not marked up as [bibliography]!")
   end
+
+  it "validates document against Metanorma XML schema" do
+    Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)
+      = A
+      X
+      :docfile: test.adoc
+      :no-pdf:
+
+      [align=mid-air]
+      Para
+    INPUT
+    expect(File.read("test.err.html"))
+      .to include('value of attribute "align" is invalid; must be equal to')
+  end
 end

@@ -9,6 +9,10 @@ module IsoDoc
         "<br/>"
       end
 
+      def ul_label_list(_elem)
+        %w(&#x2014;)
+      end
+
       include Init
     end
   end

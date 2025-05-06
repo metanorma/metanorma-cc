@@ -1,4 +1,4 @@
-gem "isodoc", git: "https://github.com/metanorma/isodoc", branch: "main"
+gem "isodoc", git: "https://github.com/metanorma/isodoc", branch: "features/anchor"
 gem "relaton-iev", git: "https://github.com/relaton/relaton-iev", branch: "features/anchor"
 gem "metanorma-standoc", git: "https://github.com/metanorma/metanorma-standoc", branch: "features/anchor"
 gem "metanorma-generic", git: "https://github.com/metanorma/metanorma-generic", branch: "features/anchor"

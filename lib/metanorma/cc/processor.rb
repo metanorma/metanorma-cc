@@ -8,7 +8,7 @@ module Metanorma
       end
 
       def initialize
-        @short = [:csd, :cc]
+        @short = %i[csd cc]
         @input_format = :asciidoc
         @asciidoctor_backend = :cc
       end
@@ -17,7 +17,7 @@ module Metanorma
         super.merge(
           html: "html",
           pdf: "pdf",
-          doc: "doc"
+          doc: "doc",
         )
       end
 
@@ -25,17 +25,21 @@ module Metanorma
         "Metanorma::Cc #{Metanorma::Cc::VERSION}"
       end
 
-      def output(isodoc_node, inname, outname, format, options={})
+      def output(isodoc_node, inname, outname, format, options = {})
         options_preprocess(options)
         case format
         when :html
-          IsoDoc::Cc::HtmlConvert.new(options).convert(inname, isodoc_node, nil, outname)
+          IsoDoc::Cc::HtmlConvert.new(options)
+            .convert(inname, isodoc_node, nil, outname)
         when :doc
-          IsoDoc::Cc::WordConvert.new(options).convert(inname, isodoc_node, nil, outname)
+          IsoDoc::Cc::WordConvert.new(options)
+            .convert(inname, isodoc_node, nil, outname)
         when :pdf
-          IsoDoc::Cc::PdfConvert.new(options).convert(inname, isodoc_node, nil, outname)
+          IsoDoc::Cc::PdfConvert.new(options)
+            .convert(inname, isodoc_node, nil, outname)
         when :presentation
-          IsoDoc::Cc::PresentationXMLConvert.new(options).convert(inname, isodoc_node, nil, outname)
+          IsoDoc::Cc::PresentationXMLConvert.new(options)
+            .convert(inname, isodoc_node, nil, outname)
         else
           super
         end

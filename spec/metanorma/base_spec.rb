@@ -363,7 +363,7 @@ RSpec.describe Metanorma::Cc do
         </foreword>
       </preface>
       <sections>
-        <clause id="_" anchor="_section_1" obligation="normative">
+        <clause id="_" obligation="normative">
           <title>Section 1</title>
         </clause>
       </sections>

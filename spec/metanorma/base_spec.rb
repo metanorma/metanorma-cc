@@ -358,13 +358,13 @@ RSpec.describe Metanorma::Cc do
       #{BLANK_HDR}
       <preface>
         <foreword id="_" obligation="informative">
-          <title>Foreword</title>
+          <title id="_">Foreword</title>
           <p id="_">This is a preamble</p>
         </foreword>
       </preface>
       <sections>
         <clause id="_" obligation="normative">
-          <title>Section 1</title>
+          <title id="_">Section 1</title>
         </clause>
       </sections>
       </metanorma>

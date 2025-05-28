@@ -100,7 +100,7 @@ BOILERPLATE =
 BOILERPLATE_LICENSE = <<~BOILERPLATE.freeze
   <license-statement>
     <clause id="_" obligation="normative">
-      <title>Warning for Drafts</title>
+      <title id="_">Warning for Drafts</title>
       <p id='_'>
         This document is not a CalConnect Standard. It is distributed for
         review and comment, and is subject to change without notice and may

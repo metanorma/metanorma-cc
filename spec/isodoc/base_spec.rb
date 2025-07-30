@@ -146,9 +146,9 @@ RSpec.describe Metanorma::Cc do
         </body>
       </html>
     INPUT
-    expect(Xml::C14n.format(IsoDoc::Cc::HtmlConvert.new({})
+    expect(Canon.format_xml(IsoDoc::Cc::HtmlConvert.new({})
       .cleanup(Nokogiri::XML(input)).to_s))
-      .to be_equivalent_to Xml::C14n.format(<<~OUTPUT)
+      .to be_equivalent_to Canon.format_xml(<<~OUTPUT)
         <?xml version="1.0"?>
         <html>
           <body lang="EN-US" link="blue" vlink="#954F72" xml:lang="EN-US" class="container">
@@ -570,9 +570,9 @@ RSpec.describe Metanorma::Cc do
          </bibliography>
       </csd-standard>
     OUTPUT
-    expect(Xml::C14n.format(strip_guid(IsoDoc::Cc::PresentationXMLConvert.new(presxml_options)
+    expect(Canon.format_xml(strip_guid(IsoDoc::Cc::PresentationXMLConvert.new(presxml_options)
       .convert("test", input, true))))
-      .to be_equivalent_to Xml::C14n.format(output)
+      .to be_equivalent_to Canon.format_xml(output)
   end
 
   it "injects JS into blank html" do
@@ -589,8 +589,8 @@ RSpec.describe Metanorma::Cc do
         <sections/>
       </csd-standard>
     OUTPUT
-    expect(Xml::C14n.format(strip_guid(Asciidoctor.convert(input, *options))))
-      .to be_equivalent_to Xml::C14n.format(output)
+    expect(Canon.format_xml(strip_guid(Asciidoctor.convert(input, *options))))
+      .to be_equivalent_to Canon.format_xml(output)
     html = File.read("test.html", encoding: "utf-8")
     expect(html).to match(%r{jquery\.min\.js})
     expect(html).to match(%r{Source Code Pro})
@@ -685,9 +685,9 @@ RSpec.describe Metanorma::Cc do
           </preface>
        </iso-standard>
     INPUT
-    expect(Xml::C14n.format(strip_guid(IsoDoc::Cc::PresentationXMLConvert.new(presxml_options)
+    expect(Canon.format_xml(strip_guid(IsoDoc::Cc::PresentationXMLConvert.new(presxml_options)
       .convert("test", input, true))))
-      .to be_equivalent_to Xml::C14n.format(presxml)
+      .to be_equivalent_to Canon.format_xml(presxml)
   end
 
   it "processes ordered lists" do
@@ -800,8 +800,8 @@ RSpec.describe Metanorma::Cc do
          </preface>
       </iso-standard>
     INPUT
-    expect(Xml::C14n.format(strip_guid(IsoDoc::Cc::PresentationXMLConvert.new(presxml_options)
+    expect(Canon.format_xml(strip_guid(IsoDoc::Cc::PresentationXMLConvert.new(presxml_options)
       .convert("test", input, true))))
-      .to be_equivalent_to Xml::C14n.format(presxml)
+      .to be_equivalent_to Canon.format_xml(presxml)
   end
 end

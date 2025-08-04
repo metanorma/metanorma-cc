@@ -67,6 +67,11 @@ RSpec.describe Metanorma::Cc do
           </editorialgroup>
         </ext>
       </bibdata>
+      <metanorma-extension>
+      <semantic-metadata>
+      <stage-published>false</stage-published>
+      </semantic-metadata>
+      </metanorma-extension>
       <sections/>
       </csd-standard>
     INPUT

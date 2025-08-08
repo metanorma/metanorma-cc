@@ -57,6 +57,8 @@ stage_abbreviations:
   cancelled:
   withdrawn:
 logo_path: ""
+committee_types:
+  - technical-committee
 fonts_manifest:
   Source Sans Pro:
   Source Serif Pro:

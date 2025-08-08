@@ -115,6 +115,17 @@ RSpec.describe Metanorma::Cc do
             </name>
           </person>
         </contributor>
+      <contributor>
+         <role type="author">
+            <description>committee</description>
+         </role>
+         <organization>
+            <name>CalConnect</name>
+            <subdivision type="Technical committee" subtype="provisional">
+               <name>TC</name>
+            </subdivision>
+         </organization>
+      </contributor>
         <contributor>
           <role type="publisher"/>
           <organization>
@@ -213,6 +224,28 @@ RSpec.describe Metanorma::Cc do
               <name>CalConnect</name>
             </organization>
           </contributor>
+      <contributor>
+         <role type="author">
+            <description>committee</description>
+         </role>
+         <organization>
+            <name>CalConnect</name>
+            <subdivision type="Technical committee" subtype="provisional">
+               <name>TC 788</name>
+            </subdivision>
+         </organization>
+      </contributor>
+      <contributor>
+         <role type="author">
+            <description>committee</description>
+         </role>
+         <organization>
+            <name>CalConnect</name>
+            <subdivision type="Technical committee" subtype="technical">
+               <name>TC 789</name>
+            </subdivision>
+         </organization>
+      </contributor>
           <contributor>
             <role type="publisher"/>
             <organization>

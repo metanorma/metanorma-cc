@@ -154,9 +154,6 @@ RSpec.describe Metanorma::Cc do
         <ext>
           <doctype abbreviation="DIR">directive</doctype>
           <flavor>cc</flavor>
-          <editorialgroup>
-            <committee type="provisional">TC</committee>
-          </editorialgroup>
         </ext>
       </bibdata>
                <metanorma-extension>
@@ -270,10 +267,6 @@ RSpec.describe Metanorma::Cc do
           <ext>
           <doctype abbreviation="Cor">technical-corrigendum</doctype>
           <flavor>cc</flavor>
-          <editorialgroup>
-            <committee type="provisional">TC 788</committee>
-            <committee type="technical">TC 789</committee>
-          </editorialgroup>
           </ext>
         </bibdata>
                  <metanorma-extension>

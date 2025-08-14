@@ -14,20 +14,5 @@
         <value>advisory</value>
       </choice>
     </define>
-    <define name="editorialgroup">
-      <element name="editorialgroup">
-        <oneOrMore>
-          <ref name="technical-committee"/>
-        </oneOrMore>
-      </element>
-    </define>
-    <define name="technical-committee">
-      <element name="committee">
-        <optional>
-          <attribute name="type"/>
-        </optional>
-        <text/>
-      </element>
-    </define>
   </include>
 </grammar>

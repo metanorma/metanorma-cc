@@ -117,7 +117,7 @@ BLANK_HDR = <<~"HDR".freeze
   <?xml version="1.0" encoding="UTF-8"?>
   <metanorma xmlns="https://www.metanorma.org/ns/standoc" type="semantic" version="#{Metanorma::Cc::VERSION}" flavor="cc">
   <bibdata type="standard">
-   <title language="en" format="text/plain">Document title</title>
+   <title language="en" type="main">Document title</title>
     <docidentifier primary="true" type="CalConnect">CC :#{Time.now.year}</docidentifier>
     <contributor>
       <role type="author"/>

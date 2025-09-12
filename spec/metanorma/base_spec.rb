@@ -89,7 +89,7 @@ RSpec.describe Metanorma::Cc do
       <?xml version="1.0" encoding="UTF-8"?>
       <metanorma xmlns="https://www.metanorma.org/ns/standoc" type="semantic" version="#{Metanorma::Cc::VERSION}" flavor="cc">
       <bibdata type="standard">
-        <title language="en" format="text/plain">Main Title</title>
+        <title language="en" type="main">Main Title</title>
         <docidentifier primary="true" type="CalConnect">CC/DIR/FDS 1000:2001</docidentifier>
         <docnumber>1000</docnumber>
         <contributor>
@@ -212,7 +212,7 @@ RSpec.describe Metanorma::Cc do
       <?xml version="1.0" encoding="UTF-8"?>
       <metanorma xmlns="https://www.metanorma.org/ns/standoc" type="semantic" version="#{Metanorma::Cc::VERSION}" flavor="cc">
         <bibdata type="standard">
-          <title language="en" format="text/plain">Main Title</title>
+          <title language="en" type="main">Main Title</title>
           <docidentifier primary="true" type="CalConnect">CC/Cor 1000:#{Time.now.year}</docidentifier>
           <docnumber>1000</docnumber>
           <contributor>
@@ -318,7 +318,7 @@ RSpec.describe Metanorma::Cc do
       <?xml version="1.0" encoding="UTF-8"?>
       <metanorma xmlns="https://www.metanorma.org/ns/standoc" type="semantic" version="#{Metanorma::Cc::VERSION}" flavor="cc">
         <bibdata type="standard">
-          <title language="en" format="text/plain">Main Title</title>
+          <title language="en" type="main">Main Title</title>
           <docidentifier primary="true" type="CalConnect">CC/Cor 1000:#{Time.now.year}</docidentifier>
           <docnumber>1000</docnumber>
           <contributor>

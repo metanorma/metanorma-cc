@@ -8,13 +8,16 @@ RSpec.describe Metanorma::Cc do
 
   it "processes a blank document" do
     options = [backend: :cc, header_footer: true]
-    expect(Canon.format_xml(strip_guid(Asciidoctor.convert(<<~"INPUT", *options)))).to be_equivalent_to Canon.format_xml(<<~"OUTPUT")
+    input = <<~INPUT
       #{ASCIIDOC_BLANK_HDR}
     INPUT
+    output = <<~OUTPUT
         #{BLANK_HDR}
         <sections/>
       </metanorma>
     OUTPUT
+    expect(Canon.format_xml(strip_guid(Asciidoctor.convert(input, *options))))
+      .to be_equivalent_to Canon.format_xml(output)
   end
 
   it "converts a blank document" do

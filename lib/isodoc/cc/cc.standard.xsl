@@ -308,7 +308,7 @@
 						<fo:block> </fo:block>
 						<fo:block margin-bottom="12pt"> </fo:block>
 						<fo:block-container font-size="16pt" text-align="center" border="0.5pt solid black" margin-bottom="12pt" margin-left="-1mm" margin-right="-1mm">
-							<fo:block-container margin-left="0mm" margin-right="0mm">
+							<fo:block-container xsl:use-attribute-sets="reset-margins-style">
 								<fo:block padding-top="1mm">
 									<xsl:call-template name="capitalizeWords">
 										<!-- ex: final-draft -->
@@ -324,7 +324,7 @@
 						</fo:block-container>
 						<fo:block margin-bottom="10pt"> </fo:block>
 						<fo:block-container font-size="10pt" border="0.5pt solid black" margin-bottom="12pt" margin-left="-1mm" margin-right="-1mm">
-							<fo:block-container margin-left="0mm" margin-right="0mm">
+							<fo:block-container xsl:use-attribute-sets="reset-margins-style">
 								<fo:block text-align="center" font-weight="bold" padding-top="1mm" margin-bottom="6pt">Warning for drafts</fo:block>
 								<fo:block margin-left="2mm" margin-right="2mm">
 									<fo:block margin-bottom="6pt">This document is not a CalConnect Standard. It is distributed for review and comment, and is subject to change without notice and may not be referred to as a Standard. Recipients of this draft are invited to submit, with their comments, notification of any relevant patent rights of which they are aware and to provide supporting documentation.</fo:block>
@@ -2655,6 +2655,10 @@
 		</xsl:element>
 	</xsl:template>
 
+	<!-- show sourcecode's name 'before' or 'after' source code -->
+	<xsl:variable name="sourcecode-name-position"><xsl:text>after</xsl:text>
+	</xsl:variable>
+
 	<xsl:template match="mn:sourcecode" name="sourcecode">
 
 		<xsl:variable name="sourcecode_attributes">
@@ -2678,7 +2682,12 @@
 
 					<xsl:call-template name="refine_sourcecode-container-style"/>
 
-					<fo:block-container margin-left="0mm" role="SKIP">
+					<fo:block-container margin-left="0mm" margin-right="0mm" role="SKIP">
+
+						<!-- <xsl:if test="$namespace = 'rsd'"> -->
+						<xsl:if test="$sourcecode-name-position = 'before'">
+							<xsl:apply-templates select="mn:fmt-name"/> <!-- show sourcecode's name BEFORE content -->
+						</xsl:if>
 
 						<fo:block xsl:use-attribute-sets="sourcecode-style">
 
@@ -2700,7 +2709,16 @@
 						</fo:block>
 
 						<xsl:apply-templates select="mn:dl"/> <!-- Key table -->
-						<xsl:apply-templates select="mn:fmt-name"/> <!-- show sourcecode's name AFTER content -->
+
+						<!-- <xsl:choose>
+							<xsl:when test="$namespace = 'rsd'"></xsl:when>
+							<xsl:otherwise>
+								<xsl:apply-templates select="mn:fmt-name" />  --><!-- show sourcecode's name AFTER content -->
+							<!-- </xsl:otherwise>
+						</xsl:choose> -->
+						<xsl:if test="$sourcecode-name-position = 'after'">
+							<xsl:apply-templates select="mn:fmt-name"/> <!-- show sourcecode's name AFTER content -->
+						</xsl:if>
 
 					</fo:block-container>
 				</fo:block-container>
@@ -8466,6 +8484,10 @@
 	<!-- image    -->
 	<!-- ====== -->
 
+	<!-- show figure's name 'before' or 'after' image -->
+	<xsl:variable name="figure-name-position"><xsl:text>after</xsl:text>
+	</xsl:variable>
+
 	<xsl:template match="mn:figure" name="figure">
 		<xsl:variable name="isAdded" select="@added"/>
 		<xsl:variable name="isDeleted" select="@deleted"/>
@@ -8477,6 +8499,10 @@
 				<xsl:with-param name="isAdded" select="$isAdded"/>
 				<xsl:with-param name="isDeleted" select="$isDeleted"/>
 			</xsl:call-template>
+
+			<xsl:if test="$figure-name-position = 'before'"> <!-- show figure's name BEFORE image -->
+				<xsl:apply-templates select="mn:fmt-name"/>
+			</xsl:if>
 
 			<!-- Example: Dimensions in millimeters -->
 			<xsl:apply-templates select="mn:note[@type = 'units']"/>
@@ -8498,7 +8524,16 @@
 			<xsl:if test="normalize-space($show_figure_key_in_block_container) = 'true'">
 				<xsl:call-template name="showFigureKey"/>
 			</xsl:if>
-			<xsl:apply-templates select="mn:fmt-name"/> <!-- show figure's name AFTER image -->
+
+			<!-- <xsl:choose>
+				<xsl:when test="$namespace = 'bsi' or $namespace = 'pas' or $namespace = 'rsd'"></xsl:when>
+				<xsl:otherwise>
+					<xsl:apply-templates select="mn:fmt-name" /> --> <!-- show figure's name AFTER image -->
+				<!-- </xsl:otherwise>
+			</xsl:choose> -->
+			<xsl:if test="$figure-name-position = 'after'">
+				<xsl:apply-templates select="mn:fmt-name"/> <!-- show figure's name AFTER image -->
+			</xsl:if>
 
 		</fo:block-container>
 	</xsl:template>
@@ -10577,7 +10612,6 @@
 	</xsl:attribute-set>
 
 	<xsl:template name="refine_references-non-normative-title-style">
-
 	</xsl:template>
 
 	<!-- bibitem in Normative References (references/@normative="true") -->
@@ -12640,7 +12674,7 @@
 	<!-- ===================================== -->
 
 	<xsl:attribute-set name="annex-title-style">
-	</xsl:attribute-set>
+	</xsl:attribute-set> <!-- annex-title-style -->
 
 	<xsl:template name="refine_annex-title-style">
 	</xsl:template>
@@ -12650,6 +12684,13 @@
 
 	<xsl:template name="refine_p-zzSTDTitle1-style">
 	</xsl:template>
+
+	<xsl:attribute-set name="p-style">
+	</xsl:attribute-set> <!-- p-style -->
+
+	<xsl:template name="refine_p-style">
+		<xsl:param name="element-name"/>
+	</xsl:template> <!-- refine_p-style -->
 
 	<xsl:template name="processPrefaceSectionsDefault">
 		<xsl:for-each select="/*/mn:preface/*[not(self::mn:note or self::mn:admonition)]">
@@ -12988,6 +13029,12 @@
 				</xsl:otherwise>
 			</xsl:choose>
 	</xsl:template>
+
+	<xsl:attribute-set name="reset-margins-style">
+		<xsl:attribute name="margin-left">0mm</xsl:attribute>
+		<xsl:attribute name="margin-right">0mm</xsl:attribute>
+		<xsl:attribute name="role">SKIP</xsl:attribute>
+	</xsl:attribute-set>
 
 	<xsl:attribute-set name="clause-style">
 
@@ -14004,8 +14051,9 @@
 
 	<xsl:template name="setTextAlignment">
 		<xsl:param name="default">left</xsl:param>
+		<xsl:param name="skip_default">false</xsl:param>
 		<xsl:variable name="align" select="normalize-space(@align)"/>
-		<xsl:attribute name="text-align">
+		<xsl:variable name="text_align">
 			<xsl:choose>
 				<xsl:when test="$lang = 'ar' and $align = 'left'">start</xsl:when>
 				<xsl:when test="$lang = 'ar' and $align = 'right'">end</xsl:when>
@@ -14013,9 +14061,13 @@
 				<xsl:when test="$align != '' and not($align = 'indent')"><xsl:value-of select="$align"/></xsl:when>
 				<xsl:when test="ancestor::mn:td/@align"><xsl:value-of select="ancestor::mn:td/@align"/></xsl:when>
 				<xsl:when test="ancestor::mn:th/@align"><xsl:value-of select="ancestor::mn:th/@align"/></xsl:when>
+				<xsl:when test="$skip_default = 'true'"/>
 				<xsl:otherwise><xsl:value-of select="$default"/></xsl:otherwise>
 			</xsl:choose>
-		</xsl:attribute>
+		</xsl:variable>
+		<xsl:if test="normalize-space($text_align) != ''">
+			<xsl:attribute name="text-align"><xsl:value-of select="$text_align"/></xsl:attribute>
+		</xsl:if>
 		<xsl:if test="$align = 'indent'">
 			<xsl:attribute name="margin-left">7mm</xsl:attribute>
 		</xsl:if>
@@ -14023,8 +14075,10 @@
 
 	<xsl:template name="setBlockAttributes">
 		<xsl:param name="text_align_default">left</xsl:param>
+		<xsl:param name="skip_text_align_default">false</xsl:param>
 		<xsl:call-template name="setTextAlignment">
 			<xsl:with-param name="default" select="$text_align_default"/>
+			<xsl:with-param name="skip_default" select="$skip_text_align_default"/>
 		</xsl:call-template>
 		<xsl:call-template name="setKeepAttributes"/>
 		<xsl:if test="node()[1][self::mn:span][contains(@style, 'line-height')]">

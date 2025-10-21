@@ -11,19 +11,13 @@ module Metanorma
         super
       end
 
-      ONE_SYMBOLS_WARNING = "Only one Symbols and Abbreviated "\
-                            "Terms section in the standard".freeze
-
-      NON_DL_SYMBOLS_WARNING = "Symbols and Abbreviated Terms can "\
-                               "only contain a definition list".freeze
-
       def symbols_validate(root)
         f = root.xpath("//definitions")
         f.empty? && return
-        (f.size == 1) || @log.add("Style", f.first, ONE_SYMBOLS_WARNING)
+        f.size == 1 or @log.add("CC_1", f.first)
         f.first.elements.each do |e|
           unless e.name == "dl"
-            @log.add("Style", f.first, NON_DL_SYMBOLS_WARNING)
+            @log.add("CC_2", f.first)
             return
           end
         end
@@ -35,7 +29,7 @@ module Metanorma
 
         test = accepted.map { |a| n.at(a) }
         if test.all?(&:nil?)
-          @log.add("Style", nil, msg)
+          @log.add("CC_3", nil, params: [msg])
         end
         names
       end
@@ -83,42 +77,35 @@ module Metanorma
           n = names.shift
         end
         if n.nil? || n.name != "clause"
-          @log.add("Style", nil, "Document must contain at least one clause")
+          @log.add("CC_4", nil)
         end
         n&.at("./self::clause") ||
-          @log.add("Style", nil, "Document must contain clause after "\
-                                 "Terms and Definitions")
+          @log.add("CC_5", nil)
         n&.at("./self::clause[@type = 'scope']") &&
-          @log.add("Style", nil,
-                   "Scope must occur before Terms and Definitions")
+          @log.add("CC_6", nil)
         n = names.shift
         while n&.name == "clause"
           n&.at("./self::clause[@type = 'scope']")
-          @log.add("Style", nil,
-                   "Scope must occur before Terms and Definitions")
+          @log.add("CC_6", nil)
           n = names.shift
         end
         unless %w(annex references).include? n&.name
-          @log.add("Style", nil,
-                   "Only annexes and references can follow clauses")
+          @log.add("CC_8", nil)
         end
         while n&.name == "annex"
           n = names.shift
           if n.nil?
-            @log.add("Style", nil, "Document must include (references) "\
-                                   "Normative References")
+            @log.add("CC_9", nil)
+
           end
         end
         n&.at("./self::references[@normative = 'true']") ||
-          @log.add("Style", nil, "Document must include (references) "\
-                                 "Normative References")
+          @log.add("CC_9", nil)
         n = names&.shift
         n&.at("./self::references[@normative = 'false']") ||
-          @log.add("Style", nil,
-                   "Final section must be (references) Bibliography")
+          @log.add("CC_11", nil)
         names.empty? ||
-          @log.add("Style", nil,
-                   "There are sections after the final Bibliography")
+          @log.add("CC_12", nil)
       end
 
       def style_warning(node, msg, text = nil)
@@ -126,7 +113,7 @@ module Metanorma
 
         w = msg
         w += ": #{text}" if text
-        @log.add("Style", node, w)
+        @log.add("STANDOC_48", node, params: [w])
       end
     end
   end

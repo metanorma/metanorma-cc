@@ -23,6 +23,7 @@
 		<mnx:contents>
 			<xsl:call-template name="processPrefaceSectionsDefault_Contents"/>
 			<xsl:call-template name="processMainSectionsDefault_Contents"/>
+			<xsl:apply-templates select="//mn:indexsect" mode="contents"/>
 			<xsl:call-template name="processTablesFigures_Contents"/>
 		</mnx:contents>
 	</xsl:variable>
@@ -117,7 +118,7 @@
 				<fo:region-start region-name="left-region" extent="{$marginLeftRight1}mm"/>
 				<fo:region-end region-name="right-region" extent="{$marginLeftRight2}mm"/>
 			</fo:simple-page-master>
-			<!-- Preface even pages -->
+			<!-- Document even pages -->
 			<fo:simple-page-master master-name="even" page-width="{$pageWidth}mm" page-height="{$pageHeight}mm">
 				<fo:region-body margin-top="{$marginTop}mm" margin-bottom="{$marginBottom}mm" margin-left="{$marginLeftRight1}mm" margin-right="{$marginLeftRight2}mm"/>
 				<fo:region-before region-name="header-even" extent="{$marginTop}mm"/>
@@ -147,6 +148,27 @@
 				</fo:repeatable-page-master-alternatives>
 			</fo:page-sequence-master>
 
+			<!-- Index pages (two columns) -->
+			<fo:simple-page-master master-name="index-odd" page-width="{$pageWidth}mm" page-height="{$pageHeight}mm">
+				<fo:region-body margin-top="{$marginTop}mm" margin-bottom="{$marginBottom}mm" margin-left="{$marginLeftRight1}mm" margin-right="{$marginLeftRight2}mm" xsl:use-attribute-sets="indexsect-region-body-style"/>
+				<fo:region-before region-name="header-odd" extent="{$marginTop}mm"/>
+				<fo:region-after region-name="footer-odd" extent="{$marginBottom}mm"/>
+				<fo:region-start region-name="left-region" extent="{$marginLeftRight1}mm"/>
+				<fo:region-end region-name="right-region" extent="{$marginLeftRight2}mm"/>
+			</fo:simple-page-master>
+			<fo:simple-page-master master-name="index-even" page-width="{$pageWidth}mm" page-height="{$pageHeight}mm">
+				<fo:region-body margin-top="{$marginTop}mm" margin-bottom="{$marginBottom}mm" margin-left="{$marginLeftRight1}mm" margin-right="{$marginLeftRight2}mm" xsl:use-attribute-sets="indexsect-region-body-style"/>
+				<fo:region-before region-name="header-even" extent="{$marginTop}mm"/>
+				<fo:region-after region-name="footer-even" extent="{$marginBottom}mm"/>
+				<fo:region-start region-name="left-region" extent="{$marginLeftRight1}mm"/>
+				<fo:region-end region-name="right-region" extent="{$marginLeftRight2}mm"/>
+			</fo:simple-page-master>
+			<fo:page-sequence-master master-name="index">
+				<fo:repeatable-page-master-alternatives>
+					<fo:conditional-page-master-reference odd-or-even="even" master-reference="index-even"/>
+					<fo:conditional-page-master-reference odd-or-even="odd" master-reference="index-odd"/>
+				</fo:repeatable-page-master-alternatives>
+			</fo:page-sequence-master>
 		</fo:layout-master-set>
 	</xsl:template> <!-- END: layout-master-set -->
 
@@ -260,6 +282,8 @@
 						<!-- End Document Pages -->
 					</xsl:for-each>
 				</xsl:for-each>
+
+				<xsl:call-template name="index-pages"/>
 
 			</xsl:for-each>
 
@@ -499,6 +523,8 @@
 			</xsl:call-template>
 		</xsl:variable>
 
+		<xsl:variable name="type" select="local-name()"/>
+
 		<xsl:variable name="display">
 			<xsl:choose>
 				<xsl:when test="$level &gt; $toc_level">false</xsl:when>
@@ -526,10 +552,15 @@
 			</xsl:variable>
 
 			<mnx:item id="{@id}" level="{$level}" section="{$section}" display="{$display}">
+				<xsl:if test="$type = 'indexsect'">
+					<xsl:attribute name="level">1</xsl:attribute>
+				</xsl:if>
 				<mnx:title>
 					<xsl:apply-templates select="xalan:nodeset($title)" mode="contents_item"/>
 				</mnx:title>
-				<xsl:apply-templates mode="contents"/>
+				<xsl:if test="$type != 'indexsect'">
+					<xsl:apply-templates mode="contents"/>
+				</xsl:if>
 			</mnx:item>
 		</xsl:if>
 
@@ -607,20 +638,6 @@
 		<xsl:if test="$inline = 'true'">
 			<fo:block> </fo:block>
 		</xsl:if>
-	</xsl:template>
-
-	<xsl:template match="mn:fmt-xref" priority="2">
-		<xsl:call-template name="insert_basic_link">
-			<xsl:with-param name="element">
-				<fo:basic-link internal-destination="{@target}" fox:alt-text="{@target}">
-					<xsl:if test="not(starts-with(text(), 'Figure') or starts-with(text(), 'Table'))">
-						<xsl:attribute name="color">blue</xsl:attribute>
-						<xsl:attribute name="text-decoration">underline</xsl:attribute>
-					</xsl:if>
-					<xsl:apply-templates/>
-				</fo:basic-link>
-			</xsl:with-param>
-		</xsl:call-template>
 	</xsl:template>
 
 	<xsl:template name="insertHeaderFooter">
@@ -2148,7 +2165,23 @@
 			<xsl:sort select="@displayorder" data-type="number"/>
 			<xsl:element name="page_sequence" namespace="{$namespace_full}">
 				<xsl:attribute name="main_page_sequence"/>
-				<xsl:apply-templates select="." mode="update_xml_step_move_pagebreak"/>
+
+				<!-- from common <xsl:template name="index-pages"> -->
+				<xsl:variable name="docid">
+					<xsl:call-template name="getDocumentId"/>
+				</xsl:variable>
+
+				<xsl:variable name="current_document_index_id">
+					<xsl:apply-templates select="." mode="index_add_id">
+						<xsl:with-param name="docid" select="$docid"/>
+					</xsl:apply-templates>
+				</xsl:variable>
+				<xsl:variable name="current_document_index">
+					<xsl:apply-templates select="xalan:nodeset($current_document_index_id)" mode="index_update"/>
+				</xsl:variable>
+
+				<!-- xalan:nodeset($current_document_index) -->
+				<xsl:apply-templates select="xalan:nodeset($current_document_index)" mode="update_xml_step_move_pagebreak"/>
 			</xsl:element>
 		</xsl:for-each>
 	</xsl:template>
@@ -7862,6 +7895,10 @@
 		<xsl:if test="string-length(normalize-space()) &lt; 30 and not(contains(normalize-space(), 'http://')) and not(contains(normalize-space(), 'https://')) and not(ancestor::*[self::mn:table or self::mn:dl])">
 			<xsl:attribute name="keep-together.within-line">always</xsl:attribute>
 		</xsl:if>
+		<xsl:if test="not(starts-with(text(), 'Figure') or starts-with(text(), 'Table'))">
+			<xsl:attribute name="color">blue</xsl:attribute>
+			<xsl:attribute name="text-decoration">underline</xsl:attribute>
+		</xsl:if>
 		<xsl:if test="parent::mn:add">
 			<xsl:call-template name="append_add-style"/>
 		</xsl:if>
@@ -7881,6 +7918,18 @@
 			</xsl:with-param>
 		</xsl:call-template>
 	</xsl:template> <!-- xref -->
+<xsl:template match="mn:indexsect//mn:fmt-xref[@pagenumber = 'true']" priority="2">
+	<xsl:call-template name="insert_basic_link">
+		<xsl:with-param name="element">
+			<fo:basic-link internal-destination="{@target}" fox:alt-text="{@target}" xsl:use-attribute-sets="xref-style">
+				<fo:inline>
+					<xsl:copy-of select="@id"/>
+					<fo:page-number-citation ref-id="{@target}"/>
+				</fo:inline>
+			</fo:basic-link>
+		</xsl:with-param>
+	</xsl:call-template>
+</xsl:template>
 
 	<!-- command between two xref points to non-standard bibitem -->
 	<xsl:template match="text()[. = ','][preceding-sibling::node()[1][self::mn:sup][mn:fmt-xref[@type = 'footnote']] and    following-sibling::node()[1][self::mn:sup][mn:fmt-xref[@type = 'footnote']]]"><xsl:value-of select="."/>
@@ -11183,8 +11232,24 @@
 	<!-- End Highlight syntax styles -->
 
 	<!-- Index section styles -->
+
+	<xsl:attribute-set name="indexsect-region-body-style">
+		<xsl:attribute name="column-count">2</xsl:attribute>
+		<xsl:attribute name="column-gap">10mm</xsl:attribute>
+	</xsl:attribute-set>
+
+	<xsl:attribute-set name="indexsect-title-block-style">
+		<xsl:attribute name="role">SKIP</xsl:attribute>
+		<xsl:attribute name="span">all</xsl:attribute>
+	</xsl:attribute-set>
+
 	<xsl:attribute-set name="indexsect-title-style">
 		<xsl:attribute name="role">H1</xsl:attribute>
+		<xsl:attribute name="font-weight">bold</xsl:attribute>
+		<xsl:attribute name="margin-bottom">24pt</xsl:attribute>
+		<xsl:attribute name="font-size">13pt</xsl:attribute>
+		<xsl:attribute name="margin-bottom">12pt</xsl:attribute>
+		<xsl:attribute name="color">rgb(14, 26, 133)</xsl:attribute>
 	</xsl:attribute-set> <!-- indexsect-title-style -->
 
 	<xsl:template name="refine_indexsect-title-style">
@@ -11209,6 +11274,44 @@
 			<bookmark><xsl:value-of select="@id"/></bookmark>
 		</xsl:for-each>
 	</xsl:variable>
+
+	<xsl:template name="index-pages">
+		<xsl:variable name="num"><xsl:number level="any" count="mn:metanorma"/></xsl:variable>
+
+		<xsl:variable name="docid">
+			<xsl:call-template name="getDocumentId"/>
+		</xsl:variable>
+
+		<xsl:variable name="current_document_index_id">
+			<xsl:apply-templates select="//mn:indexsect" mode="index_add_id">
+				<xsl:with-param name="docid" select="$docid"/>
+			</xsl:apply-templates>
+		</xsl:variable>
+		<xsl:variable name="current_document_index">
+			<xsl:apply-templates select="xalan:nodeset($current_document_index_id)" mode="index_update"/>
+		</xsl:variable>
+
+		<xsl:apply-templates select="xalan:nodeset($current_document_index)" mode="index">
+			<xsl:with-param name="num" select="$num"/>
+		</xsl:apply-templates>
+	</xsl:template>
+<xsl:template match="mn:indexsect"/>
+<xsl:template match="mn:indexsect" mode="index">
+	<xsl:param name="num"/>
+	<fo:page-sequence master-reference="index" force-page-count="no-force">
+		<xsl:call-template name="insertHeaderFooter">
+			<xsl:with-param name="section">main</xsl:with-param>
+		</xsl:call-template>
+		<fo:flow flow-name="xsl-region-body">
+			<fo:block id="{@id}" xsl:use-attribute-sets="indexsect-title-block-style">
+				<xsl:apply-templates select="mn:fmt-title"/>
+			</fo:block>
+			<fo:block role="Index">
+				<xsl:apply-templates select="*[not(self::mn:fmt-title)]"/>
+			</fo:block>
+		</fo:flow>
+	</fo:page-sequence>
+</xsl:template>
 
 	<xsl:template match="@*|node()" mode="index_add_id">
 		<xsl:param name="docid"/>
@@ -11262,7 +11365,7 @@
 	<xsl:template match="mn:indexsect//mn:li" mode="index_update">
 		<xsl:copy>
 			<xsl:apply-templates select="@*" mode="index_update"/>
-		<xsl:apply-templates select="node()[not(self::mn:fmt-name)][1]" mode="process_li_element"/>
+			<xsl:apply-templates select="node()[not(self::mn:fmt-name)][1]" mode="process_li_element"/>
 		</xsl:copy>
 	</xsl:template>
 

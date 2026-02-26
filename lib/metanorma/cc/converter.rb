@@ -3,7 +3,7 @@ require "isodoc/cc/html_convert"
 require "isodoc/cc/word_convert"
 require "isodoc/cc/presentation_xml_convert"
 require "metanorma/cc"
-require "metanorma/standoc/converter"
+require "metanorma-standoc"
 require "metanorma/generic/converter"
 
 module Metanorma

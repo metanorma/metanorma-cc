@@ -207,6 +207,10 @@ p.Biblio::before, p.NormRef::before {
   padding-right: 1em;
 }
 
+.Biblio.note, .Biblio.Note, .NormRef.note, .NormRef.Note {
+  margin-left: 2em;
+}
+
 
 /* Blocks */
 

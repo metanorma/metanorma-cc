@@ -5,7 +5,6 @@ require "isodoc/cc/presentation_xml_convert"
 require "metanorma/cc"
 require "metanorma/standoc/converter"
 require "metanorma/generic/converter"
-require_relative "validate_section"
 
 module Metanorma
   module Cc

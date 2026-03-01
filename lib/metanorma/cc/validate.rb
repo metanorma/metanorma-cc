@@ -3,7 +3,7 @@ require "metanorma-generic"
 
 module Metanorma
   module Cc
-    class Converter < Metanorma::Generic::Converter
+    class Validate < Metanorma::Generic::Validate
       def section_validate(doc)
         advisory = doc.root.at("//bibdata/ext[doctype = 'advisory']")
         symbols_validate(doc.root) unless advisory

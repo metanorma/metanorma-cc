@@ -214,12 +214,12 @@ p.Biblio::before, p.NormRef::before {
 
 /* Blocks */
 
-.figure {
+figure {
   @include figureBlock();
   @include monospaceBlockStyle();
 }
 
-table div.figure {
+table figure {
   padding: 0;
   margin: 0;
 }
@@ -326,7 +326,7 @@ table {
   @include table($border: 1px solid black);
 }
 
-p.TableTitle {
+table > caption {
   text-align: center;
   margin-top: 2.5em;
   font-weight: 400;

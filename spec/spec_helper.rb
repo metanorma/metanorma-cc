@@ -16,6 +16,8 @@ require "htmlentities"
 require "metanorma"
 require "canon"
 
+Canon::Config.instance.profile = :metanorma
+
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
   config.example_status_persistence_file_path = ".rspec_status"
@@ -46,11 +48,11 @@ end
 
 def htmlencode(xml)
   HTMLEntities.new.encode(xml, :hexadecimal)
-    .gsub(/&#x3e;/, ">").gsub(/&#xa;/, "\n")
-    .gsub(/&#x22;/, '"').gsub(/&#x3c;/, "<")
-    .gsub(/&#x26;/, "&").gsub(/&#x27;/, "'")
+    .gsub("&#x3e;", ">").gsub("&#xa;", "\n")
+    .gsub("&#x22;", '"').gsub("&#x3c;", "<")
+    .gsub("&#x26;", "&").gsub("&#x27;", "'")
     .gsub(/\\u(....)/) do |_s|
-      "&#x#{$1.downcase};"
+    "&#x#{$1.downcase};"
   end
 end
 
@@ -63,7 +65,7 @@ def strip_guid(xml)
     .gsub(%r{ schema-version="[^"]+"}, "")
 end
 
-ASCIIDOC_BLANK_HDR = <<~"HDR".freeze
+ASCIIDOC_BLANK_HDR = <<~HDR.freeze
   = Document title
   Author
   :docfile: test.adoc
@@ -72,7 +74,7 @@ ASCIIDOC_BLANK_HDR = <<~"HDR".freeze
 
 HDR
 
-VALIDATING_BLANK_HDR = <<~"HDR".freeze
+VALIDATING_BLANK_HDR = <<~HDR.freeze
   = Document title
   Author
   :docfile: test.adoc
@@ -93,8 +95,8 @@ end
 BOILERPLATE =
   boilerplate_read(
     File.read(File.join(File.dirname(__FILE__), "..", "lib", "metanorma", "cc", "boilerplate.adoc"), encoding: "utf-8")
-    .gsub(/\{\{ docyear \}\}/, Date.today.year.to_s)
-    .gsub(/<p>/, '<p id="_">')
+    .gsub("{{ docyear }}", Date.today.year.to_s)
+    .gsub("<p>", '<p id="_">')
     .gsub(/\{% if unpublished %\}.+?\{% endif %\}/m, "")
     .gsub(/\{% if ip_notice_received %\}\{% else %\}not\{% endif %\}/m, ""),
   )
@@ -116,7 +118,6 @@ BOILERPLATE_LICENSE = <<~BOILERPLATE.freeze
 BOILERPLATE
 
 BLANK_HDR = <<~"HDR".freeze
-  <?xml version="1.0" encoding="UTF-8"?>
   <metanorma xmlns="https://www.metanorma.org/ns/standoc" type="semantic" version="#{Metanorma::Cc::VERSION}" flavor="cc">
   <bibdata type="standard">
    <title language="en" type="main">Document title</title>
@@ -167,7 +168,7 @@ BLANK_HDR = <<~"HDR".freeze
   #{BOILERPLATE}
 HDR
 
-HTML_HDR = <<~"HDR".freeze
+HTML_HDR = <<~HDR.freeze
   <body lang="EN-US" link="blue" vlink="#954F72" xml:lang="EN-US" class="container">
     <div class="title-section">
       <p>&#160;</p>
@@ -181,7 +182,7 @@ HTML_HDR = <<~"HDR".freeze
 HDR
 
 def mock_pdf
-  allow(::Mn2pdf).to receive(:convert) do |url, output, _c, _d|
+  allow(Mn2pdf).to receive(:convert) do |url, output, _c, _d|
     FileUtils.cp(url.delete('"'), output.delete('"'))
   end
 end

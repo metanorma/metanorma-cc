@@ -16,8 +16,8 @@ RSpec.describe Metanorma::Cc do
         <sections/>
       </metanorma>
     OUTPUT
-    expect(Canon.format_xml(strip_guid(Asciidoctor.convert(input, *options))))
-      .to be_equivalent_to Canon.format_xml(output)
+    expect(strip_guid(Asciidoctor.convert(input, *options)))
+      .to be_xml_equivalent_to output
   end
 
   it "converts a blank document" do
@@ -36,8 +36,8 @@ RSpec.describe Metanorma::Cc do
         <sections/>
       </metanorma>
     OUTPUT
-    expect(Canon.format_xml(strip_guid(Asciidoctor.convert(input, *options))))
-      .to be_equivalent_to Canon.format_xml(output)
+    expect(strip_guid(Asciidoctor.convert(input, *options)))
+      .to be_xml_equivalent_to output
     expect(File.exist?("test.html")).to be true
     expect(File.exist?("test.pdf")).to be true
     expect(File.exist?("test.doc")).to be true
@@ -57,8 +57,8 @@ RSpec.describe Metanorma::Cc do
         <sections/>
       </metanorma>
     OUTPUT
-    expect(Canon.format_xml(strip_guid(Asciidoctor.convert(input, *options))))
-      .to be_equivalent_to Canon.format_xml(output)
+    expect(strip_guid(Asciidoctor.convert(input, *options)))
+      .to be_xml_equivalent_to output
     expect(File.exist?("test.html")).to be true
   end
 
@@ -89,7 +89,6 @@ RSpec.describe Metanorma::Cc do
       :role_2: editor
     INPUT
     output = <<~OUTPUT
-      <?xml version="1.0" encoding="UTF-8"?>
       <metanorma xmlns="https://www.metanorma.org/ns/standoc" type="semantic" version="#{Metanorma::Cc::VERSION}" flavor="cc">
       <bibdata type="standard">
         <title language="en" type="main">Main Title</title>
@@ -176,8 +175,8 @@ RSpec.describe Metanorma::Cc do
       <sections/>
       </metanorma>
     OUTPUT
-    expect(Canon.format_xml(strip_guid(Asciidoctor.convert(input, *options))))
-      .to be_equivalent_to Canon.format_xml(output)
+    expect(strip_guid(Asciidoctor.convert(input, *options)))
+      .to be_xml_equivalent_to output
   end
 
   it "processes default metadata for published technical-corrigendum" do
@@ -202,7 +201,6 @@ RSpec.describe Metanorma::Cc do
       :title: Main Title
     INPUT
     output = <<~OUTPUT
-      <?xml version="1.0" encoding="UTF-8"?>
       <metanorma xmlns="https://www.metanorma.org/ns/standoc" type="semantic" version="#{Metanorma::Cc::VERSION}" flavor="cc">
         <bibdata type="standard">
           <title language="en" type="main">Main Title</title>
@@ -277,8 +275,8 @@ RSpec.describe Metanorma::Cc do
         <sections/>
       </metanorma>
     OUTPUT
-    expect(Canon.format_xml(strip_guid(Asciidoctor.convert(input, *options))))
-      .to be_equivalent_to Canon.format_xml(output)
+    expect(strip_guid(Asciidoctor.convert(input, *options)))
+      .to be_xml_equivalent_to output
   end
 
   it "ignores unrecognised status" do
@@ -298,7 +296,6 @@ RSpec.describe Metanorma::Cc do
       :title: Main Title
     INPUT
     output = <<~OUTPUT
-      <?xml version="1.0" encoding="UTF-8"?>
       <metanorma xmlns="https://www.metanorma.org/ns/standoc" type="semantic" version="#{Metanorma::Cc::VERSION}" flavor="cc">
         <bibdata type="standard">
           <title language="en" type="main">Main Title</title>
@@ -350,8 +347,8 @@ RSpec.describe Metanorma::Cc do
         <sections/>
       </metanorma>
     OUTPUT
-    expect(Canon.format_xml(strip_guid(Asciidoctor.convert(input, *options))))
-      .to be_equivalent_to Canon.format_xml(output)
+    expect(strip_guid(Asciidoctor.convert(input, *options)))
+      .to be_xml_equivalent_to output
   end
 
   it "strips inline header" do
@@ -377,8 +374,8 @@ RSpec.describe Metanorma::Cc do
       </sections>
       </metanorma>
     OUTPUT
-    expect(Canon.format_xml(strip_guid(Asciidoctor.convert(input, *options))))
-      .to be_equivalent_to Canon.format_xml(output)
+    expect(strip_guid(Asciidoctor.convert(input, *options)))
+      .to be_xml_equivalent_to output
   end
 
   it "uses default fonts" do

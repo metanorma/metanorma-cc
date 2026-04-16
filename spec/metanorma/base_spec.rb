@@ -89,7 +89,6 @@ RSpec.describe Metanorma::Cc do
       :role_2: editor
     INPUT
     output = <<~OUTPUT
-      <?xml version="1.0" encoding="UTF-8"?>
       <metanorma xmlns="https://www.metanorma.org/ns/standoc" type="semantic" version="#{Metanorma::Cc::VERSION}" flavor="cc">
       <bibdata type="standard">
         <title language="en" type="main">Main Title</title>
@@ -202,7 +201,6 @@ RSpec.describe Metanorma::Cc do
       :title: Main Title
     INPUT
     output = <<~OUTPUT
-      <?xml version="1.0" encoding="UTF-8"?>
       <metanorma xmlns="https://www.metanorma.org/ns/standoc" type="semantic" version="#{Metanorma::Cc::VERSION}" flavor="cc">
         <bibdata type="standard">
           <title language="en" type="main">Main Title</title>
@@ -298,7 +296,6 @@ RSpec.describe Metanorma::Cc do
       :title: Main Title
     INPUT
     output = <<~OUTPUT
-      <?xml version="1.0" encoding="UTF-8"?>
       <metanorma xmlns="https://www.metanorma.org/ns/standoc" type="semantic" version="#{Metanorma::Cc::VERSION}" flavor="cc">
         <bibdata type="standard">
           <title language="en" type="main">Main Title</title>

@@ -176,7 +176,6 @@ RSpec.describe Metanorma::Cc do
     expect(IsoDoc::Cc::HtmlConvert.new({})
       .cleanup(Nokogiri::XML(input)).to_s)
       .to be_html5_equivalent_to <<~OUTPUT
-        <?xml version="1.0"?>
         <html>
           <body lang="EN-US" link="blue" vlink="#954F72" xml:lang="EN-US" class="container">
             <div class="title-section">

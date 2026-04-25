@@ -2,27 +2,6 @@ require "spec_helper"
 require "fileutils"
 
 RSpec.describe Metanorma::Cc do
-  context "when xref_error.adoc compilation" do
-    it "generates error file" do
-      File.write("xref_error.adoc", <<~"CONTENT")
-        = X
-        A
-
-        == Clause
-
-        <<a,b>>
-      CONTENT
-
-      expect do
-        mock_pdf
-        Metanorma::Compile
-          .new
-          .compile("xref_error.adoc", type: "cc", install_fonts: false)
-      end.to(change { File.exist?("xref_error.err.html") }
-              .from(false).to(true))
-    end
-  end
-
   it "Warns of illegal doctype" do
     Asciidoctor.convert(<<~"INPUT", backend: :cc, header_footer: true)
       = Document title

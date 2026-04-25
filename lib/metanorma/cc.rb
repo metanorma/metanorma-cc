@@ -1,4 +1,4 @@
-require "metanorma"
+require "metanorma-core"
 require "metanorma-generic"
 require_relative "./cc/processor"
 

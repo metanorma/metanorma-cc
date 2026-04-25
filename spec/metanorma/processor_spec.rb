@@ -1,5 +1,5 @@
 require "spec_helper"
-require "metanorma"
+require "metanorma-core"
 
 RSpec.describe Metanorma::Cc::Processor do
   registry = Metanorma::Registry.instance

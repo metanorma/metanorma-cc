@@ -6,7 +6,7 @@ require_relative "isodoc/cc/html_convert"
 require_relative "isodoc/cc/word_convert"
 require_relative "isodoc/cc/pdf_convert"
 require_relative "metanorma/cc/version"
-require "metanorma"
+require "metanorma-core"
 
 if defined? Metanorma::Registry
   require_relative "metanorma/cc"

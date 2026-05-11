@@ -10,6 +10,7 @@ RSpec.describe Metanorma::Cc do
         <title language="en" format="plain">Main Title</title>
         <docidentifier>CC/WD 1000:2001</docidentifier>
         <docnumber>1000</docnumber>
+        <date type="updated"><on>2000-01-01</on></date>
         <contributor>
           <role type="author"/>
           <organization>
@@ -65,10 +66,7 @@ RSpec.describe Metanorma::Cc do
           </organization>
         </contributor>
         <edition>2</edition>
-        <version>
-          <revision-date>2000-01-01</revision-date>
-          <draft>3.4</draft>
-        </version>
+        <version>3.4</version>
         <language>en</language>
         <script>Latn</script>
         <status>
@@ -145,7 +143,7 @@ RSpec.describe Metanorma::Cc do
           transmitteddate: "XXX",
           unchangeddate: "XXX",
           unpublished: true,
-          updateddate: "XXX",
+          updateddate: "2000-01-01",
           vote_endeddate: "XXX",
           vote_starteddate: "XXX" }
       )

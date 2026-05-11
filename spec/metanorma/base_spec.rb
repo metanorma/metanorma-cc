@@ -94,6 +94,7 @@ RSpec.describe Metanorma::Cc do
         <title language="en" type="main">Main Title</title>
         <docidentifier primary="true" type="CalConnect">CC/DIR/FDS 1000:2001</docidentifier>
         <docnumber>1000</docnumber>
+        <date type="updated"><on>2000-01-01</on></date>
         <contributor>
           <role type="author"/>
           <organization>
@@ -135,10 +136,7 @@ RSpec.describe Metanorma::Cc do
           </organization>
         </contributor>
         <edition>2</edition>
-        <version>
-          <revision-date>2000-01-01</revision-date>
-          <draft>3.4</draft>
-        </version>
+        <version>3.4</version>
         <language>en</language>
         <script>Latn</script>
         <status>

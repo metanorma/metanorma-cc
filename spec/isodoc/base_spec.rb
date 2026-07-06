@@ -187,7 +187,7 @@ RSpec.describe Metanorma::Cc do
             <div class="WordSection3">
               <div id="H"><h1>1.&#xA0; Terms and definitions</h1>
                 <p>For the purposes of this document, the following terms and definitions apply.</p>
-                <p class='Terms' style='text-align:left;' id='J'><strong>1.1.</strong>&#xa0;Term2</p>
+                <p class='Terms' style='text-align:left;' id='J'><span class="TermNum">1.1.</span>&#xa0;Term2</p>
               </div>
             </div>
           </body>

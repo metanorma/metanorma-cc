@@ -59,7 +59,7 @@ RSpec.describe Metanorma::Cc::Processor do
               <a class="anchor" href="#H"/>
               <a class="header" href="#H">1.  Terms, Definitions, Symbols and Abbreviated Terms</a>
             </h1>
-            <p class="Terms" style="text-align:left;" id="J"><strong>1.1.</strong> Term2</p>
+            <p class="Terms" style="text-align:left;" id="J"><span class="TermNum">1.1.</span>&#xa0;Term2</p>
           </div>
         </main>
       OUTPUT

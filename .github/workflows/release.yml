@@ -23,7 +23,7 @@ permissions:
 
 jobs:
   release:
-    uses: metanorma/ci/.github/workflows/rubygems-release.yml@v1
+    uses: metanorma/ci/.github/workflows/rubygems-release.yml@v1.1.0
     with:
       next_version: ${{ github.event.inputs.next_version }}
       # Explicit release_command needed since metanorma/ci#314 deprecated

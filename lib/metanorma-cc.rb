@@ -12,3 +12,4 @@ if defined? Metanorma::Registry
   require_relative "metanorma/cc"
   Metanorma::Registry.instance.register(Metanorma::Cc::Processor)
 end
+require "metanorma/cc/document"

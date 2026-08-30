@@ -478,43 +478,7 @@
 
 				<xsl:if test="count(*) = 1 and mn:fmt-title"> <!-- if there isn't user ToC -->
 
-					<xsl:for-each select="$contents/mnx:doc[@num = $num]//mnx:item[@display = 'true']">
-
-						<fo:block xsl:use-attribute-sets="toc-item-style">
-
-							<xsl:call-template name="refine_toc-item-style"/>
-
-							<fo:basic-link internal-destination="{@id}" fox:alt-text="{@section} {mnx:title}"> <!-- link at this level needs for PDF structure tags -->
-								<fo:list-block role="SKIP">
-									<xsl:attribute name="provisional-distance-between-starts">
-										<xsl:choose>
-											<!-- skip 0 section without subsections -->
-											<xsl:when test="@section != ''">8mm</xsl:when> <!-- and not(@display-section = 'false') -->
-											<xsl:otherwise>0mm</xsl:otherwise>
-										</xsl:choose>
-									</xsl:attribute>
-									<fo:list-item role="SKIP">
-										<fo:list-item-label end-indent="label-end()" role="SKIP">
-											<fo:block role="SKIP" id="__internal_layout__toc_label_{@id}">
-												<xsl:value-of select="@section"/>
-											</fo:block>
-										</fo:list-item-label>
-										<fo:list-item-body start-indent="body-start()" role="SKIP">
-											<fo:block text-align-last="justify" margin-left="12mm" text-indent="-12mm" role="SKIP">
-												<fo:basic-link internal-destination="{@id}" fox:alt-text="{mnx:title}" role="SKIP">
-													<xsl:apply-templates select="mnx:title"/>
-													<fo:inline keep-together.within-line="always" role="SKIP">
-														<fo:leader xsl:use-attribute-sets="toc-leader-style"><xsl:call-template name="refine_toc-leader-style"/></fo:leader>
-														<fo:inline role="SKIP"><fo:wrapper role="artifact"><fo:page-number-citation ref-id="{@id}"/></fo:wrapper></fo:inline>
-													</fo:inline>
-												</fo:basic-link>
-											</fo:block>
-										</fo:list-item-body>
-									</fo:list-item>
-								</fo:list-block>
-							</fo:basic-link>
-						</fo:block>
-					</xsl:for-each>
+					<xsl:apply-templates select="$contents/mnx:doc[@num = $num]/mnx:contents/mnx:item[@display = 'true']"/>
 
 					<!-- List of Tables -->
 					<xsl:if test="$contents/mnx:doc[@num = $num]//mnx:tables/mnx:table">
@@ -560,6 +524,49 @@
 		<fo:block xsl:use-attribute-sets="toc-title-style">
 			<xsl:call-template name="refine_toc-title-style"/>
 			<xsl:apply-templates/>
+		</fo:block>
+	</xsl:template>
+
+	<xsl:template match="mnx:contents//mnx:item[@display = 'true']">
+		<fo:block xsl:use-attribute-sets="toc-item-style">
+
+			<xsl:call-template name="refine_toc-item-style"/>
+
+			<!-- <fo:basic-link internal-destination="{@id}" fox:alt-text="{@section} {mnx:title}"> --> <!-- link at this level needs for PDF structure tags -->
+				<fo:list-block role="SKIP">
+					<xsl:attribute name="provisional-distance-between-starts">
+						<xsl:choose>
+							<!-- skip 0 section without subsections -->
+							<xsl:when test="@section != ''">8mm</xsl:when> <!-- and not(@display-section = 'false') -->
+							<xsl:otherwise>0mm</xsl:otherwise>
+						</xsl:choose>
+					</xsl:attribute>
+					<fo:list-item role="SKIP">
+						<fo:list-item-label end-indent="label-end()">
+							<fo:block role="SKIP" id="__internal_layout__toc_label_{@id}">
+								<xsl:value-of select="@section"/>
+							</fo:block>
+						</fo:list-item-label>
+						<fo:list-item-body start-indent="body-start()" role="SKIP">
+							<fo:block text-align-last="justify" margin-left="12mm" text-indent="-12mm" role="Reference">
+								<fo:basic-link internal-destination="{@id}" fox:alt-text="{mnx:title}">
+									<xsl:apply-templates select="mnx:title"/>
+									<fo:inline keep-together.within-line="always" role="SKIP">
+										<fo:leader xsl:use-attribute-sets="toc-leader-style"><xsl:call-template name="refine_toc-leader-style"/></fo:leader>
+										<fo:inline role="SKIP"><fo:page-number-citation ref-id="{@id}" role="SKIP"/></fo:inline>
+									</fo:inline>
+								</fo:basic-link>
+							</fo:block>
+						</fo:list-item-body>
+					</fo:list-item>
+				</fo:list-block>
+			<!-- </fo:basic-link> -->
+
+			<xsl:if test="mnx:item[@display = 'true']">
+				<fo:block role="TOC">
+					<xsl:apply-templates select="mnx:item[@display = 'true']"/>
+				</fo:block>
+			</xsl:if>
 		</fo:block>
 	</xsl:template>
 
@@ -5587,6 +5594,10 @@
 				<!-- <Caption><P> tags, see https://github.com/metanorma/metanorma-pdfa/issues/81 -->
 				<fo:block role="P">
 
+					<xsl:if test="$continued = 'true'">
+						<xsl:attribute name="role">SKIP</xsl:attribute>
+					</xsl:if>
+
 					<xsl:choose>
 						<xsl:when test="$continued = 'true'">
 						</xsl:when>
@@ -5596,7 +5607,7 @@
 					</xsl:choose>
 
 				</fo:block>
-			</fo:block>
+			</fo:block> <!-- END: Table name -->
 
 			<!-- <xsl:if test="$namespace = 'bsi' or $namespace = 'pas' or $namespace = 'iec' or $namespace = 'iso'"> -->
 			<xsl:if test="$continued = 'true'">
@@ -14388,13 +14399,13 @@
 			</xsl:if>
 		</xsl:variable>
 		<xsl:variable name="title__">
-			<xsl:for-each select="xalan:nodeset($title_)/*/node()">
-				<!-- <xsl:choose>
+			<!--  <xsl:for-each select="xalan:nodeset($title_)/*/node()">
+				<xsl:choose>
 					<xsl:when test="self::text()"><xsl:text> </xsl:text><xsl:value-of select="."/><xsl:text> </xsl:text></xsl:when>
 					<xsl:otherwise><xsl:text> </xsl:text><xsl:copy-of select="."/><xsl:text> </xsl:text></xsl:otherwise>
-				</xsl:choose> -->
-				<xsl:apply-templates select="xalan:nodeset($title_)" mode="addTagElementT"/>
-			</xsl:for-each>
+				</xsl:choose
+			</xsl:for-each> -->
+			<xsl:apply-templates select="xalan:nodeset($title_)" mode="addTagElementT"/>
 		</xsl:variable>
 		<xsl:variable name="title" select="normalize-space(translate($title__, concat($em_space,' &#8232;'), '   '))"/>
 		<xsl:if test="$title != ''">

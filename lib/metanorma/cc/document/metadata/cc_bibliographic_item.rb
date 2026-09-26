@@ -5,7 +5,7 @@ module Metanorma
     module Metadata
       # The bibliographical description of a CC document.
       # Inherits all ISO bibdata fields; CC adds nothing extra.
-      class CcBibliographicItem < Metanorma::IsoDocument::Metadata::IsoBibliographicItem
+      class CcBibliographicItem < Metanorma::Iso::Document::Metadata::IsoBibliographicItem
         attribute :ext, CcBibDataExtensionType
 
         xml do

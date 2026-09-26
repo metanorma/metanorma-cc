@@ -5,7 +5,7 @@ module Metanorma
     module Metadata
       # Extension point for bibliographical definitions of CC documents.
       # Inherits all ISO extension fields; CC adds nothing extra.
-      class CcBibDataExtensionType < Metanorma::IsoDocument::Metadata::IsoBibDataExtensionType
+      class CcBibDataExtensionType < Metanorma::Iso::Document::Metadata::IsoBibDataExtensionType
       end
     end
   end

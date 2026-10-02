@@ -621,7 +621,7 @@ RSpec.describe Metanorma::Cc do
     output = <<~OUTPUT
         #{BLANK_HDR}
         <sections/>
-      </csd-standard>
+      </metanorma>
     OUTPUT
     expect(strip_guid(Asciidoctor.convert(input, *options)))
       .to be_xml_equivalent_to output

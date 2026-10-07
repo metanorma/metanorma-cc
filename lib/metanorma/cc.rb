@@ -26,6 +26,7 @@ module Metanorma
     end
 
     configure {}
+    autoload :Document, "metanorma/cc/document"
   end
 end
 Metanorma::Registry.instance.register(Metanorma::Cc::Processor)

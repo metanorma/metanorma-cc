@@ -275,6 +275,8 @@ RSpec.describe Metanorma::Cc do
       :docfile: test.adoc
       :no-pdf:
 
+      == Clause
+
       [align=mid-air]
       Para
     INPUT

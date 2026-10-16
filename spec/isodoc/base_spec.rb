@@ -96,7 +96,7 @@ RSpec.describe Metanorma::Cc do
       </csd-standard>
     INPUT
     expect(metadata(csdc.info(docxml, nil)))
-      .to be_equivalent_to (
+      .to eq (
         { accesseddate: "XXX",
           adapteddate: "XXX",
           agency: "CalConnect",

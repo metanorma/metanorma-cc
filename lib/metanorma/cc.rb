@@ -1,6 +1,7 @@
 require "metanorma-core"
 require "metanorma-generic"
 require_relative "./cc/processor"
+require "metanorma/cc/document"
 
 module Metanorma
   module Cc
@@ -29,4 +30,3 @@ module Metanorma
   end
 end
 Metanorma::Registry.instance.register(Metanorma::Cc::Processor)
-

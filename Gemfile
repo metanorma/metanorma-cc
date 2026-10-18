@@ -20,7 +20,6 @@ gem "relaton-render", "~> 3.0.0.pre.alpha"
 gem "pubid", "~> 2.0.0.pre.alpha"
 gem "lutaml-model", "0.8.107"
 gem "leptris", "1.9.356.0"
-gem "moxml", "~> 0.5.84", "< 0.5.138"
 gem "sassc-embedded", "~> 1.80"
 gem "rake", ">= 13.0"
 

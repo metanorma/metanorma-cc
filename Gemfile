@@ -18,7 +18,7 @@ gem "metanorma-plugin-lutaml", github: "metanorma/metanorma-plugin-lutaml", bran
 gem "relaton", "~> 3.0.0.pre.alpha"
 gem "relaton-render", "~> 3.0.0.pre.alpha"
 gem "pubid", "~> 2.0.0.pre.alpha"
-gem "lutaml-model", "0.8.107"
+gem "lutaml-model", "0.8.114" # relaton 3.x declares singular_tolerance (needs 0.8.113+)
 gem "sassc-embedded", "~> 1.80"
 gem "rake", ">= 13.0"
 

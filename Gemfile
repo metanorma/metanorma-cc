@@ -6,19 +6,18 @@ git_source(:github) { |repo| "https://github.com/#{repo}" }
 
 gemspec
 
-# Canonical line: the relaton 3.x prerelease monogem over the current
-# gem mains (the released generic/standoc line caps relaton at 2.x).
+# Canonical line: the relaton 3 finals over the α engine line.
 gem "metanorma-generic", github: "metanorma/metanorma-generic", branch: "main"
-gem "metanorma-standoc", github: "metanorma/metanorma-standoc", branch: "main"
+gem "metanorma-standoc", "~> 3.5.1.pre.alpha"
 gem "metanorma-core", github: "metanorma/metanorma-core", branch: "main"
-gem "metanorma-document", github: "metanorma/metanorma-document", branch: "main"
-gem "isodoc", github: "metanorma/isodoc", branch: "main"
+gem "metanorma-document", "~> 0.5.2.pre.alpha"
+gem "isodoc", "~> 3.7.4.pre.alpha"
 gem "metanorma-mirror", github: "metanorma/metanorma-mirror", branch: "main"
 gem "metanorma-plugin-lutaml", github: "metanorma/metanorma-plugin-lutaml", branch: "main"
-gem "relaton", "~> 3.0.0.pre.alpha"
-gem "relaton-render", "~> 3.0.0.pre.alpha"
-gem "pubid", "~> 2.0.0.pre.alpha"
-gem "lutaml-model", "0.8.114" # relaton 3.x declares singular_tolerance (needs 0.8.113+)
+gem "relaton", "~> 3.0"
+gem "relaton-render", "~> 3.0"
+gem "pubid", "~> 2.0"
+gem "lutaml-model", "~> 0.8" # relaton 3.x declares singular_tolerance (needs 0.8.113+)
 gem "sassc-embedded", "~> 1.80"
 gem "rake", ">= 13.0"
 

@@ -1,5 +1,5 @@
 module Metanorma
   module Cc
-    VERSION = "2.9.1.pre.alpha.2".freeze
+    VERSION = "2.9.1".freeze
   end
 end

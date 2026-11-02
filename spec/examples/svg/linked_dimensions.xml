@@ -1,0 +1,9 @@
+<cases xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <case id="unitless"><svg:svg width="364" height="96"><svg:a xlink:href="#target"><svg:rect width="10" height="10"/></svg:a></svg:svg></case>
+  <case id="pixels"><svg:svg width="364px" height="96px"><svg:a xlink:href="#target"><svg:rect width="10" height="10"/></svg:a></svg:svg></case>
+  <case id="decimal"><svg:svg width="184.5px" height="96.25px"><svg:a xlink:href="#target"><svg:rect width="10" height="10"/></svg:a></svg:svg></case>
+  <case id="mixed"><svg:svg width="364" height="96px"><svg:a xlink:href="#target"><svg:rect width="10" height="10"/></svg:a></svg:svg></case>
+  <case id="whitespace"><svg:svg width=" 364px " height=" 96 "><svg:a xlink:href="#target"><svg:rect width="10" height="10"/></svg:a></svg:svg></case>
+  <case id="other_units"><svg:svg width="12pt" height="50%"><svg:a xlink:href="#target"><svg:rect width="10" height="10"/></svg:a></svg:svg></case>
+  <case id="invalid"><svg:svg width="invalidpx" height="10pxpx"><svg:a xlink:href="#target"><svg:rect width="10" height="10"/></svg:a></svg:svg></case>
+</cases>

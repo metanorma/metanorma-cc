@@ -8,10 +8,10 @@ gemspec
 
 # Canonical line: the relaton 3 finals over the α engine line.
 gem "metanorma-generic", github: "metanorma/metanorma-generic", branch: "main"
-gem "metanorma-standoc", "~> 3.5.1.pre.alpha"
-gem "metanorma-core", "~> 0.2.5.pre.alpha" # published flavor/taste table (metanorma-core#18)
-gem "metanorma-document", "~> 0.5.2.pre.alpha"
-gem "isodoc", "~> 3.7.4.pre.alpha"
+gem "metanorma-standoc", "~> 3.5.7"
+gem "metanorma-core", "~> 0.2.7" # published flavor/taste table (metanorma-core#18)
+gem "metanorma-document", "~> 0.5.3"
+gem "isodoc", "~> 3.7.9"
 gem "metanorma-mirror", github: "metanorma/metanorma-mirror", branch: "main"
 gem "metanorma-plugin-lutaml", github: "metanorma/metanorma-plugin-lutaml", branch: "main"
 gem "relaton", "~> 3.0"

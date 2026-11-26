@@ -28,8 +28,8 @@ RSpec.describe Metanorma::Cc do
     XML
     root = Metanorma::Cc::Document::Root.from_xml(xml)
     expect(root).to be_a(Metanorma::Cc::Document::Root)
-    expect(root.sections.first).to be_a(Metanorma::Standoc::Document::Sections::Sections)
-    expect(root.sections.first.clause.first.title.text).to eq(["Scope"])
+    expect(root.sections).to be_a(Metanorma::Standoc::Document::Sections::Sections)
+    expect(root.sections.clause.first.title.text).to eq(["Scope"])
   end
 
   it "resolves the html renderer through the harness" do

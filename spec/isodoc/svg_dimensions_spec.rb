@@ -78,8 +78,8 @@ RSpec.describe "linked SVG dimensions" do
   %w[other_units invalid].each do |name|
     it "does not accept #{name} as pixel lengths" do
       result = @dimensions.elements["results/case[@id='#{name}']"]
-      expect(result.elements["fo:table-column"].attributes["column-width"]).to eq("NaNpx")
-      expect(dimensions(result.elements["fo:block-container"])).to eq(%w[NaNpx NaNpx])
+      expect(result.elements["fo:table-column"].attributes["column-width"]).to eq("400px")
+      expect(dimensions(result.elements["fo:block-container"])).to eq(%w[400px 400px])
     end
   end
 end
